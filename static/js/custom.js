@@ -51,7 +51,7 @@ $(document).ready(function(){
 	});
 
 	//PROJECTS
-	var projects = [
+	/*var projects = [
 		{title : "markdown2json", link : "https://github.com/davidayalas/markdown2json", description : "easy markdown to json converter. Transform front matter properties and content into json key-values. Very easy to integrate with static sites generators. It creates an index that can be easily injected into algolia."},
 		{title : "Bluemix client", link : "https://github.com/davidayalas/bluemix-client", description : "Node.js Bluemix API client. It wraps CloudFoudry API and Containers API over a common interface."},
 		{title : "StaticDB", link : "https://github.com/davidayalas/staticdb", description : "generates hashed filenames with content from each row in a CSV that would we http-requested applying the same derive key algorithm. It provides the server process and the html client"},
@@ -69,7 +69,7 @@ $(document).ready(function(){
 	}
 
 	$(projects_html.join("")).appendTo($("#projects ul"));
-
+	*/
 });
 
 $('#header').css('background-image', 'url("../../images/header.jpg")');

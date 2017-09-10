@@ -58,7 +58,7 @@
 						<p>
 							<ul class="default">
 							{{ range $p.Params.doingnow }}
-								<li>{{.item}}</li>
+								<li>{{ safeHTML (markdownify .item) }}</li>
 							{{ end }}
 							</ul>
 						</p>
@@ -83,7 +83,7 @@
 							<!-- Tweets -->
 								<section class="6u 12u(mobile)" id="twitter">
 									<header>
-										<h2 class="icon fa-twitter circled"><span class="label">Tweets</span></h2>
+										<h2 class="icon fa-twitter circled"><span class="label">{{ $p.Params.miniprojects_title }}</span></h2>
 									</header>
 									<ul class="divided tweets">
 
@@ -93,9 +93,12 @@
 							<!-- Miniprojects -->
 								<section class="6u 12u(mobile)" id="projects">
 									<header>
-										<a href="http://github.com/davidayalas" title="Mini projects, mini utilities"><h2 class="icon fa-file circled"><span class="label">Mini projects</span></h2></a>
+										<a href="http://github.com/davidayalas" title="Mini projects, mini utilities"><h2 class="icon fa-file circled"><span class="label">{{ $p.Params.miniprojects_title }}</span></h2></a>
 									</header>
 									<ul class="divided">
+										{{ range $p.Params.miniprojects }}
+										<li><article class="post stub"><header><h3><a href="{{ .link }}">{{ .title }}</a></h3></header><p>{{ safeHTML (markdownify .description) }}</p></article></li>
+										{{ end }}
 									</ul>
 								</section>
 
@@ -109,9 +112,10 @@
 									<div class="copyright">
 										Design: <a href="http://html5up.net">HTML5 UP</a> | 
 										Powered By: 
-										<a href="https://pages.github.com/"><img src="images/github2.png" alt="Github Pages" title="Github Pages" class="ico" /></a> 
+										<a href="http://gohugo.io/"><img src="images/hugo.png" title="Hugo" alt="Hugo" class="ico" /></a>
+										<a href="https://www.netlify.com/"><img src="images/netlify.ico" title="Netlify" alt="Netlify" class="ico" /></a>
+										<a href="https://github.com/"><img src="images/github2.png" alt="Github" title="Github" class="ico" /></a> 
 										<a href="https://developers.google.com/apps-script/"><img src="images/gas.png" title="Google Apps Script" alt="Google Apps Script" class="ico" /></a>
-
 									</div>
 
 							</div>

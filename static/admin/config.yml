@@ -28,6 +28,13 @@ collections: # A list of collections the CMS should be able to edit
         label: Doing now
         widget: list
         fields:
-          - {label: "Ítem", name: "item", widget: markdown}
+          - {label: "Ítem", name: "item", widget: string}
+      - name: miniprojects
+        label: Miniprojects
+        widget: list
+        fields:
+          - {label: "Títol", name: "title", widget: string}
+          - {label: "Enllaç", name: "link", widget: string}
+          - {label: "Descripció", name: "description", widget: string}
     meta:
       - {label: "Date", name: "date", widget: "datetime"}
