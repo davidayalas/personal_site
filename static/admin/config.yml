@@ -16,7 +16,7 @@ collections: # A list of collections the CMS should be able to edit
     fields:
       - {label: "Title", name: "title", widget: "string", tagname: "h1"}
       - {label: "Description", name: "description", widget: "text", required: true}
-      - {label: "Keywords", name: "keyworkds", widget: "text", required: true}
+      - {label: "Keywords", name: "keywords", widget: "text", required: true}
       - name: social
         label: Contact
         widget: list
