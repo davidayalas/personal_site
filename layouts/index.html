@@ -104,7 +104,7 @@
 
 
 						</div>
-						{{ if isset $p.Params "architecture_title" }}
+{{ if and (isset $p.Params "architecture_title") (ne (string $p.Params.architecture_title) "") }}
 						<hr />
 						<div class="row" style="background-color: white">
 							<div class="12u">
