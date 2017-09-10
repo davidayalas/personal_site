@@ -4,6 +4,7 @@ description: 'IT architect mainly focused on applications, cloud computing and n
 keywords: >-
   IT architecture, software, internet, development, cloud computing, raspberry
   pi, standards
+social_title: Contact
 social:
   - class: fa-twitter
     link: 'https://twitter.com/davidayalas'
@@ -20,6 +21,7 @@ social:
   - class: fa-mail-forward
     link: 'mailto:davixyz@gmail.com'
     title: e-Mail
+doingnow_title: Doing now
 doingnow:
   - item: >-
       Bringing to my company **new cloud solutions** to increase our internal
@@ -31,7 +33,6 @@ doingnow:
   - item: Trying to teach programming skills to my children
   - item: Training a kumite karate team
   - item: Taking care of my orchard
-doingnow_title: Doing now
 miniprojects:
   - link: 'https://github.com/davidayalas/markdown2json'
     title: markdown2json
@@ -80,6 +81,7 @@ architecture_diagram: /images/uploads/personal-site.png
 miniprojects_title: 'mini projects, mini utilities'
 tweets_title: Tweeting now
 ---
+
 
 
 
