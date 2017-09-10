@@ -1,23 +1,27 @@
 ---
+doingnow_title: Doing now
 title: David Ayala
-description: IT architect mainly focused on applications, cloud computing and new solutions....
-keywords: IT architecture, software, internet, development, cloud computing, raspberry pi, standards
-social_title: Contact
+description: >-
+  IT architect mainly focused on applications, cloud computing and new
+  solutions....
+keywords: >-
+  IT architecture, software, internet, development, cloud computing, raspberry
+  pi, standards
 social:
-  - link: https://twitter.com/davidayalas
-    class: fa-twitter
+  - class: fa-twitter
+    link: https://twitter.com/davidayalas
     title: Twitter
-  - link: http://www.linkedin.com/in/davidayalas
-    class: fa-linkedin
+  - class: fa-linkedin
+    link: http://www.linkedin.com/in/davidayalas
     title: Linkedin
-  - link: http://www.flickr.com/photos/koko_koko/
-    class: fa-flickr
+  - class: fa-flickr
+    link: http://www.flickr.com/photos/koko_koko/
     title: Flickr
-  - link: http://github.com/davidayalas
-    class: fa-github
+  - class: fa-github
+    link: http://github.com/davidayalas
     title: Github
-  - link: mailto:davixyz@gmail.com
-    class: fa-mail-forward
+  - class: fa-mail-forward
+    link: mailto:davixyz@gmail.com
     title: e-Mail
 
 doingnow_title: Doing now

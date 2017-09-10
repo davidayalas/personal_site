@@ -1,6 +1,6 @@
 baseURL = "http://localhost"
 languageCode = "ca-es"
-title = "David Ayala Personal Site"
+title = "David Ayala Homepage"
 
 contentdir = "content"
 layoutdir = "layouts"
