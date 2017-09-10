@@ -104,6 +104,7 @@
 
 
 						</div>
+						{{ if isset $p.Params "architecture_title" }}
 						<hr />
 						<div class="row">
 							<div class="12u">
@@ -111,19 +112,21 @@
 								<img src="{{ $p.Params.architecture_diagram }}" />
 							</div>
 						</div>
+						{{ end }}
 						<hr />
 						<div class="row">
 							<div class="12u">
 
 								<!-- Copyright -->
 									<div class="copyright">
-										Design: <a href="http://html5up.net">HTML5 UP</a> 
-										<br />
 										Powered By: 
 										<a href="http://gohugo.io/"><img src="images/hugo.png" title="Hugo" alt="Hugo" class="ico" /></a>
 										<a href="https://www.netlify.com/"><img src="images/netlify.ico" title="Netlify" alt="Netlify" class="ico" /></a>
 										<a href="https://github.com/"><img src="images/github2.png" alt="Github" title="Github" class="ico" /></a> 
 										<a href="https://developers.google.com/apps-script/"><img src="images/gas.png" title="Google Apps Script" alt="Google Apps Script" class="ico" /></a>
+										<br />
+										<br />
+										Design: <a href="http://html5up.net">HTML5 UP</a> 
 									</div>
 
 							</div>
