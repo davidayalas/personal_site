@@ -2,8 +2,6 @@ backend:
   name: github
   repo: davidayalas/ssg-huguoc 
   branch: master
-  base_url: http://netlify-oauth.azurewebsites.net # Path to ext auth provider
-
 
 media_folder: "static/images/uploads" # Media files will be stored in the repo under static/images/uploads
 public_folder: "/images/uploads"
