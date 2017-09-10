@@ -10,9 +10,9 @@ public_folder: "/images/uploads"
 collections: # A list of collections the CMS should be able to edit
   - name: "home"
     label: "Home"
-    folder: "content/"
-    create: true
-    slug: "home.md"
+    folder: "content/home"
+    create: false
+    slug: "index.md"
     fields:
       - {label: "Title", name: "title", widget: "string", tagname: "h1"}
       - {label: "Description", name: "description", widget: "text", required: true}

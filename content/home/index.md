@@ -27,4 +27,3 @@ doingnow:
   - item: Training a kumite karate team
   - item: Taking care of my orchard
 ---
-
