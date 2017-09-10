@@ -37,6 +37,6 @@ collections: # A list of collections the CMS should be able to edit
           - {label: "Enllaç", name: "link", widget: string}
           - {label: "Descripció", name: "description", widget: string}
       - {label: "Arquitectura", name: "architecture_title", widget: "string"}
-      - {label: "Diagrama d'arquitectura", name: "architecture_diagram", widget: "image"}
+      - {label: "Diagrama", name: "architecture_diagram", widget: "image"}
     meta:
       - {label: "Date", name: "date", widget: "datetime"}

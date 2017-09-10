@@ -1,12 +1,7 @@
 ---
-doingnow_title: Doing now
 title: David Ayala
-description: >-
-  IT architect mainly focused on applications, cloud computing and new
-  solutions....
-keywords: >-
-  IT architecture, software, internet, development, cloud computing, raspberry
-  pi, standards
+description: IT architect mainly focused on applications, cloud computing and new solutions....
+keywords: IT architecture, software, internet, development, cloud computing, raspberry pi, standards
 social:
   - class: fa-twitter
     link: https://twitter.com/davidayalas
