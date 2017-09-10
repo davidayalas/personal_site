@@ -50,7 +50,7 @@ miniprojects:
   - link: 'https://github.com/davidayalas/'
     title: More mini projects here
     description: null
-architecture_title: ''
+architecture_title: 'Architecture Diagram of this site'
 architecture_diagram: /images/uploads/personal-site.png
 miniprojects_title: 'mini projects, mini utilities'
 tweets_title: Tweeting now

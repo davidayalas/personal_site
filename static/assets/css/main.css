@@ -2375,7 +2375,7 @@
 
 /* Footer */
 
-	#footer {
+	#footer, .footer {
 		position: relative;
 		overflow: hidden;
 		padding: 6em 0 6em 0;
@@ -2406,7 +2406,7 @@
 				margin: 0 0 3em 0;
 			}
 
-		#footer .copyright {
+		#footer .copyright, .footer .copyright {
 			text-align: center;
 			color: rgba(128, 128, 128, 0.75);
 			font-size: 0.8em;
@@ -3048,3 +3048,4 @@
 .style3{
 	background-color: rgba(72, 57, 73, 0.5);
 }
+.diagram{display: block; margin-left: auto; margin-right: auto}
