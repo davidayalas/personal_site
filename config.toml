@@ -1,0 +1,7 @@
+baseURL = "http://localhost"
+languageCode = "ca-es"
+title = "David Ayala Personal Site"
+
+contentdir = "content"
+layoutdir = "layouts"
+publishdir = "public"

@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	{{ $p := .Site.GetPage "page" "home.md" }}
+	<head>
+		<title>{{ .Title }}</title>		
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	    <meta name="description" content="David Ayala - IT Architect - Piecing the puzzle"  />
+	    <meta name="keywords" content="{{ $p.Keywords }}" />
+	    <meta name="author" content="David Ayala" />
+    	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/>
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body class="homepage">
+		<div id="page-wrapper">
+			<!-- Header -->
+				<div id="header">
+
+					<!-- Inner -->
+						<div class="inner">
+							<header>
+								<h1>{{ $p.Title }}</h1>
+								<hr />
+								<p >{{ $p.Description }}</p>
+							</header>
+							<footer>
+								<a href="#banner" class="button circled scrolly">Start</a>
+							</footer>
+						</div>
+				</div>
+
+			<!-- Banner -->
+				<section id="banner">
+					<header>
+						<h2>{{ $p.Params.social_title }}</h2>
+						<p>&nbsp;</p>
+						<ul class="icons">
+							{{ range $p.Params.social }}
+							<li><a href="{{.link}}" class="icon {{.class}}"><span class="label">{{.title}}</span></a></li>
+							{{ end }}
+						</ul>
+					</header>
+				</section>
+
+			<!-- Main -->
+				<div class="wrapper style2" style="background: #ddd;padding-top:1em;padding-bottom:1em">
+					<article id="main" class="container special">
+						<header>
+							<h2>{{ $p.Params.doingnow_title }}</h2>
+						</header>
+						<p>
+							<ul class="default">
+							{{ range $p.Params.doingnow }}
+								<li>{{.item}}</li>
+							{{ end }}
+							</ul>
+						</p>
+					</article>
+
+				</div>
+
+			<!-- Pictures -->
+				<section class="carousel flickr">
+					<div class="reel">
+
+
+					</div>
+				</section>
+
+
+			<!-- Footer -->
+				<div id="footer">
+					<div class="container">
+						<div class="row">
+
+							<!-- Tweets -->
+								<section class="6u 12u(mobile)" id="twitter">
+									<header>
+										<h2 class="icon fa-twitter circled"><span class="label">Tweets</span></h2>
+									</header>
+									<ul class="divided tweets">
+
+									</ul>
+								</section>
+
+							<!-- Miniprojects -->
+								<section class="6u 12u(mobile)" id="projects">
+									<header>
+										<a href="http://github.com/davidayalas" title="Mini projects, mini utilities"><h2 class="icon fa-file circled"><span class="label">Mini projects</span></h2></a>
+									</header>
+									<ul class="divided">
+									</ul>
+								</section>
+
+
+						</div>
+						<hr />
+						<div class="row">
+							<div class="12u">
+
+								<!-- Copyright -->
+									<div class="copyright">
+										Design: <a href="http://html5up.net">HTML5 UP</a> | 
+										Powered By: 
+										<a href="https://pages.github.com/"><img src="images/github2.png" alt="Github Pages" title="Github Pages" class="ico" /></a> 
+										<a href="https://developers.google.com/apps-script/"><img src="images/gas.png" title="Google Apps Script" alt="Google Apps Script" class="ico" /></a>
+
+									</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.onvisible.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+			<script src="js/custom.js"></script>
+	</body>
+</html>
