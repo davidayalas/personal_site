@@ -18,13 +18,13 @@ social:
   - class: fa-mail-forward
     link: 'mailto:davixyz@gmail.com'
     title: e-Mail
+doingnow_title: Doing now
 doingnow:
   - item: Bringing to my company **new cloud solutions** to increase our internal portfolio and improve our application lifecycle
-  - item: Researching: Docker, Openshift, Azure, Bluemix, AWS, NodeJS, Golang, Static Sites Generators, Microservices, Search Engine as a Service, Serverless Architectures, Protobufs. 
+  - item: 'Researching: Docker, Openshift, Azure, Bluemix, AWS, NodeJS, Golang, Static Sites Generators, Microservices, Search Engine as a Service, Serverless Architectures, Protobufs.'
   - item: Trying to teach programming skills to my children
   - item: Training a kumite karate team
   - item: Taking care of my orchard
-doingnow_title: Doing now
 miniprojects:
   - link: 'https://github.com/davidayalas/markdown2json'
     title: markdown2json
