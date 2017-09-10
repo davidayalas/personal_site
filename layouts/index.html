@@ -104,15 +104,17 @@
 
 
 						</div>
-{{ if and (isset $p.Params "architecture_title") (ne (string $p.Params.architecture_title) "") }}
+
+						{{ if and (isset $p.Params "architecture_title") (ne (string $p.Params.architecture_title) "") }}
 						<hr />
-						<div class="row" style="background-color: white">
+						<div class="row">
 							<div class="12u">
 								<h2>{{ $p.Params.architecture_title }}</h2>
 								<img src="{{ $p.Params.architecture_diagram }}" />
 							</div>
 						</div>
 						{{ end }}
+
 						<hr />
 						<div class="row">
 							<div class="12u">

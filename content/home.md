@@ -1,11 +1,7 @@
 ---
 title: David Ayala
-description: >-
-  IT architect mainly focused on applications, cloud computing and new
-  solutions....
-keywords: >-
-  IT architecture, software, internet, development, cloud computing, raspberry
-  pi, standards
+description: IT architect mainly focused on applications, cloud computing and new solutions....
+keywords: IT architecture, software, internet, development, cloud computing, raspberry pi, standards
 social:
   - class: fa-twitter
     link: 'https://twitter.com/davidayalas'
@@ -23,13 +19,8 @@ social:
     link: 'mailto:davixyz@gmail.com'
     title: e-Mail
 doingnow:
-  - item: >-
-      Bringing to my company **new cloud solutions** to increase our internal
-      portfolio and improve our application lifecycle
-  - item: >-
-      Researching: Docker, Openshift, Azure, Bluemix, AWS, NodeJS, Golang,
-      Static Sites Generators, Microservices, Search Engine as a Service,
-      Serverless Architectures, Protobufs. 
+  - item: Bringing to my company **new cloud solutions** to increase our internal portfolio and improve our application lifecycle
+  - item: Researching: Docker, Openshift, Azure, Bluemix, AWS, NodeJS, Golang, Static Sites Generators, Microservices, Search Engine as a Service, Serverless Architectures, Protobufs. 
   - item: Trying to teach programming skills to my children
   - item: Training a kumite karate team
   - item: Taking care of my orchard
@@ -37,49 +28,32 @@ doingnow_title: Doing now
 miniprojects:
   - link: 'https://github.com/davidayalas/markdown2json'
     title: markdown2json
-    description: >-
-      easy markdown to json converter. Transform front matter properties and
-      content into json key-values. Very easy to integrate with static sites
-      generators. It creates an index that can be easily injected into algolia.
+    description: easy markdown to json converter. Transform front matter properties and content into json key-values. Very easy to integrate with static sites generators. It creates an index that can be easily injected into algolia.
   - link: 'https://github.com/davidayalas/bluemix-client'
     title: Bluemix client
-    description: >-
-      Node.js Bluemix API client. It wraps CloudFoudry API and Containers API
-      over a common interface.
+    description: Node.js Bluemix API client. It wraps CloudFoudry API and Containers API over a common interface.
   - link: 'https://github.com/davidayalas/staticdb'
     title: StaticDB
-    description: >-
-      generates hashed filenames with content from each row in a CSV that would
-      we http-requested applying the same derive key algorithm. It provides the
-      server process and the html client
+    description: generates hashed filenames with content from each row in a CSV that would we http-requested applying the same derive key algorithm. It provides the server process and the html client 
   - link: 'https://github.com/davidayalas/go-scraper"'
     title: go-scraper
-    description: >-
-      proof of concept of Golang.org that scrapes content from a web application
-      launching multiple and concurrent requests.
+    description: proof of concept of Golang.org that scrapes content from a web application launching multiple and concurrent requests.
   - link: 'https://github.com/davidayalas/gsa-jsonp-proxy'
     title: gsa-jsonp-proxy
-    description: >-
-      a json proxy over google search protocol from <a
-      href='https://support.google.com/gsa/'>Google Search Appliance</a>
+    description: a json proxy over google search protocol from <a href='https://support.google.com/gsa/'>Google Search Appliance</a>
   - link: 'https://github.com/davidayalas/gscache'
     title: gs-cache
-    description: >-
-      Google Apps Cache and ~~scriptdb~~ SpreadSheet wrapper for Google Apps
-      Script with real persistence and value splitting for large values (due to
-      Google Apps Scripts limits).
+    description: Google Apps Cache and ~~scriptdb~~ SpreadSheet wrapper for Google Apps Script with real persistence and value splitting for large values (due to Google Apps Scripts limits).
   - link: 'https://github.com/davidayalas/gae-cache'
     title: gae-cache
-    description: >-
-      cache and blobstore wrapper for Google App Engine (python) with real
-      persistence and value splitting for large values (due to Google App Engine
-      limits).
+    description: cache and blobstore wrapper for Google App Engine (python) with real persistence and value splitting for large values (due to Google App Engine limits).
   - link: 'https://github.com/davidayalas/'
     title: More mini projects here
     description: null
-architecture_title: 
+architecture_title: ''
 architecture_diagram: /images/uploads/personal-site.png
 miniprojects_title: 'mini projects, mini utilities'
 tweets_title: Tweeting now
 ---
+
 
