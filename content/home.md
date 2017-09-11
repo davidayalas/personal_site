@@ -40,6 +40,11 @@ miniprojects:
       easy markdown to json converter. Transform front matter properties and
       content into json key-values. Very easy to integrate with static sites
       generators. It creates an index that can be easily injected into algolia.
+  - link: 'https://github.com/davidayalas/gohugo-breadcrumbs'
+    title: Hugo infinite breadcrumbs
+    description: >-
+      Partial templates to manage infinite nested subsections in breadcrumbs
+      (from Hugo 0.24)
   - link: 'https://github.com/davidayalas/bluemix-client'
     title: Bluemix client
     description: >-
@@ -51,7 +56,7 @@ miniprojects:
       generates hashed filenames with content from each row in a CSV that would
       we http-requested applying the same derive key algorithm. It provides the
       server process and the html client
-  - link: 'https://github.com/davidayalas/go-scraper"'
+  - link: 'https://github.com/davidayalas/go-scraper'
     title: go-scraper
     description: >-
       proof of concept of Golang.org that scrapes content from a web application
@@ -81,6 +86,7 @@ architecture_diagram: /images/uploads/personal-site.png
 miniprojects_title: 'mini projects, mini utilities'
 tweets_title: Tweeting now
 ---
+
 
 
 
