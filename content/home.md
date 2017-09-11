@@ -1,16 +1,5 @@
 ---
 description: 'IT architect mainly focused on applications, cloud computing and new solutions'
-doingnow_old:
-  - item: >-
-      Bringing to my company **new cloud solutions** to increase our internal
-      portfolio and improve our application lifecycle
-  - item: >-
-      Researching: Docker, Openshift, Azure, Bluemix, AWS, NodeJS, Golang,
-      Static Sites Generators, Microservices, Search Engine as a Service,
-      Serverless Architectures, Protobufs.
-  - item: Trying to teach programming skills to my children
-  - item: Training a kumite karate team
-  - item: Taking care of my orchard
 keywords: >-
   IT architecture, software, internet, development, cloud computing, raspberry
   pi, standards
