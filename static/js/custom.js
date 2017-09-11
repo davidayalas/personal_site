@@ -9,6 +9,8 @@ function fillZeros(number,digits){
 
 $(document).ready(function(){
 
+	$(".doingnow ul").addClass("default");
+
 	//FLICKR
 	$.getJSON("https://script.google.com/macros/s/AKfycbwSsffQhkYAK2xjRu1Ck0TYdg2uDnnTG7eJsfLXPUSEM2XhAyPM/exec?callback=?", function(data){
 		var stb = [];

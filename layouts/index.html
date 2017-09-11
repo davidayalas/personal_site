@@ -51,13 +51,11 @@
 
 			<!-- Main -->
 				<div class="wrapper style2" style="background: #ddd;padding-top:1em;padding-bottom:1em">
-					<article id="main" class="container special">
+					<article id="main" class="container special doingnow">
 						<header>
 							<h2>{{ $p.Params.doingnow_title }}</h2>
 						</header>
-						<p>
-							{{ safeHTML (markdownify $p.Params.doingnow) }}
-						</p>
+						{{ safeHTML (markdownify $p.Params.doingnow) }}
 					</article>
 
 				</div>
