@@ -3048,4 +3048,4 @@
 .style3{
 	background-color: rgba(72, 57, 73, 0.5);
 }
-.diagram{display: block; margin-left: auto; margin-right: auto}
+.diagram{display: block; margin-left: auto; margin-right: auto; max-width: 90%;}

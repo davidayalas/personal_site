@@ -22,7 +22,8 @@ social:
     link: 'mailto:davixyz@gmail.com'
     title: e-Mail
 doingnow_title: Doing now
-doingnow:
+doingnow: test
+doingnow_old:
   - item: >-
       Bringing to my company **new cloud solutions** to increase our internal
       portfolio and improve our application lifecycle

@@ -26,11 +26,7 @@ collections: # A list of collections the CMS should be able to edit
           - {label: "Enllaç", name: "link", widget: string}
           - {label: "CSS Class", name: "class", widget: string}
       - {label: "Doing now", name: "doingnow_title", widget: "string"}
-      - name: doingnow
-        label: Doing now
-        widget: list
-        fields:
-          - {label: "Ítem", name: "item", widget: string}
+      - {label: "Doing now list", name: "doingnow", widget: "markdown"}
       - name: miniprojects
         label: Miniprojects
         widget: list
