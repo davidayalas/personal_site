@@ -49,9 +49,6 @@ doingnow: >-
   * **Training** a kumite karate team
 
   * Taking care of my **orchard**
-
-
-  \[object HTMLDivElement\]
 miniprojects:
   - link: 'https://github.com/davidayalas/markdown2json'
     title: markdown2json
@@ -104,6 +101,7 @@ architecture_title: Architecture Diagram of this site
 architecture_diagram: /images/uploads/personal-site.png
 tweets_title: Tweeting now
 ---
+
 
 
 
