@@ -1,9 +1,21 @@
 ---
-title: David Ayala
 description: 'IT architect mainly focused on applications, cloud computing and new solutions'
+doingnow_old:
+  - item: >-
+      Bringing to my company **new cloud solutions** to increase our internal
+      portfolio and improve our application lifecycle
+  - item: >-
+      Researching: Docker, Openshift, Azure, Bluemix, AWS, NodeJS, Golang,
+      Static Sites Generators, Microservices, Search Engine as a Service,
+      Serverless Architectures, Protobufs.
+  - item: Trying to teach programming skills to my children
+  - item: Training a kumite karate team
+  - item: Taking care of my orchard
 keywords: >-
   IT architecture, software, internet, development, cloud computing, raspberry
   pi, standards
+miniprojects_title: 'mini projects, mini utilities'
+title: David Ayala
 social_title: Contact
 social:
   - class: fa-twitter
@@ -22,18 +34,21 @@ social:
     link: 'mailto:davixyz@gmail.com'
     title: e-Mail
 doingnow_title: Doing now
-doingnow: test
-doingnow_old:
-  - item: >-
-      Bringing to my company **new cloud solutions** to increase our internal
-      portfolio and improve our application lifecycle
-  - item: >-
-      Researching: Docker, Openshift, Azure, Bluemix, AWS, NodeJS, Golang,
-      Static Sites Generators, Microservices, Search Engine as a Service,
-      Serverless Architectures, Protobufs.
-  - item: Trying to teach programming skills to my children
-  - item: Training a kumite karate team
-  - item: Taking care of my orchard
+doingnow: >-
+  * Bringing to my company **new cloud solutions** to increase our internal
+  portfolio and improve our application lifecycle
+
+  * **Researching**: 
+      * Platforms and Services: Docker, Openshift, Azure, AWS, Netlify, Search Engine as a Service
+      * Middlewares and Languages: NodeJS, Golang, Python
+      * Going back to the future: Static Site Generators 
+      * Design patterns: Microservices, Serverless Architectures 
+      * Cache and Performance improvement
+  * Trying to **teach programming skills** to my children
+
+  * **Training** a kumite karate team
+
+  * Taking care of my **orchard**
 miniprojects:
   - link: 'https://github.com/davidayalas/markdown2json'
     title: markdown2json
@@ -84,9 +99,9 @@ miniprojects:
     description: null
 architecture_title: Architecture Diagram of this site
 architecture_diagram: /images/uploads/personal-site.png
-miniprojects_title: 'mini projects, mini utilities'
 tweets_title: Tweeting now
 ---
+
 
 
 
