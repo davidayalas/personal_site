@@ -38,17 +38,20 @@ doingnow: >-
   * Bringing to my company **new cloud solutions** to increase our internal
   portfolio and improve our application lifecycle
 
-  * **Researching**: 
-      * Platforms and Services: Docker, Openshift, Azure, AWS, Netlify, Search Engine as a Service
-      * Middlewares and Languages: NodeJS, Golang, Python
-      * Going back to the future: Static Site Generators 
-      * Design patterns: Microservices, Serverless Architectures 
-      * Cache and Performance improvement
+  * **Researching**:
+    * Platforms and Services: Docker, Openshift, Azure, AWS, Netlify, Search Engine as a Service
+    * Middlewares and Languages: NodeJS, Golang, Python
+    * Going back to the future: Static Site Generators
+    * Design patterns: Microservices, Serverless Architectures
+    * Cache and Performance improvement
   * Trying to **teach programming skills** to my children
 
   * **Training** a kumite karate team
 
   * Taking care of my **orchard**
+
+
+  \[object HTMLDivElement\]
 miniprojects:
   - link: 'https://github.com/davidayalas/markdown2json'
     title: markdown2json
@@ -61,11 +64,6 @@ miniprojects:
     description: >-
       Partial templates to manage infinite nested subsections in breadcrumbs
       (from Hugo 0.24)
-  - link: 'https://github.com/davidayalas/bluemix-client'
-    title: Bluemix client
-    description: >-
-      Node.js Bluemix API client. It wraps CloudFoudry API and Containers API
-      over a common interface.
   - link: 'https://github.com/davidayalas/staticdb'
     title: StaticDB
     description: >-
@@ -77,17 +75,22 @@ miniprojects:
     description: >-
       proof of concept of Golang.org that scrapes content from a web application
       launching multiple and concurrent requests.
-  - link: 'https://github.com/davidayalas/gsa-jsonp-proxy'
-    title: gsa-jsonp-proxy
-    description: >-
-      a json proxy over google search protocol from <a
-      href='https://support.google.com/gsa/'>Google Search Appliance</a>
   - link: 'https://github.com/davidayalas/gscache'
     title: gs-cache
     description: >-
       Google Apps Cache and ~~scriptdb~~ SpreadSheet wrapper for Google Apps
       Script with real persistence and value splitting for large values (due to
       Google Apps Scripts limits).
+  - link: 'https://github.com/davidayalas/bluemix-client'
+    title: Bluemix client
+    description: >-
+      Node.js Bluemix API client. It wraps CloudFoudry API and Containers API
+      over a common interface.
+  - link: 'https://github.com/davidayalas/gsa-jsonp-proxy'
+    title: gsa-jsonp-proxy
+    description: >-
+      a json proxy over google search protocol from <a
+      href='https://support.google.com/gsa/'>Google Search Appliance</a>
   - link: 'https://github.com/davidayalas/gae-cache'
     title: gae-cache
     description: >-
@@ -101,6 +104,7 @@ architecture_title: Architecture Diagram of this site
 architecture_diagram: /images/uploads/personal-site.png
 tweets_title: Tweeting now
 ---
+
 
 
 
