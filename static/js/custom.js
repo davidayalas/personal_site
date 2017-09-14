@@ -18,7 +18,7 @@ $(document).ready(function(){
 		var src;
 		for(var i=0;i<data.photoset.photo.length;i++){
 			it = data.photoset.photo[i];
-			src = "http://farm"+it.farm+".static.flickr.com/"+it.server+"/"+it.id+"_"+it.secret;
+			src = "https://farm"+it.farm+".static.flickr.com/"+it.server+"/"+it.id+"_"+it.secret;
 			stb.push('<article><a href="',src,'_b.jpg" class="image featured"><img src="',src,'_n.jpg" alt="" /></a><!--header><h3><a href="#">',it.title,'</a></h3></header--><p>',it.title,'</p></article>');
 		}
 		if(stb.length>0){
