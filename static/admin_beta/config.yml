@@ -1,7 +1,8 @@
 backend:
-  name: github
-  repo: davidayalas/personal_site 
-  branch: master
+  #name: github
+  #repo: davidayalas/personal_site 
+  #branch: master
+  name: git-gateway
 
 media_folder: "static/images/uploads" # Media files will be stored in the repo under static/images/uploads
 public_folder: "/images/uploads"
