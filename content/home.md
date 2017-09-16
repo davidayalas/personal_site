@@ -2,8 +2,9 @@
 title: David Ayala
 description: 'IT architect mainly focused on applications, cloud computing and new solutions'
 meta_keywords: >-
-  IT architecture, software, internet, development, cloud computing, raspberry
-  pi, standards
+  IT architecture, design patterns, internet, development, cloud computing,
+  raspberry pi, standards, teaching, programming languages, web performance,
+  cache, automation
 social_title: Social networks
 social:
   - class: fa-twitter
@@ -92,6 +93,7 @@ architecture_diagram: /images/uploads/personal-site.png
 miniprojects_title: 'mini projects, mini utilities'
 tweets_title: Tweeting now
 ---
+
 
 
 
