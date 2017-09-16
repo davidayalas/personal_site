@@ -23,7 +23,7 @@ social:
     title: e-Mail
 doingnow_title: Doing now
 doingnow: >-
-  * **Looking for the balance **between business, technology, simplicity (KISS)
+  * **Looking for the balance** between business, technology, simplicity (KISS)
   and costs
 
   * Bringing to my company **new (cloud) solutions** to improve IT
@@ -40,58 +40,59 @@ doingnow: >-
 
   * Taking care of my **orchard**
 miniprojects:
-  - description: >-
+  - title: markdown2json
+    description: >-
       easy markdown to json converter. Transform front matter properties and
       content into json key-values. Very easy to integrate with static sites
       generators. It creates an index that can be easily injected into algolia.
     link: 'https://github.com/davidayalas/markdown2json'
-    title: markdown2json
-  - description: >-
+  - title: Hugo infinite breadcrumbs
+    description: >-
       Partial templates to manage infinite nested subsections in breadcrumbs
       (from Hugo 0.24)
     link: 'https://github.com/davidayalas/gohugo-breadcrumbs'
-    title: Hugo infinite breadcrumbs
-  - description: >-
+  - title: StaticDB
+    description: >-
       generates hashed filenames with content from each row in a CSV that would
       we http-requested applying the same derive key algorithm. It provides the
       server process and the html client
     link: 'https://github.com/davidayalas/staticdb'
-    title: StaticDB
-  - description: >-
+  - title: go-scraper
+    description: >-
       proof of concept of Golang.org that scrapes content from a web application
       launching multiple and concurrent requests.
     link: 'https://github.com/davidayalas/go-scraper'
-    title: go-scraper
-  - description: >-
+  - title: gs-cache
+    description: >-
       Google Apps Cache and ~~scriptdb~~ SpreadSheet wrapper for Google Apps
       Script with real persistence and value splitting for large values (due to
       Google Apps Scripts limits).
     link: 'https://github.com/davidayalas/gscache'
-    title: gs-cache
-  - description: >-
+  - title: Bluemix client
+    description: >-
       Node.js Bluemix API client. It wraps CloudFoudry API and Containers API
       over a common interface.
     link: 'https://github.com/davidayalas/bluemix-client'
-    title: Bluemix client
-  - description: >-
+  - title: gsa-jsonp-proxy
+    description: >-
       a json proxy over google search protocol from <a
       href='https://support.google.com/gsa/'>Google Search Appliance</a>
     link: 'https://github.com/davidayalas/gsa-jsonp-proxy'
-    title: gsa-jsonp-proxy
-  - description: >-
+  - title: gae-cache
+    description: >-
       cache and blobstore wrapper for Google App Engine (python) with real
       persistence and value splitting for large values (due to Google App Engine
       limits).
     link: 'https://github.com/davidayalas/gae-cache'
-    title: gae-cache
-  - description: null
+  - title: More mini projects here
+    description: null
     link: 'https://github.com/davidayalas/'
-    title: More mini projects here
 architecture_title: Architecture Diagram of this site
 architecture_diagram: /images/uploads/personal-site.png
 miniprojects_title: 'mini projects, mini utilities'
 tweets_title: Tweeting now
 ---
+
 
 
 
