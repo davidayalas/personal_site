@@ -3049,3 +3049,7 @@
 	background-color: rgba(72, 57, 73, 0.5);
 }
 .diagram{display: block; margin-left: auto; margin-right: auto; max-width: 90%;}
+
+@media screen and (max-width: 736px) {
+	div.pull-right.editpage{float:none!important;text-align: center;margin-top:1em;}
+}
