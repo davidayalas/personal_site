@@ -18,6 +18,8 @@ collections: # A list of collections the CMS should be able to edit
       - {label: "Title", name: "title", widget: "string", tagname: "h1"}
       - {label: "Description", name: "description", widget: "text", required: true}
       - {label: "Keywords", name: "meta_keywords", widget: "text", required: true}
+      - {label: "Doing now", name: "doingnow_title", widget: "string"}
+      - {label: "Doing now list", name: "doingnow", widget: "markdown"}
       - {label: "Social title", name: "social_title", widget: "string"}
       - name: social
         label: Contact
@@ -26,8 +28,6 @@ collections: # A list of collections the CMS should be able to edit
           - {label: "Títol", name: "title", widget: string}
           - {label: "Enllaç", name: "link", widget: string}
           - {label: "CSS Class", name: "class", widget: string}
-      - {label: "Doing now", name: "doingnow_title", widget: "string"}
-      - {label: "Doing now list", name: "doingnow", widget: "markdown"}
       - name: miniprojects
         label: Miniprojects
         widget: list
