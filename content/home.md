@@ -1,5 +1,5 @@
 ---
-title: David Ayala.....
+title: David Ayala
 description: 'IT architect mainly focused on applications, cloud computing and new solutions'
 meta_keywords: >-
   IT architecture, design patterns, internet, development, cloud computing,
@@ -93,6 +93,7 @@ architecture_diagram: /images/uploads/personal-site.png
 miniprojects_title: 'mini projects, mini utilities'
 tweets_title: Tweeting now
 ---
+
 
 
 
