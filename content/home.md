@@ -41,17 +41,17 @@ social:
     link: 'mailto:davixyz@gmail.com'
     title: e-Mail
 miniprojects:
+  - link: 'https://github.com/davidayalas/gohugo-breadcrumbs'
+    title: Hugo infinite breadcrumbs
+    description: >-
+      Partial templates to manage infinite nested subsections in breadcrumbs
+      (from Hugo 0.24)
   - link: 'https://github.com/davidayalas/markdown2json'
     title: markdown2json
     description: >-
       Easy markdown to json converter. Transform front matter properties and
       content into json key-values. Very easy to integrate with static sites
       generators. It creates an index that can be easily injected into algolia.
-  - link: 'https://github.com/davidayalas/gohugo-breadcrumbs'
-    title: Hugo infinite breadcrumbs
-    description: >-
-      Partial templates to manage infinite nested subsections in breadcrumbs
-      (from Hugo 0.24)
   - link: 'https://github.com/davidayalas/staticdb'
     title: StaticDB
     description: >-
@@ -93,6 +93,7 @@ architecture_diagram: /images/uploads/personal-site.png
 miniprojects_title: 'mini projects, mini utilities'
 tweets_title: Tweeting now
 ---
+
 
 
 
