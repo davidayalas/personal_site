@@ -34,6 +34,9 @@ social:
   - class: fa-flickr
     link: 'http://www.flickr.com/photos/koko_koko/'
     title: Flickr
+  - class: fa-instagram
+    link: 'https://www.instagram.com/davidayalas'
+    title: Instagram
   - class: fa-github
     link: 'http://github.com/davidayalas'
     title: Github
