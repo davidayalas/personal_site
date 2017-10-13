@@ -1,6 +1,6 @@
 ---
 title: David Ayala
-description: 'IT architect mainly focused on applications, cloud computing and new solutions'
+description: (Father x 2 && Husband) + (IT Architecture Manager)
 meta_keywords: >-
   IT architecture, design patterns, internet, development, cloud computing,
   raspberry pi, standards, teaching, programming languages, web performance,
@@ -48,58 +48,59 @@ social:
     link: 'mailto:davixyz@gmail.com'
     title: e-Mail
 miniprojects:
-  - link: 'https://github.com/davidayalas/markdown2json'
-    title: markdown2json
-    description: >-
+  - description: >-
       Easy markdown to json converter. Transform front matter properties and
       content into json key-values. Very easy to integrate with static sites
       generators. It creates an index that can be easily injected into algolia.
-  - link: 'https://github.com/davidayalas/gohugo-breadcrumbs'
-    title: Hugo infinite breadcrumbs
-    description: >-
+    link: 'https://github.com/davidayalas/markdown2json'
+    title: markdown2json
+  - description: >-
       Partial templates to manage infinite nested subsections in breadcrumbs
       (from Hugo 0.24)
-  - link: 'https://github.com/davidayalas/staticdb'
-    title: StaticDB
-    description: >-
+    link: 'https://github.com/davidayalas/gohugo-breadcrumbs'
+    title: Hugo infinite breadcrumbs
+  - description: >-
       It generates hashed filenames with content from each row in a CSV that
       would we http-requested applying the same derive key algorithm. It
       provides the server process and the html client
-  - link: 'https://github.com/davidayalas/go-scraper'
-    title: go-scraper
-    description: >-
+    link: 'https://github.com/davidayalas/staticdb'
+    title: StaticDB
+  - description: >-
       Proof of concept of Golang.org that scrapes content from a web application
       launching multiple and concurrent requests.
-  - link: 'https://github.com/davidayalas/gscache'
-    title: gs-cache
-    description: >-
+    link: 'https://github.com/davidayalas/go-scraper'
+    title: go-scraper
+  - description: >-
       Google Apps Script Cache and ~~scriptdb~~ SpreadSheet wrapper with real
       persistence and value splitting for large values (due to Google Apps
       Scripts limits).
-  - link: 'https://github.com/davidayalas/gae-cache'
-    title: gae-cache
-    description: >-
+    link: 'https://github.com/davidayalas/gscache'
+    title: gs-cache
+  - description: >-
       Google Cache and Blobstore wrapper for Google App Engine (python) with
       real persistence and value splitting for large values (due to Google App
       Engine limits).
-  - link: 'https://github.com/davidayalas/gsa-jsonp-proxy'
-    title: gsa-jsonp-proxy
-    description: >-
+    link: 'https://github.com/davidayalas/gae-cache'
+    title: gae-cache
+  - description: >-
       a json proxy over google search protocol from <a
       href='https://support.google.com/gsa/'>Google Search Appliance</a>
-  - link: 'https://github.com/davidayalas/bluemix-client'
-    title: Bluemix client
-    description: >-
+    link: 'https://github.com/davidayalas/gsa-jsonp-proxy'
+    title: gsa-jsonp-proxy
+  - description: >-
       Node.js Bluemix API client. It wraps CloudFoudry API and Containers API
       over a common interface.
-  - link: 'https://github.com/davidayalas/'
+    link: 'https://github.com/davidayalas/bluemix-client'
+    title: Bluemix client
+  - description: null
+    link: 'https://github.com/davidayalas/'
     title: More mini projects here
-    description: null
 architecture_title: Architecture Diagram of this site
 architecture_diagram: /images/uploads/personal-site.png
 miniprojects_title: 'mini projects, mini utilities'
 tweets_title: Tweeting now
 ---
+
 
 
 
