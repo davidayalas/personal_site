@@ -1,0 +1,5 @@
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Cache-Control: max-age=2628000, public
+
