@@ -14,7 +14,7 @@ doingnow: >-
 
   * Bringing to my company **new (cloud) solutions** to improve IT
 
-  * Trying to be **Agile**
+  * Trying to be [**Agile**](http://agilemanifesto.org/principles.html)
 
   * **Researching**:
     * Platforms and Services: Docker, Openshift, Azure, AWS, Netlify, Search Engine as a Service
