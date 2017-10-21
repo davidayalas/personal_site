@@ -16,7 +16,7 @@ doingnow: >-
 
   * Trying to be [**Agile**](http://agilemanifesto.org/principles.html)
 
-  * Interests: **Platforms and Services** (FaaS/PaaS/CaaS, Netlify, Search
+  * Researching: **Platforms and Services** (FaaS/PaaS/CaaS, Netlify, Search
   Engine as a Service), **Middlewares and Languages** (NodeJS, Golang, Python),
   Going back to the future: **Static Site Generators**, **Design patterns**
   (Microservices, Serverless Architectures, CQRS, ...)
