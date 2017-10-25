@@ -1,5 +1,5 @@
 ---
-title: David Ayala..
+title: David Ayala
 description: ((Father x 2) && Husband) + (IT Architecture Manager)
 meta_keywords: >-
   IT architecture, design patterns, internet, development, cloud computing,
