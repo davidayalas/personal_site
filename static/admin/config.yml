@@ -13,6 +13,9 @@ collections: # A list of collections the CMS should be able to edit
     label: "Home"
     folder: "content"
     create: false
+    delete: false
+    editor: 
+      preview: false 
     slug: "home.md"
     fields:
       - {label: "Title", name: "title", widget: "string", tagname: "h1"}
