@@ -5,7 +5,7 @@ meta_keywords: >-
   IT architecture, design patterns, internet, development, cloud computing,
   raspberry pi, standards, teaching, programming languages, web performance,
   cache, automation
-doingnow_title: Doing now
+doingnow_title: About me
 doingnow: >-
   * **IT Architecture Manager** @ [UOC](https://www.uoc.edu)
 
