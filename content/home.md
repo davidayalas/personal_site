@@ -7,7 +7,9 @@ meta_keywords: >-
   cache, automation
 doingnow_title: About me!
 doingnow: >-
-  * **IT Architecture Manager** @ [UOC](https://www.uoc.edu)
+  * [**IT Architecture
+  Manager**](/11/the-architecture-manager-the-forgotten-enterprise-architecture-role/)
+  @ [UOC](https://www.uoc.edu)
 
   * **Looking for the balance** between business, technology, simplicity
   ([KISS](https://en.m.wikipedia.org/wiki/KISS_principle)) and costs
