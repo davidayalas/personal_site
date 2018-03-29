@@ -26,8 +26,6 @@ doingnow: >-
 
   * Trying to **teach programming skills** to my children
 
-  * **Training** a kumite karate team
-
   * Taking care of my **orchard**
 social_title: Networks
 social:
