@@ -5,7 +5,7 @@ meta_keywords: >-
   IT architecture, design patterns, internet, development, cloud computing,
   raspberry pi, standards, teaching, programming languages, web performance,
   cache, automation
-doingnow_title: About me!
+doingnow_title: About me
 doingnow: >-
   * [**IT Architecture
   Manager**](https://blogs.msdn.microsoft.com/nickmalik/2014/11/11/the-architecture-manager-the-forgotten-enterprise-architecture-role/)
