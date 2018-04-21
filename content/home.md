@@ -94,6 +94,11 @@ miniprojects:
       over a common interface.
   - link: 'https://github.com/davidayalas/'
     title: More mini projects here
+  - link: 'https://github.com/davidayalas/hugolifycms/blob/master/README.md'
+    title: HugolifyCMS
+    description: >-
+      Integration of Hugo generated site and Netlify CMS, with N levels (nested
+      sections/folders), multilanguage and access to CMS from live site
 architecture_title: Architecture Diagram of this site
 architecture_diagram: /images/uploads/personal-site.png
 ---
