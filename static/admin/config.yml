@@ -1,8 +1,8 @@
 backend:
-  #name: github
-  #repo: davidayalas/personal_site 
-  branch: master
-  name: git-gateway
+  name: github
+  repo: davidayalas/personal_site 
+  #branch: master
+  #name: git-gateway
 
 display_url: https://davidayala.eu
 
