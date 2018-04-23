@@ -29,6 +29,10 @@
 							<h1>{{ $p.Title }}</h1>
 							<hr />
 							<p >{{ $p.Description }}</p>
+							{{ if $p.Params.message }}
+							<hr />
+							<h2>"{{ $p.Params.message }}"</h2>
+							{{ end }}
 						</header>
 						<footer>
 							<a href="#banner" class="button circled scrolly">Start</a>
@@ -48,9 +52,8 @@
 						</ul>
 					</header>
 				</section>
-
 			<!-- Main -->
-				<div class="wrapper style2" style="background: #ddd;padding-top:1em;padding-bottom:1em">
+				<div class="wrapper style2">
 					<article id="main" class="container special doingnow">
 						<header>
 							<h2>{{ $p.Params.doingnow_title }}</h2>
@@ -121,7 +124,7 @@
 										<a href="https://github.com/"><img src="images/github2.png" alt="Github" title="Github" class="ico" /></a> 
 										<a href="https://developers.google.com/apps-script/"><img src="images/gas.png" title="Google Apps Script" alt="Google Apps Script" class="ico" /></a>
 										<br />
-										Design: <a href="http://html5up.net">HTML5 UP</a> 
+										Design: <a href="https://html5up.net/helios">HTML5 UP</a> 
 									</div>
 								<!-- Edit -->
 									<div class="pull-right editpage">
