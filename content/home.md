@@ -102,6 +102,6 @@ miniprojects:
   - link: 'https://github.com/davidayalas/'
     title: More mini projects here
 architecture_title: Architecture Diagram of this site
-architecture_diagram: /images/uploads/personal-site.png
+architecture_diagram: /media/personal-site.png
 ---
 
