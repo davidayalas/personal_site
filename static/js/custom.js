@@ -12,7 +12,7 @@ $(document).ready(function(){
 	$(".doingnow ul").addClass("default");
 
 	//FLICKR
-	$.getJSON("https://script.google.com/macros/s/AKfycbwSsffQhkYAK2xjRu1Ck0TYdg2uDnnTG7eJsfLXPUSEM2XhAyPM/exec?callback=?", function(data){
+	/*$.getJSON("https://script.google.com/macros/s/AKfycbwSsffQhkYAK2xjRu1Ck0TYdg2uDnnTG7eJsfLXPUSEM2XhAyPM/exec?callback=?", function(data){
 		var stb = [];
 		var it;
 		var src;
@@ -24,7 +24,7 @@ $(document).ready(function(){
 		if(stb.length>0){
 			$(stb.join("")).appendTo($(".flickr .reel"));
 		}
-	});
+	});*/
 
 	//TWEETS
 	$.getJSON("https://script.google.com/macros/s/AKfycbzLmZM7BRV_l4X9WL1h2QiQZmBrMZo19B6Eztx7ioT6osF9NZHg/exec?callback=?", function(data){
