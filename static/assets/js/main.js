@@ -176,7 +176,7 @@
 								}
 
 								$t._updatePos();
-							}, 10);
+							}, 4);
 						})
 						.mouseleave(function(e) {
 							window.clearInterval(timerId);
