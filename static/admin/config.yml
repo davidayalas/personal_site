@@ -19,6 +19,7 @@ collections: # A list of collections the CMS should be able to edit
     fields:
       - {label: "Key", name: "key", widget: string}
       - {label: "Title", name: "title", widget: string}
+      - {label: "Date", name: "date", widget: date}
       - {label: "Image", name: "image", widget: image}
 
   - name: "home"
