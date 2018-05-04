@@ -11,6 +11,16 @@ public_folder: "/images/uploads"
 #publish_mode: editorial_workflow
 
 collections: # A list of collections the CMS should be able to edit
+  - name: "media"
+    label: "Media"
+    folder: "content/media"
+    create: true
+    slug: "{{key}}"
+    fields:
+      - {label: "Key", name: "key", widget: string}
+      - {label: "Title", name: "title", widget: string}
+      - {label: "Image", name: "image", widget: image}
+
   - name: "home"
     label: "Home"
     folder: "content"
