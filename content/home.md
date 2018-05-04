@@ -1,6 +1,6 @@
 ---
 title: David Ayala
-description: ((Father x 2) && Husband) + (IT Architecture Manager)
+description: ((Father x 2) && Husband) + (IT Architecture Manager @ UOC.edu)
 message: 'Be async, my friend'
 meta_keywords: >-
   IT architecture, design patterns, internet, development, cloud computing,
