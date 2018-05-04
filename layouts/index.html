@@ -63,13 +63,19 @@
 
 				</div>
 
+					{{ range .Data.Pages}}
+						>>>>{{ .Title }}
+					{{ end }}
+
 			<!-- Pictures -->
 				<section class="carousel flickr">
 					<div class="reel">
+
+
 					{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
 					{{ with $mediaPage }}
 			            {{ $medias := .Resources.Match "*.md" }}
-			            {{ range $medias }}
+			            {{ range $medias}}
 			              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}		            
 			              	{{ $thumb := $image.Fit "320x320 q90" }}
 							<article><a href="{{$image.RelPermalink}}" class="image featured"><img src="{{$thumb.RelPermalink}}" alt="" /></a><p>{{ .Title }}</p></article>
