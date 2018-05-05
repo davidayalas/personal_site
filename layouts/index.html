@@ -21,6 +21,7 @@
 	</head>
 	<body class="homepage">
 		<div id="page-wrapper">
+
 			<!-- Header -->
 				<div id="header">
 					<!-- Inner -->
@@ -68,11 +69,13 @@
 					<div class="reel">
 					{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
 					{{ with $mediaPage }}
-			            {{ $medias := .Resources.ByType "page" }}
+			            {{ $medias := .Resources.ByType "page" }}			     
 			            {{ range $medias }}
-			              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}		            
-			              	{{ $thumb := $image.Fill "320x320 q90" }}
-							<article><a href="{{$image.RelPermalink}}" class="image featured"><img src="{{$thumb.RelPermalink}}" alt="" /></a><p>{{ .Title }}</p></article>
+			            	{{ if .Params.image }}
+				              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
+			              		{{ $thumb := $image.Fill "320x320 q90" }}
+								<article><a href="{{$image.RelPermalink}}" class="image featured"><img src="{{$thumb.RelPermalink}}" alt="" /></a><p>{{ .Title }}</p></article>
+							{{ end }}
 						{{ end }}
 					{{ end }}
 					</div>
@@ -108,6 +111,7 @@
 						</div>
 					</div>
 				</div>
+
 			<!-- Main -->
 				{{ if and (isset $p.Params "architecture_title") (ne (string $p.Params.architecture_title) "") }}
 				<div class="style2" style="background: #ddd;padding-top:1em;padding-bottom:2em">
