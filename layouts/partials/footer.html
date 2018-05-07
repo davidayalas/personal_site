@@ -1,0 +1,97 @@
+{{ $p := .data }}
+{{ $c := .context }}
+
+	<!-- Footer -->
+	{{ if eq $c.RelPermalink "/" }}
+		<div id="footer">
+			<div class="container">
+				<div class="row">
+					<!-- Tweets -->
+						<section class="6u 12u(mobile)" id="twitter">
+							<header>
+								<h2 class="icon fa-twitter circled"><span class="label">{{ $p.Params.miniprojects_title }}</span></h2>
+							</header>
+							<ul class="divided tweets">
+
+							</ul>
+						</section>
+
+					<!-- Miniprojects -->
+						<section class="6u 12u(mobile)" id="projects">
+							<header>
+								<a href="http://github.com/davidayalas" title="Mini projects, mini utilities"><h2 class="icon fa-file circled"><span class="label">{{ $p.Params.miniprojects_title }}</span></h2></a>
+							</header>
+							<ul class="divided">
+								{{ range $p.Params.miniprojects }}
+								<li><article class="post stub"><header><h3><a href="{{ .link }}">{{ .title }}</a></h3></header><p>{{ safeHTML (markdownify .description) }}</p></article></li>
+								{{ end }}
+							</ul>
+						</section>
+				</div>
+			</div>
+		</div>
+
+	<!-- Main -->
+		{{ if and (isset $p.Params "architecture_title") (ne (string $p.Params.architecture_title) "") }}
+		<div class="style2" style="background: #ddd;padding-top:1em;padding-bottom:2em">
+			<article id="architecture" class="container special">
+				<header>
+					<h2>{{ $p.Params.architecture_title }}</h2>
+				</header>
+				<img src="{{ $p.Params.architecture_diagram }}" class="diagram" alt="architecture diagram" />
+			</article>
+		</div>
+		{{ end }}
+	{{ end }}
+
+
+		<div class="footer">
+			<div class="container">
+				<div class="row">
+					<div class="12u">
+						<!-- Copyright -->
+							<div class="copyright">
+								Powered By: 
+								<a href="http://gohugo.io/"><img src="/images/hugo.png" title="Hugo" alt="Hugo" class="ico" /></a>
+								<a href="https://www.netlify.com/"><img src="/images/netlify.ico" title="Netlify" alt="Netlify" class="ico" /></a>
+								<a href="https://github.com/"><img src="/images/github2.png" alt="Github" title="Github" class="ico" /></a> 
+								<a href="https://developers.google.com/apps-script/"><img src="/images/gas.png" title="Google Apps Script" alt="Google Apps Script" class="ico" /></a>
+								<br />
+								Design: <a href="https://html5up.net/helios">HTML5 UP</a> 
+							</div>
+
+						<!-- Edit -->
+							<div class="pull-right editpage">
+								{{ if eq $c.RelPermalink "/" }}
+								<a href="/admin/#/collections/home/entries/home"><i class="fa fa-pencil" aria-hidden="true"></i> Edit this page</a> &nbsp;
+								{{ end }}
+
+								<a href="/admin/#/collections/gallery/new"><i class="fa fa-plus" aria-hidden="true"></i> Add new image</a>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+
+<!-- Scripts -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.dropotron.min.js"></script>
+<script src="/assets/js/jquery.scrolly.min.js"></script>
+<script src="/assets/js/jquery.onvisible.min.js"></script>
+<script src="/assets/js/skel.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+<script src="/assets/js/main.js"></script>
+<script src="/js/custom.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/#/collections/home/entries/home";
+        });
+      }
+    });
+  }
+</script>  
