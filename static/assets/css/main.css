@@ -3088,6 +3088,10 @@ ul.pagination li{
 	margin-left: .5em;
 }
 
+body.no-sidebar.gallery ul.gallery {
+	margin-left:1%;
+}
+
 @media screen and (min-width: 736px) {
 
 	body.no-sidebar.gallery ul.gallery {
