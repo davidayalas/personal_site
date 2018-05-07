@@ -11,9 +11,9 @@ public_folder: "/media"
 #publish_mode: editorial_workflow
 
 collections: # A list of collections the CMS should be able to edit
-  - name: "media"
-    label: "Media"
-    folder: "content/media"
+  - name: "gallery"
+    label: "Gallery"
+    folder: "content/gallery"
     create: true
     slug: "{{slug}}"
     fields:
