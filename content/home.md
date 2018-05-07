@@ -89,8 +89,8 @@ miniprojects:
   - link: 'https://github.com/davidayalas/personal_site'
     title: Personal site
     description: >-
-      Node.js Bluemix API client. It wraps CloudFoudry API and Containers API
-      over a common interface.
+      Personal site github repo where I test staff related with Hugo and
+      NetlifyCMS
   - link: 'https://github.com/davidayalas/'
     title: More mini projects here
 architecture_title: Architecture Diagram of this site
