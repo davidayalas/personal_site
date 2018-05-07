@@ -86,13 +86,8 @@ miniprojects:
       Google Cache and Blobstore wrapper for Google App Engine (python) with
       real persistence and value splitting for large values (due to Google App
       Engine limits).
-  - link: 'https://github.com/davidayalas/gsa-jsonp-proxy'
-    title: gsa-jsonp-proxy
-    description: >-
-      a json proxy over google search protocol from <a
-      href='https://support.google.com/gsa/'>Google Search Appliance</a>
-  - link: 'https://github.com/davidayalas/bluemix-client'
-    title: Bluemix client
+  - link: 'https://github.com/davidayalas/personal_site'
+    title: Personal site
     description: >-
       Node.js Bluemix API client. It wraps CloudFoudry API and Containers API
       over a common interface.
