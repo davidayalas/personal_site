@@ -70,7 +70,7 @@
 
 					{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
 
-					{{ range where .Data.Pages.ByDate "Section" "gallery" }}
+					{{ range where .Data.Pages "Section" "gallery" }}
 		            	{{ if .Params.image }}
 			              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
 		              		{{ $thumb := $image.Fill "320x320 q90" }}
