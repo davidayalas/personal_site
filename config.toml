@@ -1,6 +1,7 @@
 baseURL = "http://localhost"
-languageCode = "ca-es"
+languageCode = "en-GB"
 title = "David Ayala Homepage"
+enableRobotsTXT = true
 
 contentdir = "content"
 layoutdir = "layouts"
