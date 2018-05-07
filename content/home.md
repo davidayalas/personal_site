@@ -34,16 +34,13 @@ social:
     link: 'https://twitter.com/davidayalas'
     title: Twitter
   - class: fa-linkedin
-    link: 'http://www.linkedin.com/in/davidayalas'
+    link: 'https://www.linkedin.com/in/davidayalas'
     title: Linkedin
-  - class: fa-flickr
-    link: 'http://www.flickr.com/photos/koko_koko/'
-    title: Flickr
   - class: fa-instagram
     link: 'https://www.instagram.com/davidayalas'
     title: Instagram
   - class: fa-github
-    link: 'http://github.com/davidayalas'
+    link: 'https://github.com/davidayalas'
     title: Github
   - class: fa-mail-forward
     link: 'mailto:davixyz@gmail.com'
