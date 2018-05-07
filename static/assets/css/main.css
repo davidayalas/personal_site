@@ -3103,4 +3103,7 @@ ul.pagination li{
 	}
 	body.no-sidebar.gallery ul.gallery > li:nth-child(odd) {
 	}
+	article a.image h3{
+		min-height: 335px;
+	}
 }
