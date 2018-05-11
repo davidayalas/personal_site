@@ -57,8 +57,11 @@
 
 			<!-- Pictures -->
 				<section class="carousel">
-					<div class="reel">
+					<header style="text-align: center">
+						<h2><a href="/gallery">{{$p.Params.media}}</a></h2>
+					</header>
 
+					<div class="reel">
 					{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
 
 					{{ range first 8 (where .Data.Pages "Section" "gallery") }}

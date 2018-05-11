@@ -36,6 +36,7 @@ collections: # A list of collections the CMS should be able to edit
       - {label: "Keywords", name: "meta_keywords", widget: "text", required: true}
       - {label: "Doing now", name: "doingnow_title", widget: "string"}
       - {label: "Doing now list", name: "doingnow", widget: "markdown"}
+      - {label: "Media title", name: "media", widget: "string"}
       - {label: "Social title", name: "social_title", widget: "string"}
       - name: social
         label: Contact

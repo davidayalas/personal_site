@@ -6,6 +6,7 @@ meta_keywords: >-
   IT architecture, design patterns, internet, development, cloud computing,
   raspberry pi, standards, teaching, programming languages, web performance,
   cache, automation
+media: Media
 doingnow_title: About me
 doingnow: >-
   * [**IT Architecture
