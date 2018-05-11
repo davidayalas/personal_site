@@ -2702,6 +2702,8 @@
 				font-size: 1.25em;
 			}
 
+			body.gallery #header h1{color:#fff!important;}
+
 		/* Image */
 
 			.image.featured {
@@ -2992,7 +2994,7 @@
 		/* Nav */
 
 			#nav {
-				display: none;
+				_display: none;
 			}
 
 		/* Banner */
