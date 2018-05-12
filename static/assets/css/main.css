@@ -3090,9 +3090,14 @@ ul.pagination li{
 	margin-left: .5em;
 }
 
-body.no-sidebar.gallery ul.gallery {
-	margin-left:1%;
+ul.pagination li.active{
+	font-weight: bold;
 }
+
+body.no-sidebar.gallery ul.gallery {
+	margin-left:5%;
+}
+
 
 @media screen and (min-width: 736px) {
 
@@ -3105,10 +3110,9 @@ body.no-sidebar.gallery ul.gallery {
 		flex-grow: 1;
 		width: 33%;
 	}
-	body.no-sidebar.gallery ul.gallery > li:nth-child(even) {
-	}
-	body.no-sidebar.gallery ul.gallery > li:nth-child(odd) {
-	}
+	body.no-sidebar.gallery ul.gallery > li:nth-child(even) {}
+	body.no-sidebar.gallery ul.gallery > li:nth-child(odd) {}
+
 	article a.image h3{
 		min-height: 335px;
 	}
