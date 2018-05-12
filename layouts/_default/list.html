@@ -29,9 +29,18 @@
 
 				{{ if eq .Section "gallery" }}
 				<section>
-
+					{{ $pagesperpage := 9}}	
 					{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
-					{{ $paginator := .Paginate (where .Data.Pages "Section" "gallery") 9}}
+					{{ $paginator := .Paginate (where .Data.Pages "Section" "gallery") $pagesperpage}}
+
+					{{ $initimage := add (mul (sub $paginator.PageNumber 1) $pagesperpage) 1 }}
+
+					{{ $.Scratch.Set "numimages" $pagesperpage}}
+					{{ if lt (len $paginator.Pages) $pagesperpage }}
+						{{ $.Scratch.Set "numimages" (len $paginator.Pages) }}	
+					{{ end }}
+
+					<h3 style="text-align: center; margin-bottom: 1em">Images {{ $initimage }} - {{ add $initimage (sub ($.Scratch.Get "numimages") 1)}}</h3>
 
 					<ul class="{{ .Section }}">
 						{{ range $paginator.Pages }}
