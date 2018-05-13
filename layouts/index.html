@@ -56,7 +56,7 @@
 				</div>
 
 			<!-- Pictures -->
-				<section class="carousel">
+				<section class="carousel special">
 					<header style="text-align: center">
 						<h2><a href="/gallery">{{$p.Params.media}}</a></h2>
 					</header>
@@ -75,8 +75,13 @@
 					<!--article><a href="/gallery" class="image featured"><h3><p style="padding:4em;">More images</p></h3></a><p>&nbsp;</p></article-->
 
 					</div>
+					{{ if gt (len (where .Data.Pages "Section" "gallery")) 8 }}
 					<p>&nbsp;</p>
-					<a href="/gallery" class="button alt" style="margin-left:1em; max-width: 90%">More images</a>
+					<footer>
+					<a href="/gallery" class="button">More images</a>
+					</footer>
+					{{ end }}
+
 				</section>
 
 				{{ partial "footer.html" (dict "context" . "data" $p) }}
