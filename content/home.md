@@ -24,12 +24,14 @@ doingnow: >-
 
   * Researching: **Platforms and Services** (FaaS/PaaS/CaaS, Netlify, Search
   Engine as a Service), **Middlewares and Languages** (NodeJS, Golang, Python),
-  Going back to the future: **Static Site Generators**, **Design patterns**
-  (Microservices, Serverless/Servicefull Architectures, CQRS, ...)
+  Going back to the future: **Static Site Generators / JAM Stack / Headless CMS
+  / Post CMS**, **Design patterns** (Microservices, Serverless/Servicefull
+  Architectures, CQRS, ...)
 
   * Trying to **teach programming skills** to my children
 
   * Taking care of my **orchard**
+media: Media
 social_title: Networks
 social:
   - class: fa-twitter
