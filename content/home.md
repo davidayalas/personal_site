@@ -1,6 +1,6 @@
 ---
 title: David Ayala
-header: /media/khuri-india-2011.jpg
+header: /media/header-khuri.jpg
 description: ((Father x 2) && Husband) + (IT Architecture Manager @ UOC.edu)
 message: 'Be async, my friend'
 meta_keywords: >-
