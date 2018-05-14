@@ -7,6 +7,7 @@ meta_keywords: >-
   raspberry pi, standards, teaching, programming languages, web performance,
   cache, automation
 media: Media
+header: /media/header-khuri.jpg
 doingnow_title: About me
 doingnow: >-
   * [**IT Architecture
