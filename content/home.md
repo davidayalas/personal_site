@@ -1,12 +1,12 @@
 ---
 title: David Ayala
+header: /media/khuri-india-2011.jpg
 description: ((Father x 2) && Husband) + (IT Architecture Manager @ UOC.edu)
 message: 'Be async, my friend'
 meta_keywords: >-
   IT architecture, design patterns, internet, development, cloud computing,
   raspberry pi, standards, teaching, programming languages, web performance,
   cache, automation
-media: Media
 doingnow_title: About me
 doingnow: >-
   * [**IT Architecture
@@ -29,6 +29,7 @@ doingnow: >-
   * Trying to **teach programming skills** to my children
 
   * Taking care of my **orchard**
+media: Media
 social_title: Networks
 social:
   - class: fa-twitter
