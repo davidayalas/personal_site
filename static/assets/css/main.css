@@ -2101,7 +2101,7 @@
 		background-size: cover;
 		background-position: center center;
 		background-attachment: fixed;
-		color: #fff;
+		color: #000;
 		text-align: center;
 		padding: 7.5em 0 2em 0;
 		cursor: default;
@@ -2132,7 +2132,7 @@
 			}
 
 		#header h1 {
-			color: #fff;
+			color: #000;
 			font-size: 3em;
 			line-height: 1em;
 		}
@@ -3054,7 +3054,7 @@
 
 
 div#header header h2{
-	color:#fff;
+	color:#000;
 	font-size: 2em;
 	font-style: italic;
 }
@@ -3096,6 +3096,10 @@ ul.pagination li.active{
 
 body.no-sidebar.gallery ul.gallery {
 	margin-left:5%;
+}
+
+header p, header p strong{
+	color: #000;
 }
 
 @media screen and (min-width: 736px) {
