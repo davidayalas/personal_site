@@ -2186,14 +2186,14 @@
 			width: 100%;
 			height: 100%;
 			opacity: 0;
-			-moz-transition: opacity 2.5s ease-in-out;
-			-webkit-transition: opacity 2.5s ease-in-out;
-			-ms-transition: opacity 2.5s ease-in-out;
-			transition: opacity 2.5s ease-in-out;
-			-moz-transition-delay: 0.3s;
-			-webkit-transition-delay: 0.3s;
-			-ms-transition-delay: 0.3s;
-			transition-delay: 0.3s;
+			-moz-transition: opacity 1.5s ease-in-out;
+			-webkit-transition: opacity 1.5s ease-in-out;
+			-ms-transition: opacity 1.5s ease-in-out;
+			transition: opacity 1.5s ease-in-out;
+			-moz-transition-delay: 0.2s;
+			-webkit-transition-delay: 0.2s;
+			-ms-transition-delay: 0.2s;
+			transition-delay: 0.2s;
 		}
 
 	body.homepage.is-loading #header:after {
@@ -3068,6 +3068,7 @@ div.wrapper.style2{
 @media screen and (max-width: 736px) {
 	div.pull-right.editpage{float:none!important;text-align: center;margin-top:1em;}
 	header h1,header h2,header p{color: #000!important;}
+	footer a.button{width: 95%; margin: 0 auto;}
 }
 
 body.no-sidebar #header, body.no-sidebar #header h1{
