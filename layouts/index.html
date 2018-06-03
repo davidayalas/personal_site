@@ -58,13 +58,13 @@
 			<!-- Pictures -->
 				<section class="carousel special">
 					<header style="text-align: center">
-						<h2><a href="/gallery">{{$p.Params.media}}</a></h2>
+						<h2><a href="/gallery/page/2/">{{$p.Params.media}}</a></h2>
 					</header>
 
 					<div class="reel">
 					{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
 
-					{{ range first 8 (where .Data.Pages "Section" "gallery") }}
+					{{ range first 9 (where .Data.Pages "Section" "gallery") }}
 		            	{{ if .Params.image }}
 			              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
 		              		{{ $thumb := $image.Fill "320x320 q90" }}
