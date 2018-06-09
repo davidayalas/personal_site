@@ -26,9 +26,11 @@ doingnow: >-
   Going back to the future: **Static Site Generators**, **Design patterns**
   (Microservices, Serverless/Servicefull Architectures, CQRS, ...)
 
+  * **Travelling** with my family
+
   * Trying to **teach programming skills** to my children
 
-  * Taking care of my **orchard**
+  * Practising **Karate** since I was a child
 media: Media
 social_title: Networks
 social:
