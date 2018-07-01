@@ -21,10 +21,10 @@ doingnow: >-
   * Trying to be [**Agile**](http://agilemanifesto.org/principles.html) and
   [**Lean Thinking**](https://en.m.wikipedia.org/wiki/Lean_thinking)
 
-  * Researching: **Platforms and Services** (FaaS/PaaS/CaaS, Netlify, Search
-  Engine as a Service), **Middlewares and Languages** (NodeJS, Golang, Python),
-  Going back to the future: **Static Site Generators**, **Design patterns**
-  (Microservices, Serverless/Servicefull Architectures, CQRS, ...)
+  * Researching: **Platforms and Services** (FaaS/PaaS/CaaS, Search Engine as a
+  Service), **Middlewares and Languages** (NodeJS, Golang, Python), Going back
+  to the future: **Static Site Generators**, **Design patterns** (Microservices,
+  Serverless/Servicefull Architectures, CQRS, ...)
 
   * **Travelling** with my family
 
