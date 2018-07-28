@@ -16,7 +16,7 @@ doingnow: >-
   * **Looking for the balance** between business, technology, simplicity
   ([KISS](https://en.m.wikipedia.org/wiki/KISS_principle)) and costs
 
-  * Bringing to my company **new (cloud) solutions** to improve IT
+  * Bringing to my company **new solutions** to improve IT and business
 
   * Trying to be [**Agile**](http://agilemanifesto.org/principles.html) and
   [**Lean Thinking**](https://en.m.wikipedia.org/wiki/Lean_thinking)
