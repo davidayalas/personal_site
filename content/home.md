@@ -1,7 +1,7 @@
 ---
 title: David Ayala
 header: /media/header-khuri.jpg
-description: ((Father x 2) && Husband) + (IT Architecture Manager @ UOC.edu)
+description: ((Father x 2) && Husband)<br/>+<br/>(IT Architecture Manager @ UOC.edu)
 message: 'Be async, my friend'
 meta_keywords: >-
   IT architecture, design patterns, internet, development, cloud computing,
