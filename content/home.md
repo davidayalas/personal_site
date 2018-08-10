@@ -67,6 +67,16 @@ miniprojects:
     description: >-
       Partial templates to manage infinite nested subsections in breadcrumbs
       (from Hugo 0.24)
+  - link: 'https://github.com/davidayalas/gsuite-directory-query-user'
+    title: GSuite Directory Query User
+    description: >-
+      Microservice (AWS Lambda) to query if an user exists in GSuite or not (and
+      other application can provision it)
+  - link: 'https://github.com/davidayalas/gspreadsheet-html-timetable'
+    title: Google Spreadsheet to HTML Table (and resposive)
+    description: >-
+      Allows non-tech users to edit a timetable in Google Spreadsheet and then
+      publish it to a web page
   - link: 'https://github.com/davidayalas/staticdb'
     title: StaticDB
     description: >-
