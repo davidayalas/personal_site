@@ -18,7 +18,7 @@ $(document).ready(function(){
 		for(var i=0;i<data.length;i++){
 			tweet_date = new Date(data[i].created_at);
 			stb.push('<li',tcss,'><article class="tweet">',replaceURLWithHTMLLinks(data[i].text),'<span class="timestamp"> (',	fillZeros(tweet_date.getUTCHours(),2),":",fillZeros(tweet_date.getUTCMinutes(),2)," ",fillZeros(tweet_date.getUTCMonth()+1,2),"/",fillZeros((tweet_date.getUTCDate()),2),"/",fillZeros((tweet_date.getUTCFullYear()),2),')</span></article></li>');
-			if(i>=9){
+			if(i>=12){
 				tcss = " class='hidden'"
 			}
 		}
