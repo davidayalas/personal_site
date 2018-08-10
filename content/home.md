@@ -73,7 +73,7 @@ miniprojects:
       Microservice (AWS Lambda) to query if an user exists in GSuite or not (and
       other application can provision it)
   - link: 'https://github.com/davidayalas/gspreadsheet-html-timetable'
-    title: Google Spreadsheet to HTML Table (and resposive)
+    title: Google Spreadsheet to HTML Table (and responsive)
     description: >-
       Allows non-tech users to edit a timetable in Google Spreadsheet and then
       publish it to a web page
@@ -105,8 +105,6 @@ miniprojects:
     description: >-
       Personal site github repo where I test staff related with Hugo and
       NetlifyCMS
-  - link: 'https://github.com/davidayalas/'
-    title: More mini projects here
 architecture_title: Architecture Diagram of this site
 architecture_diagram: /media/personal-site.png
 ---
