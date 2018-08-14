@@ -11,22 +11,21 @@
 	</head>
 	<body class="homepage">
 		<div id="page-wrapper">
-
 			<!-- Header -->
 				<div id="header">
 					<!-- Inner -->
 					<div class="inner">
 						<header>
-							<h1>{{ $p.Title }}</h1>
+							<h1 class="notranslate"> class="notranslate"{{ $p.Title }}</h1>
 							<hr />
-							<p ><strong>{{ safeHTML $p.Description }}</strong></p>
+							<p class="notranslate"><strong>{{ safeHTML $p.Description }}</strong></p>
 							{{ if $p.Params.message }}
 							<hr />
-							<h2>"{{ $p.Params.message }}"</h2>
+							<h2 class="notranslate">"{{ $p.Params.message }}"</h2>
 							{{ end }}
 						</header>
 						<footer>
-							<a href="#banner" class="button circled scrolly">Start</a>
+							<a href="#banner" class="button circled scrolly notranslate">Start</a>
 						</footer>
 					</div>
 				</div>
@@ -34,7 +33,7 @@
 			<!-- Banner -->
 				<section id="banner">
 					<header>
-						<h2>{{ $p.Params.social_title }}</h2>
+						<h2 class="notranslate">{{ $p.Params.social_title }}</h2>
 						<p>&nbsp;</p>
 						<ul class="icons">
 							{{ range $p.Params.social }}
@@ -68,7 +67,7 @@
 		            	{{ if .Params.image }}
 			              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
 		              		{{ $thumb := $image.Fill "320x320 q90" }}
-							<article><a href="{{$image.RelPermalink}}" class="image featured"><img src="{{$thumb.RelPermalink}}" alt="{{.Title}}" /></a><p>{{ .Title }}</p></article>
+							<article><a href="{{$image.RelPermalink}}" class="image featured"><img src="{{$thumb.RelPermalink}}" alt="{{.Title}}" /></a><p class="notranslate">{{ .Title }}</p></article>
 						{{ end }}
 					{{ end }}
 					

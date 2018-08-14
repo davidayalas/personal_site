@@ -24,7 +24,7 @@
 							</header>
 							<ul class="divided">
 								{{ range $p.Params.miniprojects }}
-								<li><article class="post stub"><header><h3><a href="{{ .link }}">{{ .title }}</a></h3></header><p>{{ safeHTML (markdownify .description) }}</p></article></li>
+								<li><article class="post stub"><header><h3><a href="{{ .link }}" class="notranslate">{{ .title }}</a></h3></header><p>{{ safeHTML (markdownify .description) }}</p></article></li>
 								{{ end }}
 							</ul>
 							<footer>
