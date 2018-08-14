@@ -18,8 +18,8 @@ doingnow: >-
 
   * Bringing to my company **new solutions** to improve IT and business
 
-  * Trying to be [**Agile**](http://agilemanifesto.org/principles.html) and
-  [**Lean Thinking**](https://en.m.wikipedia.org/wiki/Lean_thinking)
+  * Trying to be <span class="notranslate">[**Agile**](http://agilemanifesto.org/principles.html)</span> and
+  <span class="notranslate">[**Lean Thinking**](https://en.m.wikipedia.org/wiki/Lean_thinking)</span>
 
   * Researching: **Platforms and Services** (FaaS/PaaS/CaaS, Search Engine as a
   Service), **Middlewares and Languages** (NodeJS, Golang, Python), Going back
