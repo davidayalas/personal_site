@@ -1,6 +1,5 @@
 {{ $data := .data }}
 {{ $links := (len $data.Params.social) }}
-
 <script type="application/ld+json">
 {
     "@context" : "http://schema.org",
@@ -13,9 +12,12 @@
     "sameAs": [
         {{ range $index, $el := $data.Params.social }}
         	{{ if in .link "https" }}
-		    	"{{.link}}",
+		    	"{{.link}}"
         	{{end}}
-        {{end}}, ""
+            {{ if lt (add $index 1) $links }}
+            ,
+            {{end}}
+        {{end}}
     ]
     }
 </script>

@@ -37,7 +37,7 @@
 
 	<!-- Main -->
 		{{ if and (isset $p.Params "architecture_title") (ne (string $p.Params.architecture_title) "") }}
-		<div class="style2" style="background: #ddd;padding-top:1em;padding-bottom:2em">
+		<div class="style2" style="background: #ddd; padding-top:1em; padding-bottom:2em">
 			<article id="architecture" class="container special">
 				<header>
 					<h2>{{ $p.Params.architecture_title }}</h2>
@@ -48,6 +48,28 @@
 		{{ end }}
 	{{ end }}
 
+		<div class="contact style3">
+			<div class="container" >
+				<header>
+					<h2>{{ $p.Params.contact_title }}</h2>
+				</header>				
+				<form name="contact" class="10u 12u(mobile)" netlify>
+					<div class="row">
+						<div class="6u 12u(mobile)"><input type="text" name="name" placeholder="Name" required /></div>
+						<div class="6u 12u(mobile)"><input type="email" name="email" placeholder="Email"  required /></div>
+					</div>
+					<div class="12u"><textarea name="message" placeholder="Message" required></textarea></div>
+				    <div data-netlify-recaptcha></div>
+					<div class="col-12">
+						<ul class="actions special">
+							<li><input type="submit" class="button" value="Send" /></li>
+							<li><input type="reset" class="button alt" value="Reset" /></li>
+						</ul>
+					</div>
+				</form>
+
+			</div>
+		</div>
 
 		<div class="footer">
 			<div class="container">

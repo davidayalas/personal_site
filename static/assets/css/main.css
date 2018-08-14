@@ -3103,6 +3103,61 @@ section#projects footer{
 	text-align: center;
 }
 
+div.contact{
+	padding: 3em 0;
+}
+
+div.contact form{
+	margin: 0 auto;
+	width: 95%;
+}
+
+form input, form textarea{
+	margin-bottom: 1em!important;
+}
+
+form ul.actions{
+	padding-left: 3%;
+}
+form ul.actions li{
+	width: 45%;
+	text-align: center
+}
+form ul.actions li input{
+	width: 75%;
+}
+
+.style3 header h2{
+	text-align: center;
+}
+
+@media screen and (max-width: 736px) {
+	div.pull-right.editpage{float:none!important;text-align: center;margin-top:1em;}
+	header h1,header h2,header p{color: #000!important;}
+	footer a.button{width: 95%; margin: 0 auto;}
+	form ul.actions li{
+		width: 95%;
+	}
+	form ul.actions li input{
+		width: 100%;
+	}
+	form input, form textarea{
+		padding-bottom: 0;
+	}
+
+	form .row > *{
+		padding-top: 0;
+	}
+	div.contact{
+		padding: 1em 0;
+	}	
+	
+	div.contact h2{
+		margin-bottom: 1.5em;
+	}	
+
+}
+
 @media screen and (min-width: 736px) {
 
 	body.no-sidebar.gallery ul.gallery {
@@ -3120,10 +3175,5 @@ section#projects footer{
 	article a.image h3{
 		min-height: 335px;
 	}
-}
 
-@media screen and (max-width: 736px) {
-	div.pull-right.editpage{float:none!important;text-align: center;margin-top:1em;}
-	header h1,header h2,header p{color: #000!important;}
-	footer a.button{width: 95%; margin: 0 auto;}
 }

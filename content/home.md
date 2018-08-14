@@ -46,9 +46,6 @@ social:
   - class: fa-github
     link: 'https://github.com/davidayalas'
     title: Github
-  - class: fa-mail-forward
-    link: 'mailto:davixyz@gmail.com'
-    title: e-Mail
 miniprojects:
   - link: 'https://github.com/davidayalas/hugolifycms/blob/master/README.md'
     title: HugolifyCMS
@@ -107,5 +104,6 @@ miniprojects:
       NetlifyCMS
 architecture_title: Architecture Diagram of this site
 architecture_diagram: /media/personal-site.png
+contact_title: Contact
 ---
 
