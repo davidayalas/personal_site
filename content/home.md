@@ -18,13 +18,14 @@ doingnow: >-
 
   * Bringing to my company **new solutions** to improve IT and business
 
-  * Trying to be <span class="notranslate">[**Agile**](http://agilemanifesto.org/principles.html)</span> and
-  <span class="notranslate">[**Lean Thinking**](https://en.m.wikipedia.org/wiki/Lean_thinking)</span>
+  * Trying to be <span
+  class="notranslate">[**Agile**](http://agilemanifesto.org/principles.html)</span>
+  and <span class="notranslate">[**Lean
+  Thinking**](https://en.m.wikipedia.org/wiki/Lean_thinking)</span>
 
-  * Researching: **Platforms and Services** (FaaS/PaaS/CaaS, Search Engine as a
-  Service), **Middlewares and Languages** (NodeJS, Golang, Python), Going back
-  to the future: **Static Site Generators**, **Design patterns** (Microservices,
-  Serverless/Servicefull Architectures, CQRS, ...)
+  * Researching: **Platforms and Services** (FaaS/PaaS/CaaS, Search Engine-aaS),
+  **Middlewares and Languages** (NodeJS, Golang, Python), Going back to the
+  future: **Static Site Generators and** **Design patterns**
 
   * **Travelling** with my family
 
