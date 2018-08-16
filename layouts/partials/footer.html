@@ -48,6 +48,7 @@
 		{{ end }}
 	{{ end }}
 
+	{{ if not $c.Section }}
 		<div class="contact style3">
 			<div class="container" >
 				<header>
@@ -70,7 +71,8 @@
 
 			</div>
 		</div>
-
+		{{ end }}
+		
 		<div class="footer">
 			<div class="container">
 				<div class="row">
@@ -108,7 +110,7 @@
 		{{ $c.Scratch.Set "header" ($image.Resize "1600x q90") }}
 	{{ end }}
 <script>
-	var headerImage = "{{ ($c.Scratch.Get "header").RelPermalink }}";
+	var headerImage = '{{ ($c.Scratch.Get "header").RelPermalink }}';
 </script>
 	{{end }}
 <script src="/assets/js/jquery.min.js"></script>
