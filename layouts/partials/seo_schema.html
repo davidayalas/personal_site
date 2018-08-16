@@ -7,17 +7,10 @@
     "name" : "{{ $data.Title }}",
     "url": "https://davidayala.eu",
     "jobTitle": "IT Architecture Manager",
-    "gender": "male",
     "image": "https://pbs.twimg.com/profile_images/660879996852920320/j7WfXHTt_400x400.jpg",
     "sameAs": [
-        {{ range $index, $el := $data.Params.social }}
-        	{{ if in .link "https" }}
-		    	"{{.link}}"
-        	{{end}}
-            {{ if lt (add $index 1) $links }}
-            ,
-            {{end}}
-        {{end}}
+        {{ range $index, $el := $data.Params.social }}{{ if in .link "https" }}"{{.link}}"{{end}}{{ if lt (add $index 1) $links }},
+        {{end}}{{end}}
     ]
     }
 </script>
