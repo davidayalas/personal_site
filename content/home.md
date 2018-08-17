@@ -25,7 +25,7 @@ doingnow: >-
 
   * Researching: **Platforms and Services** (FaaS/PaaS/CaaS, Search Engine-aaS),
   **Middlewares and Languages** (NodeJS, Golang, Python), Going back to the
-  future: **Static Site Generators and** **Design patterns**
+  future: **Static Site Generators**
 
   * **Travelling** with my family
 
