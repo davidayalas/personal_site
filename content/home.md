@@ -42,7 +42,7 @@ social:
     link: 'https://www.linkedin.com/in/davidayalas'
     title: Linkedin
   - class: fa-github
-    link: 'https://github.com/davidayalas'
+    link: 'https://github.com/davidayalas?tab=repositories'
     title: Github
   - class: fa-instagram
     link: 'https://www.instagram.com/davidayalas'
