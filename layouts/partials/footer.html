@@ -48,13 +48,13 @@
 		{{ end }}
 	{{ end }}
 
-	{{ if not $c.Section }}
+	{{ if eq $c.URL "/" }}
 		<div class="contact style3">
 			<div class="container" >
 				<header>
 					<h2>{{ $p.Params.contact_title }}</h2>
 				</header>				
-				<form name="contact" class="10u 12u(mobile)" netlify>
+				<form action="/thanks" name="contact" class="10u 12u(mobile)" netlify>
 					<div class="row">
 						<div class="6u 12u(mobile)"><input type="text" name="name" placeholder="Name" required /></div>
 						<div class="6u 12u(mobile)"><input type="email" name="email" placeholder="Email"  required /></div>
@@ -71,7 +71,7 @@
 
 			</div>
 		</div>
-		{{ end }}
+	{{ end }}
 		
 		<div class="footer">
 			<div class="container">
