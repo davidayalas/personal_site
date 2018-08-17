@@ -41,12 +41,12 @@ social:
   - class: fa-linkedin
     link: 'https://www.linkedin.com/in/davidayalas'
     title: Linkedin
-  - class: fa-instagram
-    link: 'https://www.instagram.com/davidayalas'
-    title: Instagram
   - class: fa-github
     link: 'https://github.com/davidayalas'
     title: Github
+  - class: fa-instagram
+    link: 'https://www.instagram.com/davidayalas'
+    title: Instagram
 miniprojects:
   - link: 'https://github.com/davidayalas/hugolifycms/blob/master/README.md'
     title: HugolifyCMS
