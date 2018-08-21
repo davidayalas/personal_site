@@ -3143,13 +3143,18 @@ div.center{
 @media screen and (max-width: 736px) {
 	div.pull-right.editpage{float:none!important;text-align: center;margin-top:1em;}
 	header h1,header h2,header p{color: #000!important;}
-	footer a.button{width: 95%; margin: 0 auto;}
+	footer a.button, ul li input.button{width: 95%; margin: 0 auto;}
 	form ul.actions li{
-		width: 95%;
+		width: 100%;
 	}
+
+	form ul.actions{
+		padding-left:0;
+	}	
 	form ul.actions li input{
 		width: 100%;
 	}
+
 	form input, form textarea{
 		padding-bottom: 0;
 	}
