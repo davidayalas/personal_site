@@ -6,8 +6,17 @@
 -->
 <html>
 	{{ $p := .Site.GetPage "page" "home.md" }}
+	{{ $.Scratch.Set "page" (.Site.GetPage "page" (print .Section "/_index.md")) }}
+
+
+	{{ if not ($.Scratch.Get "page") }}
+		{{ $.Scratch.Set "page" . }}
+	{{ end }}
+
+	{{ $page := $.Scratch.Get "page" }}
+
 	<head>
-		{{ partial "head.html" (dict "data" $p)}}
+		{{ partial "head.html" (dict "data" $p) }}
 	</head>
 	<body class="no-sidebar {{.Section}}">
 		<div id="page-wrapper">
@@ -16,7 +25,7 @@
 					<!-- Inner -->
 					<div class="inner">
 						<header>
-							<h1>{{ .Title }}</h1>
+							<h1><a href="/{{.Section}}">{{ $page.Title }}</a></h1>
 						</header>
 					</div>
 					<nav id="nav">
@@ -31,7 +40,12 @@
 						<header>
 							<h2>{{ .Title }}</h2>
 						</header>
-                        {{ .Content }}
+						{{ if eq .Section "gallery" }}
+							<img src="{{ .Params.image }}" style="max-width: 100%" />
+						{{ else }}
+							{{ .Content }}
+						{{ end }}
+
                     </article>
 				</section>
 
