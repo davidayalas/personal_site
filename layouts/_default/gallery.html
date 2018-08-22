@@ -28,7 +28,7 @@
 
 
 				{{ if eq .Section "gallery" }}
-				<section>
+				<section class="image-list">
 					{{ $pagesperpage := 9}}	
 					{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
 					{{ $paginator := .Paginate (where .Data.Pages "Section" "gallery") $pagesperpage}}

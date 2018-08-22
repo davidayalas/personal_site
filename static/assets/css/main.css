@@ -3140,6 +3140,18 @@ div.center{
 	background-color: darkgreen;
 }
 
+.image-container{
+	text-align: center;
+}
+
+.image-container img{
+	max-width: 95%;
+}
+
+body.gallery img, .carousel .reel img{
+	border-radius: 0.75em;
+}
+
 @media screen and (max-width: 736px) {
 	div.pull-right.editpage{float:none!important;text-align: center;margin-top:1em;}
 	header h1,header h2,header p{color: #000!important;}

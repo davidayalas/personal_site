@@ -36,12 +36,31 @@
 				</div>
 
 				<section>
-					<article id="main" class="container special doingnow">
+					<article id="main" class="container special">
 						<header>
 							<h2>{{ .Title }}</h2>
 						</header>
 						{{ if eq .Section "gallery" }}
-							<img src="{{ .Params.image }}" style="max-width: 100%" />
+							<div class="image-container">
+								{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
+								{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
+								{{ $.Scratch.Set "thumb" $image }}
+
+								{{ $width1 := 750 }}
+								{{ $width2 := 1000 }}
+
+								{{ if lt $image.Width $image.Height }}
+									{{ if gt $image.Width $width1}}
+										{{ $.Scratch.Set "thumb" ($image.Resize "750x q90") }}
+									{{ end }}
+								{{ else }}
+									{{ if gt $image.Width $width2}}
+										{{ $.Scratch.Set "thumb" ($image.Resize "1000x q90") }}	
+									{{ end }}
+								{{ end }}
+
+								<a href="{{$image.RelPermalink}}"><img src="{{ ($.Scratch.Get "thumb").RelPermalink }}" /></a>
+							</div>							
 						{{ else }}
 							{{ .Content }}
 						{{ end }}
