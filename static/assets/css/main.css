@@ -3148,8 +3148,13 @@ div.center{
 	max-width: 95%;
 }
 
-body.gallery img, .carousel .reel img{
+body.gallery img, .carousel .reel article, .carousel .reel img{
 	border-radius: 0.75em;
+}
+
+.carousel .reel img{
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 }
 
 @media screen and (max-width: 736px) {
