@@ -6,7 +6,7 @@ message: 'Be async, my friend'
 meta_keywords: >-
   IT architecture, design patterns, internet, development, cloud computing,
   raspberry pi, standards, teaching, programming languages, web performance,
-  cache, automation
+  cache, automation, ctti, uoc, elearn
 doingnow_title: About me
 doingnow: >-
   * [**IT Architecture
@@ -107,3 +107,4 @@ architecture_title: Architecture Diagram of this site
 architecture_diagram: /media/personal-site.png
 contact_title: Contact
 ---
+
