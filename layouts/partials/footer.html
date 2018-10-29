@@ -103,7 +103,7 @@
 </div>
 
 <!-- Scripts -->
-	{{if $p.Params.header}}
+{{if $p.Params.header}}
 	{{ $image := $mediaPage.Resources.GetMatch (replace $p.Params.header "/media/" "") }}
 	{{ $c.Scratch.Set "header" ($image.Resize (print $image.Width "x" $image.Height " q60")) }}
 	{{ if gt $image.Width 1600 }}
@@ -112,7 +112,7 @@
 <script>
 	var headerImage = '{{ ($c.Scratch.Get "header").RelPermalink }}';
 </script>
-	{{end }}
+{{end }}
 <script src="/assets/js/jquery.min.js"></script>
 <script src="/assets/js/jquery.dropotron.min.js"></script>
 <script src="/assets/js/jquery.scrolly.min.js"></script>
