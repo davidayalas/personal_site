@@ -27,10 +27,6 @@ doingnow: >-
   and <span class="notranslate">[**Lean
   Thinking**](https://en.m.wikipedia.org/wiki/Lean_thinking)</span>
 
-  * Researching: **Platforms and Services** (FaaS/PaaS/CaaS, Search Engine-aaS),
-  **Middlewares and Languages** (NodeJS, Golang, Python), Going back to the
-  future: **Static Site Generators**
-
   * **Travelling** with my family
 
   * Trying to **teach programming skills** to my children
