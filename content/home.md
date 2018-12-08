@@ -35,7 +35,7 @@ doingnow: >-
 
   * Trying to **teach programming skills** to my children
 
-  * Practising **Karate** since I was a child
+  * Practising **Karate** since I was a child 
 media: Media
 social_title: Networks
 social:
