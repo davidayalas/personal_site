@@ -2,7 +2,7 @@
 title: David Ayala
 header: /media/header-khuri.jpg
 description: ((Father x 2) && Husband)<br/>+<br/>(IT Architecture Manager @ UOC.edu)
-message: 'Be Async, my friend - Fail Fast, Again, Better'
+message: 'Be Async, My Friend - Fail Fast, Again, Better'
 meta_keywords: >-
   IT architecture, design patterns, internet, development, cloud computing,
   raspberry pi, standards, teaching, programming languages, web performance,
