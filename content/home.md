@@ -99,7 +99,7 @@ miniprojects:
     link: 'https://github.com/davidayalas/gae-cache'
     title: gae-cache
   - description: >-
-      Personal site github repo where I test staff related with Hugo and
+      Personal site github repo where I test stuff related with Hugo and
       NetlifyCMS
     link: 'https://github.com/davidayalas/personal_site'
     title: Personal site
