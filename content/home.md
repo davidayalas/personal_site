@@ -16,7 +16,7 @@ doingnow: >-
   * **Looking for the balance** between business, technology, simplicity
   ([KISS](https://en.m.wikipedia.org/wiki/KISS_principle)) and costs
 
-  * Bringing to my company **new solutions** to improve IT and business
+  * Bringing to my company **new solutions** to improve business
 
   * **Everything as a Service**
 
@@ -31,7 +31,7 @@ doingnow: >-
 
   * Trying to **teach programming skills** to my children
 
-  * Practising **Karate** since I was a child 
+  * Practising **Karate** since I was a child
 media: Media
 social_title: Networks
 social:
