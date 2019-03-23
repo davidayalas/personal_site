@@ -16,7 +16,7 @@ doingnow: >-
   * **Looking for the balance** between business, technology, simplicity
   ([KISS](https://en.m.wikipedia.org/wiki/KISS_principle)) and costs
 
-  * Bringing to my company **new solutions** to improve business
+  * Adding **value** to my company **through technology**
 
   * **Everything as a Service**
 
