@@ -48,7 +48,8 @@ social:
     link: 'https://www.instagram.com/davidayalas'
     title: Instagram
 miniprojects:
-  - Extensible SAML SP to generate JWT tokens. It can run on AWS Lambda
+  - description: >- 
+      Extensible SAML SP to generate JWT tokens. It can run on AWS Lambda
     link: 'https://github.com/davidayalas/saml-jwt'
     title: SAML JWT
   - description: >-
