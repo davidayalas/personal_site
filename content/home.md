@@ -48,6 +48,9 @@ social:
     link: 'https://www.instagram.com/davidayalas'
     title: Instagram
 miniprojects:
+  - Extensible SAML SP to generate JWT tokens. It can run on AWS Lambda
+    link: 'https://github.com/davidayalas/saml-jwt'
+    title: SAML JWT
   - description: >-
       Integration of Hugo site and Netlify CMS, with N levels (nested
       sections/folders), multilanguage and access to CMS from live site. <a
@@ -103,9 +106,6 @@ miniprojects:
       NetlifyCMS
     link: 'https://github.com/davidayalas/personal_site'
     title: Personal site
-  - description: Extensible SAML SP to generate JWT tokens. It can run on AWS Lambda
-    link: 'https://github.com/davidayalas/saml-jwt'
-    title: SAML JWT
 architecture_title: Architecture Diagram of this site
 architecture_diagram: /media/personal-site.png
 contact_title: Contact
