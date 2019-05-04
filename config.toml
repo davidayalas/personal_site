@@ -6,3 +6,5 @@ enableRobotsTXT = true
 contentdir = "content"
 layoutdir = "layouts"
 publishdir = "public"
+
+disableKinds = ["taxonomy", "taxonomyTerm"]

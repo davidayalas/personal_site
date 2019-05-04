@@ -67,7 +67,7 @@
 		            	{{ if .Params.image }}
 			              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
 		              		{{ $thumb := $image.Fill "320x320 q90" }}
-							<article><a href="{{.URL}}" class="image featured"><img src="{{$thumb.RelPermalink}}" alt="{{.Title}}" /></a><p class="notranslate">{{ .Title }}</p></article>
+							<article><a href="{{.Permalink}}" class="image featured"><img src="{{$thumb.RelPermalink}}" alt="{{.Title}}" /></a><p class="notranslate">{{ .Title }}</p></article>
 						{{ end }}
 					{{ end }}
 					
@@ -77,7 +77,7 @@
 					{{ if gt (len (where .Data.Pages "Section" "gallery")) 8 }}
 					<p>&nbsp;</p>
 					<footer>
-					<a href="/gallery/page/2/" class="button">More images</a>
+					<a href="/gallery/" class="button">More images</a>
 					</footer>
 					{{ end }}
 
