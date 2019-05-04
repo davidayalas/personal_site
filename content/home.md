@@ -4,9 +4,9 @@ header: /media/header-khuri.jpg
 description: ((Father x 2) && Husband)<br/>+<br/>(IT Architecture Manager @ UOC.edu)
 message: 'Be Async, My Friend - Fail Fast, Again, Better'
 meta_keywords: >-
-  IT architecture, design patterns, internet, development, cloud computing,
-  raspberry pi, standards, teaching, programming languages, web performance,
-  cache, automation, ctti, uoc, elearn
+  it architecture, enterprise architecture, ea, manager, design patterns,
+  internet, development, cloud computing, raspberry pi, standards, teaching,
+  programming languages, web performance, cache, automation, ctti, uoc, elearn
 doingnow_title: About me
 doingnow: >-
   * [**IT Architecture
@@ -29,9 +29,7 @@ doingnow: >-
 
   * **Travelling** with my family
 
-  * Trying to **teach programming skills** to my children
-
-  * Practising **Karate** since I was a child
+  * Trying to **teach programming skills and karate** to my children
 media: Media
 social_title: Networks
 social:
@@ -48,8 +46,7 @@ social:
     link: 'https://www.instagram.com/davidayalas'
     title: Instagram
 miniprojects:
-  - description: >- 
-      Extensible SAML SP to generate JWT tokens. It can run on AWS Lambda
+  - description: Extensible SAML SP to generate JWT tokens. It can run on AWS Lambda
     link: 'https://github.com/davidayalas/saml-jwt'
     title: SAML JWT
   - description: >-
