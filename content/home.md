@@ -5,8 +5,9 @@ description: ((Father x 2) && Husband)<br/>+<br/>(IT Architecture Manager @ UOC.
 message: 'Be Async, My Friend - Fail Fast, Again, Better'
 meta_keywords: >-
   it architecture, enterprise architecture, ea, manager, design patterns,
-  internet, development, cloud computing, raspberry pi, standards, teaching,
-  programming languages, web performance, cache, automation, ctti, uoc, elearn
+  internet, development, cloud computing,  standards, teaching, programming
+  languages, web performance, automation, ctti, uoc, elearn, everything as a
+  service, serverless
 doingnow_title: About me
 doingnow: >-
   * [**IT Architecture
