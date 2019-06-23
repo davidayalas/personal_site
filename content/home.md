@@ -7,7 +7,8 @@ meta_keywords: >-
   it architecture, enterprise architecture, ea, it manager, design patterns,
   internet, development, cloud computing, cloud, teaching, programming
   languages, performance, automation, ctti, uoc, elearn, everything as a
-  service, serverless, servicefull, kiss principle
+  service, serverless, servicefull, kiss principle, jamstack, ssg, headlesscms,
+  problem solver
 doingnow_title: About me
 doingnow: >-
   * [**IT Architecture
