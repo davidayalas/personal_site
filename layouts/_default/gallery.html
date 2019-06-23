@@ -46,7 +46,7 @@
 						{{ range $paginator.Pages }}
 			            	{{ if .Params.image }}
 				              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
-			              		{{ $thumb := $image.Fill "320x320 q90" }}
+			              		{{ $thumb := $image.Fill "320x320 q90 Center" }}
 								<li><a href="{{.Permalink}}" class=""><img src="{{$thumb.RelPermalink}}" alt="{{.Title}}" /></a><p>{{ .Title }}</p></li>
 								{{ end }}
 						{{ end }}
