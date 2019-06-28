@@ -53,8 +53,7 @@ miniprojects:
     title: SAML JWT
   - description: >-
       Integration of Hugo site and Netlify CMS, with N levels (nested
-      sections/folders), multilanguage and access to CMS from live site. <a
-      href="https://site-uoc.netlify.com/en/?cms=true">Live site demo</a>
+      sections/folders), multilanguage and access to CMS from live site.
     link: 'https://github.com/davidayalas/hugolifycms/blob/master/README.md'
     title: HugolifyCMS
   - description: >-
