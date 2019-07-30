@@ -7,17 +7,57 @@ function fillZeros(number,digits){
 	return String('000000000000'+number).slice(digits*-1);
 }
 
+var createGsMatrix = function(results){
+	var gs_matrix = [], gs_col, gs_row;
+
+	var orders = {
+	  setted : {},
+	  get : function(l){
+		if(!this.setted[l]){
+		  var ncols = 26;
+		  var col = 0;
+		  for(var i=l.length;i>0;i--){
+			col += ((l.charCodeAt(i-1)-65)+1)*(Math.pow(ncols,(l.length-i)));
+		  }
+		  this.setted[l] = col-1;
+		}
+		return this.setted[l];
+	  },
+	}
+
+	//creates gs_matrix
+	var gs_max_cols = 0;
+	for(var i=0,z=results.feed.entry.length;i<z;i++){
+	  gs_col = orders.get(results.feed.entry[i].title.$t.slice(0,1));
+	  gs_max_cols = (gs_max_cols<=gs_col?gs_col:gs_max_cols);
+	  gs_row = parseInt(results.feed.entry[i].title.$t.slice(1))-1;
+	  if(!gs_matrix[gs_row]){
+		gs_matrix[gs_row]=[];
+	  }
+	  gs_matrix[gs_row][gs_col]=results.feed.entry[i].content.$t;
+	}
+
+	//fill empty cells
+	gs_matrix.map(function(r){
+		for(var k=0;k<=gs_max_cols;k++){
+			if(!r[k]){r[k]=""}
+		}
+	});
+	return gs_matrix;
+}
+
 $(document).ready(function(){
 
 	$(".doingnow ul").addClass("default");
 
 	//TWEETS
-	$.getJSON("https://script.google.com/macros/s/AKfycbzLmZM7BRV_l4X9WL1h2QiQZmBrMZo19B6Eztx7ioT6osF9NZHg/exec?callback=?", function(data){
-		var stb = [], tweet_date, tcss="";
 
-		for(var i=0;i<data.length;i++){
-			tweet_date = new Date(data[i].created_at);
-			stb.push('<li',tcss,'><article class="tweet">',replaceURLWithHTMLLinks(data[i].text),'<span class="timestamp"> (',	fillZeros(tweet_date.getUTCHours(),2),":",fillZeros(tweet_date.getUTCMinutes(),2)," ",fillZeros(tweet_date.getUTCMonth()+1,2),"/",fillZeros((tweet_date.getUTCDate()),2),"/",fillZeros((tweet_date.getUTCFullYear()),2),')</span></article></li>');
+	$.getJSON("https://spreadsheets.google.com/feeds/cells/1xRcpFi4tL-mKvM4pJUbnQAQ0z3z4AED9lBVqMZKHeZ0/default/public/basic?alt=json-in-script&callback=?", function(data){
+		var tweets = createGsMatrix(data);
+		var stb = [], tweet_date, tcss="";
+		for(var i=0;i<tweets.length;i++){
+			tweet_date = new Date(tweets[i][1]);
+			stb.push('<li',tcss,'><article class="tweet">',replaceURLWithHTMLLinks(tweets[i][0]),'<span class="timestamp"> (',	fillZeros(tweet_date.getUTCHours(),2),":",fillZeros(tweet_date.getUTCMinutes(),2)," ",fillZeros(tweet_date.getUTCMonth()+1,2),"/",fillZeros((tweet_date.getUTCDate()),2),"/",fillZeros((tweet_date.getUTCFullYear()),2),')</span> <a href="https://twitter.com/davidayalas/status/',tweets[i][2],'" style="font-size: .8rem;"><i class="icon fa-link fa-xs"></i></a></article></li>');
 			if(i>=11){
 				tcss = " class='hidden'"
 			}
