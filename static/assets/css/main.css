@@ -3152,6 +3152,10 @@ body.gallery img, .carousel .reel article, .carousel .reel img{
 	border-radius: 0.75em;
 }
 
+body.gallery ul li,body.gallery ul li p{
+	text-align: center;
+}
+
 .carousel .reel img{
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
