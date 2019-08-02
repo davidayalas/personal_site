@@ -2625,12 +2625,12 @@
 			}
 
 			.tweet {
-				text-align: center;
+				text-align: left;
 			}
 
 			.timestamp {
 				display: block;
-				text-align: center;
+				text-align: left;
 			}
 
 		/* Footer */
