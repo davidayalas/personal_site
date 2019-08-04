@@ -6,6 +6,7 @@
 -->
 <html>
 	{{ $p := .Site.GetPage "page" "home.md" }}
+	{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
 	<head>
 		{{ partial "head.html" (dict "data" $p)}}
 	</head>
@@ -61,13 +62,12 @@
 					</header>
 
 					<div class="reel">
-					{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
 
 					{{ range first 9 (where .Data.Pages "Section" "gallery") }}
 		            	{{ if .Params.image }}
 			              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
 		              		{{ $thumb := $image.Fill "320x320 q90 Center" }}
-							<article><a href="{{.Permalink}}" class="image featured"><img src="{{$thumb.RelPermalink}}" alt="{{.Title}}" /></a><p class="notranslate">{{ .Title }}</p></article>
+							<article><a href="{{.Permalink}}" class="image featured"><img data-src="{{$thumb.RelPermalink}}" alt="{{.Title}}" class="lozad" /></a><p class="notranslate">{{ .Title }}</p></article>
 						{{ end }}
 					{{ end }}
 					

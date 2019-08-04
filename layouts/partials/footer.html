@@ -123,6 +123,8 @@
 <!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js" defer></script><![endif]-->
 <script src="/assets/js/main.js" defer></script>
 <script src="/js/custom.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+
 <script defer>
   if (window.netlifyIdentity) {
     window.netlifyIdentity.on("init", user => {
@@ -133,4 +135,7 @@
       }
     });
   }
+
+  const observer = window.lozad();
+  observer.observe();  
 </script>  
