@@ -1,6 +1,4 @@
 {{ $p := .data }}
-{{ $c := .context }}
-{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
 
 		{{ partial "seo_schema" (dict "data" $p ) }}
 		<title class="notranslate">{{ .Title }}</title>		
@@ -13,4 +11,3 @@
 		<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js" defer></script><![endif]-->
 		<link rel="stylesheet" href="/assets/css/main.css" media="all" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" media="all" /><![endif]-->
-
