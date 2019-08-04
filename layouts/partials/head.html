@@ -1,4 +1,6 @@
 {{ $p := .data }}
+{{ $c := .context }}
+{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
 
 		{{ partial "seo_schema" (dict "data" $p ) }}
 		<title class="notranslate">{{ .Title }}</title>		
@@ -8,6 +10,7 @@
 	    <meta name="keywords" content="{{ $p.Params.meta_keywords }}" />
 	    <meta name="author" content="David Ayala" />
     	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/>
-		<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js" defer></script><![endif]-->
 		<link rel="stylesheet" href="/assets/css/main.css" media="all" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" media="all" /><![endif]-->
+
