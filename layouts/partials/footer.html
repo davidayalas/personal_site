@@ -109,21 +109,21 @@
 	{{ if gt $image.Width 1600 }}
 		{{ $c.Scratch.Set "header" ($image.Resize "1600x q90") }}
 	{{ end }}
-<script>
+<script defer>
 	var headerImage = '{{ ($c.Scratch.Get "header").RelPermalink }}';
 </script>
 {{end }}
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>		
-<script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/jquery.dropotron.min.js"></script>
-<script src="/assets/js/jquery.scrolly.min.js"></script>
-<script src="/assets/js/jquery.onvisible.min.js"></script>
-<script src="/assets/js/skel.min.js"></script>
-<script src="/assets/js/util.js"></script>
-<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
-<script src="/assets/js/main.js"></script>
-<script src="/js/custom.js"></script>
-<script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>		
+<script src="/assets/js/jquery.min.js" defer></script>
+<script src="/assets/js/jquery.dropotron.min.js" defer></script>
+<script src="/assets/js/jquery.scrolly.min.js" defer></script>
+<script src="/assets/js/jquery.onvisible.min.js" defer></script>
+<script src="/assets/js/skel.min.js" defer></script>
+<script src="/assets/js/util.js" defer></script>
+<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js" defer></script><![endif]-->
+<script src="/assets/js/main.js" defer></script>
+<script src="/js/custom.js" defer></script>
+<script defer>
   if (window.netlifyIdentity) {
     window.netlifyIdentity.on("init", user => {
       if (!user) {
