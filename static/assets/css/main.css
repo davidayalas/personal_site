@@ -3213,3 +3213,8 @@ body.gallery ul li,body.gallery ul li p{
 	}
 
 }
+
+.reel{
+	overflow-x: scroll;
+	padding-bottom: 1em!important;
+}
