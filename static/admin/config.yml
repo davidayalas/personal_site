@@ -33,6 +33,7 @@ collections: # A list of collections the CMS should be able to edit
     slug: "home.md"
     fields:
       - {label: "Title", name: "title", widget: "string", tagname: "h1"}
+      - {label: "HTML Title", name: "html_title", widget: "string", tagname: "h1"}
       - {label: "Header image", name: "header", widget: "image", required: true}
       - {label: "Description", name: "description", widget: "text", required: true}
       - {label: "Message", name: "message", widget: "text", required: true}
