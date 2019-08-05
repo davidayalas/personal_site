@@ -61,7 +61,7 @@
 			});
 
 		// Scrolly links.
-			$('.scrolly').scrolly();
+			//$('.scrolly').scrolly();
 
 		// Off-Canvas Navigation.
 
@@ -114,7 +114,7 @@
 					timerId;
 
 				// Items.
-					if (settings.carousels.fadeIn) {
+					/*if (settings.carousels.fadeIn) {
 
 						$items.addClass('loading');
 
@@ -146,10 +146,10 @@
 
 							}, settings.carousels.fadeDelay);
 						}, 50);
-					}
+					}*/
 
 				// Main.
-					$t._update = function() {
+					/*$t._update = function() {
 						pos = 0;
 						rightLimit = (-1 * reelWidth) + $window.width();
 						leftLimit = 0;
@@ -159,10 +159,10 @@
 					if (skel.vars.IEVersion < 9)
 						$t._updatePos = function() { $reel.css('left', pos); };
 					else
-						$t._updatePos = function() { $reel.css('transform', 'translate(' + pos + 'px, 0)'); };
+						$t._updatePos = function() { $reel.css('transform', 'translate(' + pos + 'px, 0)'); };*/
 
 				// Forward.
-					$forward
+					/*$forward
 						.appendTo($t)
 						.hide()
 						.mouseenter(function(e) {
@@ -180,10 +180,10 @@
 						})
 						.mouseleave(function(e) {
 							window.clearInterval(timerId);
-						});
+						});*/
 
 				// Backward.
-					$backward
+					/*$backward
 						.appendTo($t)
 						.hide()
 						.mouseenter(function(e) {
@@ -202,10 +202,10 @@
 						})
 						.mouseleave(function(e) {
 							window.clearInterval(timerId);
-						});
+						});*/
 
 				// Init.
-					$window.load(function() {
+					/*$window.load(function() {
 
 						reelWidth = $reel[0].scrollWidth;
 
@@ -240,7 +240,7 @@
 							$t._update();
 						}).trigger('resize');
 
-					});
+					});*/
 
 			});
 
