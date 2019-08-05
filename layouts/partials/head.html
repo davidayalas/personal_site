@@ -1,7 +1,7 @@
 {{ $p := .data }}
 
 		{{ partial "seo_schema" (dict "data" $p ) }}
-		<title class="notranslate">{{ .Title }}</title>		
+		<title class="notranslate">{{ $p.Title }}</title>		
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 	    <meta name="description" content="David Ayala - IT Architecture Manager"  />

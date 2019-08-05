@@ -137,6 +137,8 @@
     });
   }
 
-  const observer = window.lozad();
-  observer.observe();  
+  try{
+	const observer = window.lozad();
+	observer.observe();  
+  }catch(e){}
 </script> 
