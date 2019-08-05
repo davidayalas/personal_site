@@ -4,7 +4,7 @@ var files   = ['index.html', 'gallery/index.html','gallery/london-2014/index.htm
     options = {
         banner       : false,
         stylesheets  : ['assets/css/main.css','assets/css/font-awesome.min.css'],
-        ignore       : [".hidden",".tweet",".fa-plus-circle"],
+        ignore       : [".hidden",".tweet",".fa-plus-circle",".default"],
         output       : 'assets/css/styles.css'
     };
 
