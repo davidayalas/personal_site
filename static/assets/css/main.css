@@ -3218,3 +3218,7 @@ body.gallery ul li,body.gallery ul li p{
 	overflow-x: scroll;
 	padding-bottom: 1em!important;
 }
+
+img.webdev{
+	width: 7em;
+}
