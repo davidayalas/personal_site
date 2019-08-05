@@ -1,5 +1,5 @@
 var uncss = require('uncss');
-uncss
+
 var files   = ['index.html', 'gallery/index.html','gallery/london-2014/index.html'],
     options = {
         banner       : false,
