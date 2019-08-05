@@ -1,5 +1,6 @@
 {{ $p := .data }}
 {{ $c := .context }}
+{{ $isServer := .isServer }}
 {{ $mediaPage := $c.Site.GetPage "page" "media/index.md"}}
 
 	<!-- Footer -->
@@ -104,6 +105,26 @@
 			</div>
 		</div>
 </div>
+
+<script type="text/javascript">
+
+	function createCSS(pathCSS){
+		var linkSS = document.createElement('link');
+		linkSS.rel = 'stylesheet';
+		linkSS.href = pathCSS;
+		linkSS.type = 'text/css';
+		var head = document.getElementsByTagName('head')[0];
+		head.insertBefore(linkSS, head.childNodes[2]);		
+	}
+
+{{ if eq $isServer true }}
+	createCSS("/assets/css/main.css");
+	createCSS("/assets/css/font-awesome.min.css");
+{{ else }}
+	createCSS("/assets/css/styles.css");
+{{ end }}
+
+</script>
 
 <!-- Scripts -->
 {{if $p.Params.header}}
