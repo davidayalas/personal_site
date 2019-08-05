@@ -114,7 +114,7 @@
 		linkSS.href = pathCSS;
 		linkSS.type = 'text/css';
 		var head = document.getElementsByTagName('head')[0];
-		head.insertBefore(linkSS, head.childNodes[2]);		
+		head.insertBefore(linkSS, head.childNodes[0]);		
 	}
 
 {{ if eq $isServer true }}
