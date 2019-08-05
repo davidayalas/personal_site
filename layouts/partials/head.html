@@ -11,6 +11,7 @@
 	    <meta name="author" content="David Ayala" />
     	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/>
 		
+		{{ if eq .isServer false}}
 		<style>
 			{{ if eq $section "gallery" }}
 				{{ partial "critical-css-gallery.html" . | print | safeCSS }}
@@ -18,3 +19,4 @@
 				{{ partial "critical-css-home.html"  . | print | safeCSS }}
 			{{ end }}
 		</style>
+		{{ end }}
