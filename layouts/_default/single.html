@@ -16,7 +16,7 @@
 	{{ $page := $.Scratch.Get "page" }}
 
 	<head>
-		{{ partial "head.html" (dict "data" $p "isServer" .Site.IsServer )}}
+		{{ partial "head.html" (dict "data" $p "isServer" .Site.IsServer "section" .Section)}}
 	</head>
 	<body class="no-sidebar {{.Section}}">
 		<div id="page-wrapper">
