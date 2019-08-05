@@ -68,6 +68,6 @@
                     </article>
 				</section>
 
-				{{ partial "footer.html" (dict "context" . "data" $p) }}
+				{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer ) }}
 	</body>
 </html>
