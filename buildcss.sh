@@ -1,5 +1,7 @@
-node uncss.js > static/assets/css/styles.css    
+hugo
+node _tasks/css/uncss.js > static/assets/css/styles.css    
 hugo server &
-node critical.js http://localhost:1313 layouts/partials/critical-css-home.html
-node critical.js http://localhost:1313/gallery/ layouts/partials/critical-css-gallery.html
+node _tasks/css/critical.js http://localhost:1313 $(pwd)/layouts/partials/critical-css-home.html
+node _tasks/css/critical.js http://localhost:1313/gallery/  $(pwd)/layouts/partials/critical-css-gallery.html
 kill $(ps aux | grep '[h]ugo' | awk '{print $2}')
+rm -R public

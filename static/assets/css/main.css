@@ -3221,4 +3221,5 @@ body.gallery ul li,body.gallery ul li p{
 
 img.webdev{
 	width: 7em;
+	display:block;
 }
