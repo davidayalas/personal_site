@@ -9,10 +9,8 @@ if(!url || !dest){
 
 Crittr({
     urls: [url],
-    css: "static/assets/css/styles.css"
+    css:  "static/assets/css/styles.css"
 }).then(({critical, rest}) => {
-    console.log(critical.split("\r"));
-
     require('fs').writeFile(dest, critical, function(err) {
         if(err) {
             return console.log(err);
