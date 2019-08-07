@@ -7,5 +7,5 @@ var files   = [__dirname+'/../../public/index.html', __dirname+'/../../public/ga
     };
 
 uncss(files, options, function (error, output) {
-    console.log(output.replace(/\n/g, '').replace(/\s\s+/g, ' '));
+    console.log(output.replace(/\n/g, '').replace(/\s\s+/g, ' ').replace(/'\.\.\/fonts/g, '\'/assets/fonts'));
 });
