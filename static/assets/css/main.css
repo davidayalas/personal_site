@@ -3223,3 +3223,10 @@ img.webdev{
 	width: 7em;
 	display:block;
 }
+
+@media screen and (max-width: 736px) {
+	img.webdev{
+		width: 7em;
+		display:inline;
+	}
+}
