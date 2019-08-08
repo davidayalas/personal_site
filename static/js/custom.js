@@ -1,3 +1,5 @@
+$('body.homepage #header').css('background-image', 'url("'+ (headerImage||null)+'")');
+
 function replaceURLWithHTMLLinks(text){
     var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
     return text.replace(exp,"<a href='$1'>$1</a>"); 
@@ -77,8 +79,6 @@ $(document).ready(function(){
 		});
 	});
 });
-
-$('body.homepage #header').css('background-image', 'url("'+ (headerImage||null)+'")');
 
 /* google analytics basic setup */
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

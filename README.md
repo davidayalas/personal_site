@@ -1,6 +1,6 @@
 # About this site
 
-This is my personal site and in it, I try some things about web publishing, standards and performance.
+This is my personal site and in it I try some things about web publishing, standards and performance.
 
 * It's a web published with a Static Site Generator (#SSG), [HUGO](https://gohugo.io), and edited throught a #Headless CMS, [NetlifyCMS](https://www.netlifycms.org).
 
