@@ -119,7 +119,7 @@
 	}
 
 {{ if or (eq .isServer false) (eq $testProd true) }}
-	createCSS("/assets/css/styles.css");
+	createCSS("/assets/css/style.css");
 {{ else }}
 	createCSS("/assets/css/main.css");
 	createCSS("/assets/css/font-awesome.min.css");
