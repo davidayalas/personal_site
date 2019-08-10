@@ -8,3 +8,6 @@ layoutdir = "layouts"
 publishdir = "public"
 
 disableKinds = ["taxonomy", "taxonomyTerm"]
+
+[params]
+  testProd = false

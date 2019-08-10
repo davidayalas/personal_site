@@ -1,6 +1,7 @@
 {{ $p := .data }}
 {{ $isServer := .isServer }}
 {{ $section := .section }}
+{{ $testProd := .testProd }}
 
 		{{ partial "seo_schema" (dict "data" $p ) }}
 		<title class="notranslate">{{ $p.Params.html_title }}</title>		
@@ -11,7 +12,7 @@
 	    <meta name="author" content="David Ayala" />
     	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/>
 		
-		{{ if eq .isServer false}}
+		{{ if or (eq .isServer false) (eq $testProd true) }}
 		<style>
 			{{ if eq $section "gallery" }}
 				{{ partial "critical-css-gallery.html" . | print | safeCSS }}
@@ -20,3 +21,5 @@
 			{{ end }}
 		</style>
 		{{ end }}
+
+
