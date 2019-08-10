@@ -2197,9 +2197,9 @@
 			transition-delay: 0.2s;*/
 		}
 
-	body.homepage.is-loading #header:after {
+	/*body.homepage.is-loading #header:after {
 		opacity: 1;
-	}
+	}*/
 
 /* Nav */
 

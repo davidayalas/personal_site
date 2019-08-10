@@ -1,6 +1,7 @@
 {{ $p := .data }}
 {{ $c := .context }}
 {{ $isServer := .isServer }}
+{{ $testProd := .testProd }}
 {{ $mediaPage := $c.Site.GetPage "page" "media/index.md"}}
 
 	<!-- Footer -->
@@ -117,7 +118,7 @@
 		head.insertBefore(linkSS, head.childNodes[0]);		
 	}
 
-{{ if eq $isServer true }}
+{{ if or (eq .isServer false) (eq $testProd true) }}
 	createCSS("/assets/css/main.css");
 	createCSS("/assets/css/font-awesome.min.css");
 {{ else }}
