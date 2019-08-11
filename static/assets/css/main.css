@@ -1608,7 +1608,7 @@
 
 	strong, b {
 		font-weight: 400;
-		color: #483949;
+		/*color: #483949;*/
 	}
 
 	em, i {
@@ -3225,4 +3225,9 @@ img.webdev{
 
 h3 a{
 	color: rgb(233, 187, 127);	
+}
+
+.style2 strong, .style2 b {
+	font-weight: bold;
+	/*color: #483949;*/
 }
