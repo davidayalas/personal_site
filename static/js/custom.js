@@ -50,6 +50,8 @@ var createGsMatrix = function(results){
 
 $(document).ready(function(){
 
+	$("body").css("font-family","Source Sans Pro");
+
 	$(".doingnow ul").addClass("default");
 
 	//TWEETS

@@ -107,6 +107,8 @@
 		</div>
 </div>
 
+
+<!-- Scripts -->
 <script type="text/javascript">
 
 	function createCSS(pathCSS){
@@ -129,7 +131,11 @@
 
 </script>
 
-<!-- Scripts -->
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous" defer></script>
+
 {{if $p.Params.header}}
 	{{ $image := $mediaPage.Resources.GetMatch (replace $p.Params.header "/media/" "") }}
 	{{ $c.Scratch.Set "header" ($image.Resize (print $image.Width "x" $image.Height " q60")) }}
@@ -142,12 +148,8 @@
 {{end }}
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous" defer></script>
 <!--script src="/assets/js/jquery.min.js" defer></script-->
-<script src="/assets/js/jquery.dropotron.min.js" defer></script>
+<!--script src="/assets/js/jquery.dropotron.min.js" defer></script-->
 <!--script src="/assets/js/jquery.scrolly.min.js" defer></script-->
 <!--script src="/assets/js/jquery.onvisible.min.js" defer></script--> 
 <script src="/assets/js/skel.min.js" defer></script>
