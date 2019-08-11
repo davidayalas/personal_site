@@ -1555,11 +1555,11 @@
 		color: #5b5b5b;
 		font-size: 15pt;
 		line-height: 1.85em;
-		font-family: 'Source Sans Pro', sans-serif;
+		/*font-family: 'Source Sans Pro', sans-serif;*/
 		font-weight: 300;
 	}
 
-		body.is-loading *, body.is-loading *:after, body.is-loading *:before {
+		/*body.is-loading *, body.is-loading *:after, body.is-loading *:before {
 			-moz-transition: none !important;
 			-webkit-transition: none !important;
 			-ms-transition: none !important;
@@ -1568,7 +1568,7 @@
 			-webkit-animation: none !important;
 			-ms-animation: none !important;
 			animation: none !important;
-		}
+		}*/
 
 	input, textarea, select {
 		font-size: 15pt;
@@ -2084,7 +2084,7 @@
 /* Wrapper */
 
 	.wrapper {
-		background: #fff;
+		/*background: #fff;*/
 		margin: 0 0 2em 0;
 		padding: 6em 0 6em 0;
 	}
@@ -2101,14 +2101,14 @@
 		background-size: cover;
 		background-position: center center;
 		background-attachment: fixed;
-		color: #000;
+		/*color: #000;*/
 		text-align: center;
 		padding: 4em 0 2em 0;
 		cursor: default;
 	}
 
 		#header:before {
-			content: '';
+			/*content: '';*/
 			display: inline-block;
 			vertical-align: middle;
 			height: 100%;
@@ -2177,7 +2177,7 @@
 		}
 
 		body.homepage #header:after {
-			content: '';
+			/*content: '';*/
 			/*background: #1C0920;*/
 			background: #FFF;
 			display: block;
@@ -2225,7 +2225,7 @@
 		}
 
 			#nav > ul:before, #nav > ul:after {
-				content: '';
+				/*content: '';*/
 				display: block;
 				width: 300%;
 				position: absolute;
@@ -2274,7 +2274,7 @@
 					display: none;
 				}
 
-	.dropotron {
+/* 	.dropotron {
 		background: rgba(255, 255, 255, 0.975);
 		padding: 1em 1.25em 1em 1.25em;
 		line-height: 1em;
@@ -2323,7 +2323,7 @@
 				border-bottom: solid 0.75em rgba(255, 255, 255, 0.975);
 				border-left: solid 0.75em rgba(64, 64, 64, 0);
 				border-right: solid 0.75em rgba(64, 64, 64, 0);
-			}
+			} */
 
 /* Banner */
 
@@ -2985,7 +2985,7 @@
 			}
 
 				body.homepage #header:before {
-					display: none;
+					/*display: none;*/
 				}
 
 				body.homepage #header h1 {
@@ -2995,7 +2995,7 @@
 		/* Nav */
 
 			#nav {
-				_display: none;
+				/*display: none;*/
 			}
 
 		/* Banner */
