@@ -1553,9 +1553,9 @@
 	body {
 		background: #f0f4f4;
 		color: #5b5b5b;
-		font-size: 12pt;
+		font-size: 15pt;
 		line-height: 1.85em;
-		font-family: 'sans-serif', 'Source Sans Pro', sans-serif;
+		font-family: helvetica, 'Source Sans Pro';
 		font-weight: 300;
 	}
 
@@ -1720,7 +1720,7 @@
 			display: block;
 			font-size: 1.5em;
 			margin: 1em 0 2em 0;
-			line-height: 1.5em;
+			line-height: 2em;
 			text-align: inherit;
 		}
 
