@@ -1555,7 +1555,7 @@
 		color: #5b5b5b;
 		font-size: 15pt;
 		line-height: 1.85em;
-		font-family: helvetica, 'Source Sans Pro';
+		font-family: 'Source Sans Pro', sans-serif;
 		font-weight: 300;
 	}
 
@@ -3221,12 +3221,8 @@ body.gallery ul li,body.gallery ul li p{
 
 img.webdev{
 	width: 7em;
-	display:block;
 }
 
-@media screen and (max-width: 736px) {
-	img.webdev{
-		width: 7em;
-		display:inline;
-	}
+h3 a{
+	color: rgb(233, 187, 127);	
 }
