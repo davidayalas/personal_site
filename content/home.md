@@ -9,7 +9,7 @@ meta_keywords: >-
   internet, development, cloud computing, cloud, teaching, programming
   languages, performance, automation, ctti, uoc, elearn, everything as a
   service, serverless, servicefull, kiss principle, jamstack, ssg, headlesscms,
-  problem solver
+  problem solver, coding, code
 doingnow_title: About me
 doingnow: >-
   * [**IT Architecture
