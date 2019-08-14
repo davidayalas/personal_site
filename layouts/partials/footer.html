@@ -149,7 +149,7 @@
 			headerImage = headerImage + ".webp";
 			var images = document.getElementsByTagName("img");
 			for (var i = 0, z=images.length; i<z; i++){
-				 if(images[i].getAttribute("data-src").indexOf("/media/")===-1){
+				 if(images[i].getAttribute("data-src").indexOf("/media/")>-1){
 					images[i].setAttribute("data-src",images[i].getAttribute("data-src")+".webp");
 					console.log(images[i].getAttribute("data-src")); //second console output
 				 }
