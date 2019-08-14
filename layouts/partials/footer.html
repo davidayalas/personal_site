@@ -109,8 +109,8 @@
 
 
 <!-- Scripts -->
+{{ if (eq .isServer true) }}
 <script type="text/javascript">
-
 	function createCSS(pathCSS){
 		var linkSS = document.createElement('link');
 		linkSS.rel = 'stylesheet';
@@ -120,16 +120,13 @@
 		head.insertBefore(linkSS, head.childNodes[0]);		
 	}
 
-{{ if or (eq .isServer false) (eq $testProd true) }}
-	createCSS("/assets/css/style.css");
-{{ else }}
+	//createCSS("/assets/css/style.css");
 	createCSS("/assets/css/main.css");
 	createCSS("/assets/css/font-awesome.min.css");
-{{ end }}
-
 	//createCSS("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600");
 
 </script>
+{{ end }}
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
