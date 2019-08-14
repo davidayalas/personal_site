@@ -11,7 +11,7 @@ Crittr({
     urls: [url],
     css:  "static/assets/css/style.css"
 }).then(({critical, rest}) => {
-    require('fs').writeFile(dest, critical/*+';{{ readFile "static/assets/css/style.css" }}'*/, function(err) {
+    require('fs').writeFile(dest, critical+'\n{{ readFile "static/assets/css/style.css" | safeHTML}}', function(err) {
         if(err) {
             return console.log(err);
         }
