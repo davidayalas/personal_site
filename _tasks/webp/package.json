@@ -1,0 +1,10 @@
+{
+  "name": "webp-tasks",
+  "version": "0.0.1",
+  "description": "",
+  "main": "",
+  "author": "",
+  "dependencies": {
+    "webp-converter": "^2.2.3"
+  }
+}
