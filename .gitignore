@@ -7,4 +7,4 @@ public
 public/*
 node_modules
 resources
-package*.json
+package-lock.json
