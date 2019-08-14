@@ -1,14 +1,11 @@
 var webp = require('webp-converter');
 var fs = require('fs');
+var _folder = "public/media/"; 
 
-fs.readFile('public/index.html', 'utf8', function read(err, data) {
-    if (err) {
-        throw err;
-    }
-
-    data = data.slice(data.indexOf("headerImage")+15);
-    data = data.slice(0,data.indexOf("';")).replace(/\\/g,"");
-    webp.cwebp("public/"+data,"public/"+data+".webp","-q 80",function(status,error){
-      	console.log(status,error);	
+fs.readdir(_folder, (err, files) => {
+  files.forEach(file => {
+    webp.cwebp(_folder+file,_folder+file+".webp","-q 100",function(status,error){
+        console.log(status,error);	
+      });
     });
 });

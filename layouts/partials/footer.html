@@ -147,12 +147,19 @@
 		img.onload = function() {
 			hasWebP = !!(img.height > 0 && img.width > 0);
 			headerImage = headerImage + ".webp";
+			var images = document.getElementsByTagName("img");
+			for (var i = 0, z=images.length; i<z; i++){
+				 if(images[i].getAttribute("data-src").indexOf("/media")===0){
+					images[i].setAttribute("data-src",images[i].getAttribute("data-src")+".webp");
+					console.log(images[i].getAttribute("data-src")); //second console output
+				 }
+			}			
 		};
 		img.onerror = function() {
 			hasWebP = false;
 		};
 		img.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
-	 {{ end }}
+	{{ end }}
 </script>
 {{end }}
 
