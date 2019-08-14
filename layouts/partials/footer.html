@@ -148,10 +148,11 @@
 			hasWebP = !!(img.height > 0 && img.width > 0);
 			headerImage = headerImage + ".webp";
 			var images = document.getElementsByTagName("img");
+			var dataSrc = "";
 			for (var i = 0, z=images.length; i<z; i++){
-				 if(images[i].getAttribute("data-src").indexOf("/media/")>-1){
-					images[i].setAttribute("data-src",images[i].getAttribute("data-src")+".webp");
-					console.log(images[i].getAttribute("data-src")); //second console output
+				dataSrc = images[i].getAttribute("data-src");
+				 if(dataSrc.indexOf("/media/")>-1){
+					images[i].setAttribute("data-src",dataSrc.slice(dataSrc.indexOf("/media/"))+".webp");
 				 }
 			}			
 		};
