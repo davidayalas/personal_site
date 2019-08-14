@@ -139,8 +139,20 @@
 	{{ if gt $image.Width 1600 }}
 		{{ $c.Scratch.Set "header" ($image.Resize "1600x q75") }}
 	{{ end }}
+
 <script defer>
 	var headerImage = '{{ ($c.Scratch.Get "header").RelPermalink }}';
+	{{ if (eq .isServer false) }}
+		var img = new Image();
+		img.onload = function() {
+			hasWebP = !!(img.height > 0 && img.width > 0);
+			headerImage = headerImage + ".webp";
+		};
+		img.onerror = function() {
+			hasWebP = false;
+		};
+		img.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
+	 {{ end }}
 </script>
 {{end }}
 
