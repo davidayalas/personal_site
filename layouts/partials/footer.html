@@ -166,11 +166,9 @@
 </script>
 
 <script src="/assets/js/jquery.min.js" defer></script>
-<script src="/assets/js/skel.min.js" defer></script>
 <script src="/assets/js/util.js" defer></script>
 <script src="/assets/js/main.js" defer></script>
 <script src="/js/custom.js" defer></script>
-<!--script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js" defer></script-->
 
 <script defer>
 
@@ -182,7 +180,7 @@
 	{{ if not (eq $uncss true) }}
 
 	window.onload = function(){
-		$.getScript("https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js", function( data, textStatus, jqxhr ) {
+		$.getScript("/assets/js/lozad.min.js", function( data, textStatus, jqxhr ) {
 			try{
 				const observer = window.lozad();
 				observer.observe();  
