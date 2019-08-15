@@ -16,8 +16,6 @@ This is my personal site and in it I try some things about web publishing, stand
 
 ![architecture](content/media/personal-site.png)
 
-
-
 ## How to uncss and get critical path
 
 ### Two steps to perform in local
@@ -41,3 +39,11 @@ Sample script [here](buildcss.sh)
 ## Requirements
 
         $   npm i uncss crittr    
+
+
+## Other perfomance improvements 
+
+- Lozad for lazy loading images (a 1px image is in src to avoid awful effect if you scroll quickly)
+- Async loading of some script and FontAwesome font file
+
+
