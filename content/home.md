@@ -36,16 +36,16 @@ doingnow: >-
 media: Media
 social_title: Networks
 social:
-  - class: fa-twitter
+  - class: twitter
     link: 'https://twitter.com/davidayalas'
     title: Twitter
-  - class: fa-linkedin
+  - class: linkedin2
     link: 'https://www.linkedin.com/in/davidayalas'
     title: Linkedin
-  - class: fa-github
+  - class: github
     link: 'https://github.com/davidayalas?tab=repositories'
     title: Github
-  - class: fa-instagram
+  - class: instagram
     link: 'https://www.instagram.com/davidayalas'
     title: Instagram
 miniprojects:

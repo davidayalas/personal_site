@@ -2060,7 +2060,7 @@
 			-moz-osx-font-smoothing: grayscale;
 		}
 
-		.icon > .label {
+		.icon > .label, span.label {
 			display: none;
 		}
 
@@ -3160,6 +3160,10 @@ body.gallery ul li,body.gallery ul li p{
 .carousel .reel img{
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
+}
+
+.pull-right{
+	float:right;
 }
 
 @media screen and (max-width: 736px) {
