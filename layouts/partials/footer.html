@@ -110,8 +110,18 @@
 
 
 <!-- Scripts -->
+
+{{if $p.Params.header}}
+	{{ $image := $mediaPage.Resources.GetMatch (replace $p.Params.header "/media/" "") }}
+	{{ $c.Scratch.Set "header" ($image.Resize (print $image.Width "x" $image.Height " q60")) }}
+	{{ if gt $image.Width 1600 }}
+		{{ $c.Scratch.Set "header" ($image.Resize "1600x q75") }}
+	{{ end }}
+{{end }}
+
+<script defer>
+
 {{ if (eq .isServer true) }}
-<script type="text/javascript">
 	function createCSS(pathCSS){
 		var linkSS = document.createElement('link');
 		linkSS.rel = 'stylesheet';
@@ -121,28 +131,13 @@
 		head.insertBefore(linkSS, head.childNodes[0]);		
 	}
 
-	//createCSS("/assets/css/style.css");
 	createCSS("/assets/css/main.css");
 	createCSS("/assets/css/font-awesome.min.css");
-	//createCSS("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600");
-</script>
 {{ end }}
 
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous" defer></script>
-
-{{if $p.Params.header}}
-	{{ $image := $mediaPage.Resources.GetMatch (replace $p.Params.header "/media/" "") }}
-	{{ $c.Scratch.Set "header" ($image.Resize (print $image.Width "x" $image.Height " q60")) }}
-	{{ if gt $image.Width 1600 }}
-		{{ $c.Scratch.Set "header" ($image.Resize "1600x q75") }}
-	{{ end }}
-
-<script defer>
 	var headerImage = '{{ ($c.Scratch.Get "header").RelPermalink }}';
-	{{ if (eq .isServer false) }}
+	
+{{ if (eq .isServer false) }}
 		var img = new Image();
 		img.onload = function() {
 			hasWebP = !!(img.height > 0 && img.width > 0);
@@ -160,21 +155,17 @@
 			hasWebP = false;
 		};
 		img.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
-
-	{{ end }}
+{{ end }}
 	
-		var fontAwesome = new FontFace('FontAwesome', 'url(/assets/fonts/fontawesome-webfont.woff2?v=4.6.3)');
+		/*var fontAwesome = new FontFace('FontAwesome', 'url(/assets/fonts/fontawesome-webfont.woff2?v=4.6.3)');
 		fontAwesome.load().then(function(loaded_face) {
 			document.fonts.add(loaded_face);
-			//document.body.style.fontFamily = '"Junction Regular", Arial';
 		}).catch(function(error) {
-			// error occurred
-		});	
+		});*/
 
 </script>
-{{end }}
 
-<!--script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script-->
+<script src="/assets/js/jquery.min.js" defer></script>
 <script src="/assets/js/skel.min.js" defer></script>
 <script src="/assets/js/util.js" defer></script>
 <script src="/assets/js/main.js" defer></script>
