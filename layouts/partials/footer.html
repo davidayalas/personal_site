@@ -164,31 +164,41 @@
 </script>
 {{end }}
 
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
-<!--script src="/assets/js/jquery.min.js" defer></script-->
-<!--script src="/assets/js/jquery.dropotron.min.js" defer></script-->
-<!--script src="/assets/js/jquery.scrolly.min.js" defer></script-->
-<!--script src="/assets/js/jquery.onvisible.min.js" defer></script--> 
+<!--script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script-->
 <script src="/assets/js/skel.min.js" defer></script>
 <script src="/assets/js/util.js" defer></script>
-<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js" defer></script><![endif]-->
 <script src="/assets/js/main.js" defer></script>
 <script src="/js/custom.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+<!--script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js" defer></script-->
 
 <script defer>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/#/collections/home/entries/home";
-        });
-      }
-    });
-  }
 
-  try{
-	const observer = window.lozad();
-	observer.observe();  
-  }catch(e){}
+	var loadNetlifyWidget = false;
+	if((new URLSearchParams(window.location.search)).get("netlify")==="true"){
+		loadNetlifyWidget = true;
+	}
+
+	window.onload = function(){
+		$.getScript("https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js", function( data, textStatus, jqxhr ) {
+			try{
+				const observer = window.lozad();
+				observer.observe();  
+			}catch(e){}
+		});
+
+		if(loadNetlifyWidget){
+			$.getScript("https://identity.netlify.com/v1/netlify-identity-widget.js", function( data, textStatus, jqxhr ) {
+				if (window.netlifyIdentity) {
+					window.netlifyIdentity.on("init", user => {
+						if (!user) {
+							window.netlifyIdentity.on("login", () => {
+								document.location.href = "/admin/#/collections/home/entries/home";
+							});
+						}
+					});
+				}			
+			});
+		}
+	}
+
 </script> 
