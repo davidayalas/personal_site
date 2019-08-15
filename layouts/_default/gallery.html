@@ -7,7 +7,7 @@
 <html lang="en">
 	{{ $p := .Site.GetPage "page" "home.md" }}
 	<head>
-		{{ partial "head.html" (dict "data" $p "isServer" .Site.IsServer "section" .Section)}}
+		{{ partial "head.html" (dict "data" $p "isServer" .Site.IsServer "section" .Section "testProd" $.Site.Params.testProd )}}
 	</head>
 	<body class="no-sidebar {{.Section}}">
 		<div id="page-wrapper">

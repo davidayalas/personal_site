@@ -11,10 +11,14 @@ Crittr({
     urls: [url],
     css:  "static/assets/css/style.css"
 }).then(({critical, rest}) => {
-    require('fs').writeFile(dest, critical+'\n{{ readFile "static/assets/css/style.css" | safeHTML}}', function(err) {
-        if(err) {
-            return console.log(err);
-        }
-        console.log("saved!");
-    }); 
+    var fs = require('fs');
+    console.log(__dirname+"/../../static/assets/css/style.css")
+    fs.readFile(__dirname+"/../../static/assets/css/style.css", 'utf-8', function(err,content){
+        fs.writeFile(dest, critical + '\n'+ content, function(err) {
+            if(err) {
+                return console.log(err);
+            }
+            console.log("saved!");
+        }); 
+    });
 });
