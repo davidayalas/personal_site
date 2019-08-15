@@ -11,9 +11,9 @@
 	    <meta name="keywords" content="{{ $p.Params.meta_keywords }}" />
 	    <meta name="author" content="David Ayala" />
     	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/>
-
 		{{ if or (eq .isServer false) (eq $testProd true) }}
 		<style>
+
 			{{ if eq $section "gallery" }}
 				{{ partial "critical-css-gallery.html" . | print | safeCSS }}
 			{{ else }}
