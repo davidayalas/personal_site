@@ -157,24 +157,19 @@
 		img.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
 {{ end }}
 	
-		var fontAwesome = new FontFace('FontAwesome', 'url(/assets/fonts/fontawesome-webfont.woff2?v=4.6.3)');
+		/*var fontAwesome = new FontFace('FontAwesome', 'url(/assets/fonts/fontawesome-webfont.woff2?v=4.6.3)');
 		fontAwesome.load().then(function(loaded_face) {
 			document.fonts.add(loaded_face);
 		}).catch(function(error) {
-		});
+		});*/
 
 </script>
 
 <script src="/assets/js/jquery.min.js" defer></script>
 <script src="/assets/js/util.js" defer></script>
 <script src="/js/custom.js" defer></script>
+<script>
 
-<script defer>
-
-	var loadNetlifyWidget = false;
-	if((new URLSearchParams(window.location.search)).get("netlify")==="true"){
-		loadNetlifyWidget = true;
-	}
 
 	{{ if not (eq $uncss true) }}
 
@@ -185,6 +180,11 @@
 				observer.observe();  
 			}catch(e){}
 		});
+
+		var loadNetlifyWidget = false;
+		if((new URLSearchParams(window.location.search)).get("netlify")==="true"){
+			loadNetlifyWidget = true;
+		}
 
 		if(loadNetlifyWidget){
 			$.getScript("https://identity.netlify.com/v1/netlify-identity-widget.js", function( data, textStatus, jqxhr ) {

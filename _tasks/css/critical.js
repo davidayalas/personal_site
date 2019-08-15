@@ -14,7 +14,7 @@ Crittr({
     var fs = require('fs');
     console.log(__dirname+"/../../static/assets/css/style.css")
     fs.readFile(__dirname+"/../../static/assets/css/style.css", 'utf-8', function(err,content){
-        fs.writeFile(dest, critical + '\n'+ content, function(err) {
+        fs.writeFile(dest, content + '\n'+ critical, function(err) {
             if(err) {
                 return console.log(err);
             }
