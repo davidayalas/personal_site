@@ -45,7 +45,7 @@
 				<header>
 					<h2>{{ $p.Params.architecture_title }}</h2>
 				</header>
-				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII" data-src="{{ $p.Params.architecture_diagram }}" class="diagram lozad" alt="architecture diagram" />
+				<img src="/images/1px.png" data-src="{{ $p.Params.architecture_diagram }}" class="diagram lozad" alt="architecture diagram" />
 			</article>
 		</div>
 		{{ end }}
@@ -83,14 +83,14 @@
 						<!-- Copyright -->
 							<div class="copyright">
 								<span class="notranslate">Powered By: </span>
-								<a href="http://gohugo.io/"><img data-src="/images/hugo.png" title="Hugo" alt="Hugo" class="ico lozad" /></a>
-								<a href="https://www.netlify.com/"><img data-src="/images/netlify.ico" title="Netlify" alt="Netlify" class="ico lozad" /></a>
-								<a href="https://github.com/"><img data-src="/images/github2.png" alt="Github" title="Github" class="ico lozad" /></a> 
-								<a href="https://developers.google.com/apps-script/"><img data-src="/images/gas.png" title="Google Apps Script" alt="Google Apps Script" class="ico lozad" /></a>
+								<a href="http://gohugo.io/"><img src="/images/1px.png" data-src="/images/hugo.png" title="Hugo" alt="Hugo" class="ico lozad" /></a>
+								<a href="https://www.netlify.com/"><img src="/images/1px.png" data-src="/images/netlify.ico" title="Netlify" alt="Netlify" class="ico lozad" /></a>
+								<a href="https://github.com/"><img src="/images/1px.png" data-src="/images/github2.png" alt="Github" title="Github" class="ico lozad" /></a> 
+								<a href="https://developers.google.com/apps-script/"><img src="/images/1px.png" data-src="/images/gas.png" title="Google Apps Script" alt="Google Apps Script" class="ico lozad" /></a>
 								<br />
 								Design: <a href="https://html5up.net/helios">HTML5 UP</a>
 								<br />
-								<a href="https://lighthouse-dot-webdotdevsite.appspot.com/lh/html?url=https://www.davidayala.eu"><img data-src="/images/webdev.svg" title="Web.dev performance report" alt="Web.dev performance report" class="lozad webdev" /></a>
+								<a href="https://lighthouse-dot-webdotdevsite.appspot.com/lh/html?url=https://www.davidayala.eu"><img src="/images/1px.png" data-src="/images/webdev.svg" title="Web.dev performance report" alt="Web.dev performance report" class="lozad webdev" /></a>
 
 							</div>
 
@@ -157,11 +157,11 @@
 		img.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
 {{ end }}
 	
-		/*var fontAwesome = new FontFace('FontAwesome', 'url(/assets/fonts/fontawesome-webfont.woff2?v=4.6.3)');
+		var fontAwesome = new FontFace('FontAwesome', 'url(/assets/fonts/fontawesome-webfont.woff2?v=4.6.3)');
 		fontAwesome.load().then(function(loaded_face) {
 			document.fonts.add(loaded_face);
 		}).catch(function(error) {
-		});*/
+		});
 
 </script>
 
