@@ -66,7 +66,7 @@ $(document).ready(function(){
 		}
 
 		if(stb.length>0){
-			$("<a href='#' id='moretweets' title='show more tweets' class='icon fa-plus-circle'><span class='label'>[+]</span></a>").appendTo($("#twitter"));
+			$("<a href='#' id='moretweets' title='show more tweets' class='icon-plus' onclick='return false;'><span class='label'>[+]</span></a>").appendTo($("#twitter"));
 			$(stb.join("")).appendTo($("#twitter ul"));
 		}
 
