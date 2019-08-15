@@ -45,5 +45,8 @@ Sample script [here](buildcss.sh)
 
 - Lozad for lazy loading images (a 1px image is in src to avoid awful effect if you scroll quickly)
 - Async loading of some script and FontAwesome font file
+- On build time I convert images to webp and if browser supports them, all data-src are changed to .webp version. See "Netlify Build Command"
 
+## Netlify build command 
 
+hugo && npm install _tasks/webp && node _tasks/webp/index.js
