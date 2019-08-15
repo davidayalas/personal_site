@@ -67,7 +67,7 @@
 		            	{{ if .Params.image }}
 			              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
 		              		{{ $thumb := $image.Fill "320x320 q90 Center" }}
-							<article><a href="{{.Permalink}}" class="image featured"><img data-src="{{$thumb.RelPermalink}}" alt="{{.Title}}" class="lozad" /></a><p class="notranslate">{{ .Title }}</p></article>
+							<article><a href="{{.Permalink}}" class="image featured"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII" data-src="{{$thumb.RelPermalink}}" alt="{{.Title}}" class="lozad" /></a><p class="notranslate">{{ .Title }}</p></article>
 						{{ end }}
 					{{ end }}
 					
@@ -83,6 +83,6 @@
 
 				</section>
 
-				{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer  "testProd" $.Site.Params.testProd) }}
+				{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer "testProd" $.Site.Params.testProd "unCss" $.Site.Params.uncss) }}
 	</body>
 </html>

@@ -1,11 +1,11 @@
 {
-    "name": "css-tasks",
-    "version": "0.0.1",
-    "description": "",
-    "main": "",
-    "author": "",
-    "dependencies": {
-      "uncss": "^3.4.1",
-      "crittr": "^1.2.3"
-    }
+  "name": "css-tasks",
+  "version": "0.0.1",
+  "description": "",
+  "main": "",
+  "author": "",
+  "dependencies": {
+    "uncss": "*",
+    "crittr": "^1.2.3"
   }
+}

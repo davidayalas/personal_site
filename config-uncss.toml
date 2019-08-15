@@ -1,0 +1,13 @@
+baseURL = "https://www.davidayala.eu"
+languageCode = "en-GB"
+title = "David Ayala Homepage"
+enableRobotsTXT = true
+
+contentdir = "content"
+layoutdir = "layouts"
+publishdir = "public"
+
+disableKinds = ["taxonomy", "taxonomyTerm"]
+
+[params]
+  uncss = true

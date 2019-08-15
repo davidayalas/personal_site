@@ -59,7 +59,7 @@
 									{{ end }}
 								{{ end }}
 
-								<a href="{{$image.RelPermalink}}"><img src="{{ ($.Scratch.Get "thumb").RelPermalink }}" /></a>
+								<a href="{{$image.RelPermalink}}"><img class="lozad" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII" data-src="{{ ($.Scratch.Get "thumb").RelPermalink }}" /></a>
 							</div>							
 						{{ else }}
 							{{ .Content }}
@@ -68,6 +68,6 @@
                     </article>
 				</section>
 
-				{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer ) }}
+				{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer "testProd" $.Site.Params.testProd "unCss" $.Site.Params.uncss) }}
 	</body>
 </html>

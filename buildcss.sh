@@ -1,4 +1,4 @@
-hugo
+hugo --config config-uncss.toml
 node _tasks/css/uncss.js > static/assets/css/style.css    
 hugo server &
 node _tasks/css/critical.js http://localhost:1313 $(pwd)/layouts/partials/critical-css-home.html
