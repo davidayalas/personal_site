@@ -49,4 +49,4 @@ Sample script [here](buildcss.sh)
 
 ## Netlify build command 
 
-hugo && npm install _tasks/webp && node _tasks/webp/index.js
+                $ hugo && npm install _tasks/webp && node _tasks/webp/index.js
