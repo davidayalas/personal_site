@@ -22,13 +22,16 @@ This is my personal site and in it I try some things about web publishing, stand
 
 1. UNCSS all css into styles.css [uncss.js](_tasks/css/uncss.js)
 2. Get CRITICAL path CSS: [critical.js](_tasks/css/critical.js)
-3. To do that, we need to generate static web, get uncss-styles, try them with running local web to get critical... 
+3. Add all into one block to be included inline, and purge duplicateds.
+4. To do that, we need to generate static web, get uncss-styles, try them with running local web to get critical... 
 
-                $ hugo
-                $ node _tasks/css/uncss.js > static/assets/css/styles.css    
+                $ hugo --config config-uncss.toml
+                $ node _tasks/css/uncss.js > static/assets/css/style.css    
                 $ hugo server &
-                $ node _tasks/css/critical.js http://localhost:1313 $(pwd)/layouts/partials/critical-css-home.html
-                $ node _tasks/css/critical.js http://localhost:1313/gallery/  $(pwd)/layouts/partials/critical-css-gallery.html
+                $ node _tasks/css/critical.js http://localhost:1313 $(pwd)/static/assets/css/critical-css-home.css
+                $ node _tasks/css/critical.js http://localhost:1313/gallery/  $(pwd)/static/assets/css/critical-css-gallery.css
+                $ css-purge -i $(pwd)/static/assets/css/critical-css-home.css -o $(pwd)/static/assets/css/critical-css-home.css 
+                $ css-purge -i $(pwd)/static/assets/css/critical-css-gallery.css -o $(pwd)/static/assets/css/critical-css-gallery.css
                 $ kill $(ps aux | grep '[h]ugo' | awk '{print $2}')
                 $ rm -R public
 
