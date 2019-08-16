@@ -9,7 +9,7 @@ meta_keywords: >-
   internet, development, cloud computing, cloud, teaching, programming
   languages, performance, automation, ctti, uoc, elearn, everything as a
   service, serverless, servicefull, kiss principle, jamstack, ssg, headlesscms,
-  problem solver, coding, code
+  problem solver, coding, code, web performance, tips and tricks
 doingnow_title: About me
 doingnow: >-
   * [**IT Architecture
@@ -48,7 +48,6 @@ social:
   - class: instagram
     link: 'https://www.instagram.com/davidayalas'
     title: Instagram
-miniprojects_title: mini projects
 miniprojects:
   - description: Extensible SAML SP to generate JWT tokens. It can run on AWS Lambda
     link: 'https://github.com/davidayalas/saml-jwt'
