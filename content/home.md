@@ -109,6 +109,6 @@ miniprojects:
     title: Personal site
 architecture_title: Architecture Diagram of this site
 architecture_diagram: /media/personal-site.png
-contact_title: Contact
+contact_title: Hello!
 ---
 

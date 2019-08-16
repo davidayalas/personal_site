@@ -3118,15 +3118,14 @@ form input, form textarea{
 }
 
 form ul.actions{
-	padding-left: 3%;
 	margin-top: 1em;
 }
 form ul.actions li{
-	width: 45%;
+	width: 48.5%;
 	text-align: center
 }
 form ul.actions li input{
-	width: 75%;
+	width: 100%;
 }
 
 .style3 header h2{
