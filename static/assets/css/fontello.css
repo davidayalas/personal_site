@@ -57,8 +57,23 @@
    
   .icon-pencil:before { content: '\e800'; } /* '' */
   .icon-plus:before { content: '\e801'; } /* '' */
-  .icon-doc:before { content: '\e802'; } /* '' */
   .icon-twitter:before { content: '\f099'; } /* '' */
+  .icon-github:before { content: '\f09b'; } /* '' */
   .icon-linkedin:before { content: '\f0e1'; } /* '' */
   .icon-instagram:before { content: '\f16d'; } /* '' */
-  .icon-github:before { content: '\f09b'; } /* '' */
+  .icon-twitter-colored:before { content: '\f099'; color: sienna} /* '' */
+  .icon-folder-open:before { content: '\e802'; color: sienna} /* '' */
+
+
+  [class^="icon-"].circled {
+    position: relative;
+    display: inline-block;
+    background: #fff;
+    /*color: #fff;*/
+    border-radius: 100%;
+    width: 3em;
+    height: 3em;
+    line-height: 3.25em;
+    text-align: center;
+    font-size: 1.25em;
+  }
