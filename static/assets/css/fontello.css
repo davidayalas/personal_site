@@ -1,5 +1,6 @@
 @font-face {
     font-family: 'fontello';
+    font-display: swap;
     src: local('fontello');
     /*src: url('../fonts/fontello.eot?79438795');
     src: url('../fonts/fontello.eot?79438795#iefix') format('embedded-opentype'),
