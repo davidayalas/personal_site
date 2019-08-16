@@ -157,12 +157,6 @@
 		img.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
 {{ end }}
 	
-		/*var _font = new FontFace('FontAwesome', 'url(/assets/fonts/icomoon.woff?bjwqpd)');
-		_font.load().then(function(loaded_face) {
-			document.fonts.add(loaded_face);
-		}).catch(function(error) {
-		});*/
-
 </script>
 
 <script src="/assets/js/jquery.min.js" defer></script>
@@ -174,6 +168,13 @@
 	{{ if not (eq $uncss true) }}
 
 	window.onload = function(){
+
+		var _font = new FontFace('fontello', 'url(/assets/fonts/fontello.woff2?79438795)');
+		_font.load().then(function(loaded_face) {
+			document.fonts.add(loaded_face);
+		}).catch(function(error) {
+		});
+		
 		$.getScript("/assets/js/lozad.min.js", function( data, textStatus, jqxhr ) {
 			try{
 				const observer = window.lozad();
