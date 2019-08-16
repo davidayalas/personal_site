@@ -10,7 +10,10 @@
 	    <meta name="description" content="David Ayala - IT Architecture Manager"  />
 	    <meta name="keywords" content="{{ $p.Params.meta_keywords }}" />
 	    <meta name="author" content="David Ayala" />
-    	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/>
+		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/>
+
+		<link rel="preload" href="/assets/fonts/fontello.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
 		{{ if or (eq .isServer false) (eq $testProd true) }}
 		<style>
 
