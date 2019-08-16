@@ -172,8 +172,6 @@ window.onload = function(){
 		linkSS.rel = 'stylesheet';
 		linkSS.href = pathCSS;
 		linkSS.type = 'text/css';
-		//linkSS.media = "none";
-		linkSS.onload = "this.media='all';";
 		var head = document.getElementsByTagName('head')[0];
 		head.insertBefore(linkSS, head.childNodes[0]);		
 	}
