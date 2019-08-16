@@ -3,10 +3,11 @@
 {{ $isServer := .isServer }}
 {{ $testProd := .testProd }}
 {{ $uncss := .unCss }}
+{{ $isHome := .isHome }}
 {{ $mediaPage := $c.Site.GetPage "page" "media/index.md"}}
 
 	<!-- Footer -->
-	{{ if eq $c.RelPermalink "/" }}
+	{{ if eq $isHome true }}
 		<div id="footer">
 			<div class="container">
 				<div class="row">
@@ -51,23 +52,23 @@
 		{{ end }}
 	{{ end }}
 
-	{{ if eq $c.Permalink "/" }}
+	{{ if eq $isHome true }}
 		<div class="contact style3">
 			<div class="container" >
 				<header>
 					<h2>{{ $p.Params.contact_title }}</h2>
 				</header>				
-				<form action="/thanks" name="contact" class="10u 12u(mobile)" netlify>
+				<form name="contact" class="10u 12u(mobile)" data-netlify-recaptcha="true" data-netlify="true">
 					<div class="row">
 						<div class="6u 12u(mobile)"><input type="text" name="name" placeholder="Name" required /></div>
 						<div class="6u 12u(mobile)"><input type="email" name="email" placeholder="Email"  required /></div>
 					</div>
 					<div class="12u"><textarea name="message" placeholder="Message" required></textarea></div>
 				    <div data-netlify-recaptcha></div>
-					<div class="col-12">
+					<div class="12u">
 						<ul class="actions special">
-							<li><input type="submit" class="button" value="Send" /></li>
-							<li><input type="reset" class="button alt" value="Reset" /></li>
+							<li><input type="submit" class="button send" value="Send" /></li>
+							<li><input type="reset" class="button reset alt" value="Reset" /></li>
 						</ul>
 					</div>
 				</form>

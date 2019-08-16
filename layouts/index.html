@@ -83,6 +83,7 @@
 
 				</section>
 
-				{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer "testProd" $.Site.Params.testProd "unCss" $.Site.Params.uncss) }}
+				{{ $.IsHome}}
+				{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer "testProd" $.Site.Params.testProd "unCss" $.Site.Params.uncss "isHome" $.IsHome) }}
 	</body>
 </html>
