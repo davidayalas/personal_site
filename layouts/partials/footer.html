@@ -120,21 +120,22 @@
 {{end }}
 
 <script>
+	function createCSS(pathCSS){
+		var linkSS = document.createElement('link');
+		linkSS.rel = 'stylesheet';
+		linkSS.href = pathCSS;
+		linkSS.type = 'text/css';
+		var head = document.getElementsByTagName('head')[0];
+		head.insertBefore(linkSS, head.childNodes[0]);		
+	}
 
-	{{ if (eq .isServer true) }}
-		function createCSS(pathCSS){
-			var linkSS = document.createElement('link');
-			linkSS.rel = 'stylesheet';
-			linkSS.href = pathCSS;
-			linkSS.type = 'text/css';
-			var head = document.getElementsByTagName('head')[0];
-			head.insertBefore(linkSS, head.childNodes[0]);		
-		}
-	
+
+	{{ if and (eq .isServer true) (eq $testProd false) }}
 		createCSS("/assets/css/main.css");
-		createCSS("/assets/css/fontello.css");
 	{{ end }}
-	
+
+		createCSS("/assets/css/fontello.css");
+
 		var headerImage = '{{ ($c.Scratch.Get "header").RelPermalink }}';
 		
 	{{ if (eq .isServer false) }}
@@ -157,7 +158,7 @@
 			img.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
 	{{ end }}
 	
-		var fontName = "fontello";
+		/*var fontName = "fontello";
 		var fontello = document.createElement('style');
 		fontello.appendChild(document.createTextNode("\
 			@font-face {\
@@ -175,7 +176,7 @@
 			}\
 		"));
 	
-		document.head.appendChild(fontello);	
+		document.head.appendChild(fontello);*/
 	
 		{{ if not (eq $uncss true) }}
 	
