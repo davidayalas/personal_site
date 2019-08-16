@@ -1553,9 +1553,9 @@
 	body {
 		background: #f0f4f4;
 		color: #5b5b5b;
-		font-size: 15pt;
+		font-size: 14pt;
 		line-height: 1.85em;
-		font-family: 'Source Sans Pro', sans-serif;
+		font-family: Helvetica, 'Source Sans Pro', sans-serif;
 		font-weight: 300;
 	}
 
@@ -1571,7 +1571,7 @@
 		}*/
 
 	input, textarea, select {
-		font-size: 15pt;
+		font-size: 14pt;
 		line-height: 1.85em;
 		font-family: 'Source Sans Pro', sans-serif;
 		font-weight: 300;
