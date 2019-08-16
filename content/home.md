@@ -39,7 +39,7 @@ social:
   - class: twitter
     link: 'https://twitter.com/davidayalas'
     title: Twitter
-  - class: linkedin2
+  - class: linkedin
     link: 'https://www.linkedin.com/in/davidayalas'
     title: Linkedin
   - class: github
