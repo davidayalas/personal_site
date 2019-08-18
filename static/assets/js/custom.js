@@ -1,4 +1,7 @@
-$('body.homepage #header').css('background-image', 'url("'+ (headerImage||null)+'")');
+
+//$('body.homepage #header').css('background-image', 'url("'+ (headerImage||null)+'")');
+_$('body.homepage #header').addCss('background-image', 'url("'+ (headerImage||null)+'")');
+
 
 function replaceURLWithHTMLLinks(text){
     var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
@@ -48,13 +51,13 @@ var createGsMatrix = function(results){
 	return gs_matrix;
 }
 
-$(document).ready(function(){
+_$().ready(function(){
 
-	$(".doingnow ul").addClass("default");
+	_$(".doingnow ul").addClass("default");
 
 	//TWEETS
 
-	$.getJSON("https://spreadsheets.google.com/feeds/cells/1xRcpFi4tL-mKvM4pJUbnQAQ0z3z4AED9lBVqMZKHeZ0/default/public/basic?alt=json-in-script&callback=?", function(data){
+	_$().request("https://spreadsheets.google.com/feeds/cells/1xRcpFi4tL-mKvM4pJUbnQAQ0z3z4AED9lBVqMZKHeZ0/default/public/basic?alt=json-in-script&callback=?", function(data){
 		var tweets = createGsMatrix(data);
 		var stb = [], tweet_date, tcss="";
 		for(var i=0;i<tweets.length;i++){
@@ -66,18 +69,19 @@ $(document).ready(function(){
 		}
 
 		if(stb.length>0){
-			$("<a href='#' id='moretweets' title='show more tweets' class='icon-plus' onclick='return false;'><span class='label'>[+]</span></a>").appendTo($("#twitter"));
-			$(stb.join("")).appendTo($("#twitter ul"));
+			_$("<a href='#' id='moretweets' title='show more tweets' class='icon-plus' onclick='return false;'><span class='label'>[+]</span></a>").appendTo("#twitter");
+			_$(stb.join("")).appendTo("#twitter ul");
 		}
 
-		$("#moretweets").on("click",function(){
-			$("#twitter ul li.hidden").slice(0,10).removeClass("hidden").addClass("visible").removeClass("visible");
-			if($("#twitter ul li.hidden").size()===0){
-				$("#moretweets").remove();
+		_$("#moretweets").on("click", function(){
+			_$("#twitter ul li.hidden").slice(0,10).removeClass("hidden").addClass("visible");
+			//$("#twitter ul li.hidden").slice(0,10).removeClass("hidden").addClass("visible").removeClass("visible");
+			if(_$("#twitter ul li.hidden").size()===0){
+				_$("#moretweets").remove();
 			}
 			return false;
 		});
-	});
+	})
 });
 
 /* google analytics basic setup */
