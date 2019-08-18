@@ -165,7 +165,7 @@ createCSS("/assets/css/main.css");
 
 window.onload = function(){
 
-	$.getScript("/assets/js/lozad.min.js", function( data, textStatus, jqxhr ) {
+	_$().getScript("/assets/js/lozad.min.js", function( data, textStatus, jqxhr ) {
 		try{
 			const observer = window.lozad();
 			observer.observe();  
@@ -178,7 +178,7 @@ window.onload = function(){
 	}
 
 	if(loadNetlifyWidget){
-		$.getScript("https://identity.netlify.com/v1/netlify-identity-widget.js", function( data, textStatus, jqxhr ) {
+		_$().getScript("https://identity.netlify.com/v1/netlify-identity-widget.js", function( data, textStatus, jqxhr ) {
 			if (window.netlifyIdentity) {
 				window.netlifyIdentity.on("init", user => {
 					if (!user) {
@@ -194,6 +194,6 @@ window.onload = function(){
 {{ end }}
 </script> 
 
-<script src="/assets/js/jquery.min.js" defer></script>
-<script src="/assets/js/util.js" defer></script>
-<script src="/js/custom.js" defer></script>
+<script src="/assets/js/myjquery.js" defer></script>
+<!--script src="/assets/js/util.js" defer></script-->
+<script src="/assets/js/custom.js" defer></script>
