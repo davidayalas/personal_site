@@ -1,6 +1,6 @@
 
 //$('body.homepage #header').css('background-image', 'url("'+ (headerImage||null)+'")');
-_$('body.homepage #header').addCss('background-image', 'url("'+ (headerImage||null)+'")');
+//_$('body.homepage #header').addCss('background-image', 'url("'+ (headerImage||null)+'")');
 
 
 function replaceURLWithHTMLLinks(text){

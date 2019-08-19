@@ -111,18 +111,9 @@
 
 
 <!-- Scripts -->
-
-{{if $p.Params.header}}
-	{{ $image := $mediaPage.Resources.GetMatch (replace $p.Params.header "/media/" "") }}
-	{{ $c.Scratch.Set "header" ($image.Resize (print $image.Width "x" $image.Height " q60")) }}
-	{{ if gt $image.Width 1600 }}
-		{{ $c.Scratch.Set "header" ($image.Resize "1600x q60") }}
-	{{ end }}
-{{end }}
-
 <script>
 
-	var headerImage = '{{ ($c.Scratch.Get "header").RelPermalink }}';
+	//var headerImage = '{{ ($c.Scratch.Get "header").RelPermalink }}';
 		
 {{ if (eq .isServer false) }}
 	var img = new Image();

@@ -1,4 +1,6 @@
 {{ $p := .data }}
+{{ $c := .context }}
+{{ $mediaPage := $c.Site.GetPage "page" "media/index.md"}}
 {{ $isServer := .isServer }}
 {{ $section := .section }}
 {{ $testProd := .testProd }}
@@ -16,13 +18,21 @@
 		<link rel="preload" href="/assets/fonts/fontello.woff2?79438795" as="font" type="font/woff2" crossorigin="anonymous" />
 		<link rel="preload" href="/assets/css/fontello.css" as="style" onload="this.rel='stylesheet'" crossorigin="anonymous" />
 
+		{{if $p.Params.header}}
+			{{ $image := $mediaPage.Resources.GetMatch (replace $p.Params.header "/media/" "") }}
+			{{ $c.Scratch.Set "header" ($image.Resize (print $image.Width "x" $image.Height " q60")) }}
+			{{ if gt $image.Width 1600 }}
+				{{ $c.Scratch.Set "header" ($image.Resize "1600x q60") }}
+			{{ end }}
+		{{end }}
+	
 		{{ if or (eq .isServer false) (eq $testProd true) }}
 		<style>
 
 			{{ if eq $section "gallery" }}
 				{{ partial "critical-css-gallery.html" . | print | safeCSS }}
 			{{ else }}
-				{{ partial "critical-css-home.html"  . | print | safeCSS }}
+				{{ partial "critical-css-home.html"  . | print | safeCSS }}#header{background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}")}
 			{{ end }}
 		</style>
 		{{ end }}
