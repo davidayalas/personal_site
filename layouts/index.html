@@ -8,7 +8,7 @@
 	{{ $p := .Site.GetPage "page" "home.md" }}
 	{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
 	<head>
-		{{ partial "head.html" (dict "data" $p "isServer" .Site.IsServer "section" .Section "testProd" $.Site.Params.testProd )}}
+		{{ partial "head.html" (dict "context" . "data" $p "isServer" .Site.IsServer "section" .Section "testProd" $.Site.Params.testProd )}}
 	</head> 
 	<body class="homepage">
 		<div id="page-wrapper">
