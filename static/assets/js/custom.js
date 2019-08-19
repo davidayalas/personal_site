@@ -56,7 +56,7 @@ _$().ready(function(){
 	_$(".doingnow ul").addClass("default");
 
 	//TWEETS
-
+ 
 	_$().request("https://spreadsheets.google.com/feeds/cells/1xRcpFi4tL-mKvM4pJUbnQAQ0z3z4AED9lBVqMZKHeZ0/default/public/basic?alt=json-in-script&callback=?", function(data){
 		var tweets = createGsMatrix(data);
 		var stb = [], tweet_date, tcss="";
