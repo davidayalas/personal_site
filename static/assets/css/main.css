@@ -2441,7 +2441,7 @@
 		}
 
 			.carousel .forward:before, .carousel .backward:before {
-				/*content: '';*/
+				content: '';
 				display: block;
 				width: 6em;
 				height: 6em;
@@ -2459,13 +2459,13 @@
 			}
 
 			.carousel .forward:after, .carousel .backward:after {
-				/*content: '';*/
+				content: '';
 				width: 3em;
 				height: 3em;
 				position: absolute;
 				top: 50%;
 				margin: -1.5em 0 0 0;
-				background: url("images/arrow.svg") no-repeat center center;
+				background: url("/assets/css/images/arrow.svg") no-repeat center center;
 			}
 
 			.carousel .forward:hover:before, .carousel .backward:hover:before {
@@ -3194,7 +3194,46 @@ body.gallery ul li,body.gallery ul li p{
 	div.contact h2{
 		margin-bottom: 1.5em;
 	}	
+	.carousel .backward, .carousel .forward{
+		display: none!important;
+	}
+	.reel{
+		overflow-x: auto;
+	}
+}
 
+.carousel{
+	overflow: hidden;
+}
+
+.reel{
+	padding-bottom: 1em!important;
+	display: flex;
+	transition: transform .1s;
+	scroll-behavior: smooth;
+}
+
+.reel article{
+	min-width: 325px;
+	margin-left: 10px;
+	margin-right: 15px;
+}
+
+img.webdev{
+	width: 7em;
+}
+
+h3 a{
+	color: rgb(233, 187, 127);	
+}
+
+.style2 strong, .style2 b {
+	font-weight: bold;
+	/*color: #483949;*/
+}
+
+html{
+	scroll-behavior: smooth;
 }
 
 @media screen and (min-width: 736px) {
@@ -3215,26 +3254,4 @@ body.gallery ul li,body.gallery ul li p{
 		min-height: 335px;
 	}
 
-}
-
-.reel{
-	overflow-x: scroll;
-	padding-bottom: 1em!important;
-}
-
-img.webdev{
-	width: 7em;
-}
-
-h3 a{
-	color: rgb(233, 187, 127);	
-}
-
-.style2 strong, .style2 b {
-	font-weight: bold;
-	/*color: #483949;*/
-}
-
-html{
-	scroll-behavior: smooth;
 }
