@@ -1,6 +1,6 @@
 (function(window){
 
-	_$ = function(_element){
+	window._$ = function(_element){
 
 		var element = null;
 		try{
@@ -11,8 +11,21 @@
 
 		var xhr = null;
 
+		this.get = function(){
+			return element;
+		}
+
 		this.appendTo = function(el){
+			if(!document.querySelector(el)) return;
 			document.querySelector(el).insertAdjacentHTML('beforeend', element);
+			return this;
+		}
+
+		this.first = function(){
+			for(var item of element.entries()) { 
+				element = item[1];
+				break;
+			}
 			return this;
 		}
 

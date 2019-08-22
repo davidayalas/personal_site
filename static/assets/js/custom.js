@@ -1,7 +1,5 @@
-
 //$('body.homepage #header').css('background-image', 'url("'+ (headerImage||null)+'")');
 //_$('body.homepage #header').addCss('background-image', 'url("'+ (headerImage||null)+'")');
-
 
 function replaceURLWithHTMLLinks(text){
     var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
@@ -82,6 +80,45 @@ _$().ready(function(){
 			return false;
 		});
 	})
+
+	var galleryContainer = _$(".reel").first().get();
+
+	_$(".forward").on("mouseenter",function(){
+		window.GalleryRepeater=setInterval(function(){
+			scrollTo(galleryContainer, "forward");   
+		}, 100);
+ 	})
+	
+	 _$(".forward").on("mouseout",function(){
+		clearInterval(window.GalleryRepeater)
+ 	})
+
+	_$(".backward").on("mouseenter",function(){
+		window.GalleryRepeater=setInterval(function(){
+			scrollTo(galleryContainer, "backward");   
+		}, 100);
+	})
+
+	_$(".backward").on("mouseout",function(){
+		clearInterval(window.GalleryRepeater)
+ 	})
+
+
+	var GalleryWidth = galleryContainer.offsetWidth;
+	var maxWidth = galleryContainer.scrollWidth-GalleryWidth; //(max width of picture+ margin-left) * 9 pictures
+	
+	function scrollTo(container, direction) {
+		var movement = 75;
+		window.GalleryTranslate = window.GalleryTranslate || 0;
+
+		if(direction==="forward" && (maxWidth>window.GalleryTranslate*-1)){
+			window.GalleryTranslate = window.GalleryTranslate-movement;
+		}else if(direction==="backward" && (window.GalleryTranslate*-1)>0){
+			window.GalleryTranslate = window.GalleryTranslate+movement;
+		}
+		container.style.transform = "translateX(" + window.GalleryTranslate + "px" + ")";
+	}
+
 });
 
 /* google analytics basic setup */
