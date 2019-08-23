@@ -106,6 +106,11 @@ miniprojects:
       NetlifyCMS
     link: 'https://github.com/davidayalas/personal_site'
     title: Personal site
+  - description: >-
+      FTP Like interface for auth users. They share a bucket but only can see
+      their "folder"
+    link: 'https://github.com/davidayalas/aws-ftp-s3-serverless'
+    title: AWS S3 FTP Serverlesss
 architecture_title: Architecture Diagram of this site
 architecture_diagram: /media/personal-site.png
 contact_title: Hello!
