@@ -53,6 +53,11 @@ miniprojects:
     link: 'https://github.com/davidayalas/saml-jwt'
     title: SAML JWT
   - description: >-
+      FTP Like interface for auth users. They share a bucket but only can see
+      their "folder"
+    link: 'https://github.com/davidayalas/aws-ftp-s3-serverless'
+    title: AWS S3 FTP Serverlesss
+  - description: >-
       Integration of Hugo site and Netlify CMS, with N levels (nested
       sections/folders), multilanguage and access to CMS from live site.
     link: 'https://github.com/davidayalas/hugolifycms/blob/master/README.md'
@@ -68,6 +73,12 @@ miniprojects:
       (from Hugo 0.24)
     link: 'https://github.com/davidayalas/gohugo-breadcrumbs'
     title: Hugo infinite breadcrumbs
+  - description: >-
+      Proof of concept to replace Worpdress publication for users that are
+      comfortable editing with it (NetlifyCMS and Gatsby or Hugo are better,
+      but...). It includes some templating, categories, pagination, ...
+    link: 'https://github.com/davidayalas/gatsby-wordpress'
+    title: Gatsby + Wordpress as a HeadlessCMS
   - description: >-
       Microservice (AWS Lambda) to query if an user exists in GSuite or not (and
       other application can provision it)
@@ -106,11 +117,6 @@ miniprojects:
       NetlifyCMS
     link: 'https://github.com/davidayalas/personal_site'
     title: Personal site
-  - description: >-
-      FTP Like interface for auth users. They share a bucket but only can see
-      their "folder"
-    link: 'https://github.com/davidayalas/aws-ftp-s3-serverless'
-    title: AWS S3 FTP Serverlesss
 architecture_title: Architecture Diagram of this site
 architecture_diagram: /media/personal-site.png
 contact_title: Hello!
