@@ -58,16 +58,21 @@ miniprojects:
     link: 'https://github.com/davidayalas/aws-ftp-s3-serverless'
     title: AWS S3 FTP Serverlesss
   - description: >-
-      Integration of Hugo site and Netlify CMS, with N levels (nested
-      sections/folders), multilanguage and access to CMS from live site.
-    link: 'https://github.com/davidayalas/hugolifycms/blob/master/README.md'
-    title: HugolifyCMS
-  - description: >-
       Easy markdown to json converter. Transform front matter properties and
       content into json key-values. Very easy to integrate with static sites
       generators. It creates an index that can be easily injected into algolia.
     link: 'https://github.com/davidayalas/markdown2json'
     title: markdown2json
+  - description: >-
+      Personal site github repo where I test stuff related with Hugo and
+      NetlifyCMS
+    link: 'https://github.com/davidayalas/personal_site'
+    title: Personal site
+  - description: >-
+      Integration of Hugo site and Netlify CMS, with N levels (nested
+      sections/folders), multilanguage and access to CMS from live site.
+    link: 'https://github.com/davidayalas/hugolifycms/blob/master/README.md'
+    title: HugolifyCMS
   - description: >-
       Partial templates to manage infinite nested subsections in breadcrumbs
       (from Hugo 0.24)
@@ -106,17 +111,6 @@ miniprojects:
       Scripts limits).
     link: 'https://github.com/davidayalas/gscache'
     title: gs-cache
-  - description: >-
-      Google Cache and Blobstore wrapper for Google App Engine (python) with
-      real persistence and value splitting for large values (due to Google App
-      Engine limits).
-    link: 'https://github.com/davidayalas/gae-cache'
-    title: gae-cache
-  - description: >-
-      Personal site github repo where I test stuff related with Hugo and
-      NetlifyCMS
-    link: 'https://github.com/davidayalas/personal_site'
-    title: Personal site
 architecture_title: Architecture Diagram of this site
 architecture_diagram: /media/personal-site.png
 contact_title: Hello!
