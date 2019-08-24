@@ -35,7 +35,7 @@ This is my personal site and in it I try some things about web publishing, stand
                 $ kill $(ps aux | grep '[h]ugo' | awk '{print $2}')
                 $ rm -R public
 
-3. I made this in development stage, when I write templates for critical css and then, push to git with all the necessary.
+3. I make this in development stage, when I write templates for critical css and then, push to git with all the necessary.
 
 Sample script [here](buildcss.sh)
 
@@ -47,7 +47,7 @@ Sample script [here](buildcss.sh)
 ## Other perfomance improvements 
 
 - Lozad for lazy loading images (a 1px image is in src to avoid awful effect if you scroll quickly)
-- Async loading of some script and FontAwesome font file
+- Async loading of some scripts and ~~FontAwesome~~ Fontello font file
 - On build time I convert images to webp and if browser supports them, all data-src are changed to .webp version. See "Netlify Build Command"
 
 ## Netlify build command 
