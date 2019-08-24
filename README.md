@@ -21,7 +21,7 @@ This is my personal site and in it I try some things about web publishing, stand
 ### Two steps to perform in local
 
 1. UNCSS all css into styles.css [uncss.js](_tasks/css/uncss.js)
-2. Get CRITICAL path CSS: [critical.js](_tasks/css/critical.js)
+2. ~~Get CRITICAL path CSS: [critical.js](_tasks/css/critical.js)~~
 3. Add all into one block to be included inline, and purge duplicateds.
 4. To do that, we need to generate static web, get uncss-styles, try them with running local web to get critical... 
 
@@ -50,6 +50,6 @@ Sample script [here](buildcss.sh)
 - Async loading of some scripts and ~~FontAwesome~~ Fontello font file
 - On build time I convert images to webp and if browser supports them, all data-src are changed to .webp version. See "Netlify Build Command"
 
-## Netlify build command 
+## Netlify build command
 
                 $ hugo && npm install _tasks/webp && node _tasks/webp/index.js
