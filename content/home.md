@@ -56,7 +56,7 @@ miniprojects:
       FTP Like interface for auth users. They share a bucket but only can see
       their "folder"
     link: 'https://github.com/davidayalas/aws-ftp-s3-serverless'
-    title: AWS S3 FTP Serverlesss
+    title: AWS S3 FTP Serverless
   - description: >-
       Easy markdown to json converter. Transform front matter properties and
       content into json key-values. Very easy to integrate with static sites
