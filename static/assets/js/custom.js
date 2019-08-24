@@ -66,8 +66,8 @@ _$().ready(function(){
 				datasrc=tweets[i][4].slice(0,tweets[i][4].lastIndexOf("."));
 				datasrc=datasrc+"?format="+(window.hasWebP?"webp":"jpg")+"&name=small";
 			}
-			stb.push('<li',tcss,'><article class="tweet">',(tweets[i][3]==="pinned"?'<span class="icon-pin-colored"></span> ':''),replaceURLWithHTMLLinks(tweets[i][0]),'<span class="timestamp"> (',	fillZeros(tweet_date.getUTCHours(),2),":",fillZeros(tweet_date.getUTCMinutes(),2)," ",fillZeros(tweet_date.getUTCMonth()+1,2),"/",fillZeros((tweet_date.getUTCDate()),2),"/",fillZeros((tweet_date.getUTCFullYear()),2),')</span> <!--a href="https://twitter.com/davidayalas/status/',tweets[i][2],'" style="font-size: .8rem;"><i class="icon fa-link fa-xs"></i></a-->',(tweets[i][3]==="pinned" && tweets[i][4]?'<img src="/images/1px.png" data-src="'+datasrc+'" class="lozad" alt="" />':""),'</article></li>');
-			if(i>=11){
+			stb.push('<li',tcss,'><article class="tweet">',(tweets[i][3]==="pinned"?'<span class="icon-pin-colored"></span> ':''),replaceURLWithHTMLLinks(tweets[i][0]),'<span class="timestamp"> (',	fillZeros(tweet_date.getUTCHours(),2),":",fillZeros(tweet_date.getUTCMinutes(),2)," ",fillZeros(tweet_date.getUTCMonth()+1,2),"/",fillZeros((tweet_date.getUTCDate()),2),"/",fillZeros((tweet_date.getUTCFullYear()),2),')</span> <!--a href="https://twitter.com/davidayalas/status/',tweets[i][2],'" style="font-size: .8rem;"><i class="icon fa-link fa-xs"></i></a-->',(datasrc?'<img src="/images/1px.png" data-src="'+datasrc+'" class="lozad" alt="" />':""),'</article></li>');
+			if(i>=8){
 				tcss = " class='hidden'"
 			}
 		}
