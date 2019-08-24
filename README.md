@@ -8,7 +8,7 @@ This is my personal site and in it I try some things about web publishing, stand
 
 * It gets some dynamic content from a Google Spreadsheet that has my recent tweets, that are populated with a [Google Apps Script](static/gas-scripts/get-twitter.gs)
 
-* The template I use is from html5up.net: https://html5up.net/helios
+* The template I use is from html5up.net, heavely modified without jquery and others: https://html5up.net/helios
 
 * To make it performant, I try to acomplish with Google LightHouse. [This is my current report](https://lighthouse-dot-webdotdevsite.appspot.com/lh/html?url=https://www.davidayala.eu). This is the most complex thing: SSG, critical path CSS, inline it, uncss...  
 
