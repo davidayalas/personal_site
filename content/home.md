@@ -53,7 +53,7 @@ miniprojects:
     link: 'https://github.com/davidayalas/saml-jwt'
     title: SAML JWT
   - description: >-
-      FTP Like interface for auth users. They share a bucket but only can see
+      FTP-like interface for auth users. They share a bucket but only can see
       their "folder"
     link: 'https://github.com/davidayalas/aws-ftp-s3-serverless'
     title: AWS S3 FTP Serverless
