@@ -28,11 +28,12 @@
 	
 		{{ if or (eq .isServer false) (eq $testProd true) }}
 		<style>
-
 			{{ if eq $section "gallery" }}
 				{{ partial "critical-css-gallery.html" . | print | safeCSS }}
 			{{ else }}
-				{{ partial "critical-css-home.html"  . | print | safeCSS }}#header{background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}")}
+				{{ partial "critical-css-home.html"  . | print | safeCSS }}
+				#header{background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}")}
+				#header.webp{background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}.webp")}
 			{{ end }}
 		</style>
 		{{ end }}
