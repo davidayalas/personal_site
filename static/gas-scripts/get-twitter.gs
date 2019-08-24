@@ -55,6 +55,8 @@ function run() {
   var activeSheet = sheet.getActiveSheet();
   var RT = "";
   var row=1;
+  var aux = "";
+  
   if(pinned_tweet){
      activeSheet.getRange(row,1,1,4).setValues(pinned_tweet);
      row++;
@@ -62,9 +64,9 @@ function run() {
   
   for(var i=0,z=tweets.length; i<z;i++,row++){
     RT = ""; 
+    aux = tweets[i] && tweets[i].extended_entities && tweets[i].extended_entities.media && tweets[i].extended_entities.media.length>0 ? tweets[i].extended_entities.media[0].media_url_https : "";
     if(pinned_tweet && pinned_tweet[0][2][0]===tweets[i].id_str){
       row--;
-      var aux = tweets[i] && tweets[i].extended_entities && tweets[i].extended_entities.media && tweets[i].extended_entities.media.length>0 ? tweets[i].extended_entities.media[0].media_url_https : "";
       if(lastPinnedTweetMedia!==aux){
         lastPinnedTweetMedia = aux;
       }
@@ -76,7 +78,7 @@ function run() {
     if(tweets[i].full_text.indexOf("RT")===0){
       RT = tweets[i].full_text.slice(0,tweets[i].full_text.indexOf(":")+1);
     }
-    activeSheet.getRange(row,1,1,3).setValues([[[ (tweets[i].retweeted_status && tweets[i].retweeted_status.full_text ? RT + " " + tweets[i].retweeted_status.full_text : tweets[i].full_text) ],[tweets[i].created_at],[tweets[i].id_str]]])
+    activeSheet.getRange(row,1,1,5).setValues([[[ (tweets[i].retweeted_status && tweets[i].retweeted_status.full_text ? RT + " " + tweets[i].retweeted_status.full_text : tweets[i].full_text) ],[tweets[i].created_at],[tweets[i].id_str],[],[RT==="" && aux ? aux : ""]]])
   }
   
   for(var i=0; i<=sheet.getSheets().length; i++){
