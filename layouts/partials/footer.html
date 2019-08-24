@@ -118,19 +118,20 @@
 {{ if (eq .isServer false) }}
 	var img = new Image();
 	img.onload = function() {
-		hasWebP = !!(img.height > 0 && img.width > 0);
+		window.hasWebP = !!(img.height > 0 && img.width > 0);
 		//headerImage = headerImage + ".webp";
 		var images = document.getElementsByTagName("img");
 		var dataSrc = "";
 		for (var i = 0, z=images.length; i<z; i++){
 			dataSrc = images[i].getAttribute("data-src");
-				if(dataSrc.indexOf("/media/")>-1){
+			if(dataSrc.indexOf("/media/")>-1){
 				images[i].setAttribute("data-src",dataSrc.slice(dataSrc.indexOf("/media/"))+".webp");
-				}
-		}			
+			}
+		}
+		document.querySelector("div#header").classList.add("webp");
 	};
 	img.onerror = function() {
-		hasWebP = false;
+		window.hasWebP = false;
 	};
 	img.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
 {{ end }}
