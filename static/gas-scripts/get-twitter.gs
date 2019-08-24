@@ -32,12 +32,14 @@ function run() {
   var tweets = _request(url, service.getAccessToken());
 
   var user = _request(user_url, service.getAccessToken());
+
   var pinned_tweet = (user && user.data && user.data.length>0 ? user.data[0].pinned_tweet_id : null);
   pinned_tweet = _request(pinned_url.replace("{id}",pinned_tweet), service.getAccessToken());
   pinned_tweet = (pinned_tweet && pinned_tweet.data && pinned_tweet.data.length>0 ? [[[pinned_tweet.data[0].text],[pinned_tweet.data[0].created_at],[pinned_tweet.data[0].id], ["pinned"]]] : null);
 
   var lastTweet = Properties.getProperty("lastTweet");
   var lastPinnedTweet = Properties.getProperty("pinnedTweet");
+  var lastPinnedTweetMedia = Properties.getProperty("pinnedTweetMedia");
   
   //If not modified, returns
   if(tweets.length && tweets[0].id_str){
@@ -62,6 +64,13 @@ function run() {
     RT = ""; 
     if(pinned_tweet && pinned_tweet[0][2][0]===tweets[i].id_str){
       row--;
+      var aux = tweets[i] && tweets[i].extended_entities && tweets[i].extended_entities.media && tweets[i].extended_entities.media.length>0 ? tweets[i].extended_entities.media[0].media_url_https : "";
+      if(lastPinnedTweetMedia!==aux){
+        lastPinnedTweetMedia = aux;
+      }
+      if(lastPinnedTweetMedia){
+          activeSheet.getRange('E1').setValue(lastPinnedTweetMedia);
+      }
       continue;
     }
     if(tweets[i].full_text.indexOf("RT")===0){
@@ -79,6 +88,7 @@ function run() {
   sheet.getSheets()[0].setName("Sheet1");
   Properties.setProperty("lastTweet",tweets[0].id_str);
   Properties.setProperty("pinnedTweet",pinned_tweet && pinned_tweet[0][2][0] ? pinned_tweet[0][2][0] : "");
+  Properties.setProperty("pinnedTweetMedia", lastPinnedTweetMedia);
 }
 
 /**
