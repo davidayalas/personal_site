@@ -156,13 +156,6 @@ createCSS("/assets/css/main.css");
 
 window.onload = function(){
 
-	_$().getScript("/assets/js/lozad.min.js", function( data, textStatus, jqxhr ) {
-		try{
-			const observer = window.lozad();
-			observer.observe();  
-		}catch(e){}
-	});
-
 	var loadNetlifyWidget = false;
 	if((new URLSearchParams(window.location.search)).get("netlify")==="true"){
 		loadNetlifyWidget = true;

@@ -60,12 +60,19 @@ _$().ready(function(){
 		var stb = [], tweet_date, tcss="";
 		for(var i=0;i<tweets.length;i++){
 			tweet_date = new Date(tweets[i][1]);
-			stb.push('<li',tcss,'><article class="tweet">',(tweets[i][3]==="pinned"?'<span class="icon-pin-colored"></span> ':''),replaceURLWithHTMLLinks(tweets[i][0]),'<span class="timestamp"> (',	fillZeros(tweet_date.getUTCHours(),2),":",fillZeros(tweet_date.getUTCMinutes(),2)," ",fillZeros(tweet_date.getUTCMonth()+1,2),"/",fillZeros((tweet_date.getUTCDate()),2),"/",fillZeros((tweet_date.getUTCFullYear()),2),')</span> <!--a href="https://twitter.com/davidayalas/status/',tweets[i][2],'" style="font-size: .8rem;"><i class="icon fa-link fa-xs"></i></a--></article></li>');
+			stb.push('<li',tcss,'><article class="tweet">',(tweets[i][3]==="pinned"?'<span class="icon-pin-colored"></span> ':''),replaceURLWithHTMLLinks(tweets[i][0]),'<span class="timestamp"> (',	fillZeros(tweet_date.getUTCHours(),2),":",fillZeros(tweet_date.getUTCMinutes(),2)," ",fillZeros(tweet_date.getUTCMonth()+1,2),"/",fillZeros((tweet_date.getUTCDate()),2),"/",fillZeros((tweet_date.getUTCFullYear()),2),')</span> <!--a href="https://twitter.com/davidayalas/status/',tweets[i][2],'" style="font-size: .8rem;"><i class="icon fa-link fa-xs"></i></a-->',(tweets[i][3]==="pinned" && tweets[i][4]?'<img src="/images/1px.png" data-src="'+tweets[i][4]+'" class="lozad"  />':""),'</article></li>');
 			if(i>=11){
 				tcss = " class='hidden'"
 			}
 		}
 
+		_$().getScript("/assets/js/lozad.min.js", function( data, textStatus, jqxhr ) {
+			try{
+				const observer = window.lozad();
+				observer.observe();  
+			}catch(e){}
+		});
+	
 		if(stb.length>0){
 			_$("<a href='#' id='moretweets' title='show more tweets' class='icon-plus' onclick='return false;'><span class='label'>[+]</span></a>").appendTo("#twitter");
 			_$(stb.join("")).appendTo("#twitter ul");
@@ -79,6 +86,7 @@ _$().ready(function(){
 			}
 			return false;
 		});
+
 	})
 
 	var galleryContainer = _$(".reel").first().get();
