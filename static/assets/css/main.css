@@ -3165,6 +3165,67 @@ body.gallery ul li,body.gallery ul li p{
 	float:right;
 }
 
+.carousel{
+	overflow: hidden;
+}
+
+.reel{
+	padding-bottom: 1em!important;
+	display: flex;
+	transition: transform .1s;
+	scroll-behavior: smooth;
+}
+
+.reel article{
+	min-width: 325px;
+	margin-left: 10px;
+	margin-right: 15px;
+}
+
+img.webdev{
+	width: 7em;
+}
+
+h3 a{
+	color: rgb(233, 187, 127);	
+}
+
+.style2 strong, .style2 b {
+	font-weight: bold;
+	/*color: #483949;*/
+}
+
+html{
+	scroll-behavior: smooth;
+}
+
+ul.tweets article img{
+	max-width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1em;
+	display: block;
+}
+
+@media screen and (min-width: 736px) {
+
+	body.no-sidebar.gallery ul.gallery {
+		display: flex;
+		flex-wrap: wrap;
+		margin-left:1%;
+	}
+	body.no-sidebar.gallery ul.gallery > li {
+		flex-grow: 1;
+		width: 33%;
+	}
+	body.no-sidebar.gallery ul.gallery > li:nth-child(even) {}
+	body.no-sidebar.gallery ul.gallery > li:nth-child(odd) {}
+
+	article a.image h3{
+		min-height: 335px;
+	}
+}
+
 @media screen and (max-width: 736px) {
 	div.pull-right.editpage{float:none!important;text-align: center;margin-top:1em;}
 	header h1,header h2,header p{color: #000!important;}
@@ -3200,58 +3261,7 @@ body.gallery ul li,body.gallery ul li p{
 	.reel{
 		overflow-x: auto;
 	}
-}
-
-.carousel{
-	overflow: hidden;
-}
-
-.reel{
-	padding-bottom: 1em!important;
-	display: flex;
-	transition: transform .1s;
-	scroll-behavior: smooth;
-}
-
-.reel article{
-	min-width: 325px;
-	margin-left: 10px;
-	margin-right: 15px;
-}
-
-img.webdev{
-	width: 7em;
-}
-
-h3 a{
-	color: rgb(233, 187, 127);	
-}
-
-.style2 strong, .style2 b {
-	font-weight: bold;
-	/*color: #483949;*/
-}
-
-html{
-	scroll-behavior: smooth;
-}
-
-@media screen and (min-width: 736px) {
-
-	body.no-sidebar.gallery ul.gallery {
-		display: flex;
-		flex-wrap: wrap;
-		margin-left:1%;
+	ul.tweets article img{
+		max-width: 95%;
 	}
-	body.no-sidebar.gallery ul.gallery > li {
-		flex-grow: 1;
-		width: 33%;
-	}
-	body.no-sidebar.gallery ul.gallery > li:nth-child(even) {}
-	body.no-sidebar.gallery ul.gallery > li:nth-child(odd) {}
-
-	article a.image h3{
-		min-height: 335px;
-	}
-
 }
