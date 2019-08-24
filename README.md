@@ -18,7 +18,7 @@ This is my personal site and in it I try some things about web publishing, stand
 
 ## How to uncss and get critical path
 
-### Two steps to perform in local
+### Steps to perform in local
 
 1. UNCSS all css into styles.css [uncss.js](_tasks/css/uncss.js)
 2. ~~Get CRITICAL path CSS: [critical.js](_tasks/css/critical.js)~~
