@@ -22,8 +22,8 @@ This is my personal site and in it I try some things about web publishing, stand
 
 1. UNCSS all css into styles.css [uncss.js](_tasks/css/uncss.js)
 2. ~~Get CRITICAL path CSS: [critical.js](_tasks/css/critical.js)~~
-3. Add all into one block to be included inline, and purge duplicateds.
-4. To do that, we need to generate static web, get uncss-styles, try them with running local web to get critical... 
+3. ~~Add all into one block to be included inline, and purge duplicated rules.~~
+4. To do that, we need to generate static web, get uncss-styles, ~~try them with running local web to get critical... ~~
 
                 $ hugo --config config-uncss.toml
                 $ node _tasks/css/uncss.js > static/assets/css/style.css    
