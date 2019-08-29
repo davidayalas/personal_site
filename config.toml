@@ -10,4 +10,4 @@ publishdir = "public"
 disableKinds = ["taxonomy", "taxonomyTerm"]
 
 [params]
-  testProd = true
+  testProd = false
