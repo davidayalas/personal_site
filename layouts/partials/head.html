@@ -32,7 +32,7 @@
 				{{ partial "critical-css-gallery.html" . | print | safeCSS }}
 			{{ else }}
 				{{ partial "critical-css-home.html"  . | print | safeCSS }}
-				#header{background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}")}
+				#header.nowebp{background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}")}
 				#header.webp{background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}.webp")}
 			{{ end }}
 		</style>

@@ -132,6 +132,7 @@
 	};
 	img.onerror = function() {
 		window.hasWebP = false;
+		document.querySelector("div#header").classList.add("nowebp");
 	};
 	img.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
 {{ end }}
