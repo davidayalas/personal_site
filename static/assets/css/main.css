@@ -3207,6 +3207,11 @@ ul.tweets article img{
 	display: block;
 }
 
+ul.gallery li img{
+	min-width: 320px;
+	min-height: 320px;
+}
+
 @media screen and (min-width: 736px) {
 
 	body.no-sidebar.gallery ul.gallery {
