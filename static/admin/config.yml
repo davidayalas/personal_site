@@ -35,6 +35,7 @@ collections: # A list of collections the CMS should be able to edit
       - {label: "Title", name: "title", widget: "string", tagname: "h1"}
       - {label: "HTML Title", name: "html_title", widget: "string", tagname: "h1"}
       - {label: "Header image", name: "header", widget: "image", required: true}
+      - {label: "Header quality", name: "header_quality", widget: "number", required: true, default: 60}
       - {label: "Description", name: "description", widget: "text", required: true}
       - {label: "Message", name: "message", widget: "text", required: true}
       - {label: "Keywords", name: "meta_keywords", widget: "text", required: true}
