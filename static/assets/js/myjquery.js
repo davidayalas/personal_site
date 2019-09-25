@@ -106,9 +106,17 @@
                 }
 			},
 			getScript : function(src, callback){
+                var callbackFN;
+                if(src.indexOf("callback=?")>-1){
+                    callbackFN = "mycustomcallback_"+(+new Date());
+                    src = src.replace("callback=?","callback=" + callbackFN);
+                    window[callbackFN] = function(data){
+                        callback(data);
+                    }
+                }
 				var s = document.createElement( "script" );
-				s.onload = function(){
-					callback();
+				s.onload = function(data){
+					callback(data);
 				}
 				s.src = src;
 				document.head.appendChild(s);
