@@ -1,7 +1,7 @@
 baseURL = "https://www.davidayala.eu"
 languageCode = "en-GB"
 title = "David Ayala Homepage"
-enableRobotsTXT = true
+enableRobotsTXT = false
 
 contentdir = "content"
 layoutdir = "layouts"
