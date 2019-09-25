@@ -30,9 +30,11 @@ var createGsMatrix = function(results){
 
 	//creates gs_matrix
 	var gs_max_cols = 0;
+
 	if(!results.feed){
 		return;
 	}
+
 	for(var i=0,z=results.feed.entry.length;i<z;i++){
 	  gs_col = orders.get(results.feed.entry[i].title.$t.slice(0,1));
 	  gs_max_cols = (gs_max_cols<=gs_col?gs_col:gs_max_cols);
@@ -58,11 +60,11 @@ _$().ready(function(){
 
 	//TWEETS
  
-	_$().getScript("https://spreadsheets.google.com/feeds/cells/1xRcpFi4tL-mKvM4pJUbnQAQ0z3z4AED9lBVqMZKHeZ0/default/public/basic?alt=json-in-script&callback=?", function(data, textStatus, jqxhr ){
+	_$().request("https://spreadsheets.google.com/feeds/cells/1xRcpFi4tL-mKvM4pJUbnQAQ0z3z4AED9lBVqMZKHeZ0/default/public/basic?alt=json-in-script&callback=?", function(data, textStatus, jqxhr ){
 		var tweets = createGsMatrix(data);
 		var stb = [], tweet_date, tcss="";
 		var datasrc="";
-		if(!tweets)return;
+
 		for(var i=0;i<tweets.length;i++){
 			tweet_date = new Date(tweets[i][1]);
 			datasrc="";
