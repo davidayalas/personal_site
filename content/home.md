@@ -59,6 +59,12 @@ miniprojects:
     link: 'https://github.com/davidayalas/aws-ftp-s3-serverless'
     title: AWS S3 FTP Serverless
   - description: >-
+      Based on the idea behind https://staticman.net, this lambda allow to
+      publish comments in your repo for authenticated users (API GW Custom
+      Authorizer involved)
+    link: 'https://github.com/davidayalas/jamstack-lambda-comments'
+    title: JAMStack comments for auth users
+  - description: >-
       Easy markdown to json converter. Transform front matter properties and
       content into json key-values. Very easy to integrate with static sites
       generators. It creates an index that can be easily injected into algolia.
