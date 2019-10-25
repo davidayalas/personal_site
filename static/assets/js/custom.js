@@ -31,7 +31,8 @@ var createGsMatrix = function(results){
 	//creates gs_matrix
 	var gs_max_cols = 0;
 
-	if(!results.feed){
+	if(!results.feed || !results.feed.entry){
+		console.log("break")
 		return;
 	}
 
@@ -64,7 +65,9 @@ _$().ready(function(){
 		var tweets = createGsMatrix(data);
 		var stb = [], tweet_date, tcss="";
 		var datasrc="";
-
+		if(!tweets){
+			return;
+		}
 		for(var i=0;i<tweets.length;i++){
 			tweet_date = new Date(tweets[i][1]);
 			datasrc="";
