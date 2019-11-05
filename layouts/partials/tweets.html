@@ -1,4 +1,4 @@
-{{ $tweetsAPI := .tweetsAPI }}
+{{ $tweetsAPI := print .tweetsAPI "&" (dateFormat "2006010215040506" now) }}
 
 {{ $tweets := getJSON $tweetsAPI }}
 
