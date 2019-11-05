@@ -2,6 +2,7 @@
 {{ $c := .context }}
 {{ $isServer := .isServer }}
 {{ $testProd := .testProd }}
+{{ $tweetsAPI := .tweetsAPI }}
 {{ $uncss := .unCss }}
 {{ $isHome := .isHome }}
 {{ $mediaPage := $c.Site.GetPage "page" "media/index.md"}}
@@ -16,9 +17,11 @@
 							<header>
 								<h2 class="icon-twitter-colored circled"><span class="label">{{ $p.Params.miniprojects_title }}</span></h2>
 							</header>
-							<ul class="divided tweets">
 
+							<ul class="divided tweets">
+								{{ partial "tweets.html" (dict "context" . "tweetsAPI" $tweetsAPI) }}
 							</ul>
+							<a href='#' id='moretweets' title='show more tweets' class='icon-plus' onclick='return false;'><span class='label'>[+]</span></a>							
 						</section>
 
 					<!-- Miniprojects -->

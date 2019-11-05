@@ -61,7 +61,7 @@ _$().ready(function(){
 
 	//TWEETS
  
-	_$().request("https://spreadsheets.google.com/feeds/cells/1xRcpFi4tL-mKvM4pJUbnQAQ0z3z4AED9lBVqMZKHeZ0/default/public/basic?alt=json-in-script&callback=?", function(data, textStatus, jqxhr ){
+	/*_$().request("https://spreadsheets.google.com/feeds/cells/1xRcpFi4tL-mKvM4pJUbnQAQ0z3z4AED9lBVqMZKHeZ0/default/public/basic?alt=json-in-script&callback=?", function(data, textStatus, jqxhr ){
 		var tweets = createGsMatrix(data);
 		var stb = [], tweet_date, tcss="";
 		var datasrc="";
@@ -102,7 +102,24 @@ _$().ready(function(){
 			return false;
 		});
 
-	})
+	});*/
+
+	_$().getScript("/assets/js/lozad.min.js", function( data, textStatus, jqxhr ) {
+		try{
+			const observer = window.lozad();
+			observer.observe();  
+		}catch(e){}
+	});
+
+	_$("#moretweets").on("click", function(){
+		_$("#twitter ul li.hidden").slice(0,10).removeClass("hidden").addClass("visible");
+		//$("#twitter ul li.hidden").slice(0,10).removeClass("hidden").addClass("visible").removeClass("visible");
+		if(_$("#twitter ul li.hidden").size()===0){
+			_$("#moretweets").remove();
+		}
+		return false;
+	});
+
 
 	var galleryContainer = _$(".reel").first().get();
 
