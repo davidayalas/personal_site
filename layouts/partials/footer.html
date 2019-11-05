@@ -128,7 +128,9 @@
 		for (var i = 0, z=images.length; i<z; i++){
 			dataSrc = images[i].getAttribute("data-src");
 			if(dataSrc.indexOf("/media/")>-1){
-				images[i].setAttribute("data-src",dataSrc.slice(dataSrc.indexOf("/media/"))+".webp");
+				if(images[i].getAttribute("data-origin")!=="twitter"){
+					images[i].setAttribute("data-src",dataSrc.slice(dataSrc.indexOf("/media/"))+".webp");
+				}
 			}
 		}
 		document.querySelector("div#header").classList.add("webp");
