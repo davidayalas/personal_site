@@ -91,6 +91,9 @@ function run() {
   Properties.setProperty("lastTweet",tweets[0].id_str);
   Properties.setProperty("pinnedTweet",pinned_tweet && pinned_tweet[0][2][0] ? pinned_tweet[0][2][0] : "");
   Properties.setProperty("pinnedTweetMedia", lastPinnedTweetMedia);
+  
+  //call netlify build
+  UrlFetchApp.fetch(Properties.getProperty("build_hook"), {'method' : 'post'});
 }
 
 /**
