@@ -19,7 +19,7 @@
     {{ $col := substr (index (index $tweet "title") "$t") 0 1 }}
 
     {{ if (ne ($scratch.Get "oldrow") ($scratch.Get "row")) }}
-        <li {{if ge ($scratch.Get "count") 8 }} class="hidden" {{end}}><article class="tweet">
+        <li {{if ge ($scratch.Get "count") 13 }} class="hidden" {{end}}><article class="tweet">
 
             {{ if eq ($scratch.Get "D") "pinned"}}
             <span class="icon-pin-colored"></span>
