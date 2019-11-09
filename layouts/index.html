@@ -67,7 +67,7 @@
 		            	{{ if .Params.image }}
 			              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
 		              		{{ $thumb := $image.Fill "320x320 q90 Center" }}
-							<article><a href="{{.Permalink}}" class="image featured"><img src="/images/1px.png" data-src="{{$thumb.RelPermalink}}" alt="{{.Title}}" class="lozad" /></a><p class="notranslate">{{ .Title }}</p></article>
+							<div><a href="{{.Permalink}}" class="image featured"><img src="/images/1px.png" data-src="{{$thumb.RelPermalink}}" alt="{{.Title}}" class="lozad" /></a><p class="notranslate">{{ .Title }}</p></div>
 						{{ end }}
 					{{ end }}
 					
