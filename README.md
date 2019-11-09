@@ -6,7 +6,7 @@ This is my personal site and in it I try some things about web publishing, stand
 
 * It's published in a CDN, in this case in [Netlify](http://netlify.com), but it can be published wherever.
 
-* It gets some dynamic content from a Google Spreadsheet that has my recent tweets, that are populated with a [Google Apps Script](static/gas-scripts/get-twitter.gs)
+* It gets some dynamic content from a Google Spreadsheet that has my recent tweets, that are populated with a [Google Apps Script](static/gas-scripts/get-twitter.gs). Then, tweets are writed into html with Hugo data template. Build hook is triggered by Google Apps Script on new tweets.
 
 * The template I use is from html5up.net, heavely modified without jquery and others: https://html5up.net/helios
 
