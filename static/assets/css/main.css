@@ -3278,4 +3278,7 @@ ul.gallery li img{
 	ul.tweets img{
 		max-width: 95%;
 	}
+	ul.tweets li{
+		text-align: justify;
+	}	
 }
