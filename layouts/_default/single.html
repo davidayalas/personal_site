@@ -35,7 +35,7 @@
 					</nav>					
 				</div>
 
-				<section>
+				<!--section-->
 					<article id="main" class="container special">
 						<header>
 							<h2>{{ .Title }}</h2>
@@ -59,14 +59,14 @@
 									{{ end }}
 								{{ end }}
 
-								<a href="{{$image.RelPermalink}}"><img class="lozad" src="/images/1px.png" data-src="{{ ($.Scratch.Get "thumb").RelPermalink }}" /></a>
+								<a href="{{$image.RelPermalink}}"><img class="lozad" src="/images/1px.png" data-src="{{ ($.Scratch.Get "thumb").RelPermalink }}" alt="{{ .Title }}" /></a>
 							</div>							
 						{{ else }}
 							{{ .Content }}
 						{{ end }}
 
                     </article>
-				</section>
+				<!--/section-->
 
 				{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer "testProd" $.Site.Params.testProd "unCss" $.Site.Params.uncss) }}
 	</body>
