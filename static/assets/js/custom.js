@@ -1,7 +1,8 @@
+
 _$().ready(function(){
 
-    _$(".doingnow ul").addClass("default");
-    
+	_$(".doingnow ul").addClass("default");
+
 	_$().getScript("/assets/js/lozad.min.js", function( data, textStatus, jqxhr ) {
 		try{
 			const observer = window.lozad();
@@ -41,14 +42,14 @@ _$().ready(function(){
 		clearInterval(window.GalleryRepeater)
  	})
 
-	var GalleryImage = _$(".reel div").first().get();
-	//var GalleryWidth = galleryContainer.offsetWidth;
-	//var maxWidth = galleryContainer.scrollWidth-GalleryWidth; //(max width of picture+ margin-left) * 9 pictures
-	var maxWidth = GalleryImage.offsetWidth*9; 
 
+	var GalleryWidth = galleryContainer.offsetWidth;
+	var maxWidth = galleryContainer.scrollWidth-GalleryWidth; //(max width of picture+ margin-left) * 9 pictures
+	
 	function scrollTo(container, direction) {
 		var movement = 75;
 		window.GalleryTranslate = window.GalleryTranslate || 0;
+
 		if(direction==="forward" && (maxWidth>window.GalleryTranslate*-1)){
 			window.GalleryTranslate = window.GalleryTranslate-movement;
 		}else if(direction==="backward" && (window.GalleryTranslate*-1)>0){
