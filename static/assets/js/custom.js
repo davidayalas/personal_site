@@ -1,4 +1,3 @@
-console.log("hola")
 _$().ready(function(){
 
     _$(".doingnow ul").addClass("default");
@@ -21,8 +20,6 @@ _$().ready(function(){
 
 
 	var galleryContainer = _$(".reel").first().get();
-
-    console.log(_$(".reel"))
 
 	_$(".forward").on("mouseenter",function(){
 		window.GalleryRepeater=setInterval(function(){
