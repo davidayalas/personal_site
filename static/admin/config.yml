@@ -50,6 +50,8 @@ collections: # A list of collections the CMS should be able to edit
           - {label: "Títol", name: "title", widget: string}
           - {label: "Enllaç", name: "link", widget: string}
           - {label: "CSS Class", name: "class", widget: string}
+      - {label: "Twitter timeline title", name: "timeline_title", widget: "string"}
+      - {label: "Miniprojects title", name: "miniprojects_title", widget: "string"}
       - name: miniprojects
         label: Miniprojects
         widget: list
