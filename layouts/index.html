@@ -63,7 +63,7 @@
 
 					<div class="reel">
 
-					{{ range first 9 (where .Data.Pages "Section" "gallery") }}
+					{{ range first 9 (where .Site.Pages "Section" "gallery") }}
 		            	{{ if .Params.image }}
 			              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
 		              		{{ $thumb := $image.Fill "320x320 q90 Center" }}
