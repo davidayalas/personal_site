@@ -186,8 +186,9 @@ window.onload = function(){
 </script> 
 
 {{ $myquery := resources.Get "js/myjquery.js" | resources.Minify | resources.Fingerprint }}
-<script src="{{ $myquery.Permalink }}" integrity="{{ $myquery.Data.Integrity }}" crossorigin="anonymous"></script>
 {{ $custom := resources.Get "js/custom.js" | resources.Minify | resources.Fingerprint }}
-<script src="{{ $custom.Permalink }}" integrity="{{ $custom.Data.Integrity }}" crossorigin="anonymous"></script>
+{{ $js := slice $myquery $custom | resources.Concat "js/bundle.js" }}
+<script src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+
 <!--script src="/assets/js/myjquery.js" defer></script-->
 <!--script src="/assets/js/custom.js" defer></script-->
