@@ -26,22 +26,21 @@ _$().ready(function(){
 		window.GalleryRepeater=setInterval(function(){
 			scrollTo(galleryContainer, "forward");   
 		}, 100);
- 	})
+ 	});
 	
-	 _$(".forward").on("mouseout",function(){
-		clearInterval(window.GalleryRepeater)
- 	})
+	_$(".forward").on("mouseout",function(){
+		clearInterval(window.GalleryRepeater);
+ 	});
 
 	_$(".backward").on("mouseenter",function(){
 		window.GalleryRepeater=setInterval(function(){
 			scrollTo(galleryContainer, "backward");   
 		}, 100);
-	})
+	});
 
 	_$(".backward").on("mouseout",function(){
 		clearInterval(window.GalleryRepeater)
- 	})
-
+ 	});
 
 	var GalleryWidth = galleryContainer.offsetWidth;
 	var maxWidth = galleryContainer.scrollWidth-GalleryWidth; //(max width of picture+ margin-left) * 9 pictures

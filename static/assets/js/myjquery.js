@@ -143,21 +143,20 @@
 					}
 					xhr.onreadystatechange = function() {
 						if (this.readyState==4 && this.status==200) {
-						var data = this.responseText;
-						if(jsonp){
-							var s = document.createElement( "script" );
-							s.text = data;
-							document.head.appendChild(s);
-							return;  
-						}
-						callback(data);
+                            var data = this.responseText;
+                            if(jsonp){
+                                var s = document.createElement( "script" );
+                                s.text = data;
+                                document.head.appendChild(s);
+                                return;  
+                            }
+                            callback(data);
 						} else {
 						}
 					};
 					xhr.send(JSON.stringify(body));
 				}
 			}
-				
         }
 
 		element = myDOM.get(_element);
