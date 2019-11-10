@@ -1,14 +1,9 @@
-
 _$().ready(function(){
 
 	_$(".doingnow ul").addClass("default");
 
-	_$().getScript("/assets/js/lozad.min.js", function( data, textStatus, jqxhr ) {
-		try{
-			const observer = window.lozad();
-			observer.observe();  
-		}catch(e){}
-	});
+	const observer = window.lozad();
+	observer.observe();  
 
 	_$("#moretweets").on("click", function(){
 		_$("#twitter ul li.hidden").slice(0,10).removeClass("hidden").addClass("visible");
