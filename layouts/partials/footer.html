@@ -185,6 +185,9 @@ window.onload = function(){
 {{ end }}
 </script> 
 
-<script src="/assets/js/myjquery.js" defer></script>
-<!--script src="/assets/js/util.js" defer></script-->
-<script src="/assets/js/custom.js" defer></script>
+{{ $myquery := resources.Get "js/myjquery.js" | resources.Minify | resources.Fingerprint }}
+<script src="{{ $myquery.Permalink }}" integrity="{{ $myquery.Data.Integrity }}" crossorigin="anonymous"></script>
+{{ $custom := resources.Get "js/custom.js" | resources.Minify | resources.Fingerprint }}
+<script src="{{ $custom.Permalink }}" integrity="{{ $custom.Data.Integrity }}" crossorigin="anonymous"></script>
+<!--script src="/assets/js/myjquery.js" defer></script-->
+<!--script src="/assets/js/custom.js" defer></script-->

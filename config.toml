@@ -7,6 +7,8 @@ contentdir = "content"
 layoutdir = "layouts"
 publishdir = "public"
 
+assetDir = "static/assets"
+
 disableKinds = ["taxonomy", "taxonomyTerm"]
 
 [params]
