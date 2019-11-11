@@ -17,7 +17,9 @@
 		<!--link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNa7lqDY.woff2" as="font" type="font/woff2" crossorigin="anonymous" /-->
 
 		<link rel="preload" href="/assets/fonts/fontello.woff2?79438795" as="font" type="font/woff2" crossorigin="anonymous" />
-		<link rel="preload" href="/assets/css/fontello.css" as="style" onload="this.rel='stylesheet'" crossorigin="anonymous" />
+		<!--link rel="preload" href="/assets/css/fontello.min.css" as="style" onload="this.rel='stylesheet'" crossorigin="anonymous" /-->
+		{{ $fontello := resources.Get "css/fontello.css" | resources.Minify | resources.Fingerprint }}
+		<link rel="preload" href="{{ $fontello.Permalink }}" as="style" onload="this.rel='stylesheet'" crossorigin="anonymous" />
 
 		{{if $p.Params.header}}
 			{{ $image := $mediaPage.Resources.GetMatch (replace $p.Params.header "/media/" "") }}
