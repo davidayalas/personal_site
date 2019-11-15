@@ -59,7 +59,7 @@
 									{{ end }}
 								{{ end }}
 
-								<a href="{{$image.RelPermalink}}"><img class="lozad" src="/images/1px.png" data-src="{{ ($.Scratch.Get "thumb").RelPermalink }}" alt="{{ .Title }}" /></a>
+								<a href="{{$image.RelPermalink}}"><img class="lozad" width="1" height="1" src="/images/1px.png" data-src="{{ ($.Scratch.Get "thumb").RelPermalink }}" alt="{{ .Title }}" /></a>
 							</div>							
 						{{ else }}
 							{{ .Content }}

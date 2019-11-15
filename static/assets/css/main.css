@@ -2427,6 +2427,7 @@
 					color: rgba(212, 212, 212, 1);
 				}
 
+
 /* Carousel */
 
 	.carousel {
@@ -3221,6 +3222,15 @@ ul.gallery li img{
 	min-height: 320px;
 }
 
+.lozad.ico{
+	width: 32px;
+	height: auto;
+}
+.lozad{
+	width: auto;
+	height: auto;
+}
+
 @media screen and (min-width: 736px) {
 
 	body.no-sidebar.gallery ul.gallery {
@@ -3279,3 +3289,4 @@ ul.gallery li img{
 		max-width: 95%;
 	}
 }
+
