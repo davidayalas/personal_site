@@ -31,7 +31,7 @@
 
             {{if ne ($scratch.Get "E") ""}}
                 {{ $ext := path.Ext ($scratch.Get "E") }}
-                <img src="/images/1px.png" data-origin="twitter" data-src="{{ replace ($scratch.Get "E") $ext ""}}?format=jpg&name=small" class="lozad" alt="" />
+                <img src="/images/1px.png" width="1" height="1" data-origin="twitter" data-src="{{ replace ($scratch.Get "E") $ext ""}}?format=jpg&name=small" class="lozad" alt="" />
             {{ end }}
 
         <!--/article--></li>
