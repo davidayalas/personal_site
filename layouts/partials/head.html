@@ -31,12 +31,8 @@
 	
 		{{ if or (eq .isServer false) (eq $testProd true) }}
 		<style>
-			{{ if eq $section "gallery" }}
-				{{ partial "critical-css-gallery.html" . | print | safeCSS }}
-			{{ else }}
-				{{ partial "critical-css-home.html"  . | print | safeCSS }}
-				#header.nowebp{background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}")}
-				#header.webp{background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}.webp")}
-			{{ end }}
+			{{ partial "critical-css.html"  . | print | safeCSS }}
+			#header.nowebp{background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}")}
+			#header.webp{background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}.webp")}
 		</style>
 		{{ end }}

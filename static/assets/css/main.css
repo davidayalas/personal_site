@@ -3099,7 +3099,7 @@ ul.pagination li.active{
 }
 
 body.no-sidebar.gallery ul.gallery {
-	margin-left:5%;
+	margin: 0 auto;
 }
 
 header p, header p strong{
