@@ -1,0 +1,14 @@
+{
+    "name": "netlify-function-twitter-webhook",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "David Ayala - https://davidayala.eu",
+    "license": "",
+    "devDependencies": {
+        "netlify-lambda": "^1.4.3"
+    },
+    "scripts": {
+        "dev": "netlify-lambda serve functions",
+        "build": "netlify-lambda build functions"
+    }
+}

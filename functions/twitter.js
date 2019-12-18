@@ -15,6 +15,7 @@ exports.handler = async event => {
   
       return {
         statusCode: 200,
+        headers: {"content-type": "application/json"},
         body: JSON.stringify({response_token:hmac})
       }  
     }else if(event.httpMethod==="POST"){
