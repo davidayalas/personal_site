@@ -10,3 +10,4 @@ resources
 package-lock.json
 yarn*
 .netlify
+functions-build

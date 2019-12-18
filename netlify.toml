@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"
-  functions = "./functions"
+  functions = "./functions-build"
 
 [[headers]]
   for = "*.woff"
