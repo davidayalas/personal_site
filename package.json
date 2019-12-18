@@ -1,0 +1,14 @@
+{
+    "name": "netlify function build",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "",
+    "license": "",
+    "devDependencies": {
+      "netlify-lambda": "^1.6.3"
+    },
+    "scripts": {
+      "dev": "netlify-lambda serve functions",
+      "build": "netlify-lambda build functions"
+    }
+  }
