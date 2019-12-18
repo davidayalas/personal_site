@@ -5,7 +5,7 @@
     "author": "",
     "license": "",
     "devDependencies": {
-      "netlify-lambda": "^1.6.3"
+      "netlify-lambda": "^1.4.3"
     },
     "scripts": {
       "dev": "netlify-lambda serve functions",
