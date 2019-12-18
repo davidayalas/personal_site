@@ -1,5 +1,5 @@
 [build]
-  functions = "./functions-build"
+  functions = "./functions"
 
 [[headers]]
   for = "*.woff"
