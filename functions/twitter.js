@@ -1,5 +1,5 @@
 const crypto = require('crypto')
-const consumer_secret = process.env.SECRET || 'asdadadqweqwrwefñlkjdoihjewoirwirej!';
+const consumer_secret = process.env.SECRET || '';
 exports.handler = async event => {
 
     if(event.httpMethod==="GET"){
