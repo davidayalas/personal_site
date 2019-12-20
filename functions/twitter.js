@@ -72,11 +72,9 @@ async function post(event){
 }
 
 exports.handler = async event => {
-  return post({"body" : "{\"tweet_create_events\":[1,2,3]}"});
-
-    /*if(event.httpMethod==="GET"){
+    if(event.httpMethod==="GET"){
       return get(event);
     }else if(event.httpMethod==="POST"){
       return await post(event);
-    }*/
+    }
 }
