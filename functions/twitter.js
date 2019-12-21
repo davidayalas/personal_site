@@ -26,7 +26,7 @@ function get(event){
 async function post(event){
   if (event.body) {
     let tData = JSON.parse(event.body)
-    if (tData.tweet_create_events.length>0 || tData.tweet_delete_events.length>0){ //new tweet, post to Google Apps Script
+    if ((tData.tweet_create_events && tData.tweet_create_events.length>0) || (tData.tweet_delete_events && tData.tweet_delete_events.length>0)){ //new or deleted tweet, post to Google Apps Script
       const data = JSON.stringify({
         api_key: gas_api_key
       })
