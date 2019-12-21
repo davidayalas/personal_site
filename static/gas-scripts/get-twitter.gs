@@ -121,3 +121,29 @@ function getService() {
       // Set the property store where authorized tokens should be persisted.
       .setPropertyStore(PropertiesService.getUserProperties());
 }
+
+/**
+ * Wrapper around run function to delete triggers
+ */
+function runWebhook(){
+  run();
+}
+
+/**
+ * Exposes endpoint to trigger run function, from netlify-functions twitter webhook
+ */
+function doPost(e){
+  deleteTriggers();
+  ScriptApp.newTrigger("runWebhook").timeBased().after(30*1000).create();
+  ScriptApp.newTrigger("runWebhook").timeBased().after(70*1000).create();
+  return ContentService.createTextOutput("done");
+}
+
+function deleteTriggers(){
+  var triggers = ScriptApp.getProjectTriggers();
+  for (var i = 0; i < triggers.length; i++) {
+    if (triggers[i].getHandlerFunction()==="runWebhook"){
+      ScriptApp.deleteTrigger(triggers[i])
+    }
+  }
+}
