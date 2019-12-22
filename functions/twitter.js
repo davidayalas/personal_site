@@ -144,7 +144,6 @@ async function post(event){
 
 exports.handler = async event => {
   //const tweets = await getTweets();
-  await git()
   if(event.httpMethod==="GET"){
     return get(event);
   }else if(event.httpMethod==="POST"){
