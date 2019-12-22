@@ -1,0 +1,10 @@
+{
+    "name": "twitter-webhook-to-gspreadsheet",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "David Ayala - https://davidayala.eu",
+    "license": "",
+    "dependencies": {
+        "twitter": "^1.7.1"
+    }
+}

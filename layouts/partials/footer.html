@@ -19,6 +19,9 @@
 							</header>
 
 							<ul class="divided tweets">
+								{{/*
+									{{ partial "tweets-new.html" (dict "context" $c ) }} 
+								*/}}
 								{{ partial "tweets.html" (dict "context" . "tweetsAPI" $tweetsAPI) }}
 							</ul>
 							<a href='#' id='moretweets' title='show more tweets' class='icon-plus' onclick='return false;'><span class='label'>[+]</span></a>							

@@ -9,6 +9,7 @@
     },
     "scripts": {
         "dev": "netlify-lambda serve functions",
+        "install": "netlify-lambda install functions",
         "build": "netlify-lambda build functions"
     }
 }
