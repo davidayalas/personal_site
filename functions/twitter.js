@@ -136,8 +136,9 @@ async function post(event){
   if(event && event.body && getSignature(event.body)===event.headers["x-twitter-webhooks-signature"]) {
     let tData = JSON.parse(event.body)
     if ((tData.tweet_create_events && tData.tweet_create_events.length>0) || (tData.tweet_delete_events && tData.tweet_delete_events.length>0)){ //new or deleted tweet, post to Google Apps Script
-        console.log(tData.tweet_create_events)
-        await git("new", tData.tweet_create_events[0]);
+      console.log(tData.tweet_create_events)
+      console.log(tData.tweet_delete_events)
+      await git("new", tData.tweet_create_events[0]);
     }
   }
 }
