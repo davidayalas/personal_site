@@ -156,7 +156,9 @@ async function post(event){
 
     //NEW TWEET
     if(tData.tweet_create_events && tData.tweet_create_events.length>0){
+      console.log("new tweet");
       if(tData.tweet_create_events && (tData.tweet_create_events[0].user.screen_name!==tw_user || tData.tweet_create_events[0].in_reply_to_user_id!==null)){
+        console.log("not my user or is a reply");
         return {statusCode : 401, body : ""};
       }
       tweet = await getTweet(tData.tweet_create_events[0].id_str);
@@ -177,6 +179,7 @@ async function post(event){
 
     //DELETE TWEET
     else if(tData.tweet_delete_events && tData.tweet_delete_events.length>0){
+      console.log("delete tweet");
       let contents = await git("get",{id:tData.tweet_delete_events[0].status.id})
       contents = JSON.parse(contents.body)
       await git("del", {"id":tData.tweet_delete_events[0].status.id, "sha" : contents.sha});

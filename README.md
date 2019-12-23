@@ -6,7 +6,9 @@ This is my personal site and in it I try some things about web publishing, stand
 
 * It's published in a CDN, in this case in [Netlify](http://netlify.com), but it can be published wherever.
 
-* It gets some dynamic content from a Google Spreadsheet that has my recent tweets, that are populated with a [Google Apps Script](static/gas-scripts/get-twitter.gs). Then, tweets are writed into html with Hugo data template. ~~Build hook is triggered by Google Apps Script on new tweets~~. Build hook is triggered on new tweets (twitter > netlify function webhook > google apps script > netlify build)
+* ~~It gets some dynamic content from a Google Spreadsheet that has my recent tweets, that are populated with a [Google Apps Script](static/gas-scripts/get-twitter.gs). Then, tweets are writed into html with Hugo data template. ~~Build hook is triggered by Google Apps Script on new tweets~~. Build hook is triggered on new tweets (twitter > netlify function webhook > google apps script > netlify build)~~
+
+* A Netlify (AWS Lambda) Function is setup to manage Twitter Webhooks and to publish or to delete tweets in website repo. This is like I do with comments in other projects: [JAMStack Lambda Comments](https://github.com/davidayalas/jamstack-lambda-comments)
 
 * The template I use is from html5up.net, heavely modified without jquery and others: https://html5up.net/helios
 
