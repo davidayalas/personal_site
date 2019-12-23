@@ -15,6 +15,13 @@ const tw_consumer_secret = process.env.TWITTER_CONSUMER_SECRET || '';
 const tw_access_token = process.env.TWITTER_ACCESS_TOKEN || '';
 const tw_access_token_secret = process.env.TWITTER_ACCESS_TOKEN_SECRET || '';
 
+const twitterClient = new twitter({
+  "consumer_key": tw_consumer_key,
+  "consumer_secret": tw_consumer_secret,
+  "access_token_key": tw_access_token,
+  "access_token_secret": tw_access_token_secret
+});
+
 /**
  * Git Management
  */
@@ -22,65 +29,60 @@ const project = process.env.GITHUB_PROJECTID;
 const owner = process.env.GITHUB_OWNER || "";
 const token =  "token " + process.env.GITHUB_TOKEN;
 const auth_header = "Authorization";
-const method = "PUT";
-
-let options = {
-  'hostname': "api.github.com",
-  'port': 443,
-  'method': method,
-  'headers': {
-    'Content-Type': 'application/json'
-  }
-};
  
-async function git(action, tweet){
-
-  let RT = "";
-  let aux = tweet.extended_entities && tweet.extended_entities.media && tweet.extended_entities.media.length>0 ? tweet.extended_entities.media[0].media_url_https : "";
-  if(tweet.text.indexOf("RT")===0){
-    RT = tweet.text.slice(0,tweet.text.indexOf(":")+1);
-  }
+async function git(action, content){
  
   let data = {
     "branch": "master", 
-    "content": {
-      "content" : (tweet.retweeted_status && tweet.retweeted_status.text) ? RT + " " + tweet.retweeted_status.text : tweet.text,
-      "date" : +new Date(tweet.created_at),
-      "id" : tweet.id_str,
-      "media" : (RT==="" && aux) ? aux : ""
+  };
+
+  let options = {
+    'hostname': "api.github.com",
+    'port': 443,
+    'headers': {
+      'Content-Type': 'application/json'
     }
   };
 
-  data.content.content = data.content.content.replace("\"","\\\"");
-  data.content = JSON.stringify(data.content);
+  switch(action){
+    case "new":
+      data.content = Buffer.from(JSON.stringify(content)).toString("base64");
+      data.message = "twitter webhook";
+      options.method = "PUT";
+      break;
+    case "del":
+      data.message = "twitter webhook";
+      data.sha = content.sha;
+      //data.content = Buffer.from(JSON.stringify(data)).toString("base64");
+      options.method = "DELETE";
+      break;
+    default:
+      options.method = "GET";
+  }
 
-  let file = "data/tweets/"+tweet.id+".json";
+  let file = `data/tweets/${content.id}.json`;
+
+  data = JSON.stringify(data);
 
   options.headers[auth_header] = token;
-
-  options.headers["user-agent"] = "comment-bot";
+  options.headers["user-agent"] = "twitter-webhook";
   options.path = `/repos/${owner}/${project}/contents/${file}`;
-  data.content = Buffer.from(data.content).toString("base64");
-  data.message = "twitter webhook";
-
-  let _response = {
-      statusCode: 200,
-      "headers" : {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin' : '*',
-          'Access-Control-Allow-Credentials' : true,
-          'Access-Control-Allow-Methods' : '*'
-      }
-  };
+  options.headers["content-length"] = data.length;
 
   return new Promise(function(resolve, reject) {
-    
+
+    let _response = {
+      statusCode: 200,
+      body : ""
+    };
+
     const req = https.request(options, (res) => {
       res.on('data', (d) => {
-        _response.body = d.toString();
-        resolve(_response);
+        _response.body += d.toString();
       });
-      
+      res.on('end', () => {
+        resolve(_response);
+      })      
     });
     
     req.on('error', (error) => {
@@ -88,8 +90,8 @@ async function git(action, tweet){
       _response.body = error;
       reject(_response);
     });
-    
-    req.write(JSON.stringify(data));
+
+    req.write(data);
     req.end();
     
   });  
@@ -130,21 +132,63 @@ function getSignature(body){
 }
 
 /**
+ * Get tweet details
+ */
+
+async function getTweet(_id){
+  var params = {
+    screen_name: 'davidayalas',
+    id : _id,
+    tweet_mode : "extended"
+  };
+
+  return new Promise((resolve, reject) => {
+    twitterClient.get('statuses/show', params, function(error, tweet, response) {
+      if (!error) {
+        resolve(tweet);
+      }
+      reject(error);
+    });  
+  });
+}
+
+/**
  * Twitter webhook post
  */
 async function post(event){
   if(event && event.body && getSignature(event.body)===event.headers["x-twitter-webhooks-signature"]) {
     let tData = JSON.parse(event.body)
-    if ((tData.tweet_create_events && tData.tweet_create_events.length>0) || (tData.tweet_delete_events && tData.tweet_delete_events.length>0)){ //new or deleted tweet, post to Google Apps Script
-      console.log(tData.tweet_create_events)
-      console.log(tData.tweet_delete_events)
-      await git("new", tData.tweet_create_events[0]);
+    let tweet;
+
+    //NEW TWEET
+    if(tData.tweet_create_events && tData.tweet_create_events.length>0){ 
+      tweet = await getTweet(tData.tweet_create_events[0].id_str);
+      let RT = "";
+      let aux = tweet.extended_entities && tweet.extended_entities.media && tweet.extended_entities.media.length>0 ? tweet.extended_entities.media[0].media_url_https : "";
+      if(tweet.full_text.indexOf("RT")===0){
+        RT = tweet.full_text.slice(0,tweet.text.indexOf(":")+1);
+      }
+      let object = {
+        "content" : (tweet.retweeted_status && tweet.retweeted_status.full_text) ? RT + " " + tweet.retweeted_status.full_text : tweet.full_text,
+        "date" : +new Date(tweet.created_at),
+        "id" : tweet.id_str,
+        "media" : (RT==="" && aux) ? aux : ""
+      }
+      object.content = object.content.replace("\"","\\\"");
+      await git("new", object);
     }
+
+    //DELETE TWEET
+    else if(tData.tweet_delete_events && tData.tweet_delete_events.length>0){
+      let contents = await git("get",{id:tData.tweet_delete_events[0].status.id})
+      contents = JSON.parse(contents.body)
+      await git("del", {"id":tData.tweet_delete_events[0].status.id, "sha" : contents.sha});
+    }
+    
   }
 }
 
 exports.handler = async event => {
-  //const tweets = await getTweets();
   if(event.httpMethod==="GET"){
     return get(event);
   }else if(event.httpMethod==="POST"){
@@ -178,13 +222,6 @@ exports.handler = async event => {
  */
 async function getTweets(){
   //const fs = require('fs');
-
-  var twitterClient = new twitter({
-    "consumer_key": tw_consumer_key,
-    "consumer_secret": tw_consumer_secret,
-    "access_token_key": tw_access_token,
-    "access_token_secret": tw_access_token_secret
-  });
 
   var params = {
     screen_name: 'davidayalas',
