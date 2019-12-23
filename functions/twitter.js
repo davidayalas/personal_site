@@ -163,7 +163,7 @@ async function post(event){
       let RT = "";
       let aux = tweet.extended_entities && tweet.extended_entities.media && tweet.extended_entities.media.length>0 ? tweet.extended_entities.media[0].media_url_https : "";
       if(tweet.full_text.indexOf("RT")===0){
-        RT = tweet.full_text.slice(0,tweet.text.indexOf(":")+1);
+        RT = tweet.full_text.slice(0,tweet.full_text.indexOf(":")+1);
       }
       let object = {
         "content" : (tweet.retweeted_status && tweet.retweeted_status.full_text) ? RT + " " + tweet.retweeted_status.full_text : tweet.full_text,
