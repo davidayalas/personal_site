@@ -157,7 +157,7 @@ async function post(event){
     //NEW TWEET
     if(tData.tweet_create_events && tData.tweet_create_events.length>0){
       if(tData.tweet_create_events && (tData.tweet_create_events[0].user.screen_name!==tw_user || tData.tweet_create_events[0].in_reply_to_user_id!==null)){
-        return null;
+        return {statusCode : 401, body : ""};
       }
       tweet = await getTweet(tData.tweet_create_events[0].id_str);
       let RT = "";
