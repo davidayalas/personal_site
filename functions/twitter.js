@@ -14,6 +14,7 @@ const tw_consumer_key = process.env.TWITTER_CONSUMER_KEY || '';
 const tw_consumer_secret = process.env.TWITTER_CONSUMER_SECRET || '';
 const tw_access_token = process.env.TWITTER_ACCESS_TOKEN || '';
 const tw_access_token_secret = process.env.TWITTER_ACCESS_TOKEN_SECRET || '';
+const tw_user = process.env.TWITTER_USER || 'davidayalas';
 
 const twitterClient = new twitter({
   "consumer_key": tw_consumer_key,
@@ -154,7 +155,10 @@ async function post(event){
     let tweet;
 
     //NEW TWEET
-    if(tData.tweet_create_events && tData.tweet_create_events.length>0){ 
+    if(tData.tweet_create_events && tData.tweet_create_events.length>0){
+      if(tData.tweet_create_events[0].user.screen_name!==tw_user){
+        return null;
+      }
       tweet = await getTweet(tData.tweet_create_events[0].id_str);
       let RT = "";
       let aux = tweet.extended_entities && tweet.extended_entities.media && tweet.extended_entities.media.length>0 ? tweet.extended_entities.media[0].media_url_https : "";
