@@ -1,5 +1,6 @@
 ---
 title: David Ayala
+pinned_tweet: 1205168017119821827
 html_title: David Ayala - IT Architect
 header: /media/header-finland.jpg
 header_quality: 60

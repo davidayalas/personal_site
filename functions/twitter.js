@@ -2,7 +2,7 @@
  * This lambda function does some things:
  * 1. Twitter webhook validation: crc token (GET) and x-twitter-webhooks-signature (POST webhook)
  * 2. Puts new tweets into github repo to generate a build
- * 3. TODO: deletes deleted tweets
+ * 3. Deletes from github deleted tweets in twitter
  */
 
 const crypto = require('crypto');
@@ -53,16 +53,15 @@ async function git(action, content){
     case "del":
       data.message = "twitter webhook";
       data.sha = content.sha;
-      //data.content = Buffer.from(JSON.stringify(data)).toString("base64");
       options.method = "DELETE";
       break;
     default:
       options.method = "GET";
   }
 
-  let file = `data/tweets/${content.id}.json`;
-
   data = JSON.stringify(data);
+
+  let file = `data/tweets/${content.id}.json`;
 
   options.headers[auth_header] = token;
   options.headers["user-agent"] = "twitter-webhook";
@@ -72,17 +71,12 @@ async function git(action, content){
   return new Promise(function(resolve, reject) {
 
     let _response = {
-      statusCode: 200,
-      body : ""
+      statusCode: 200, body : ""
     };
 
     const req = https.request(options, (res) => {
-      res.on('data', (d) => {
-        _response.body += d.toString();
-      });
-      res.on('end', () => {
-        resolve(_response);
-      })      
+      res.on('data', (d) => _response.body += d.toString());
+      res.on('end', () => resolve(_response));
     });
     
     req.on('error', (error) => {
@@ -134,7 +128,6 @@ function getSignature(body){
 /**
  * Get tweet details
  */
-
 async function getTweet(_id){
   var params = {
     screen_name: 'davidayalas',
@@ -184,7 +177,7 @@ async function post(event){
       contents = JSON.parse(contents.body)
       await git("del", {"id":tData.tweet_delete_events[0].status.id, "sha" : contents.sha});
     }
-    
+
   }
 }
 

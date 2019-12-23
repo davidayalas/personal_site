@@ -1,26 +1,14 @@
 {{ $c := .context }}
+{{ $pinned := string .pinned }}
 
-{{ $tweets := $c.Site.Data.tweets }}
+{{ range $c.Site.Data.tweets }}
+  {{ if eq .id $pinned }}
+    {{ partial "tweet.html" (dict "context" . "index" 1 "pinned" $pinned) }}
+  {{ end }}
+{{ end }}
 
-{{ range $index, $tweet := (sort $c.Site.Data.tweets "date" "desc")}}
+{{ range $index, $tweet := first 30 (sort $c.Site.Data.tweets "date" "desc")}}
 
-        <li {{if ge $index 13 }} class="hidden" {{end}}>
+  {{ partial "tweet.html" (dict "context" . "index" $index "pinned" $pinned ) }}
 
-            <!--span class="icon-pin-colored"></span--->
-
-            {{ safeHTML (replaceRE "(https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*))" "<a href='$1'>$1</a>" .content) }}
-
-            <span class="timestamp"> ({{ dateFormat "02-01-2006 15:04" (time (add (div (int .date) 1000) (int $.Site.Params.timeDiff) )) }})</span>
-
-            {{if ne .media ""}}
-                {{ $ext := path.Ext .media }}
-
-                MEDIA >>> {{$ext}}
-
-                <img src="/images/1px.png" width="1" height="1" data-origin="twitter" data-src="{{ replace .media $ext ""}}?format=jpg&name=small" class="lozad" alt="" />
-            {{ end }}
-
-        </li>
-
-    
 {{ end }}
