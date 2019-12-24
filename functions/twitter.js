@@ -10,17 +10,13 @@ const https = require('https');
 const twitter = require('twitter');
 require('dotenv').config();
 
-const tw_consumer_key = process.env.TWITTER_CONSUMER_KEY || '';
-const tw_consumer_secret = process.env.TWITTER_CONSUMER_SECRET || '';
-const tw_access_token = process.env.TWITTER_ACCESS_TOKEN || '';
-const tw_access_token_secret = process.env.TWITTER_ACCESS_TOKEN_SECRET || '';
 const tw_user = process.env.TWITTER_USER || 'davidayalas';
 
 const twitterClient = new twitter({
-  "consumer_key": tw_consumer_key,
-  "consumer_secret": tw_consumer_secret,
-  "access_token_key": tw_access_token,
-  "access_token_secret": tw_access_token_secret
+  "consumer_key": process.env.TWITTER_CONSUMER_KEY || '',
+  "consumer_secret": process.env.TWITTER_CONSUMER_SECRET || '',
+  "access_token_key": process.env.TWITTER_ACCESS_TOKEN || '',
+  "access_token_secret": process.env.TWITTER_ACCESS_TOKEN_SECRET || ''
 });
 
 /**
