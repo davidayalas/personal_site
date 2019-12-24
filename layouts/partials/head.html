@@ -32,7 +32,7 @@
 		{{ if or (eq .isServer false) (eq $testProd true) }}
 		<style>
 			{{ partial "critical-css.html"  . | print | safeCSS }}
-			#header.nowebp{background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}")}
-			#header.webp{background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}.webp")}
+			#header.nowebp{background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}") no-repeat fixed center; background-size: cover;}
+			#header.webp{background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}.webp") no-repeat fixed center; background-size: cover;}
 		</style>
 		{{ end }}

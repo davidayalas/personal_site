@@ -20,7 +20,7 @@
 							<h1 class="notranslate">{{ $p.Title }}</h1>
 							<hr />
 							<p class="notranslate"><strong>{{ safeHTML $p.Description }}</strong></p>
-							{{ if $p.Params.message }}
+							<strong>{{ if $p.Params.message }}</strong>
 							<hr />
 							<h2 class="notranslate">{{ safeHTML $p.Params.message }}</h2>
 							{{ end }}
