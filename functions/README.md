@@ -26,3 +26,7 @@ The new file will be named like this:
 
 https://[repo api endpoint]/data/tweets/[id].json
 
+
+## Webhook
+
+To setup twitter webhook, best guide here: https://dev.to/alexluong/comprehensive-guide-to-twitter-webhook-1cd3

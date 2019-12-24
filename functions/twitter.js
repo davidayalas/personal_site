@@ -1,8 +1,8 @@
 /**
  * This lambda function does some things:
  * 1. Twitter webhook validation: crc token (GET) and x-twitter-webhooks-signature (POST webhook)
- * 2. Puts new tweets into github repo to generate a build
- * 3. Deletes from github deleted tweets in twitter
+ * 2. Puts new tweets or retweets into github repo as data file to generate a Hugo build
+ * 3. Deletes from github deleted tweets or undone retweets in twitter
  */
 
 const crypto = require('crypto');
@@ -35,6 +35,7 @@ async function git(action, content){
  
   let data = {
     "branch": "master", 
+    "message": "twitter webhook"
   };
 
   let options = {
@@ -46,13 +47,11 @@ async function git(action, content){
   };
 
   switch(action){
-    case "new":
+    case "push":
       data.content = Buffer.from(JSON.stringify(content)).toString("base64");
-      data.message = "twitter webhook";
       options.method = "PUT";
       break;
     case "del":
-      data.message = "twitter webhook";
       data.sha = content.sha;
       options.method = "DELETE";
       break;
@@ -95,7 +94,7 @@ async function git(action, content){
 /**
  * Twitter challenge to verify hook
  */
-function get(event){
+function twitterValidateCRC(event){
   const crc_token = event.queryStringParameters.crc_token || null;
   if(!crc_token){
     return {
@@ -116,7 +115,7 @@ function get(event){
 /**
  * Twitter Signature Validation
  */
-function getSignature(body){
+function twitterSignature(body){
   var generatedSignature = 'sha256='.concat(
     crypto.createHmac('sha256', tw_consumer_secret)
     .update(body,'utf8')
@@ -129,9 +128,9 @@ function getSignature(body){
 /**
  * Get tweet details
  */
-async function getTweet(_id){
+async function twitterGetTweet(_id){
   var params = {
-    screen_name: 'davidayalas',
+    screen_name: tw_user,
     id : _id,
     tweet_mode : "extended"
   };
@@ -149,50 +148,52 @@ async function getTweet(_id){
 /**
  * Twitter webhook post
  */
-async function post(event){
-  if(event && event.body && getSignature(event.body)===event.headers["x-twitter-webhooks-signature"]) {
-    let tData = JSON.parse(event.body)
-    let tweet;
+async function twitterWebHook(event){
 
-    //NEW TWEET
-    if(tData.tweet_create_events && tData.tweet_create_events.length>0){
-      console.log("new tweet");
-      if(tData.tweet_create_events && (tData.tweet_create_events[0].user.screen_name!==tw_user || tData.tweet_create_events[0].in_reply_to_user_id!==null)){
-        console.log("not my user or is a reply");
-        return {statusCode : 401, body : ""};
-      }
-      tweet = await getTweet(tData.tweet_create_events[0].id_str);
-      let RT = "";
-      let aux = tweet.extended_entities && tweet.extended_entities.media && tweet.extended_entities.media.length>0 ? tweet.extended_entities.media[0].media_url_https : "";
-      if(tweet.full_text.indexOf("RT")===0){
-        RT = tweet.full_text.slice(0,tweet.full_text.indexOf(":")+1);
-      }
-      let object = {
-        "content" : (tweet.retweeted_status && tweet.retweeted_status.full_text) ? RT + " " + tweet.retweeted_status.full_text : tweet.full_text,
-        "date" : +new Date(tweet.created_at),
-        "id" : tweet.id_str,
-        "media" : (RT==="" && aux) ? aux : ""
-      }
-      object.content = object.content.replace("\"","\\\"");
-      await git("new", object);
+  if(!event || !event.body || twitterSignature(event.body)!==event.headers["x-twitter-webhooks-signature"]){
+    return {
+      statusCode: 401,
+      body: ""
+    }  
+  }
+
+  let tData = JSON.parse(event.body)
+  let tweet;
+
+  //NEW TWEET
+  if(tData.tweet_create_events && tData.tweet_create_events.length>0){
+    if(tData.tweet_create_events && (tData.tweet_create_events[0].user.screen_name!==tw_user || tData.tweet_create_events[0].in_reply_to_user_id!==null)){ // if not tweet from user or is a response
+      return {statusCode : 401, body : ""};
     }
-
-    //DELETE TWEET
-    else if(tData.tweet_delete_events && tData.tweet_delete_events.length>0){
-      console.log("delete tweet");
-      let contents = await git("get",{id:tData.tweet_delete_events[0].status.id})
-      contents = JSON.parse(contents.body)
-      await git("del", {"id":tData.tweet_delete_events[0].status.id, "sha" : contents.sha});
+    tweet = await twitterGetTweet(tData.tweet_create_events[0].id_str);
+    let RT = "";
+    let aux = tweet.extended_entities && tweet.extended_entities.media && tweet.extended_entities.media.length>0 ? tweet.extended_entities.media[0].media_url_https : "";
+    if(tweet.full_text.indexOf("RT")===0){
+      RT = tweet.full_text.slice(0,tweet.full_text.indexOf(":")+1);
     }
+    let object = {
+      "content" : (tweet.retweeted_status && tweet.retweeted_status.full_text) ? RT + " " + tweet.retweeted_status.full_text : tweet.full_text,
+      "date" : +new Date(tweet.created_at),
+      "id" : tweet.id_str,
+      "media" : (RT==="" && aux) ? aux : ""
+    }
+    object.content = object.content.replace("\"","\\\"");
+    await git("push", object);
+  }
 
+  //DELETE TWEET
+  else if(tData.tweet_delete_events && tData.tweet_delete_events.length>0){
+    let contents = await git("get",{id:tData.tweet_delete_events[0].status.id});
+    contents = JSON.parse(contents.body);
+    await git("del", {"id":tData.tweet_delete_events[0].status.id, "sha" : contents.sha});
   }
 }
 
 exports.handler = async event => {
   if(event.httpMethod==="GET"){
-    return get(event);
+    return twitterValidateCRC(event);
   }else if(event.httpMethod==="POST"){
-    return await post(event);
+    return await twitterWebHook(event);
   }
 }
  
@@ -224,7 +225,7 @@ async function getTweets(){
   //const fs = require('fs');
 
   var params = {
-    screen_name: 'davidayalas',
+    screen_name: tw_user,
     count : 200,
     include_rts : 1,
     include_entities : 0,
