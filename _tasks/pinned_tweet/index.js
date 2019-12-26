@@ -71,6 +71,7 @@ async function main(){
         }
         object.content = object.content.replace("\"","\\\"");
         console.log(JSON.stringify(object));
+        fs.mkdirSync(process.env.WRITE_PATH+"/pinned");
         fs.writeFileSync(process.env.WRITE_PATH+"/pinned.json",JSON.stringify(object));
     }
 }
