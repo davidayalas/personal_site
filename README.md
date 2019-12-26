@@ -2,13 +2,15 @@
 
 This is my personal site and in it I try some things about web publishing, standards and performance.
 
-* It's a web published with a Static Site Generator (#SSG), [HUGO](https://gohugo.io), and edited throught a #Headless CMS, [NetlifyCMS](https://www.netlifycms.org).
+* It's a web published with a Static Site Generator (#SSG #JamStack), [HUGO](https://gohugo.io), and edited throught a #Headless CMS, [NetlifyCMS](https://www.netlifycms.org).
 
-* It's published in a CDN, in this case in [Netlify](http://netlify.com), but it can be published wherever.
+* It's published in a CDN, in this case in [Netlify](http://netlify.com).
 
 * ~~It gets some dynamic content from a Google Spreadsheet that has my recent tweets, that are populated with a [Google Apps Script](static/gas-scripts/get-twitter.gs). Then, tweets are writed into html with Hugo data template. ~~Build hook is triggered by Google Apps Script on new tweets~~. Build hook is triggered on new tweets (twitter > netlify function webhook > google apps script > netlify build)~~
 
-* A Netlify (AWS Lambda) Function is setup to manage Twitter Webhooks and to publish or to delete tweets in website repo. This is like I do with comments in other projects: [JAMStack Lambda Comments](https://github.com/davidayalas/jamstack-lambda-comments)
+* A Netlify (AWS Lambda) [Function](functions/twitter.js) is setup to manage Twitter Webhooks and to publish or to delete tweets in website repo. This is like I do with comments in other projects: [JAMStack Lambda Comments](https://github.com/davidayalas/jamstack-lambda-comments)
+
+    * Because to "pin a tweet" doesn't generate a webhook, I launch a Netlify build when I fav a tweet of my own.
 
 * The template I use is from html5up.net, heavely modified without jquery and others: https://html5up.net/helios
 
@@ -25,7 +27,7 @@ This is my personal site and in it I try some things about web publishing, stand
 1. UNCSS all css into styles.css [uncss.js](_tasks/css/uncss.js)
 2. ~~Get CRITICAL path CSS: [critical.js](_tasks/css/critical.js)~~
 3. ~~Add all into one block to be included inline, and purge duplicated rules.~~
-4. To do that, we need to generate static web, get uncss-styles, ~~try them with running local web to get critical... ~~
+4. To do that, we need to generate static web, get uncss-styles, ...
 
                 $ hugo --config config-uncss.toml
                 $ node _tasks/css/uncss.js > static/assets/css/style.css    
@@ -54,8 +56,14 @@ Sample script [here](buildcss.sh)
 
 ## Netlify build command
 
-                $ hugo && npm install _tasks/webp && node _tasks/webp/index.js
+                $ npm install _tasks/pinned_tweet && node _tasks/pinned_tweet/index.js && hugo --minify && npm install _tasks/webp && node _tasks/webp/index.js && npm run install && npm run build
                 
+
+1. **npm install _tasks/pinned_tweet && node _tasks/pinned_tweet/index.js** looks for pinned tweet and put it into build path as data for Hugo
+2. **hugo --minify** build and minifies assets
+3. **npm install _tasks/webp && node _tasks/webp/index.js** convert images to webp
+
+
 ## Other notes
 
 To setup twitter webhook, best guide here: https://dev.to/alexluong/comprehensive-guide-to-twitter-webhook-1cd3
