@@ -55,7 +55,7 @@ Sample script [here](buildcss.sh)
 ## Netlify build command
 
                 $ hugo && npm install _tasks/webp && node _tasks/webp/index.js
-
+                
 ## Other notes
 
 To setup twitter webhook, best guide here: https://dev.to/alexluong/comprehensive-guide-to-twitter-webhook-1cd3

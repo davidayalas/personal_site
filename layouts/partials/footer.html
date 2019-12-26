@@ -22,7 +22,7 @@
 								{{/*
 									{{ partial "tweets.html" (dict "context" . "tweetsAPI" $tweetsAPI) }}
 								*/}}
-								{{ partial "tweets-new.html" (dict "context" $c "pinned" $p.Params.pinned_tweet) }} 
+								{{ partial "tweets-new.html" (dict "context" $c) }} 
 							</ul>
 							<a href='#' id='moretweets' title='show more tweets' class='icon-plus' onclick='return false;'><span class='label'>[+]</span></a>							
 						</section>

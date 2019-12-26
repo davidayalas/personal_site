@@ -12,3 +12,4 @@ yarn*
 .netlify
 functions-build
 .env
+data/pinned

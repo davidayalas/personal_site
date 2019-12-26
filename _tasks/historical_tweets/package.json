@@ -1,5 +1,5 @@
 {
-    "name": "twitter-webhook-to-git-content",
+    "name": "histotical-tweets-to-data",
     "version": "1.0.0",
     "main": "index.js",
     "author": "David Ayala - https://davidayala.eu",

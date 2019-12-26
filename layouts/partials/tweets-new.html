@@ -1,14 +1,13 @@
 {{ $c := .context }}
-{{ $pinned := string .pinned }}
 
-{{ range $c.Site.Data.tweets }}
-  {{ if eq .id $pinned }}
-    {{ partial "tweet.html" (dict "context" . "index" 1 "pinned" $pinned) }}
-  {{ end }}
+{{ $scratch := newScratch }}
+{{ $scratch.Set "pinned" "" }}
+
+{{ range $c.Site.Data.pinned }}
+    {{ partial "tweet.html" (dict "context" . "index" 1 "pinned" .id) }}
+    {{ $scratch.Set "pinned" .id }}
 {{ end }}
 
 {{ range $index, $tweet := first 30 (sort $c.Site.Data.tweets "date" "desc")}}
-
-  {{ partial "tweet.html" (dict "context" . "index" $index "pinned" $pinned ) }}
-
+  {{ partial "tweet.html" (dict "context" . "index" $index "pinned" ($scratch.Get "pinned") ) }}
 {{ end }}

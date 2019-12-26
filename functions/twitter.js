@@ -7,18 +7,20 @@
 
 const crypto = require('crypto');
 const https = require('https');
-const twitter = require('twitter');
 require('dotenv').config();
 
 const tw_consumer_secret = process.env.TWITTER_CONSUMER_SECRET || '';
 const tw_user = process.env.TWITTER_USER || 'davidayalas';
 
-const twitterClient = new twitter({
-  "consumer_key": process.env.TWITTER_CONSUMER_KEY || '',
-  "consumer_secret": tw_consumer_secret,
-  "access_token_key": process.env.TWITTER_ACCESS_TOKEN || '',
-  "access_token_secret": process.env.TWITTER_ACCESS_TOKEN_SECRET || ''
-});
+let twitterRequestOptions = {
+  "host" : "api.twitter.com",
+  'port': 443,
+  'method': "GET",
+  'headers': {},
+  "labs" : "/labs/1",
+  "show" : "/1.1/statuses/show.json",
+  "timeline" : "/1.1/statuses/user_timeline.json"
+}
 
 /**
  * Git Management
@@ -65,33 +67,13 @@ async function git(action, content){
   options.path = `/repos/${owner}/${project}/contents/${file}`;
   options.headers["content-length"] = data.length;
 
-  return new Promise(function(resolve, reject) {
-
-    let _response = {
-      statusCode: 200, body : ""
-    };
-
-    const req = https.request(options, (res) => {
-      res.on('data', (d) => _response.body += d.toString());
-      res.on('end', () => resolve(_response));
-    });
-    
-    req.on('error', (error) => {
-      _response.statusCode = 500;
-      _response.body = error;
-      reject(_response);
-    });
-
-    req.write(data);
-    req.end();
-    
-  });  
+  return await request(options, data);  
 }
 
 /**
  * Twitter challenge to verify hook
  */
-function twitterValidateCRC(event){
+function getTwitterCRC(event){
   const crc_token = event.queryStringParameters.crc_token || null;
   if(!crc_token){
     return {
@@ -112,7 +94,7 @@ function twitterValidateCRC(event){
 /**
  * Twitter Signature Validation
  */
-function twitterSignature(body){
+function getTwitterPostSignature(body){
   var generatedSignature = 'sha256='.concat(
     crypto.createHmac('sha256', tw_consumer_secret)
     .update(body,'utf8')
@@ -125,21 +107,14 @@ function twitterSignature(body){
 /**
  * Get tweet details
  */
-async function twitterGetTweet(_id){
-  var params = {
-    screen_name: tw_user,
-    id : _id,
-    tweet_mode : "extended"
-  };
-
-  return new Promise((resolve, reject) => {
-    twitterClient.get('statuses/show', params, function(error, tweet, response) {
-      if (!error) {
-        resolve(tweet);
-      }
-      reject(error);
-    });  
-  });
+async function getTweet(_id){
+  let options = twitterRequestOptions;
+  options.path = `${options.show}?id=${_id}&tweet_mode=extended`;
+  let response = await request(options);
+  if(response && response.body){
+    response = JSON.parse(response.body);
+  }
+  return response;
 }
 
 /**
@@ -147,7 +122,7 @@ async function twitterGetTweet(_id){
  */
 async function twitterWebHook(event){
 
-  if(!event || !event.body || twitterSignature(event.body)!==event.headers["x-twitter-webhooks-signature"]){
+  if(!event || !event.body || getTwitterPostSignature(event.body)!==event.headers["x-twitter-webhooks-signature"]){
     return {
       statusCode: 401,
       body: ""
@@ -162,7 +137,7 @@ async function twitterWebHook(event){
     if(tData.tweet_create_events && (tData.tweet_create_events[0].user.screen_name!==tw_user || tData.tweet_create_events[0].in_reply_to_user_id!==null)){ // if not tweet from user or is a response
       return {statusCode : 401, body : ""};
     }
-    tweet = await twitterGetTweet(tData.tweet_create_events[0].id_str);
+    tweet = await getTweet(tData.tweet_create_events[0].id_str);
     let RT = "";
     let aux = tweet.extended_entities && tweet.extended_entities.media && tweet.extended_entities.media.length>0 ? tweet.extended_entities.media[0].media_url_https : "";
     if(tweet.full_text.indexOf("RT")===0){
@@ -186,74 +161,54 @@ async function twitterWebHook(event){
   }
 }
 
-exports.handler = async event => {
-  if(event.httpMethod==="GET"){
-    return twitterValidateCRC(event);
-  }else if(event.httpMethod==="POST"){
-    return await twitterWebHook(event);
-  }
+/**
+ * Twitter bearer token
+ */
+async function twitterGetBearerToken(){
+  let oauth2 = new (require('oauth').OAuth2)(process.env.TWITTER_CONSUMER_KEY,process.env.TWITTER_CONSUMER_SECRET, 'https://api.twitter.com/', null, 'oauth2/token', null);
+  return new Promise(function(resolve, reject) {
+      oauth2.getOAuthAccessToken('', {'grant_type':'client_credentials'}, function (e, access_token, refresh_token, results){
+          resolve(access_token);
+      });
+  });
 }
- 
 
 /**
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * I used this function to generate files for historical tweets... not needed anymore
+ * Request generic function
  */
-async function getTweets(){
-  //const fs = require('fs');
+async function request(options, data){
 
-  var params = {
-    screen_name: tw_user,
-    count : 200,
-    include_rts : 1,
-    include_entities : 0,
-    exclude_replies : 1,
-    contributor_details : 0,
-    tweet_mode : "extended"
-  };
+  return new Promise(function(resolve, reject) {
 
-  return new Promise((resolve, reject) => {
+      let _response = {
+          statusCode: 200, body : ""
+      };
 
-    let jsonTweets = {};
-    let RT = "";
-    twitterClient.get('statuses/user_timeline', params, function(error, tweets, response) {
-      if (!error) {
-        for(let i=0,z=tweets.length;i<z;i++){
-          RT = "";
-          aux = tweets[i] && tweets[i].extended_entities && tweets[i].extended_entities.media && tweets[i].extended_entities.media.length>0 ? tweets[i].extended_entities.media[0].media_url_https : "";
-          if(tweets[i].full_text.indexOf("RT")===0){
-            RT = tweets[i].full_text.slice(0,tweets[i].full_text.indexOf(":")+1);
-          }
-          jsonTweets[tweets[i].id_str] = {
-            content : (tweets[i].retweeted_status && tweets[i].retweeted_status.full_text) ? RT + " " + tweets[i].retweeted_status.full_text : tweets[i].full_text,
-            date : +new Date(tweets[i].created_at),
-            id : tweets[i].id_str,
-            media : (RT==="" && aux) ? aux : ""
-          }
-        }
-        resolve(jsonTweets);
-      }
-      reject(error);
-    });
+      const req = https.request(options, (res) => {
+          res.on('data', (d) => _response.body += d.toString());
+          res.on('end', () => resolve(_response));
+      });
 
-  });
+      req.on('error', (error) => {
+          _response.statusCode = 500;
+          _response.body = error;
+          reject(_response);
+      });
+
+      req.write(data || '');
+      req.end();
+  
+  });      
+}
+
+/**
+ * Lambda Handler
+ */
+exports.handler = async event => {
+  if(event.httpMethod==="GET"){
+    return getTwitterCRC(event);
+  }else if(event.httpMethod==="POST"){
+    twitterRequestOptions.headers["Authorization"] = "Bearer " + await twitterGetBearerToken();
+    return await twitterWebHook(event);
+  }
 }
