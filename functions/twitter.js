@@ -159,6 +159,20 @@ async function twitterWebHook(event){
     contents = JSON.parse(contents.body);
     await git("del", {"id":tData.tweet_delete_events[0].status.id, "sha" : contents.sha});
   }
+
+  //FAV TWEET --> test if is a fav on a own tweet to send a post to Netlify Webhook and build (this is because Pinned Tweets doesn't send webhook)
+  else if(tData.favorite_events && tData.favorite_events.length>0){
+    console.log(JSON.stringify(tData.favorite_events))
+    tweet = tData.favorite_events[0];
+    if(tweet.favorited_status.user.screen_name === tw_user && tweet.user.screen_name === tw_user){
+      await request({
+        "host" : "https://api.netlify.com",
+        'method': "POST",
+        "path" : `/build_hooks/${process.env.WEBHOOK_ID}`
+      });
+    }
+  }
+
 }
 
 /**
