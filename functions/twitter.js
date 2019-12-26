@@ -166,7 +166,7 @@ async function twitterWebHook(event){
     tweet = tData.favorite_events[0];
     if(tweet.favorited_status.user.screen_name === tw_user && tweet.user.screen_name === tw_user){
       await request({
-        "host" : "https://api.netlify.com",
+        "host" : "api.netlify.com",
         'method': "POST",
         "path" : `/build_hooks/${process.env.WEBHOOK_ID}`
       });
@@ -191,27 +191,21 @@ async function twitterGetBearerToken(){
  * Request generic function
  */
 async function request(options, data){
-
   return new Promise(function(resolve, reject) {
-
       let _response = {
           statusCode: 200, body : ""
       };
-
       const req = https.request(options, (res) => {
           res.on('data', (d) => _response.body += d.toString());
           res.on('end', () => resolve(_response));
       });
-
       req.on('error', (error) => {
           _response.statusCode = 500;
           _response.body = error;
           reject(_response);
       });
-
       req.write(data || '');
       req.end();
-  
   });      
 }
 
