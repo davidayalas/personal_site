@@ -69,6 +69,7 @@ async function main(){
           "id" : tweet.id_str,
           "media" : (RT==="" && aux) ? aux : ""
         }
+        
         console.log(JSON.stringify(object));
         if(!fs.existsSync(process.env.WRITE_PATH)){
             fs.mkdirSync(process.env.WRITE_PATH);
