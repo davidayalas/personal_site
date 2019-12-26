@@ -69,7 +69,7 @@ async function main(){
           "id" : tweet.id_str,
           "media" : (RT==="" && aux) ? aux : ""
         }
-        object.content = object.content.replace("\"","\\\"");
+        
         console.log(JSON.stringify(object));
         fs.mkdirSync(process.env.WRITE_PATH);
         fs.writeFileSync(process.env.WRITE_PATH+"/pinned.json",JSON.stringify(object));
