@@ -6,7 +6,7 @@
  */
 
 const crypto = require('crypto');
-const https = require('https');
+const utils = require('./utils');
 require('dotenv').config();
 
 const tw_consumer_secret = process.env.TWITTER_CONSUMER_SECRET || '';
@@ -20,54 +20,6 @@ let twitterRequestOptions = {
   "labs" : "/labs/1",
   "show" : "/1.1/statuses/show.json",
   "timeline" : "/1.1/statuses/user_timeline.json"
-}
-
-/**
- * Git Management
- */
-const project = process.env.GITHUB_PROJECTID;
-const owner = process.env.GITHUB_OWNER || "";
-const token =  "token " + process.env.GITHUB_TOKEN;
-const auth_header = "Authorization";
- 
-async function git(action, content){
- 
-  let data = {
-    "branch": "master", 
-    "message": "twitter webhook"
-  };
- 
-  let options = {
-    'hostname': "api.github.com",
-    'port': 443,
-    'headers': {
-      'Content-Type': 'application/json'
-    }
-  };
-
-  switch(action){
-    case "push":
-      data.content = Buffer.from(JSON.stringify(content)).toString("base64");
-      options.method = "PUT";
-      break;
-    case "del":
-      data.sha = content.sha;
-      options.method = "DELETE";
-      break;
-    default:
-      options.method = "GET";
-  }
-
-  data = JSON.stringify(data);
-
-  let file = `data/tweets/${content.id}.json`;
-
-  options.headers[auth_header] = token;
-  options.headers["user-agent"] = "twitter-webhook";
-  options.path = `/repos/${owner}/${project}/contents/${file}`;
-  options.headers["content-length"] = data.length;
-
-  return await request(options, data);  
 }
 
 /**
@@ -110,7 +62,7 @@ function getTwitterPostSignature(body){
 async function getTweet(_id){
   let options = twitterRequestOptions;
   options.path = `${options.show}?id=${_id}&tweet_mode=extended`;
-  let response = await request(options);
+  let response = await utils.request(options);
   if(response && response.body){
     response = JSON.parse(response.body);
   }
@@ -131,47 +83,62 @@ async function twitterWebHook(event){
 
   let tData = JSON.parse(event.body)
   let tweet;
+  let reBuild = false;
+  let i,z;
 
   //NEW TWEET
   if(tData.tweet_create_events && tData.tweet_create_events.length>0){
     if(tData.tweet_create_events && (tData.tweet_create_events[0].user.screen_name!==tw_user || tData.tweet_create_events[0].in_reply_to_user_id!==null)){ // if not tweet from user or is a response
       return {statusCode : 401, body : ""};
     }
-    tweet = await getTweet(tData.tweet_create_events[0].id_str);
-    let RT = "";
-    let aux = tweet.extended_entities && tweet.extended_entities.media && tweet.extended_entities.media.length>0 ? tweet.extended_entities.media[0].media_url_https : "";
-    if(tweet.full_text.indexOf("RT")===0){
-      RT = tweet.full_text.slice(0,tweet.full_text.indexOf(":")+1);
+    for(i=0,z=tData.tweet_create_events.length;i<z;i++){
+      reBuild = true;
+      tweet = await getTweet(tData.tweet_create_events[i].id_str);
+      let RT = "";
+      let aux = tweet.extended_entities && tweet.extended_entities.media && tweet.extended_entities.media.length>0 ? tweet.extended_entities.media[0].media_url_https : "";
+      if(tweet.full_text.indexOf("RT")===0){
+        RT = tweet.full_text.slice(0,tweet.full_text.indexOf(":")+1);
+      }
+      let object = {
+        "content" : (tweet.retweeted_status && tweet.retweeted_status.full_text) ? RT + " " + tweet.retweeted_status.full_text : tweet.full_text,
+        "date" : +new Date(tweet.created_at),
+        "id" : tweet.id_str,
+        "media" : (RT==="" && aux) ? aux : ""
+      }
+      object.content = object.content.replace("\"","\\\"");
+      await utils.git("push", `data/tweets/${tweet.id_str}.json`, object, {"message":"twitter webhook"});
     }
-    let object = {
-      "content" : (tweet.retweeted_status && tweet.retweeted_status.full_text) ? RT + " " + tweet.retweeted_status.full_text : tweet.full_text,
-      "date" : +new Date(tweet.created_at),
-      "id" : tweet.id_str,
-      "media" : (RT==="" && aux) ? aux : ""
-    }
-    object.content = object.content.replace("\"","\\\"");
-    await git("push", object);
   }
 
   //DELETE TWEET
-  else if(tData.tweet_delete_events && tData.tweet_delete_events.length>0){
-    let contents = await git("get",{id:tData.tweet_delete_events[0].status.id});
-    contents = JSON.parse(contents.body);
-    await git("del", {"id":tData.tweet_delete_events[0].status.id, "sha" : contents.sha});
+  if(tData.tweet_delete_events && tData.tweet_delete_events.length>0){
+    let contents = "";
+    for(i=0,z=tData.tweet_create_events.length;i<z;i++){
+      reBuild = true;
+      contents = await utils.git("get",`data/tweets/${tData.tweet_delete_events[i].status.id}.json`);
+      contents = JSON.parse(contents.body);
+      await utils.git("del", `data/tweets/${tData.tweet_delete_events[i].status.id}.json`, {"sha" : contents.sha}, {"message":"twitter webhook"});
+    }
   }
 
   //FAV TWEET --> test if is a fav on a own tweet to send a post to Netlify Webhook and build (this is because Pinned Tweets doesn't send webhook)
-  else if(tData.favorite_events && tData.favorite_events.length>0){
+  if(tData.favorite_events && tData.favorite_events.length>0){
     console.log(JSON.stringify(tData.favorite_events))
-    tweet = tData.favorite_events[0];
-    if(tweet.favorited_status.user.screen_name === tw_user && tweet.user.screen_name === tw_user){
-      await request({
-        "host" : "api.netlify.com",
-        'method': "POST",
-        "path" : `/build_hooks/${process.env.WEBHOOK_ID}`
-      });
+    for(i=0,z=tData.tweet_create_events.length;i<z;i++){
+      tweet = tData.favorite_events[i];
+      if(tweet.favorited_status.user.screen_name === tw_user && tweet.user.screen_name === tw_user){
+        reBuild = true;
+      }
     }
   }
+
+  if(reBuild){
+    await utils.request({
+      "host" : "api.netlify.com",
+      'method': "POST",
+      "path" : `/build_hooks/${process.env.WEBHOOK_ID}`
+    });    
+  }  
 
 }
 
@@ -188,31 +155,12 @@ async function twitterGetBearerToken(){
 }
 
 /**
- * Request generic function
- */
-async function request(options, data){
-  return new Promise(function(resolve, reject) {
-      let _response = {
-          statusCode: 200, body : ""
-      };
-      const req = https.request(options, (res) => {
-          res.on('data', (d) => _response.body += d.toString());
-          res.on('end', () => resolve(_response));
-      });
-      req.on('error', (error) => {
-          _response.statusCode = 500;
-          _response.body = error;
-          reject(_response);
-      });
-      req.write(data || '');
-      req.end();
-  });      
-}
-
-/**
  * Lambda Handler
  */
 exports.handler = async event => {
+  //console.log(await utils.git("get",`data/tweets/972145554804428800.json`))
+  //console.log(await utils.request({url:"https://www.davidayala.eu"}))
+  
   if(event.httpMethod==="GET"){
     return getTwitterCRC(event);
   }else if(event.httpMethod==="POST"){
