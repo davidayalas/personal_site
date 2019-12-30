@@ -160,6 +160,8 @@ async function twitterGetBearerToken(){
 exports.handler = async event => {
   //console.log(await utils.git("get",`data/tweets/972145554804428800.json`))
   //console.log(await utils.request({url:"https://www.davidayala.eu"}))
+  //twitterRequestOptions.headers["Authorization"] = "Bearer " + await twitterGetBearerToken();
+  //console.log(await getTweet("972145554804428800"))
   
   if(event.httpMethod==="GET"){
     return getTwitterCRC(event);

@@ -1,19 +1,21 @@
 # Context
 
+I needed to capture tweets in my Hugo site and generate a build when a new tweet or rewteet is done. I come from a Google Spreadsheet / Google Apps Script integration, but due to compute limitations of GAS, I had some issues periodically. 
+
+Then, I decided to use Netlify Functions (AWS Lambda) to capture webhook and process actions.
+
 * This lambda is based on the idea behind of https://staticman.net/ for publising comments into static sites and [JAMStack Lambda Comments](https://github.com/davidayalas/jamstack-lambda-comments)
 
 * It manages Twitter webhook validation: crc token (GET) and x-twitter-webhooks-signature (POST webhook)
 * On new tweets or retweets puts new data file into github repo to generate a build
 * Deletes from github deleted tweets or undone retweets 
-* For pinned tweets there isn't a webhook. Then I generate a build if webhook is a fav (favorited_status) on a tweet of my own.
+* For pinned tweets there isn't a webhook action. For that, I generate a build if webhook is a fav (favorited_status) on a tweet of my own.
 
 ## Environment variables
 
 * TWITTER:
     * TWITTER_CONSUMER_KEY
     * TWITTER_CONSUMER_SECRET
-    * TWITTER_ACCESS_TOKEN
-    * TWITTER_ACCESS_TOKEN_SECRET
     * TWITTER_USER
 
 * GITHUB
