@@ -3163,7 +3163,6 @@ body.gallery ul li,body.gallery ul li p{
 }
 
 body.tweets img{
-	display: block;
 	margin-left: auto;
 	margin-right: auto;
 }
