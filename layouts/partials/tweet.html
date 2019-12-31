@@ -1,20 +1,19 @@
 {{ $c := .context }}
-{{ $index := .index }}
-{{ $pinned := string .pinned }}
 
-{{ if or (and (eq $pinned $c.id) (eq $index 1)) (ne $pinned $c.id) }}
-<li {{if ge $index 13 }} class="hidden" {{end}}>
+{{ if and (eq $c.Kind "page") (or (and (eq .pinned $c.Params.id) (eq .index 1)) (ne .pinned $c.Params.id)) }}
+<li {{if ge .index 13 }} class="hidden" {{end}}>
 
-    {{ if eq $c.id $pinned }}
+    {{ if eq $c.Params.id .pinned }}
     <span class="icon-pin-colored"></span>
     {{ end }}
-    {{ safeHTML (replaceRE "(https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*))" "<a href='$1'>$1</a>" $c.content) }}
 
-    <span class="timestamp"> ({{ dateFormat "02-01-2006 15:04" (time (add (div (int $c.date) 1000) (int $.Site.Params.timeDiff) )) }})</span>
+    {{ safeHTML (replaceRE "(https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*))" "<a href='$1'>$1</a>" (replace $c.Description "\n" "<br />") ) }}
 
-    {{if ne $c.media ""}}
-        {{ $ext := path.Ext $c.media }}
-        <img src="/images/1px.png" width="1" height="1" data-origin="twitter" data-src="{{ replace $c.media $ext ""}}?format=jpg&name=small" class="lozad" alt="" />
+    <span class="timestamp"> ({{ dateFormat "02-01-2006 15:04" $c.Params.date }})</span>
+
+    {{if ne $c.Params.media ""}}
+        {{ $ext := path.Ext $c.Params.media }}
+        <img src="/images/1px.png" width="1" height="1" data-origin="twitter" data-src="{{ replace $c.Params.media $ext ""}}?format=jpg&name=small" class="lozad" alt="" />
     {{ end }}
 
 </li>

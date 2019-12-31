@@ -13,3 +13,4 @@ yarn*
 functions-build
 .env
 data/pinned/pinned.json
+content/pinned/pinned.md

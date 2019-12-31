@@ -31,10 +31,10 @@ async function request(options, data){
  * 
  * @param {String} action "push", "del", "get"
  * @param {String} file path of the file to manage
- * @param {Object} content 
- *    "push": content of the file to upload
- *    "del" : key "sha" with the sha of the file to delete
- *    "get" : nothing
+ * @param {String} content 
+ *    for "push": content of the file to upload
+ *    for "del" : "sha" with the sha of the file to delete
+ *    for "get" : nothing
  * @param {Object} data {message: "", "branch"}
  */
 async function git(action, file, content, data){
@@ -58,11 +58,11 @@ async function git(action, file, content, data){
 
   switch(action){
     case "push":
-      data.content = Buffer.from(JSON.stringify(content)).toString("base64");
+      data.content = Buffer.from(content).toString("base64");
       options.method = "PUT";
       break;
     case "del":
-      data.sha = content.sha;
+      data.sha = content;
       options.method = "DELETE";
       break;
     default:

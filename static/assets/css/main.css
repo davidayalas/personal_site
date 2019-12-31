@@ -3162,6 +3162,26 @@ body.gallery ul li,body.gallery ul li p{
 	text-align: center;
 }
 
+body.tweets ul.tweets{
+	max-width: 50%;
+	margin: auto;
+}
+
+body.tweets ul.tweets li{
+	font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+	font-size: .8em;
+	font-weight: normal;
+	line-height: 16px;
+	border-color: #eee #ddd #bbb;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	margin: 10px 5px;
+	padding: 16px 16px 16px 16px;
+	width: 98%;
+  }
+
 .carousel .reel img{
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
@@ -3286,6 +3306,10 @@ ul.gallery li img{
 		overflow-x: auto;
 	}
 	ul.tweets img{
+		max-width: 95%;
+	}
+
+	body.tweets ul{
 		max-width: 95%;
 	}
 }

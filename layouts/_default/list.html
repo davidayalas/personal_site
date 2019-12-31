@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+	{{ $p := .Site.GetPage "page" "home.md" }}
+	<head>
+		{{ partial "head.html" (dict "data" $p "isServer" .Site.IsServer "section" .Section "testProd" $.Site.Params.testProd )}}
+	</head>
+	<body class="no-sidebar {{.Section}}">
+		<div id="page-wrapper">
+
+				<div id="header">
+					<!-- Inner -->
+					<div class="inner">
+						<header>
+							<h1>{{ .Title }}</h1>
+						</header>
+					</div>
+					<nav id="nav">
+						<ul>
+							<li style="white-space: nowrap;"><a href="/">Home</a></li>
+						</ul>
+					</nav>					
+				</div>
+
+
+				{{ if eq .Section "gallery" }}
+				<section class="image-list">
+
+					{{ $pagesperpage := 9}}	
+					{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
+					{{ $paginator := .Paginate (where .Data.Pages "Section" "gallery") $pagesperpage}}
+
+					{{ $initimage := add (mul (sub $paginator.PageNumber 1) $pagesperpage) 1 }}
+
+					{{ $.Scratch.Set "numimages" $pagesperpage}}
+					{{ if lt (len $paginator.Pages) $pagesperpage }}
+						{{ $.Scratch.Set "numimages" (len $paginator.Pages) }}	
+					{{ end }}
+
+					<h3 style="text-align: center; margin-bottom: 1em">Images {{ $initimage }} - {{ add $initimage (sub ($.Scratch.Get "numimages") 1)}}</h3>
+
+					<ul class="{{ .Section }}">
+						{{ range $paginator.Pages }}
+			            	{{ if .Params.image }}
+				              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
+			              		{{ $thumb := $image.Fill "320x320 q85 Center" }}
+								<li><a href="{{.Permalink}}" class=""><img class="lozad" width="1" height="1" src="/images/1px.png" data-src="{{$thumb.RelPermalink}}" alt="{{.Title}}" /></a><p>{{ .Title }}</p></li>
+								{{ end }}
+						{{ end }}
+					</ul>
+
+				</section>
+				{{ template "_internal/pagination.html" . }}
+
+				{{ end }}
+
+				{{ if eq .Section "tweets" }}
+
+				<section>
+					{{ $pagesperpage := 10}}	
+					{{ $paginator := .Paginate (where .Data.Pages "Section" "tweets") $pagesperpage}}
+
+					<ul class="{{ .Section }}">
+						{{ range $paginator.Pages }}
+							<li>
+								<span>{{ dateFormat "02-01-2006 15:04" .Date }}</span><br /><br />
+								{{ safeHTML (replaceRE "(https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*))" "<a href='$1'>$1</a>" (replace .Description "\n" "<br />") ) }}
+								{{if ne .Params.media ""}}
+									{{ $ext := path.Ext .Params.media }}
+									<img src="/images/1px.png" width="1" height="1" data-origin="twitter" data-src="{{ replace .Params.media $ext ""}}?format=jpg&name=small" class="lozad" alt="" />
+								{{ end }}
+							</li>
+						{{ end }}
+					</ul>
+
+				</section>
+				{{ template "_internal/pagination.html" . }}
+
+				{{ end }}
+
+
+				{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer "testProd" $.Site.Params.testProd "unCss" $.Site.Params.uncss) }}
+	</body>
+</html>

@@ -91,22 +91,18 @@ async function twitterWebHook(event){
     if(tData.tweet_create_events && (tData.tweet_create_events[0].user.screen_name!==tw_user || tData.tweet_create_events[0].in_reply_to_user_id!==null)){ // if not tweet from user or is a response
       return {statusCode : 401, body : ""};
     }
+    let description = "";
+    let RT = "";
+    let aux = "";
     for(i=0,z=tData.tweet_create_events.length;i<z;i++){
       reBuild = true;
       tweet = await getTweet(tData.tweet_create_events[i].id_str);
-      let RT = "";
-      let aux = tweet.extended_entities && tweet.extended_entities.media && tweet.extended_entities.media.length>0 ? tweet.extended_entities.media[0].media_url_https : "";
-      if(tweet.full_text.indexOf("RT")===0){
-        RT = tweet.full_text.slice(0,tweet.full_text.indexOf(":")+1);
-      }
-      let object = {
-        "content" : (tweet.retweeted_status && tweet.retweeted_status.full_text) ? RT + " " + tweet.retweeted_status.full_text : tweet.full_text,
-        "date" : +new Date(tweet.created_at),
-        "id" : tweet.id_str,
-        "media" : (RT==="" && aux) ? aux : ""
-      }
-      object.content = object.content.replace("\"","\\\"");
-      await utils.git("push", `data/tweets/${tweet.id_str}.json`, object, {"message":"twitter webhook [skip ci]"});
+      aux = tweet.extended_entities && tweet.extended_entities.media && tweet.extended_entities.media.length>0 ? tweet.extended_entities.media[0].media_url_https : "";
+      RT = tweet.full_text.indexOf("RT")===0 ? tweet.full_text.slice(0,tweet.full_text.indexOf(":")+1) : "";
+      description = (tweet.retweeted_status && tweet.retweeted_status.full_text) ? RT + " " + tweet.retweeted_status.full_text : tweet.full_text;
+      description = description.replace(/\n/g,"\n  ");  
+   
+      await utils.git("push", `content/tweets/${tweet.id_str}.md`, `---\ntitle: \ndescription: >-\n ${description}\ndate: ${new Date(tweet.created_at).toISOString()}\nid: ${tweet.id_str}\nmedia: ${(RT==="" && aux) ? aux : ""}\n---`, {"message":"twitter webhook [skip ci]"});
     }
   }
 
@@ -117,7 +113,7 @@ async function twitterWebHook(event){
       reBuild = true;
       contents = await utils.git("get",`data/tweets/${tData.tweet_delete_events[i].status.id}.json`);
       contents = JSON.parse(contents.body);
-      await utils.git("del", `data/tweets/${tData.tweet_delete_events[i].status.id}.json`, {"sha" : contents.sha}, {"message":"twitter webhook [skip ci]"});
+      await utils.git("del", `data/tweets/${tData.tweet_delete_events[i].status.id}.json`, contents.sha, {"message":"twitter webhook [skip ci]"});
     }
   }
 
