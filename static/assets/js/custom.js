@@ -8,8 +8,9 @@ _$().ready(function(){
 	_$("#moretweets").on("click", function(){
 		_$("#twitter ul li.hidden").slice(0,10).removeClass("hidden").addClass("visible");
 		if(_$("#twitter ul li.hidden").size()===0){
-			_$("#moretweets").remove();
-			_$("#tweets_section").removeClass("hidden");
+			let tweets_button = _$("#moretweets").first().get();
+			tweets_button.setAttribute("href","/tweets/page/4");
+			tweets_button.setAttribute("onclick", function(){return true;});
 		}
 		return false;
 	});
