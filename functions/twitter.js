@@ -6,7 +6,7 @@
  */
 
 const crypto = require('crypto');
-const utils = require('./utils');
+const utils = require('./libs/utils');
 require('dotenv').config();
 
 const tw_consumer_secret = process.env.TWITTER_CONSUMER_SECRET || '';
@@ -102,7 +102,7 @@ async function twitterWebHook(event){
       description = (tweet.retweeted_status && tweet.retweeted_status.full_text) ? RT + " " + tweet.retweeted_status.full_text : tweet.full_text;
       description = description.replace(/\n/g,"\n  ");  
    
-      await utils.git("push", `content/tweets/${tweet.id_str}.md`, `---\ntitle: \ndescription: >-\n ${description}\ndate: ${new Date(tweet.created_at).toISOString()}\nid: ${tweet.id_str}\nmedia: ${(RT==="" && aux) ? aux : ""}\n---`, {"message":"twitter webhook [skip ci]"});
+      await utils.git("push", `content/tweets/${tweet.id_str}.md`, {"message":"twitter webhook [skip ci]"}, `---\ntitle: \ndescription: >-\n ${description}\ndate: ${new Date(tweet.created_at).toISOString()}\nid: ${tweet.id_str}\nmedia: ${(RT==="" && aux) ? aux : ""}\n---`);
     }
   }
 
@@ -113,7 +113,7 @@ async function twitterWebHook(event){
       reBuild = true;
       contents = await utils.git("get",`data/tweets/${tData.tweet_delete_events[i].status.id}.json`);
       contents = JSON.parse(contents.body);
-      await utils.git("del", `content/tweets/${tData.tweet_delete_events[i].status.id}.md`, contents.sha, {"message":"twitter webhook [skip ci]"});
+      await utils.git("del", `content/tweets/${tData.tweet_delete_events[i].status.id}.md`, {"message":"twitter webhook [skip ci]","sha":contents.sha});
     }
   }
 
@@ -154,7 +154,9 @@ async function twitterGetBearerToken(){
  * Lambda Handler
  */
 exports.handler = async event => {
-  //console.log(await utils.git("get",`data/tweets/972145554804428800.json`))
+  let response = await utils.git("get",`content/tweets/test.md`)
+  let sha = JSON.parse(response.body).sha
+  console.log(await utils.git("del",`content/tweets/test.md`,{message:"[skip ci]","sha":sha}))
   //console.log(await utils.request({url:"https://www.davidayala.eu"}))
   //twitterRequestOptions.headers["Authorization"] = "Bearer " + await twitterGetBearerToken();
   //console.log(await getTweet("972145554804428800"))

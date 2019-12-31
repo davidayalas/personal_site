@@ -19,12 +19,13 @@
 							</header>
 
 							<ul class="divided tweets">
-								{{/*
-									{{ partial "tweets.html" (dict "context" . "tweetsAPI" $tweetsAPI) }}
-								*/}}
-								{{ partial "tweets-new.html" (dict "context" $c) }} 
+								{{ partial "tweets.html" (dict "context" $c) }} 
 							</ul>
-							<a href='#' id='moretweets' title='show more tweets' class='icon-plus' onclick='return false;'><span class='label'>[+]</span></a>							
+							<footer>
+								<a href='#' id='moretweets' title='show more tweets' class='icon-plus' onclick='return false;'><span class='label'>[+]</span></a> 
+								<a href="/tweets/page/4" id="tweets_section" class="button hidden">More tweets</a>
+							</footer>
+
 						</section>
 
 					<!-- Miniprojects -->

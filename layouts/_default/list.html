@@ -9,7 +9,7 @@
 	<head>
 		{{ partial "head.html" (dict "data" $p "isServer" .Site.IsServer "section" .Section "testProd" $.Site.Params.testProd )}}
 	</head>
-	<body class="no-sidebar {{.Section}}">
+	<body class="no-sidebar inner {{.Section}}">
 		<div id="page-wrapper">
 
 				<div id="header">
@@ -43,7 +43,7 @@
 
 					<h3 style="text-align: center; margin-bottom: 1em">Images {{ $initimage }} - {{ add $initimage (sub ($.Scratch.Get "numimages") 1)}}</h3>
 
-					<ul class="{{ .Section }}">
+					<ul class="section-list {{ .Section }}">
 						{{ range $paginator.Pages }}
 			            	{{ if .Params.image }}
 				              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
@@ -64,7 +64,7 @@
 					{{ $pagesperpage := 10}}	
 					{{ $paginator := .Paginate (where .Data.Pages "Section" "tweets") $pagesperpage}}
 
-					<ul class="{{ .Section }}">
+					<ul class="section-list {{ .Section }}">
 						{{ range $paginator.Pages }}
 							<li>
 								<span>{{ dateFormat "02-01-2006 15:04" .Date }}</span><br /><br />

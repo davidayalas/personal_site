@@ -7,9 +7,9 @@ _$().ready(function(){
 
 	_$("#moretweets").on("click", function(){
 		_$("#twitter ul li.hidden").slice(0,10).removeClass("hidden").addClass("visible");
-		//$("#twitter ul li.hidden").slice(0,10).removeClass("hidden").addClass("visible").removeClass("visible");
 		if(_$("#twitter ul li.hidden").size()===0){
 			_$("#moretweets").remove();
+			_$("#tweets_section").removeClass("hidden");
 		}
 		return false;
 	});

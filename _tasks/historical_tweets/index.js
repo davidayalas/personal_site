@@ -57,8 +57,14 @@ async function request(options, data){
  */
 async function getTweets(){
 
+  let maxid = "45883297863180288";
+
+  if(maxid!==""){
+      maxid = "&max_id="+maxid;
+  }
+
   options.headers["Authorization"] = "Bearer " + await twitterGetBearerToken();
-  options.path = `${options.path}?screen_name=${tw_user}&count=1000&include_rts=1&include_entities=0&exclude_replies=1&contributor_details=0&tweet_mode=extended`;
+  options.path = `${options.path}?screen_name=${tw_user}&count=1000&include_rts=1&include_entities=0&exclude_replies=1&contributor_details=0&tweet_mode=extended${maxid}`;
   let response = await request(options);
   let tweets = JSON.parse(response.body);
   const path = process.env.WRITE_PATH; 
@@ -71,15 +77,6 @@ async function getTweets(){
     if(tweets[i].full_text.indexOf("RT")===0){
       RT = tweets[i].full_text.slice(0,tweets[i].full_text.indexOf(":")+1);
     }
-
-    console.log(i, tweets[i].id_str);
-    /*fs.writeFileSync(`${path}/tweets/${tweets[i].id_str}.json`, {
-      content : (tweets[i].retweeted_status && tweets[i].retweeted_status.full_text) ? RT + " " + tweets[i].retweeted_status.full_text : tweets[i].full_text,
-      date : +new Date(tweets[i].created_at),
-      id : tweets[i].id_str,
-      media : (RT==="" && aux) ? aux : ""
-    }, "utf8");*/
-
     description = (tweets[i].retweeted_status && tweets[i].retweeted_status.full_text) ? RT + " " + tweets[i].retweeted_status.full_text : tweets[i].full_text;
     description = description.replace(/\n/g,"\n  ");
     fs.writeFileSync(`content/tweets/${tweets[i].id_str}.md`, `---\ntitle: \ndescription: >-\n ${description}\ndate: ${new Date(tweets[i].created_at).toISOString()}\nid: ${tweets[i].id_str}\nmedia: ${(RT==="" && aux) ? aux : ""}\n---`, "utf8");

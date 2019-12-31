@@ -1724,7 +1724,7 @@
 			text-align: inherit;
 		}
 
-		body.gallery header h1{
+		body.inner header h1{
 			margin-top:1em;
 		}
 
@@ -2709,7 +2709,7 @@
 				font-size: 1.25em;
 			}
 
-			body.gallery #header h1{color:#fff!important;}
+			body.no-sidebar #header h1{color:#fff!important;}
 
 		/* Image */
 
@@ -3098,7 +3098,7 @@ ul.pagination li.active{
 	font-weight: bold;
 }
 
-body.no-sidebar.gallery ul.gallery {
+body.no-sidebar.inner ul.section-list {
 	margin: 0 auto;
 }
 
@@ -3106,7 +3106,7 @@ header p, header p strong{
 	color: #000;
 }
 
-section#projects footer{
+section#projects footer, section#twitter footer{
 	text-align: center;
 }
 
@@ -3162,9 +3162,10 @@ body.gallery ul li,body.gallery ul li p{
 	text-align: center;
 }
 
-body.tweets ul.tweets, body.tweets div.tweets{
-	max-width: 50%;
-	margin: auto;
+body.tweets img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 body.tweets ul.tweets li, body.tweets div.tweets{
@@ -3182,11 +3183,11 @@ body.tweets ul.tweets li, body.tweets div.tweets{
 	width: 98%;
   }
 
-body.tweets div.tweets{
-	width: 70%;
-	font-size: 1.5em;
-	margin-left: auto;
-	margin-right: auto;
+body.tweets ul.tweets, body.tweets div.tweets{
+	width: 50%;
+	font-size: 1.2em;
+	margin-left: auto!important;
+	margin-right: auto!important;
 }
 
 .carousel .reel img{
@@ -3260,17 +3261,17 @@ ul.gallery li img{
 
 @media screen and (min-width: 736px) {
 
-	body.no-sidebar.gallery ul.gallery {
+	body.no-sidebar.inner ul.section-list {
 		display: flex;
 		flex-wrap: wrap;
 		margin-left:1%;
 	}
-	body.no-sidebar.gallery ul.gallery > li {
+	body.no-sidebar.inner ul.gallery > li {
 		flex-grow: 1;
 		width: 33%;
 	}
-	body.no-sidebar.gallery ul.gallery > li:nth-child(even) {}
-	body.no-sidebar.gallery ul.gallery > li:nth-child(odd) {}
+	body.no-sidebar.inner ul.gallery > li:nth-child(even) {}
+	body.no-sidebar.inner ul.gallery > li:nth-child(odd) {}
 
 	article a.image h3{
 		min-height: 335px;
@@ -3312,12 +3313,12 @@ ul.gallery li img{
 	.reel{
 		overflow-x: auto;
 	}
-	ul.tweets img{
+	ul.tweets img, div.tweets img{
 		max-width: 95%;
 	}
 
 	body.tweets ul.tweets, body.tweets div.tweets{
-		max-width: 95%;
+		width: 100%;
 	}
 }
 

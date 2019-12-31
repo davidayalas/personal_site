@@ -1,0 +1,48 @@
+{{ $tweetsAPI := print .tweetsAPI "&" (dateFormat "2006010215040506" now) }}
+
+{{ $tweets := getJSON $tweetsAPI }}
+
+{{ $scratch := newScratch }}
+
+{{ $scratch.Set "oldrow" "" }}
+{{ $scratch.Set "count" 1 }}
+
+{{ range $index, $tweet := (index (index $tweets "feed") "entry") }}
+
+    {{ $id := index (index $tweet "id") "$t" }}
+    {{ $scratch.Set "row" (substr $id -3 -2) }}
+
+    {{ if eq ($scratch.Get "oldrow") ""  }}
+        {{ $scratch.Set "oldrow" ($scratch.Get "row") }}
+    {{ end }}
+
+    {{ $col := substr (index (index $tweet "title") "$t") 0 1 }}
+
+    {{ if (ne ($scratch.Get "oldrow") ($scratch.Get "row")) }}
+        <li {{if ge ($scratch.Get "count") 13 }} class="hidden" {{end}}><!--article class="tweet"-->
+
+            {{ if eq ($scratch.Get "D") "pinned"}}
+            <span class="icon-pin-colored"></span>
+            {{ end }}
+
+            {{ safeHTML (replaceRE "(https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*))" "<a href='$1'>$1</a>" ($scratch.Get "A")) }}
+            
+            <span class="timestamp"> ({{ dateFormat "15:04 01/02/06" ($scratch.Get "B")}})</span>
+
+            {{if ne ($scratch.Get "E") ""}}
+                {{ $ext := path.Ext ($scratch.Get "E") }}
+                <img src="/images/1px.png" width="1" height="1" data-origin="twitter" data-src="{{ replace ($scratch.Get "E") $ext ""}}?format=jpg&name=small" class="lozad" alt="" />
+            {{ end }}
+
+        <!--/article--></li>
+
+        {{ $scratch.Set "D" "" }}
+        {{ $scratch.Set "E" "" }}
+        {{ $scratch.Set "oldrow" ($scratch.Get "row") }}
+        {{ $scratch.Add "count" 1 }}
+    {{ end }}
+
+    {{ $content := index (index $tweet "content") "$t" }}
+    {{ $scratch.Set $col $content }}
+    
+{{ end }}
