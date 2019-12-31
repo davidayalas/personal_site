@@ -5,12 +5,10 @@
 
 {{ $pinned := $c.Site.GetPage "/pinned/pinned.md" }} 
 {{ if $pinned }}
+  {{ $scratch.Set "pinned" $pinned.Params.id }}
   {{ partial "tweet.html" (dict "context" $pinned "index" 1 "pinned" $pinned.Params.id ) }}
 {{ end }}
 
-{{/* 
- range $index, $tweet := first 30 (sort $c.Site.Data.tweets "date" "desc") 
- */}}
 {{ range $index, $tweet := first 30 (where $c.Site.Pages "Section" "tweets") }}
   {{ partial "tweet.html" (dict "context" . "index" $index "pinned" ($scratch.Get "pinned") ) }}
 {{ end }}
