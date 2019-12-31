@@ -12,3 +12,4 @@
 {{ range $index, $tweet := first 30 (where $c.Site.Pages "Section" "tweets") }}
   {{ partial "tweet.html" (dict "context" . "index" $index "pinned" ($scratch.Get "pinned") ) }}
 {{ end }}
+ 
