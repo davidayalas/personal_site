@@ -154,9 +154,9 @@ async function twitterGetBearerToken(){
  * Lambda Handler
  */
 exports.handler = async event => {
-  let response = await utils.git("get",`content/tweets/test.md`)
-  let sha = JSON.parse(response.body).sha
-  console.log(await utils.git("del",`content/tweets/test.md`,{message:"[skip ci]","sha":sha}))
+  //let response = await utils.git("get",`content/tweets/test.md`)
+  //let sha = JSON.parse(response.body).sha
+  //console.log(await utils.git("del",`content/tweets/test.md`,{message:"[skip ci]","sha":sha}))
   //console.log(await utils.request({url:"https://www.davidayala.eu"}))
   //twitterRequestOptions.headers["Authorization"] = "Bearer " + await twitterGetBearerToken();
   //console.log(await getTweet("972145554804428800"))
