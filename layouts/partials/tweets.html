@@ -2,14 +2,23 @@
 
 {{ $scratch := newScratch }}
 {{ $scratch.Set "pinned" "" }}
+{{ $scratch.Set "count" 0 }}
+{{ $scratch.Set "max" 31 }}
 
 {{ $pinned := $c.Site.GetPage "/pinned/pinned.md" }} 
 {{ if $pinned }}
+  {{ $scratch.Add "count" 1 }}
   {{ $scratch.Set "pinned" $pinned.Params.id }}
   {{ partial "tweet.html" (dict "context" $pinned "index" 1 "pinned" $pinned.Params.id ) }}
 {{ end }}
 
-{{ range $index, $tweet := first 30 (where $c.Site.Pages "Section" "tweets") }}
-  {{ partial "tweet.html" (dict "context" . "index" $index "pinned" ($scratch.Get "pinned") ) }}
+{{ range $index, $tweet := first ($scratch.Get "max") (where $c.Site.Pages "Section" "tweets") }}
+  {{ if or (lt ($scratch.Get "count") ($scratch.Get "max")) (eq ($scratch.Get "count") ($scratch.Get "max"))}}
+    {{ partial "tweet.html" (dict "context" . "index" $index "pinned" ($scratch.Get "pinned") ) }}
+  {{ end }}
+
+  {{ if ne .Params.id ($scratch.Get "pinned") }}
+    {{ $scratch.Add "count" 1 }}
+  {{ end }}
 {{ end }}
  
