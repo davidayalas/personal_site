@@ -3162,16 +3162,16 @@ body.gallery ul li,body.gallery ul li p{
 	text-align: center;
 }
 
-body.tweets ul.tweets{
+body.tweets ul.tweets, body.tweets div.tweets{
 	max-width: 50%;
 	margin: auto;
 }
 
-body.tweets ul.tweets li{
+body.tweets ul.tweets li, body.tweets div.tweets{
 	font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
 	font-size: .8em;
 	font-weight: normal;
-	line-height: 16px;
+	line-height: 1.5em;
 	border-color: #eee #ddd #bbb;
 	border-radius: 5px;
 	border-style: solid;
@@ -3181,6 +3181,13 @@ body.tweets ul.tweets li{
 	padding: 16px 16px 16px 16px;
 	width: 98%;
   }
+
+body.tweets div.tweets{
+	width: 70%;
+	font-size: 1.5em;
+	margin-left: auto;
+	margin-right: auto;
+}
 
 .carousel .reel img{
 	border-bottom-left-radius: 0;
@@ -3309,7 +3316,7 @@ ul.gallery li img{
 		max-width: 95%;
 	}
 
-	body.tweets ul{
+	body.tweets ul.tweets, body.tweets div.tweets{
 		max-width: 95%;
 	}
 }
