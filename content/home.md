@@ -13,8 +13,8 @@ meta_keywords: >-
   problem solver, coding, code, web performance, tips and tricks
 doingnow_title: About me
 doingnow: >-
-  * [**IT Architecture
-  Manager**](https://blogs.msdn.microsoft.com/nickmalik/2014/11/11/the-architecture-manager-the-forgotten-enterprise-architecture-role/)
+  * **[IT Architecture
+  Manager](https://blogs.msdn.microsoft.com/nickmalik/2014/11/11/the-architecture-manager-the-forgotten-enterprise-architecture-role/)**
   @ [UOC](https://www.uoc.edu)
 
   * **Looking for the balance** between business, technology, simplicity
@@ -27,9 +27,9 @@ doingnow: >-
   * **Experimenting** continuously
 
   * Trying to be <span
-  class="notranslate">[**Agile**](http://agilemanifesto.org/principles.html)</span>
-  and <span class="notranslate">[**Lean
-  Thinking**](https://en.m.wikipedia.org/wiki/Lean_thinking)</span>
+  class="notranslate">**[Agile](http://agilemanifesto.org/principles.html)**</span>
+  and <span class="notranslate">**[Lean
+  Thinking](https://en.m.wikipedia.org/wiki/Lean_thinking)**</span>
 
   * **Travelling** with my family
 
@@ -109,17 +109,6 @@ miniprojects:
       provides the server process and the html client
     link: 'https://github.com/davidayalas/staticdb'
     title: StaticDB
-  - description: >-
-      Proof of concept of Golang.org that scrapes content from a web application
-      launching multiple and concurrent requests.
-    link: 'https://github.com/davidayalas/go-scraper'
-    title: go-scraper
-  - description: >-
-      Google Apps Script Cache and ~~scriptdb~~ SpreadSheet wrapper with real
-      persistence and value splitting for large values (due to Google Apps
-      Scripts limits).
-    link: 'https://github.com/davidayalas/gscache'
-    title: gs-cache
 architecture_title: Architecture Diagram of this site
 architecture_diagram: /media/personal-site.png
 contact_title: Hello!
