@@ -111,7 +111,7 @@ async function twitterWebHook(event){
     let contents = "";
     for(i=0,z=tData.tweet_delete_events.length;i<z;i++){
       reBuild = true;
-      contents = await utils.git("get",`data/tweets/${tData.tweet_delete_events[i].status.id}.json`);
+      contents = await utils.git("get",`content/tweets/${tData.tweet_delete_events[i].status.id}.md`);
       contents = JSON.parse(contents.body);
       await utils.git("del", `content/tweets/${tData.tweet_delete_events[i].status.id}.md`, {"message":"twitter webhook [skip ci]","sha":contents.sha});
     }
