@@ -36,7 +36,7 @@ async function request(options, data){
  */
 async function git(action, file, data, content){
   const project = process.env.GITHUB_PROJECTID;
-  const owner = process.env.GITHUB_OWNER || "";
+  const owner = process.env.GITHUB_OWNER || "me";
   const token =  "token " + process.env.GITHUB_TOKEN;
   const auth_header = "Authorization";
 
@@ -68,7 +68,7 @@ async function git(action, file, data, content){
   data = JSON.stringify(data);
 
   options.headers[auth_header] = token;
-  options.headers["user-agent"] = "nodejs function";
+  options.headers["user-agent"] = owner;
   options.path = `/repos/${owner}/${project}/contents/${file}`;
   options.headers["content-length"] = data.length;
 
