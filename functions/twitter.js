@@ -108,18 +108,18 @@ async function twitterWebHook(event){
 
   //DELETE TWEET
   if(tData.tweet_delete_events && tData.tweet_delete_events.length>0){
-    let contents = "";
+    let contents = "", file="";
     for(i=0,z=tData.tweet_delete_events.length;i<z;i++){
       reBuild = true;
-      contents = await utils.git("get",`content/tweets/${tData.tweet_delete_events[i].status.id}.md`);
+      file = `content/tweets/${tData.tweet_delete_events[i].status.id}.md`;
+      contents = await utils.git("get", file);
       contents = JSON.parse(contents.body);
-      await utils.git("del", `content/tweets/${tData.tweet_delete_events[i].status.id}.md`, {"message":"twitter webhook [skip ci]","sha":contents.sha});
+      await utils.git("del", file, {"message":"twitter webhook [skip ci]","sha":contents.sha});
     }
   }
 
-  //FAV TWEET --> test if is a fav on a own tweet to send a post to Netlify Webhook and build (this is because Pinned Tweets doesn't send webhook)
+  //FAV TWEET --> test if is a fav on an own tweet to send a post to Netlify Webhook and build (this is because Pinned Tweets doesn't send webhook)
   if(tData.favorite_events && tData.favorite_events.length>0){
-    console.log(JSON.stringify(tData.favorite_events))
     for(i=0,z=tData.favorite_events.length;i<z;i++){
       tweet = tData.favorite_events[i];
       if(tweet.favorited_status.user.screen_name === tw_user && tweet.user.screen_name === tw_user){

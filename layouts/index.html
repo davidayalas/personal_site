@@ -88,8 +88,7 @@
 					{{ end }}
 
 				</section>
-				
-				{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer "testProd" $.Site.Params.testProd "tweetsAPI" $.Site.Params.tweetsAPI  "unCss" $.Site.Params.uncss "isHome" $.IsHome) }}
+				{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer "testProd" $.Site.Params.testProd "tweetsAPI" $.Site.Params.tweetsAPI "isHome" $.IsHome) }}
 	</body>
 	
 </html>

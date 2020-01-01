@@ -31,7 +31,7 @@ async function request(options, data){
  * 
  * @param {String} action "push", "del", "get"
  * @param {String} file path of the file to manage
- * @param {Object} data {"message", "branch", "sha"} > "sha" key for new update or delete a file
+ * @param {Object} data {"message", "branch", "sha"} > "sha" key for update or delete a file
  * @param {String} content for "push"
  */
 async function git(action, file, data, content){

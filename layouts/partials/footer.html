@@ -3,7 +3,6 @@
 {{ $isServer := .isServer }}
 {{ $testProd := .testProd }}
 {{ $tweetsAPI := .tweetsAPI }}
-{{ $uncss := .unCss }}
 {{ $isHome := .isHome }}
 {{ $mediaPage := $c.Site.GetPage "page" "media/index.md"}}
 
@@ -163,8 +162,6 @@ function createCSS(pathCSS){
 
 //createCSS("/assets/css/fontello.css");
 
-{{ if not (eq $uncss true) }}
-
 window.onload = function(){
 
 	var loadNetlifyWidget = false;
@@ -186,7 +183,7 @@ window.onload = function(){
 		});
 	}
 }
-{{ end }}
+
 </script> 
 
 {{ $myquery := resources.Get "js/myjquery.js" | resources.Minify | resources.Fingerprint }}

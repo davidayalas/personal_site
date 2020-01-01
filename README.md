@@ -29,7 +29,7 @@ This is my personal site and in it I try some things about web publishing, stand
 3. ~~Add all into one block to be included inline, and purge duplicated rules.~~
 4. To do that, we need to generate static web, get uncss-styles, ...
 
-                $ hugo --config config-uncss.toml
+                $ hugo
                 $ node _tasks/css/uncss.js > static/assets/css/style.css    
                 $ hugo server &
                 $ node _tasks/css/critical.js http://localhost:1313 $(pwd)/static/assets/css/critical-css-home.css

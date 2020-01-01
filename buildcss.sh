@@ -1,4 +1,4 @@
-hugo --config config-uncss.toml
+hugo
 
 node _tasks/css/uncss.js > static/assets/css/style.css    
 
