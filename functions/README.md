@@ -7,7 +7,7 @@ Then, I decided to use Netlify Functions (AWS Lambda) to capture webhook and pro
 * This lambda is based on the idea behind of https://staticman.net/ for publising comments into static sites and [JAMStack Lambda Comments](https://github.com/davidayalas/jamstack-lambda-comments)
 
 * It manages Twitter webhook validation: crc token (GET) and x-twitter-webhooks-signature (POST webhook)
-* On new tweets or retweets puts new data file into github repo to generate a build
+* On new tweets or retweets puts new markdown file into github repo to generate a build
 * Deletes from github deleted tweets or undone retweets 
 * For pinned tweets there isn't a webhook action. For that, I generate a build if webhook is a fav (favorited_status) on a tweet of my own.
 
@@ -27,7 +27,7 @@ Then, I decided to use Netlify Functions (AWS Lambda) to capture webhook and pro
 
 The new file will be named like this:
 
-https://[repo api endpoint]/data/tweets/[id].json
+https://[repo api endpoint]/content/tweets/[id].md
 
 ## Webhook
 
