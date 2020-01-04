@@ -73,8 +73,8 @@ miniprojects:
     link: 'https://github.com/davidayalas/markdown2json'
     title: markdown2json
   - description: >-
-      Personal site github repo where I test stuff related with Hugo and
-      NetlifyCMS
+      Personal site github repo where I test stuff related with JAMStack (Hugo,
+      NetlifyCMS, performance, ...)
     link: 'https://github.com/davidayalas/personal_site'
     title: Personal site
   - description: >-
