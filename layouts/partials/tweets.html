@@ -1,9 +1,12 @@
 {{ $c := .context }}
+{{ $p := .data }}
 
 {{ $scratch := newScratch }}
 {{ $scratch.Set "pinned" "" }}
 {{ $scratch.Set "count" 0 }}
-{{ $scratch.Set "max" 31 }}
+{{ $scratch.Set "max" (add $p.Params.number_of_tweets 1)}}
+
+<script type="">let number_of_tweets = {{$p.Params.number_of_tweets}};</script>
 
 {{ $pinned := $c.Site.GetPage "/pinned/pinned.md" }} 
 {{ if $pinned }}

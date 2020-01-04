@@ -50,6 +50,7 @@ social:
     link: 'https://www.instagram.com/davidayalas'
     title: Instagram
 timeline_title: Latest Tweets
+number_of_tweets: 20
 miniprojects_title: Miniprojects
 miniprojects:
   - description: Extensible SAML SP to generate JWT tokens. It can run on AWS Lambda

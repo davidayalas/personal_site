@@ -9,7 +9,7 @@ let options = {
     'port': 443,
     'method': "GET",
     'headers': {},
-    "path" : "/1.1/statuses/user_timeline.json"
+    "_path" : "/1.1/statuses/user_timeline.json"
 }  
 
 /**
@@ -28,46 +28,45 @@ async function twitterGetBearerToken(){
  * Request generic function
  */
 async function request(options, data){
-
     return new Promise(function(resolve, reject) {
-  
         let _response = {
             statusCode: 200, body : ""
         };
-  
         const req = https.request(options, (res) => {
             res.on('data', (d) => _response.body += d.toString());
             res.on('end', () => resolve(_response));
         });
-  
         req.on('error', (error) => {
             _response.statusCode = 500;
             _response.body = error;
             reject(_response);
         });
-  
         req.write(data || '');
         req.end();
-    
     });      
 }  
 
 /**
  * Generate files for historical tweets... not needed anymore
  */
-async function getTweets(){
+async function getTweets(maxid){
 
-  let maxid = "45883297863180288";
-
-  if(maxid!==""){
-      maxid = "&max_id="+maxid;
+  const params = {
+    "screen_name" : tw_user,
+    "count" : 200,
+    "include_rts" : 1,
+    "include_entities" : 0,
+    "exclude_replies" : true,
+    "contributor_details" : 0,
+    "tweet_mode" : "extended",
+    "include_rts" : 1,
+    "trim_user" : true
   }
 
   options.headers["Authorization"] = "Bearer " + await twitterGetBearerToken();
-  options.path = `${options.path}?screen_name=${tw_user}&count=1000&include_rts=1&include_entities=0&exclude_replies=1&contributor_details=0&tweet_mode=extended${maxid}`;
+  options.path = `${options._path}?${Object.entries(params).map(it=>it.join("=")).join("&")}${maxid ? "&max_id="+maxid : ""}`;
   let response = await request(options);
   let tweets = JSON.parse(response.body);
-  const path = process.env.WRITE_PATH; 
   let RT = "";
   let description = "";
 
@@ -80,8 +79,17 @@ async function getTweets(){
     description = (tweets[i].retweeted_status && tweets[i].retweeted_status.full_text) ? RT + " " + tweets[i].retweeted_status.full_text : tweets[i].full_text;
     description = description.replace(/\n/g,"\n  ");
     fs.writeFileSync(`content/tweets/${tweets[i].id_str}.md`, `---\ntitle: \ndescription: >-\n ${description}\ndate: ${new Date(tweets[i].created_at).toISOString()}\nid: ${tweets[i].id_str}\nmedia: ${(RT==="" && aux) ? aux : ""}\n---`, "utf8");
-    console.log(new Date(tweets[i].created_at).toISOString())
+    //console.log(new Date(tweets[i].created_at).toISOString())
   }
+
+  return [tweets[tweets.length-1].id_str!==maxid, tweets[tweets.length-1].id_str];
 }
 
-getTweets();
+async function main(){
+    let next = true, last=null;
+    do{
+        [next, last] = await getTweets(last);
+    }while(next);
+}
+
+main();
