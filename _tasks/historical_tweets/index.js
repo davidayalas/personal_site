@@ -70,6 +70,10 @@ async function getTweets(maxid){
   let RT = "";
   let description = "";
 
+  if(tweets[tweets.length-1].id_str===maxid){
+      return [false, ""];
+  }
+
   for(let i=0,z=tweets.length;i<z;i++){
     RT = "";
     aux = tweets[i] && tweets[i].extended_entities && tweets[i].extended_entities.media && tweets[i].extended_entities.media.length>0 ? tweets[i].extended_entities.media[0].media_url_https : "";
@@ -79,10 +83,9 @@ async function getTweets(maxid){
     description = (tweets[i].retweeted_status && tweets[i].retweeted_status.full_text) ? RT + " " + tweets[i].retweeted_status.full_text : tweets[i].full_text;
     description = description.replace(/\n/g,"\n  ");
     fs.writeFileSync(`content/tweets/${tweets[i].id_str}.md`, `---\ntitle: \ndescription: >-\n ${description}\ndate: ${new Date(tweets[i].created_at).toISOString()}\nid: ${tweets[i].id_str}\nmedia: ${(RT==="" && aux) ? aux : ""}\n---`, "utf8");
-    //console.log(new Date(tweets[i].created_at).toISOString())
   }
-
-  return [tweets[tweets.length-1].id_str!==maxid, tweets[tweets.length-1].id_str];
+  console.log("retrieved ", tweets.length, " tweets")
+  return [true, tweets[tweets.length-1].id_str];
 }
 
 async function main(){
