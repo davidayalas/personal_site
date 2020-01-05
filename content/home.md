@@ -27,9 +27,9 @@ doingnow: >-
   * **Experimenting** continuously
 
   * Trying to be <span
-  class="notranslate">**[Agile](http://agilemanifesto.org/principles.html)**</span>
-  and <span class="notranslate">**[Lean
-  Thinking](https://en.m.wikipedia.org/wiki/Lean_thinking)**</span>
+  class="notranslate"> **[Agile](http://agilemanifesto.org/principles.html)** </span>
+  and <span class="notranslate"> **[Lean
+  Thinking](https://en.m.wikipedia.org/wiki/Lean_thinking)** </span>
 
   * **Travelling** with my family
 

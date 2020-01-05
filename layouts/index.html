@@ -50,7 +50,7 @@
 						<header>
 							<h2>{{ $p.Params.doingnow_title }}</h2>
 						</header>
-						{{ safeHTML (markdownify $p.Params.doingnow) }}
+						{{ markdownify (safeHTML $p.Params.doingnow) }}
 					</article>
 
 				</div>

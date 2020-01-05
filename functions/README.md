@@ -47,3 +47,9 @@ To setup twitter webhook, best guide here: https://dev.to/alexluong/comprehensiv
     1. To build (on Netlify). See "Netlify Build Command" in [README.md](../README.md#netlify-build-command)
 
             $ npm run build 
+
+## Historical tweets
+
+In the folder [_tasks](../tasks) I have some script to perform actions. One is to capture [historical tweets](../_tasks/historical_tweets/index.js). 
+
+I execute them from root folder because some of them share [env file](../.env)
