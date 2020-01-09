@@ -24,7 +24,7 @@
 		{{if $p.Params.header}}
 			{{ $image := $mediaPage.Resources.GetMatch (replace $p.Params.header "/media/" "") }}
 			{{ $c.Scratch.Set "header" ($image.Resize (print $image.Width "x" $image.Height " q" $p.Params.header_quality)) }}
-			{{ $c.Scratch.Set "header_mobile" ($image.Resize (print "500x q70")) }}
+			{{ $c.Scratch.Set "header_mobile" ($image.Resize (print "700x q70")) }}
 			{{ if gt $image.Width 1600 }}
 				{{ $c.Scratch.Set "header" ($image.Resize (print "1600x q" $p.Params.header_quality)) }}
 			{{ end }}
