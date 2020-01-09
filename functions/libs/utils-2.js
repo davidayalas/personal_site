@@ -70,7 +70,7 @@ async function git(action, file, data, content, update){
 
   switch(action){
     case "push":
-      data.content = git_type==="GITHUB" ? Buffer.from(content).toString("base64") :content;
+      data.content = git_type==="GITHUB" ? Buffer.from(content).toString("base64") : content;
       options.method = method;
       break;
     case "del":

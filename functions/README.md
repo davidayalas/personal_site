@@ -18,10 +18,12 @@ Then, I decided to use Netlify Functions (AWS Lambda) to capture webhook and pro
     * TWITTER_CONSUMER_SECRET
     * TWITTER_USER
 
-* GITHUB
-    * PROJECTID
-    * OWNER
-    * TOKEN
+* GIT
+    * GIT_TYPE [optional] "GITHUB" or "GITLAB". Default "GITHUB"
+    * GIT_PROJECTID
+    * GIT_OWNER
+    * GIT_TOKEN
+    * GIT_MESSAGE [optional]
 
 ## Filepath
 
