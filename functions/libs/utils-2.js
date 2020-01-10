@@ -27,15 +27,16 @@ async function request(options, data){
 }
 
 /** 
- * Git actions
+ * Git Repo File actions
  * 
  * @param {String} action "push", "del", "get"
  * @param {String} file path of the file to manage
- * @param {Object} data {"message", "branch", "sha"} > "sha" key for update or delete a file
  * @param {String} content for "push"
+ * @param {Object} data {"message", "branch", "sha"} > "sha" key for update or delete a file
  * @param {Boolean} true for "push" and update in GITLAB to use PUT instead of POST
  */
-async function git(action, file, data, content, update){
+async function _gitFileAction(action, file, data, content, update, git_options){
+    console.log(git_options)
   update = update || false;
   const git_type = process.env.GIT_TYPE && process.env.GIT_TYPE.toUpperCase()==="GITHUB" ? "GITHUB" : "GITLAB";
   const project = process.env.GIT_PROJECTID;
@@ -70,7 +71,7 @@ async function git(action, file, data, content, update){
 
   switch(action){
     case "push":
-      data.content = git_type==="GITHUB" ? Buffer.from(content).toString("base64") : content;
+      data.content = git_type==="GITHUB" ? Buffer.from(content).toString("base64") :content;
       options.method = method;
       break;
     case "del":
@@ -86,11 +87,26 @@ async function git(action, file, data, content, update){
   options.headers["user-agent"] = owner;
   options.path = git_type==="GITHUB" ? `/repos/${owner}/${project}/contents/${file}` : `/api/v4/projects/${project}/repository/files/${encodeURIComponent(file)}`;
   options.headers["content-length"] = data.length;
+  console.log(data)
 
   return await request(options, data);  
 }
 
 
 exports.request = request;
-exports.git = git;
+
+exports.git = function(){
+    let git_options = {a:1}
+    let _FileAction = function(action, file, data, content, update){
+        _gitFileAction(action, file, data, content, update, git_options);
+    }
+
+    return {
+        "repo" : {
+            "push" : async function(file, content, data){
+                return await _FileAction("push", file, data || {}, content);
+            }
+        }
+    }
+};
 

@@ -49,11 +49,11 @@ async function request(options, data){
 /**
  * Generate files for historical tweets... not needed anymore
  */
-async function getTweets(maxid){
+async function getTweets(maxid, token){
 
   const params = {
     "screen_name" : tw_user,
-    "count" : 200,
+    "count" : 1,
     "include_rts" : 1,
     "include_entities" : 0,
     "exclude_replies" : true,
@@ -63,13 +63,13 @@ async function getTweets(maxid){
     "trim_user" : true
   }
 
-  options.headers["Authorization"] = "Bearer " + await twitterGetBearerToken();
+  options.headers["Authorization"] = "Bearer " + token;
   options.path = `${options._path}?${Object.entries(params).map(it=>it.join("=")).join("&")}${maxid ? "&max_id="+maxid : ""}`;
   let response = await request(options);
   let tweets = JSON.parse(response.body);
   let RT = "";
   let description = "";
-
+  
   if(tweets[tweets.length-1].id_str===maxid){
       return [false, ""];
   }
@@ -90,8 +90,9 @@ async function getTweets(maxid){
 
 async function main(){
     let next = true, last=null;
+    const token = await twitterGetBearerToken();
     do{
-        [next, last] = await getTweets(last);
+        [next, last] = await getTweets(last, token);
     }while(next);
 }
 
