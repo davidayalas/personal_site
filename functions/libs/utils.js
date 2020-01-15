@@ -86,8 +86,6 @@ async function git(action, file, data, content, update){
   options.headers["user-agent"] = owner;
   options.path = git_type==="GITHUB" ? `/repos/${owner}/${project}/contents/${file}` : `/api/v4/projects/${project}/repository/files/${encodeURIComponent(file)}`;
   options.headers["content-length"] = data.length;
-  console.log(options)
-  console.log(data)
   return await request(options, data);  
 }
 
