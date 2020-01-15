@@ -52,6 +52,6 @@ To setup twitter webhook, best guide here: https://dev.to/alexluong/comprehensiv
 
 ## Historical tweets
 
-In the folder [_tasks](../../../tree/master/_tasks) I have some script to perform actions. One is to capture [historical tweets](../_tasks/historical_tweets/index.js). 
+In the folder [_tasks](../../../tree/master/_tasks) I have some scripts to perform certain actions. One is to capture [historical tweets](../_tasks/historical_tweets/index.js). 
 
 I execute them from root folder because some of them share [env file](../.env)
