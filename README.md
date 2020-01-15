@@ -8,7 +8,7 @@ This is my personal site and in it I try some things about web publishing, stand
 
 * ~~It gets some dynamic content from a Google Spreadsheet that has my recent tweets, that are populated with a [Google Apps Script](static/gas-scripts/get-twitter.gs). Then, tweets are writed into html with Hugo data template. ~~Build hook is triggered by Google Apps Script on new tweets~~. Build hook is triggered on new tweets (twitter > netlify function webhook > google apps script > netlify build)~~
 
-* A Netlify (AWS Lambda) [Function](tree/master/functions) is setup to manage Twitter Webhooks and to publish or to delete tweets in website repo. This is like I do with comments in other projects: [JAMStack Lambda Comments](https://github.com/davidayalas/jamstack-lambda-comments)
+* A Netlify (AWS Lambda) [Function](../../tree/master/functions) is setup to manage Twitter Webhooks and to publish or to delete tweets in website repo. This is like I do with comments in other projects: [JAMStack Lambda Comments](https://github.com/davidayalas/jamstack-lambda-comments)
 
     * Because to "pin a tweet" doesn't generate a webhook, I launch a Netlify build when I fav a tweet of my own.
 
