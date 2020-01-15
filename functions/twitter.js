@@ -9,6 +9,15 @@ const crypto = require('crypto');
 const utils = require('./libs/utils');
 require('dotenv').config();
 
+const git_options = {
+  git_type : process.env.GIT_TYPE && process.env.GIT_TYPE.toUpperCase()==="GITLAB" ? "GITLAB" : "GITHUB",
+  project : process.env.GIT_PROJECTID,
+  token : process.env.GIT_TOKEN, 
+  owner : process.env.GIT_OWNER || "me@test.com"
+}
+
+let git = null;
+
 const tw_consumer_secret = process.env.TWITTER_CONSUMER_SECRET || '';
 const tw_user = process.env.TWITTER_USER || 'davidayalas';
 
@@ -102,7 +111,7 @@ async function twitterWebHook(event){
       description = (tweet.retweeted_status && tweet.retweeted_status.full_text) ? RT + " " + tweet.retweeted_status.full_text : tweet.full_text;
       description = description.replace(/\n/g,"\n  ");  
    
-      await utils.git("push", `content/tweets/${tweet.id_str}.md`, {"message":"twitter webhook [skip ci]"}, `---\ntitle: \ndescription: >-\n ${description}\ndate: ${new Date(tweet.created_at).toISOString()}\nid: ${tweet.id_str}\nmedia: ${(RT==="" && aux) ? aux : ""}\n---`);
+      await git.repo.put(`content/tweets/${tweet.id_str}.md`, `---\ntitle: \ndescription: >-\n ${description}\ndate: ${new Date(tweet.created_at).toISOString()}\nid: ${tweet.id_str}\nmedia: ${(RT==="" && aux) ? aux : ""}\n---`, {"message":"twitter webhook [skip ci]"});
     }
   }
 
@@ -112,9 +121,7 @@ async function twitterWebHook(event){
     for(i=0,z=tData.tweet_delete_events.length;i<z;i++){
       reBuild = true;
       file = `content/tweets/${tData.tweet_delete_events[i].status.id}.md`;
-      contents = await utils.git("get", file);
-      contents = JSON.parse(contents.body);
-      await utils.git("del", file, {"message":"twitter webhook [skip ci]","sha":contents.sha});
+      await git.repo.del(file, {"message":"twitter webhook [skip ci]"});
     }
   }
 
@@ -154,13 +161,10 @@ async function twitterGetBearerToken(){
  * Lambda Handler
  */
 exports.handler = async event => {
-  //let response = await utils.git("get",`content/tweets/test.md`)
-  //let sha = JSON.parse(response.body).sha
-  //console.log(await utils.git("del",`content/tweets/test.md`,{message:"[skip ci]","sha":sha}))
-  //console.log(await utils.request({url:"https://www.davidayala.eu"}))
-  //twitterRequestOptions.headers["Authorization"] = "Bearer " + await twitterGetBearerToken();
-  //console.log(await getTweet("972145554804428800"))
-  
+  if(!git){
+    git = new utils.git(git_options);
+  }
+    
   if(event.httpMethod==="GET"){
     return getTwitterCRC(event);
   }else if(event.httpMethod==="POST"){

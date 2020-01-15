@@ -1,4 +1,3 @@
-const utils2 = require('./utils-2');
 const utils = require('./utils');
 require('dotenv').config();
 
@@ -10,7 +9,7 @@ async function main(){
         owner : process.env.GIT_OWNER || "me@test.com"
     }
   
-    const git = new utils2.git(git_options);
+    const git = new utils.git(git_options);
 
     //console.log(git.get());
     if(!git.repo){
