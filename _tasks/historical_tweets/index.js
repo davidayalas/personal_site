@@ -53,7 +53,7 @@ async function getTweets(maxid, token){
 
   const params = {
     "screen_name" : tw_user,
-    "count" : 1,
+    "count" : 3,
     "include_rts" : 1,
     "include_entities" : 0,
     "exclude_replies" : true,

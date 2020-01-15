@@ -5,7 +5,7 @@
     "author": "David Ayala - https://davidayala.eu",
     "license": "",
     "dependencies": {
-        "oauth": "^0.9.15",
-        "dotenv": "*"
+        "dotenv": "^8.2.0",
+        "oauth": "^0.9.15"
     }
 }

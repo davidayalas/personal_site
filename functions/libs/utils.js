@@ -37,7 +37,7 @@ async function request(options, data){
  */
 async function git(action, file, data, content, update){
   update = update || false;
-  const git_type = process.env.GIT_TYPE && process.env.GIT_TYPE.toUpperCase()==="GITHUB" ? "GITHUB" : "GITLAB";
+  const git_type = process.env.GIT_TYPE && process.env.GIT_TYPE.toUpperCase()==="GITLAB" ? "GITLAB" : "GITHUB";
   const project = process.env.GIT_PROJECTID;
   const owner = process.env.GIT_OWNER || "me@test.com";
   const author_email = process.env.GIT_AUTHOR || owner;
@@ -70,7 +70,7 @@ async function git(action, file, data, content, update){
 
   switch(action){
     case "push":
-      data.content = git_type==="GITHUB" ? Buffer.from(content).toString("base64") :content;
+      data.content = git_type==="GITHUB" ? Buffer.from(content).toString("base64") : content;
       options.method = method;
       break;
     case "del":
@@ -86,7 +86,8 @@ async function git(action, file, data, content, update){
   options.headers["user-agent"] = owner;
   options.path = git_type==="GITHUB" ? `/repos/${owner}/${project}/contents/${file}` : `/api/v4/projects/${project}/repository/files/${encodeURIComponent(file)}`;
   options.headers["content-length"] = data.length;
-
+  console.log(options)
+  console.log(data)
   return await request(options, data);  
 }
 
