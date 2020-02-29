@@ -4,7 +4,7 @@ html_title: David Ayala - IT Architect
 header: /media/header-finland.jpg
 header_quality: 60
 description: ((Father x 2) && Husband)<br/>+<br/>(IT Architecture Manager @ UOC.edu)
-message: '"Be Async, My Friend. <br /> Fail Fast, Again, Better"'
+message: '"Be Async, My Friend. <br /> Fail Fast, Again, Better" '
 meta_keywords: >-
   it architecture, enterprise architecture, ea, it manager, design patterns,
   internet, development, cloud computing, cloud, teaching, programming
@@ -26,15 +26,16 @@ doingnow: >-
 
   * **Experimenting** continuously
 
-  * Trying to be <span
-  class="notranslate"> **[Agile](http://agilemanifesto.org/principles.html)** </span>
-  and <span class="notranslate"> **[Lean
+  * Trying to be <span class="notranslate">
+  **[Agile](http://agilemanifesto.org/principles.html)** </span> and <span
+  class="notranslate"> **[Lean
   Thinking](https://en.m.wikipedia.org/wiki/Lean_thinking)** </span>
 
   * **Travelling** with my family
 
   * Trying to **teach programming skills and karate** to my children
 media: Media
+number_of_tweets: 20
 social_title: Networks
 social:
   - class: twitter
@@ -50,7 +51,6 @@ social:
     link: 'https://www.instagram.com/davidayalas'
     title: Instagram
 timeline_title: Latest Tweets
-number_of_tweets: 20
 miniprojects_title: Miniprojects
 miniprojects:
   - description: Extensible SAML SP to generate JWT tokens. It can run on AWS Lambda
