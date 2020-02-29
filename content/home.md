@@ -22,7 +22,7 @@ doingnow: >-
 
   * Adding **value** to my company **through technology**
 
-  * **Everything as a Service**
+  * **Everything as a Service, Everything is Software**
 
   * **Experimenting** continuously
 
