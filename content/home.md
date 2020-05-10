@@ -51,7 +51,7 @@ miniprojects:
   - link: https://github.com/davidayalas/aws-s3-select-lambda
     title: AWS S3 Select & Lambda
     description: Lambda wrapper over AWS S3 Select to allow create READ
-      microservices based on CSV or JSON easily
+      microservices based on CSV, JSON or Parquet easily
   - description: Extensible SAML SP to generate JWT tokens. It can run on AWS Lambda
     link: https://github.com/davidayalas/saml-jwt
     title: SAML JWT
