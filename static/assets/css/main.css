@@ -3189,6 +3189,10 @@ body.tweets ul.tweets, body.tweets div.tweets{
 	margin-right: auto!important;
 }
 
+#footer ul li{
+	padding: 1.2em 0;
+}
+
 .carousel .reel img{
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
@@ -3310,11 +3314,11 @@ ul.gallery li img{
 		display: none!important;
 	}
 	
-	/*.reel{
+	.reel{
 		overflow: hidden;
 		display: inline; 
 		text-align: center;
-	}*/
+	}
 
 	.carousel article {
 		display: block;
@@ -3328,10 +3332,6 @@ ul.gallery li img{
 
 	body.tweets ul.tweets, body.tweets div.tweets{
 		width: 95%;
-	}
-
-	#footer ul li{
-		padding: 1.2em 0;
 	}
 }
 
