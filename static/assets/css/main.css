@@ -3309,11 +3309,12 @@ ul.gallery li img{
 	.carousel .backward, .carousel .forward{
 		display: none!important;
 	}
-	.reel{
+	
+	/*.reel{
 		overflow: hidden;
 		display: inline; 
 		text-align: center;
-	}
+	}*/
 
 	.carousel article {
 		display: block;
@@ -3327,6 +3328,10 @@ ul.gallery li img{
 
 	body.tweets ul.tweets, body.tweets div.tweets{
 		width: 95%;
+	}
+
+	#footer ul li{
+		padding: 1.2em 0;
 	}
 }
 
