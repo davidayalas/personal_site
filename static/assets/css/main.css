@@ -3310,8 +3310,17 @@ ul.gallery li img{
 		display: none!important;
 	}
 	.reel{
-		overflow-x: auto;
+		overflow: hidden;
+		display: inline; 
+		text-align: center;
 	}
+
+	.carousel article {
+		display: block;
+		margin: 0 auto;
+		margin-bottom: 1em;
+	}
+
 	ul.tweets img, div.tweets img{
 		max-width: 95%;
 	}
