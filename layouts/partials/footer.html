@@ -145,6 +145,8 @@
 	img.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
 {{ end }}
 
+{{ if and (eq .isServer true) (eq $testProd false) }}
+
 function createCSS(pathCSS){
 	var linkSS = document.createElement('link');
 	linkSS.rel = 'stylesheet';
@@ -156,8 +158,7 @@ function createCSS(pathCSS){
 	head.appendChild(linkSS);//, head.childNodes[0]);		
 }
 
-{{ if and (eq .isServer true) (eq $testProd false) }}
-	createCSS("/assets/css/main.css");
+createCSS("/assets/css/main.css");
 {{ end }}
 
 //createCSS("/assets/css/fontello.css");

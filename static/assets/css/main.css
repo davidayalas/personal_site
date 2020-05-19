@@ -3325,6 +3325,12 @@ ul.gallery li img{
 		margin: 0 auto;
 		margin-bottom: 1em;
 	}
+	.carousel article:last-child {
+		margin-bottom: 0em;
+	}
+	.carousel footer {
+		margin: 1em 0;
+	}
 
 	ul.tweets img, div.tweets img{
 		max-width: 95%;
