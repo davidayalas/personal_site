@@ -55,8 +55,9 @@ miniprojects:
   - description: Extensible SAML SP to generate JWT tokens. It can run on AWS Lambda
     link: https://github.com/davidayalas/saml-jwt
     title: SAML JWT
-  - description: FTP-like interface for auth users. They share a bucket but only can
-      see their "folder"
+  - description: FTP-like interface over S3 to allow auth users (OAuth, SAML) manage
+      files under some buckets and folders, with normal users and admins over
+      spaces.
     link: https://github.com/davidayalas/aws-ftp-s3-serverless
     title: AWS S3 FTP Serverless
   - description: Based on the idea behind https://staticman.net, this lambda allow
