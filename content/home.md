@@ -5,11 +5,11 @@ header: /media/header-finland.jpg
 header_quality: 60
 description: ((Father x 2) && Husband)<br/>+<br/>(IT Architecture Manager @ UOC.edu)
 message: '"Be Async, My Friend. <br /> Fail Fast, Again, Better" '
-meta_keywords: it architecture, enterprise architecture, ea, it manager, design
+meta_keywords: successful it architecture, everything as a service, enterprise
+  architecture, ea, serverless, servicefull, kiss principle, it manager, design
   patterns, internet, development, cloud computing, cloud, teaching, programming
-  languages, performance, automation, ctti, uoc, elearn, everything as a
-  service, serverless, servicefull, kiss principle, jamstack, ssg, headlesscms,
-  problem solver, coding, code, web performance, tips and tricks
+  languages, performance, automation, ctti, uoc, elearn, jamstack, ssg,
+  headlesscms, problem solver, coding, code, web performance, tips and tricks
 doingnow_title: About me
 doingnow: >-
   * **[IT Architecture
