@@ -63,5 +63,3 @@ collections: # A list of collections the CMS should be able to edit
       - {label: "Arquitectura", name: "architecture_title", widget: "string", required: false}
       - {label: "Diagrama", name: "architecture_diagram", widget: "image"}
       - {label: "Títol form contacte", name: "contact_title", widget: "string", required: false}
-    meta:
-      - {label: "Date", name: "date", widget: "datetime"}
