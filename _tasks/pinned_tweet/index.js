@@ -50,26 +50,18 @@ async function request(options, data){
 async function main(){
     bearer = await getTwitterBearerToken();
     options.headers["Authorization"] = "Bearer " + bearer;
-    options.path = `/labs/1/users?usernames=${process.env.TWITTER_USER}&format=detailed`;
-
+    options.path = `/labs/2/users/by/username/${process.env.TWITTER_USER}?user.fields=created_at,description,pinned_tweet_id`;
     let userResponse = await request(options);
     userResponse = JSON.parse(userResponse.body);
     
-    if(userResponse.data[0].pinned_tweet_id){
+    if(userResponse.data.pinned_tweet_id){
         options.path = "/1.1/statuses/show.json?tweet_mode=extended";
-        const tweet = await getTweet(userResponse.data[0].pinned_tweet_id, options);
+        const tweet = await getTweet(userResponse.data.pinned_tweet_id, options);
         let RT = "";
         const aux = tweet.extended_entities && tweet.extended_entities.media && tweet.extended_entities.media.length>0 ? tweet.extended_entities.media[0].media_url_https : "";
         if(tweet.full_text.indexOf("RT")===0){
           RT = tweet.full_text.slice(0,tweet.full_text.indexOf(":")+1);
         }
-        /*let object = {
-          "Description" : (tweet.retweeted_status && tweet.retweeted_status.full_text) ? RT + " " + tweet.retweeted_status.full_text : tweet.full_text,
-          "Date" : +new Date(tweet.created_at),
-          "id" : tweet.id_str,
-          "media" : (RT==="" && aux) ? aux : ""
-        }*/
-        
         let description = (tweet.retweeted_status && tweet.retweeted_status.full_text) ? RT + " " + tweet.retweeted_status.full_text : tweet.full_text;
         description = description.replace(/\n/g,"\n  ");
     
@@ -77,7 +69,6 @@ async function main(){
             fs.mkdirSync(process.env.WRITE_PATH);
         }
         fs.writeFileSync(process.env.WRITE_PATH+"/pinned.md", `---\ntitle: \ndescription: >-\n ${description}\ndate: ${new Date(tweet.created_at).toISOString()}\nid: ${tweet.id_str}\nmedia: ${(RT==="" && aux) ? aux : ""}\n---`,"utf8");
-        //fs.writeFileSync(process.env.WRITE_PATH+"/pinned.md", `---\nid: ${tweet.id_str}\n---`,"utf8");
     }
 }
 
