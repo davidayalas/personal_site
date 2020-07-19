@@ -4,5 +4,7 @@
   "description": "",
   "main": "",
   "author": "",
-  "dependencies": {}
+  "dependencies": {
+    "webp-converter": "2.2.3"
+  }
 }
