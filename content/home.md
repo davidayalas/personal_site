@@ -2,7 +2,7 @@
 title: David Ayala
 html_title: David Ayala - IT Architect
 header: /media/header-finland.jpg
-header_quality: 60
+header_quality: 59
 description: ((Father x 2) && Husband)<br/>+<br/>(IT Architecture Manager @ UOC.edu)
 message: '"Be Async, My Friend. <br /> Fail Fast, Again, Better" '
 meta_keywords: successful it architecture, everything as a service, enterprise
