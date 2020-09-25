@@ -45,6 +45,9 @@ social:
   - class: instagram
     link: https://www.instagram.com/davidayalas
     title: Instagram
+  - class: strava
+    link: https://www.strava.com/athletes/davidayalas
+    title: Strava
 timeline_title: Latest Tweets
 miniprojects_title: Miniprojects
 miniprojects:

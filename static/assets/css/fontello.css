@@ -68,6 +68,7 @@
   .icon-pin:before { content: '\e803'; } /* '' */
   .icon-pin-colored:before { content: '\e803'; color: sienna} /* '' */
 
+  .icon-strava:before { content: '\e802'; } /* '' */
 
   [class^="icon-"].circled{
     position: relative;
