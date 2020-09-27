@@ -29,7 +29,10 @@
 				{{ $c.Scratch.Set "header" ($image.Resize (print "1600x q" $p.Params.header_quality)) }}
 			{{ end }}
 		{{end }}
-	
+		
+		<link rel="preload" href="{{ ($c.Scratch.Get "header").RelPermalink }}.webp" as="image" />
+		<link rel="preload" href="{{ ($c.Scratch.Get "header_mobile").RelPermalink }}.webp" as="image" media="(max-width: 736px)" />
+
 		<style>
 			{{ partial "critical-css.html"  . | print | safeCSS }}
 			#header.nowebp{background: url("{{ ($c.Scratch.Get "header").RelPermalink }}") no-repeat fixed center; background-size: cover;}
