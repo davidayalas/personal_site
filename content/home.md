@@ -63,16 +63,16 @@ miniprojects:
       spaces.
     link: https://github.com/davidayalas/aws-ftp-s3-serverless
     title: AWS S3 FTP Serverless
+  - title: Private static sites with AWS Cloudfront + S3 + Lambda + Signed Cookies
+      (SAML/Shibboleth Login)
+    link: https://github.com/davidayalas/aws-cloudfront-private-static-sites
+    description: Protect S3 static sites under Cloudfront CDN, with SAML login
+      (lambda function) and cloudfront signed cookies.
   - description: Based on the idea behind https://staticman.net, this lambda allow
       to publish comments in your repo for authenticated users (API GW Custom
       Authorizer involved)
     link: https://github.com/davidayalas/jamstack-lambda-comments
     title: JAMStack Lambda Comments
-  - description: Easy markdown to json converter. Transform front matter properties
-      and content into json key-values. Very easy to integrate with static sites
-      generators. It creates an index that can be easily injected into algolia.
-    link: https://github.com/davidayalas/markdown2json
-    title: markdown2json
   - description: Personal site github repo where I test stuff related with JAMStack
       (Hugo, NetlifyCMS, performance, ...)
     link: https://github.com/davidayalas/personal_site
@@ -94,15 +94,6 @@ miniprojects:
       not (and other application can provision it)
     link: https://github.com/davidayalas/gsuite-directory-query-user
     title: GSuite Directory Query User
-  - description: Allows non-tech users to edit a timetable in Google Spreadsheet and
-      then publish it to a web page
-    link: https://github.com/davidayalas/gspreadsheet-html-timetable
-    title: Google Spreadsheet to HTML Table (and responsive)
-  - description: It generates hashed filenames with content from each row in a CSV
-      that would we http-requested applying the same derive key algorithm. It
-      provides the server process and the html client
-    link: https://github.com/davidayalas/staticdb
-    title: StaticDB
 architecture_title: Architecture Diagram of this site
 architecture_diagram: /media/personal-site.png
 contact_title: Hello!
