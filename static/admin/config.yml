@@ -4,7 +4,7 @@ backend:
   #branch: master
   #name: git-gateway
 
-display_url: https://davidayala.eu
+display_url: https://www.davidayala.me
 
 media_folder: "/content/media" # Media files will be stored in the repo under static/images/uploads
 public_folder: "/media"
