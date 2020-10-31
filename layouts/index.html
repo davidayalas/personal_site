@@ -5,6 +5,7 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html lang="en">
+	{{ $scratch := newScratch }}
 	{{ $p := .Site.GetPage "page" "home.md" }}
 	{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
 	<head>
@@ -62,8 +63,8 @@
 					</header>
 
 					<div class="reel">
-
-					{{ range first 9 (where .Site.Pages "Section" "gallery") }}
+					{{ $scratch.Set "max" (add $p.Params.number_of_images 1)}}
+					{{ range first ($scratch.Get "max") (where .Site.Pages "Section" "gallery") }}
 		            	{{ if .Params.image }}
 			              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
 		              		{{ $thumb := $image.Fill "320x320 q90 Center" }}
@@ -79,8 +80,7 @@
 					</div>
 					<div class="backward"></div>
 					<div class="forward"></div>
-
-					{{ if gt (len (where .Site.Pages "Section" "gallery")) 8 }}
+					{{ if gt (len (where .Site.Pages "Section" "gallery")) ($scratch.Get "max") }}
 					<footer>
 					<a href="/gallery/" class="button">More images</a>
 					</footer>

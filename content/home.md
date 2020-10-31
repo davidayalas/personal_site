@@ -31,6 +31,7 @@ doingnow: >-
   * Trying to **teach programming skills and karate** to my children
 media: Media
 number_of_tweets: 20
+number_of_images: 6
 social_title: Networks
 social:
   - class: twitter

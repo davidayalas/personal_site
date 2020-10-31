@@ -43,6 +43,7 @@ collections: # A list of collections the CMS should be able to edit
       - {label: "Doing now list", name: "doingnow", widget: "markdown"}
       - {label: "Media title", name: "media", widget: "string"}
       - {label: "Number of tweets (home)", name: "number_of_tweets", widget: "number", required: true, default: 10}
+      - {label: "Number of images (home)", name: "number_of_images", widget: "number", required: true, default: 8}
       - {label: "Social title", name: "social_title", widget: "string"}
       - name: social
         label: Contact
