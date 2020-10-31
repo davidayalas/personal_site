@@ -29,6 +29,8 @@ doingnow: >-
   * **Travelling** with my family
 
   * Trying to **teach programming skills and karate** to my children
+
+  * **[BZFlag](https://www.bzflag.org/)** player
 media: Media
 number_of_tweets: 20
 number_of_images: 6
