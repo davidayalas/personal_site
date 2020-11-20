@@ -58,6 +58,14 @@ miniprojects:
     title: AWS S3 Select & Lambda
     description: Lambda wrapper over AWS S3 Select to allow create READ
       microservices based on CSV, JSON or Parquet easily
+  - description: Rewrite Rules for cloud era. No more Apache or Nginx mod_rewrite.
+    link: https://github.com/davidayalas/aws-url-redirector
+    title: Cloud URL Rewrite
+  - title: Private static sites with AWS Cloudfront + S3 + Lambda + Signed Cookies
+      (SAML/Shibboleth Login)
+    link: https://github.com/davidayalas/aws-cloudfront-private-static-sites
+    description: Protect S3 static sites under Cloudfront CDN, with SAML login
+      (lambda function) and cloudfront signed cookies.
   - description: Extensible SAML SP to generate JWT tokens. It can run on AWS Lambda
     link: https://github.com/davidayalas/saml-jwt
     title: SAML JWT
@@ -66,28 +74,15 @@ miniprojects:
       spaces.
     link: https://github.com/davidayalas/aws-ftp-s3-serverless
     title: AWS S3 FTP Serverless
-  - title: Private static sites with AWS Cloudfront + S3 + Lambda + Signed Cookies
-      (SAML/Shibboleth Login)
-    link: https://github.com/davidayalas/aws-cloudfront-private-static-sites
-    description: Protect S3 static sites under Cloudfront CDN, with SAML login
-      (lambda function) and cloudfront signed cookies.
+  - description: Personal site github repo where I test stuff related with JAMStack
+      (Hugo, NetlifyCMS, performance, ...)
+    link: https://github.com/davidayalas/personal_site
+    title: Personal site
   - description: Based on the idea behind https://staticman.net, this lambda allow
       to publish comments in your repo for authenticated users (API GW Custom
       Authorizer involved)
     link: https://github.com/davidayalas/jamstack-lambda-comments
     title: JAMStack Lambda Comments
-  - description: Personal site github repo where I test stuff related with JAMStack
-      (Hugo, NetlifyCMS, performance, ...)
-    link: https://github.com/davidayalas/personal_site
-    title: Personal site
-  - description: Integration of Hugo site and Netlify CMS, with N levels (nested
-      sections/folders), multilanguage and access to CMS from live site.
-    link: https://github.com/davidayalas/hugolifycms/blob/master/README.md
-    title: HugolifyCMS
-  - description: Partial templates to manage infinite nested subsections in
-      breadcrumbs (from Hugo 0.24)
-    link: https://github.com/davidayalas/gohugo-breadcrumbs
-    title: Hugo infinite breadcrumbs
   - description: Proof of concept to replace Worpdress publication for users that
       are comfortable editing with it (NetlifyCMS and Gatsby or Hugo are better,
       but...). It includes some templating, categories, pagination, ...
