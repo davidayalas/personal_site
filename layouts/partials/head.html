@@ -30,8 +30,8 @@
 			{{ end }}
 		{{end }}
 		
-		<link rel="preload" href="{{ ($c.Scratch.Get "header").RelPermalink }}.webp" as="image" />
-		<link rel="preload" href="{{ ($c.Scratch.Get "header_mobile").RelPermalink }}.webp" as="image" media="(max-width: 736px)" />
+		<!--link rel="preload" href="{{ ($c.Scratch.Get "header").RelPermalink }}.webp" as="image" />
+		<link rel="preload" href="{{ ($c.Scratch.Get "header_mobile").RelPermalink }}.webp" as="image" media="(max-width: 736px)" /-->
 
 		<style>
 			{{ partial "critical-css.html"  . | print | safeCSS }}
