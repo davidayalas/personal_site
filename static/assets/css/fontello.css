@@ -64,7 +64,8 @@
   .icon-linkedin:before { content: '\f0e1'; } /* '' */
   .icon-instagram:before { content: '\f16d'; } /* '' */
   .icon-twitter-colored:before { content: '\f099'; color: sienna} /* '' */
-  .icon-folder-open:before { content: '\e802'; color: sienna} /* '' */
+  .icon-folder:before { content: '\f115'; } /* '' */
+  .icon-folder-colored:before { content: '\f115'; color: sienna} /* '' */
   .icon-pin:before { content: '\e803'; } /* '' */
   .icon-pin-colored:before { content: '\e803'; color: sienna} /* '' */
 
