@@ -3061,9 +3061,14 @@
 }
 .diagram{display: block; margin-left: auto; margin-right: auto; max-width: 90%;}
 
-div#header header{
+body.homepage div#header header{
 	padding:1.5em; 
 	background-color:rgba(255,255,255,0.4);
+}
+
+body.gallery header h1{
+	margin-top: .4em!important;
+	margin-bottom: 0em!important;
 }
 
 div#header header h2{
@@ -3288,17 +3293,17 @@ ul.gallery li img{
 @media screen and (max-width: 736px) {
 	div.pull-right.editpage{float:none!important;text-align: center;margin-top:1em;}
 	header h1,header h2,header p{color: #000!important;}
-	header h2{
+	body.homepage header h2{
 		font-size: 2em!important;
 	}
 	footer a.button, ul li input.button{width: 95%; margin: 0 auto;}
 
-	body hr{
+	body.homepage body hr{
 		margin-bottom: 1em!important;
 		margin-top: 1em!important;
 	}
 
-	body div#header header p{
+	body.homepage body div#header header p{
 		margin-bottom: -1.5em!important;
 	}
 
