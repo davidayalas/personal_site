@@ -2,7 +2,6 @@
 
 {{ if and (eq $c.Kind "page") (or (and (eq .pinned $c.Params.id) (eq .index 1)) (ne .pinned $c.Params.id)) }}
 <li {{if ge .index 13 }} class="hidden" {{end}}>
-
     {{ if eq $c.Params.id .pinned }}
     <span class="icon-pin-colored"></span>
     {{ end }}

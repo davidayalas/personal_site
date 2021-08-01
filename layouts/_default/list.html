@@ -69,7 +69,7 @@
 							<li>
 								<span>{{ dateFormat "02-01-2006 15:04" .Date }}</span><br /><br />
 								{{ safeHTML (replaceRE "(https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*))" "<a href='$1'>$1</a>" (replace .Description "\n" "<br />") ) }}
-								{{if ne .Params.media ""}}
+								{{if ne .Params.media nil}}
 									{{ $ext := path.Ext .Params.media }}
 									<img src="/images/1px.png" width="1" height="1" data-origin="twitter" data-src="{{ replace .Params.media $ext ""}}?format=jpg&name=small" class="lozad" alt="" />
 								{{ end }}
