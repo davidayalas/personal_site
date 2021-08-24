@@ -4,7 +4,7 @@ html_title: David Ayala - IT Architect
 header: /media/header-finland.jpg
 header_quality: 59
 description: ((Proud father x 2) && N's life partner)<br/>+<br/>(IT Architecture
-  Manager @ UOC.edu)
+  Manager @ UOC.edu && <br />Associate lecturer @ UAB.edu)
 message: '"Be Async, My Friend. <br /> Fail Fast, Again, Better" '
 meta_keywords: successful it architecture, everything as a service, enterprise
   architecture, ea, serverless, servicefull, kiss principle, it manager, design
