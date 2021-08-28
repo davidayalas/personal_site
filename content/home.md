@@ -31,7 +31,9 @@ doingnow: >-
 
   * **Travelling** with my family
 
-  * Trying to **teach programming skills and karate** to my children
+  * Trying to **teach programming skills** to my children
+ 
+  * Running, karate, hikking
 
   * **[BZFlag](https://www.bzflag.org/)** player
 media: Media
