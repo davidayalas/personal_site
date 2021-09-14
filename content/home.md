@@ -17,7 +17,7 @@ doingnow: >-
   Manager](https://blogs.msdn.microsoft.com/nickmalik/2014/11/11/the-architecture-manager-the-forgotten-enterprise-architecture-role/)**
   @ [UOC](https://www.uoc.edu)
 
-  * **Associate lecturer** @ [UAB](https://www.uab.edu)
+  * **Associate lecturer** @ [UAB](https://www.uab.cat)
 
   * **Looking for the balance** between business, technology, simplicity ([KISS](https://en.m.wikipedia.org/wiki/KISS_principle)) and costs
 
