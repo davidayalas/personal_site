@@ -9,7 +9,6 @@
     {{ (safeHTML (replaceRE "(https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*))" "<a href='$1'>$1</a>" (replace $c.Description "\n" "<br />") ) ) }}
 
     <span class="timestamp"> ({{ dateFormat "02-01-2006 15:04" $c.Params.date }})</span>
-
     {{if ne $c.Params.media nil}}
         {{ $ext := path.Ext $c.Params.media }}
         <img src="/images/1px.png" width="1" height="1" data-origin="twitter" data-src="{{ replace $c.Params.media $ext ""}}?format=jpg&name=small" class="lozad" alt="" />
