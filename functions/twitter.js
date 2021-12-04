@@ -91,6 +91,7 @@ async function twitterWebHook(event){
   }
 
   let tData = JSON.parse(event.body)
+  console.log(event.body)
   let tweet;
   let reBuild = false;
   let i,z;
