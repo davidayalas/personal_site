@@ -112,7 +112,7 @@ async function twitterWebHook(event){
       description = (tweet.retweeted_status && tweet.retweeted_status.full_text) ? RT + " " + tweet.retweeted_status.full_text : tweet.full_text;
       description = description.replace(/\n/g,"\n  ");  
    
-      await git.repo.put(`content/tweets/${tweet.id_str}.md`, `---\ntitle: \ndescription: >-\n ${description}\ndate: ${new Date(tweet.created_at).toISOString()}\nid: ${tweet.id_str}\nmedia: ${(RT==="" && aux) ? aux : ""}\n---`, {"message":"twitter webhook [skip ci]"});
+      await git.repo.put(`content/tweets/${tweet.id_str}.md`, `---\ntitle: \ndescription: >-\n ${description}\ndate: ${new Date(tweet.created_at).toISOString()}\nid: ${tweet.id_str}\nmedia: ${aux ? aux : ""}\n---`, {"message":"twitter webhook [skip ci]"});
     }
   }
 
