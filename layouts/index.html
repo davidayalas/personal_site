@@ -87,6 +87,23 @@
 					{{ end }}
 
 				</section>
+
+			<!-- Talks -->
+
+			<div class="wrapper style2">
+				<article id="main" class="container special doingnow">
+					<header>
+						<h2>{{ $p.Params.strategy_title }}</h2>
+					</header>
+					<ul>
+						{{ range $p.Params.strategy }}
+						<li><a href="{{.link}}" title="{{.title}}">{{.title}}</a></li>
+						{{ end }}
+					</ul>
+				</article>
+			</div>
+			
+
 				{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer "testProd" $.Site.Params.testProd "tweetsAPI" $.Site.Params.tweetsAPI "isHome" $.IsHome) }}
 	</body>
 	
