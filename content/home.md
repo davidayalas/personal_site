@@ -104,7 +104,7 @@ strategy:
   - link: /docs/AWS_Summit_2022_Madrid_UOC.pdf
     title: AWS Summit Madrid 2022. UOC Road to the cloud
   - link: /docs/cloud-intro-2021.pdf
-    title: Cloud introduction. Universitat Autònoma de Barcelona (UAB) 2021
+    title: Cloud computing introduction. Universitat Autònoma de Barcelona (UAB) 2021
   - link: /docs/RedIris-2019.pdf
     title: RedIris presentation. Seville 2019
   - link: /docs/TAC19.pdf
