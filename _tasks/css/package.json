@@ -6,7 +6,6 @@
   "author": "",
   "dependencies": {
     "crittr": "^1.2.3",
-    /*"css-purge": "^3.1.8",*/
     "uncss": "*"
   }
 }
