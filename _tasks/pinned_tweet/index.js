@@ -50,7 +50,7 @@ async function request(options, data){
 async function main(){
     bearer = await getTwitterBearerToken();
     options.headers["Authorization"] = "Bearer " + bearer;
-    options.path = `/labs/2/users/by/username/${process.env.TWITTER_USER}?user.fields=created_at,description,pinned_tweet_id`;
+    options.path = `/2/users/by/username/${process.env.TWITTER_USER}?user.fields=created_at,description,pinned_tweet_id`;
     let userResponse = await request(options);
     userResponse = JSON.parse(userResponse.body);
     
@@ -64,7 +64,6 @@ async function main(){
         }
         let description = (tweet.retweeted_status && tweet.retweeted_status.full_text) ? RT + " " + tweet.retweeted_status.full_text : tweet.full_text;
         description = description.replace(/\n/g,"\n  ");
-    
         if(!fs.existsSync(process.env.WRITE_PATH)){
             fs.mkdirSync(process.env.WRITE_PATH);
         }
