@@ -3,8 +3,8 @@ title: David Ayala
 html_title: David Ayala - IT Architect
 header: /media/header-finland.jpg
 header_quality: 59
-description: ((Proud father x 2) && N's life partner)<br/>+<br/>(Director of IT/EA Architecture 
-   @ UOC.edu && <br />Associate lecturer @ UAB.cat)
+description: ((Proud father x 2) && N's life partner)<br/>+<br/>(Director of
+  IT/EA Architecture @ UOC.edu && <br />Associate lecturer @ UAB.cat)
 message: '"Be Async, My Friend. <br /> Fail Fast, Again, Better" '
 meta_keywords: successful it architecture, everything as a service, enterprise
   architecture, ea, serverless, servicefull, kiss principle, it manager, design
@@ -13,7 +13,8 @@ meta_keywords: successful it architecture, everything as a service, enterprise
   headlesscms, problem solver, coding, code, web performance, tips and tricks
 doingnow_title: About me
 doingnow: >-
-  * **[Director of IT/EA Architecture](https://blogs.msdn.microsoft.com/nickmalik/2014/11/11/the-architecture-manager-the-forgotten-enterprise-architecture-role/)**
+  * **[Director of IT/EA
+  Architecture](https://blogs.msdn.microsoft.com/nickmalik/2014/11/11/the-architecture-manager-the-forgotten-enterprise-architecture-role/)**
   @ [UOC](https://www.uoc.edu)
 
   * **Associate lecturer** @ [UAB](https://www.uab.cat)
@@ -52,9 +53,6 @@ social:
   - class: instagram
     link: https://www.instagram.com/davidayalas
     title: Instagram
-  - class: strava
-    link: https://www.strava.com/athletes/davidayalas
-    title: Strava
 timeline_title: Latest Tweets
 miniprojects_title: Miniprojects
 miniprojects:
@@ -98,7 +96,6 @@ miniprojects:
     title: GSuite Directory Query User
 architecture_title: Architecture Diagram of this site
 architecture_diagram: /media/personal-site.png
-contact_title: Hello!
 strategy_title: Some talks and presentations
 strategy:
   - link: /docs/AWS_Summit_2022_Madrid_UOC.pdf
@@ -109,4 +106,5 @@ strategy:
     title: RedIris presentation. Seville 2019
   - link: /docs/TAC19.pdf
     title: Trobada Anella Científica. Barcelona 2019
+contact_title: Hello!
 ---
