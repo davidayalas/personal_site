@@ -13,8 +13,11 @@ meta_keywords: successful it architecture, everything as a service, enterprise
   headlesscms, problem solver, coding, code, web performance, tips and tricks
 doingnow_title: About me
 doingnow: >-
-  * **[Director of IT/EA
+  * **[IT/Enterprise
   Architecture](https://blogs.msdn.microsoft.com/nickmalik/2014/11/11/the-architecture-manager-the-forgotten-enterprise-architecture-role/)**
+  @ [CTTI](https://ctti.gencat.cat)
+
+  * **Former Director of IT/EA**
   @ [UOC](https://www.uoc.edu)
 
   * **Associate lecturer** @ [UAB](https://www.uab.cat)
