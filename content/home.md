@@ -1,6 +1,6 @@
 ---
 title: David Ayala
-html_title: David Ayala - IT / Enterprise Architect
+html_title: David Ayala - Looking for ServiceFull Enterprise Architecture
 header: /media/header-finland.jpg
 header_quality: 59
 description: ((Proud father x 2) && N's life partner)<br/>+<br/>(IT/Enterprise
@@ -17,8 +17,7 @@ doingnow: >-
   Architecture](https://blogs.msdn.microsoft.com/nickmalik/2014/11/11/the-architecture-manager-the-forgotten-enterprise-architecture-role/)**
   @ [CTTI](https://ctti.gencat.cat)
 
-  * **Former Director of IT/EA**
-  @ [UOC](https://www.uoc.edu)
+  * **Former Director of IT/EA** @ [UOC](https://www.uoc.edu)
 
   * **Associate lecturer** @ [UAB](https://www.uab.cat)
 
