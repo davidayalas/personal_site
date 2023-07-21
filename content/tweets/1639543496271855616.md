@@ -1,0 +1,8 @@
+---
+title: 
+description: >-
+ Talking with chatGPT: "Yes, we can say that we are entering a humanless tech era. AI is revolutionizing the way we work and live, and it’s only going to become more prevalent in the future" #humanless
+date: 2023-03-25T08:23:25.000Z
+id: 1639543496271855616
+media: 
+---
