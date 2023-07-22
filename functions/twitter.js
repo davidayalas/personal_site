@@ -40,7 +40,6 @@ async function getTweetData(entry, pinned=false){
         console.log(e.message);
         return {"error" : true}
     }
-    
     if(!pinned && (tweet && tweet.name)){return {"exists": true};}
 
     const date = new Date(entry.content.itemContent.tweet_results.result.legacy.created_at).toISOString();
@@ -88,7 +87,6 @@ async function fetchLatestTweets(){
     const pinned = tweets.data.user.result.timeline_v2.timeline.instructions[1].entry;
     const entries = tweets.data.user.result.timeline_v2.timeline.instructions[2].entries;
 
-
     const pinnedData = await getTweetData(pinned, true);
     let pinnedGit = await git.repo.get('content/pinned/pinned.md');
     let newPinned = false;
@@ -100,7 +98,6 @@ async function fetchLatestTweets(){
             pinnedId = Buffer.from(pinnedGit.content, 'base64').toString('utf8');
             pinnedId = pinnedId.slice(pinnedId.indexOf("id: ")+4,pinnedId.indexOf("media:"));
         }
-
 
         if(!pinnedData.exists && (pinnedGit.message || pinnedId*1!=pinnedData.id*1)){
             newPinned = true;
@@ -115,7 +112,6 @@ async function fetchLatestTweets(){
         if(!entries[i].content.itemContent){continue};
 
         tweet = await getTweetData(entries[i]);
-        
         if(tweet.exists){
             break;
         }
@@ -134,7 +130,7 @@ exports.handler = async event => {
     if(!git){
       git = new utils.git(git_options);
     }
-
+    
     const result = await fetchLatestTweets();
 
     if(result[0]>0 || result[1]){

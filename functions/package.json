@@ -1,11 +1,10 @@
 {
-    "name": "twitter-webhook-to-git-content",
+    "name": "twitter-polling-to-git-content",
     "version": "1.0.0",
     "main": "index.js",
-    "author": "David Ayala - https://davidayala.eu",
+    "author": "David Ayala - https://davidayala.me",
     "license": "",
     "dependencies": {
-        "dotenv": "^8.2.0",
-        "oauth": "^0.9.15"
+        "dotenv": "^8.2.0"
     }
 }

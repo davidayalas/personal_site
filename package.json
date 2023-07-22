@@ -2,7 +2,7 @@
     "name": "netlify-function-twitter-webhook",
     "version": "1.0.0",
     "main": "index.js",
-    "author": "David Ayala - https://davidayala.eu",
+    "author": "David Ayala - https://davidayala.me",
     "license": "",
     "devDependencies": {
         "netlify-lambda": "^1.4.3"
