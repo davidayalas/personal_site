@@ -76,7 +76,7 @@ async function fetchLatestTweets(){
           "x-twitter-auth-type": "OAuth2Session",
           "x-twitter-client-language": "ca",
           "cookie": `dnt=1; ads_prefs=\"HBISAAA=\"; remember_checked_on=1; auth_token=${authToken}; twid=u%3D${userId}; des_opt_in=Y; ct0=${cookie_ct0}; daa=1; `,
-          "Referer": `https://twitter.com/${userId}`,
+          "Referer": `https://twitter.com/${userName}`,
           "Referrer-Policy": "strict-origin-when-cross-origin"
         },
         "body": null,

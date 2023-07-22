@@ -56,7 +56,8 @@ Sample script [here](buildcss.sh)
 
 ## Netlify build command
 
-                $ npm install _tasks/pinned_tweet && node _tasks/pinned_tweet/index.js && hugo --minify && npm install _tasks/webp && node _tasks/webp/index.js && npm run install && npm run build
+                ~~$ npm install _tasks/pinned_tweet && node _tasks/pinned_tweet/index.js && hugo --minify && npm install _tasks/webp && node _tasks/webp/index.js && npm run install && npm run build~~
+                $ hugo --minify && npm install _tasks/webp && node _tasks/webp/index.js && npm run install && npm run build
                 
 
 1. **npm install _tasks/pinned_tweet && node _tasks/pinned_tweet/index.js** looks for pinned tweet and put it into build path as data for Hugo
