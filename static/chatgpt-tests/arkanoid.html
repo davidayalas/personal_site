@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Arkanoid</title>
+	<style>
+		body {
+		margin: 0;
+		}
+
+		canvas {
+		width: 100%;
+		height: 100%;
+		}		
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="640" height="480"></canvas>
+</body>
+</html>
+
+<script>
+
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+
+var ballRadius = 10;
+var ballX = canvas.width / 2;
+var ballY = canvas.height - 30;
+var ballDX = 2;
+var ballDY = -2;
+
+var paddleHeight = 10;
+var paddleWidth = 75;
+var paddleX = (canvas.width - paddleWidth) / 2;
+
+var brickRowCount = 3;
+var brickWidth = 75;
+var brickHeight = 20;
+var brickPadding = 10;
+var brickOffsetTop = 30;
+var brickOffsetLeft = 30;
+
+var brickColumnCount = (canvas.width / (brickWidth+brickOffsetLeft-brickPadding))+1;
+var over = false;
+
+var bricks = [];
+for (var c = 0; c < brickColumnCount; c++) {
+    bricks[c] = [];
+    for (var r = 0; r < brickRowCount; r++) {
+        bricks[c][r] = { x: 0, y: 0, status: 1 };
+    }
+}
+
+function drawBall() {
+	ctx.beginPath();
+	ctx.arc(ballX, ballY, ballRadius, 0, Math.PI*2);
+	ctx.fillStyle = "#0095DD";
+	ctx.fill();
+	ctx.closePath();
+}
+
+function drawPaddle() {
+	ctx.beginPath();
+	ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+	ctx.fillStyle = "#0095DD";
+	ctx.fill();
+	ctx.closePath();
+}
+
+function drawBricks() {
+	for (var c = 0; c < brickColumnCount; c++) {
+		for (var r = 0; r < brickRowCount; r++) {
+			if (bricks[c][r].status === 1) {
+				var brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+				var brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+				bricks[c][r].x = brickX;
+				bricks[c][r].y = brickY;
+				ctx.beginPath();
+				ctx.rect(brickX, brickY, brickWidth, brickHeight);
+				ctx.fillStyle = "#0095DD";
+				ctx.fill();
+				ctx.closePath();
+			}
+		}
+	}
+}
+
+function draw() {
+	// dibujar fondo
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	
+	// dibujar elementos
+	drawBall();
+	drawPaddle();
+	drawBricks();
+}
+function collisionDetection() {
+	for (var c = 0; c < brickColumnCount; c++) {
+		for (var r = 0; r < brickRowCount; r++) {
+			var b = bricks[c][r];
+			if (b.status === 1) {
+				if (ballX > b.x && ballX < b.x + brickWidth && ballY > b.y && ballY < b.y + brickHeight) {
+					ballDY = -ballDY;
+					b.status = 0;
+				}
+			}
+		}
+	}
+}
+
+function moveBall() {
+	if(over){return;}
+
+	// detectar colisiones con lados del canvas
+	if (ballX + ballDX > canvas.width - ballRadius || ballX + ballDX < ballRadius) {
+		ballDX = -ballDX;
+	}
+	// detectar colisiones con techo del canvas
+	if (ballY + ballDY < ballRadius) {
+		ballDY = -ballDY;
+	}
+	// detectar colisiones con paleta
+	else if (ballY + ballDY > canvas.height - ballRadius) {
+		if (ballX > paddleX && ballX < paddleX + paddleWidth) {
+			ballDY = -ballDY;
+		}
+		else {
+			over = true;
+			alert("Game Over");
+			document.location.reload();
+		}
+	}
+
+	ballX += ballDX;
+	ballY += ballDY;
+}
+
+function movePaddle() {
+	// mover paleta con flechas del teclado
+	if (rightPressed && paddleX < canvas.width - paddleWidth) {
+		paddleX += 7;
+	}
+	else if (leftPressed && paddleX > 0) {
+		paddleX -= 7;
+	}
+}
+
+// declarar variables para detectar teclas de flechas
+var rightPressed = false;
+var leftPressed = false;
+
+// detectar teclas presionadas
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
+function keyDownHandler(event) {
+	if (event.keyCode === 39) {
+		rightPressed = true;
+	}
+	else if (event.keyCode === 37) {
+		leftPressed = true;
+	}
+}
+
+function keyUpHandler(event) {
+	if (event.keyCode === 39) {
+		rightPressed = false;
+	}
+	else if (event.keyCode === 37) {
+		leftPressed = false;
+	}
+}
+
+function movePaddle() {
+	// mover paleta con flechas del teclado
+	if (rightPressed && paddleX < canvas.width - paddleWidth) {
+		paddleX += 7;
+	}
+	else if (leftPressed && paddleX > 0) {
+		paddleX -= 7;
+	}
+}
+
+
+function gameLoop() {
+	draw();
+	moveBall();
+	movePaddle();
+	collisionDetection();
+}
+
+setInterval(gameLoop, 10);
+
+</script>

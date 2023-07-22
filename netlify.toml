@@ -6,3 +6,6 @@
   [headers.values]
     Access-Control-Allow-Origin = "*"
     Content-Type = "application/font-woff"
+
+[functions."twitter-cron"]
+schedule = "@hourly"

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pong</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gameCanvas" style="width:100%; height:auto;"></canvas>
+    <script src="pong.js"></script>
+  </body>
+  <script>
+    // Configuración del canvas
+    var canvas = document.getElementById("gameCanvas");
+    var ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+
+    window.addEventListener('resize', resizeCanvas);
+
+    // Puntuaciones
+    var scorePlayer1 = 0;
+    var scorePlayer2 = 0;
+
+    // Paletas
+    var paddleWidth = 10;
+    var paddleHeight = 100;
+    var paddleSpeed = 10;
+    var player1PaddleY = canvas.height / 2 - paddleHeight / 2;
+    var player2PaddleY = canvas.height / 2 - paddleHeight / 2;
+
+    // Bola
+    var ballSize = 10;
+    var ballX = canvas.width / 2 - ballSize / 2;
+    var ballY = canvas.height / 2 - ballSize / 2;
+    var ballSpeedX = 5;
+    var ballSpeedY = 5;
+
+    // velocidad máxima permitida
+    var maxBallSpeed = 15;
+
+    // intervalo de tiempo para aumentar la velocidad
+    var speedInterval = 5000; // 5 segundos
+
+    // incremento de velocidad cada vez que se ejecuta la función
+    var speedIncrement = 1;
+
+    // iniciamos el intervalo
+    setInterval(function() {
+        // Aumentar la velocidad de la bola en 'speedIncrement'
+        ballSpeedX = Math.sign(ballSpeedX) * Math.min(Math.abs(ballSpeedX) + speedIncrement, maxBallSpeed);
+        ballSpeedY = Math.sign(ballSpeedY) * Math.min(Math.abs(ballSpeedY) + speedIncrement, maxBallSpeed);
+    }, speedInterval);
+
+    // Teclado
+    var keyA = false;
+    var keyQ = false;
+    var keyUp = false;
+    var keyDown = false;
+
+    // Actualización de las posiciones
+    function update() {
+
+        // Control del jugador 1
+        if (keyQ) {
+            player1PaddleY = Math.max(0, player1PaddleY - paddleSpeed);
+        } else if (keyA) {
+            player1PaddleY = Math.min(canvas.height - paddleHeight, player1PaddleY + paddleSpeed);
+        }
+
+        // Control del jugador 2
+        if (keyUp) {
+            player2PaddleY = Math.max(0, player2PaddleY - paddleSpeed);
+        } else if (keyDown) {
+            player2PaddleY = Math.min(canvas.height - paddleHeight, player2PaddleY + paddleSpeed);
+        }
+
+        // Movimiento de la bola
+        ballX += ballSpeedX;
+        ballY += ballSpeedY;
+
+        // Colisión de la bola con la paleta de los jugadores
+        if (ballX < paddleWidth && ballY > player1PaddleY && ballY < player1PaddleY + paddleHeight) {
+            ballSpeedX = -ballSpeedX;
+        } else if (ballX > canvas.width - paddleWidth - ballSize && ballY > player2PaddleY && ballY < player2PaddleY + paddleHeight) {
+            ballSpeedX = -ballSpeedX;
+        }
+
+        // Colisión de la bola con las paredes superior e inferior
+        if (ballY < 0 || ballY > canvas.height - ballSize) {
+            ballSpeedY = -ballSpeedY;
+        }
+
+        // Punto del jugador 1
+        if (ballX > canvas.width - ballSize) {
+            scorePlayer1++;
+            ballX = canvas.width / 2 - ballSize / 2;
+            ballY = canvas.height / 2 - ballSize / 2;
+            //ballSpeedX = -ballSpeedX;
+            ballSpeedX = 5;
+            ballSpeedY = 5;
+        }
+
+        // Punto del jugador 2
+        if (ballX < 0) {
+            scorePlayer2++;
+            ballX = canvas.width / 2 - ballSize / 2;
+            ballY = canvas.height / 2 - ballSize / 2;
+            //ballSpeedX = -ballSpeedX;
+            ballSpeedX = 5;
+            ballSpeedY = 5;
+        }
+
+    }
+
+    // Dibuja la escena
+    function draw() {
+
+        // Fondo negro
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Paletas del jugador 1 y jugador 2
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, player1PaddleY, paddleWidth, paddleHeight);
+        ctx.fillRect(canvas.width - paddleWidth, player2PaddleY, paddleWidth, paddleHeight);
+
+        // Bola
+        ctx.fillRect(ballX, ballY, ballSize, ballSize);
+
+        // Puntuaciones
+        ctx.fillStyle = "white";
+        ctx.font = "24px Arial";
+        ctx.fillText(scorePlayer1, 20, 30);
+        ctx.fillText(scorePlayer2, canvas.width - 40, 30);
+
+    }
+
+    // Bucle principal
+    function main() {
+        update();
+        draw();
+        requestAnimationFrame(main);
+    }
+
+    // Teclado
+        document.addEventListener("keydown", function(event) {
+        if (event.keyCode === 81) {
+            keyQ = true;
+        } else if (event.keyCode === 65) {
+            keyA = true;
+        } else if (event.keyCode === 38) {
+            keyUp = true;
+        } else if (event.keyCode === 40) {
+            keyDown = true;
+        }
+    });
+
+    document.addEventListener("keyup", function(event) {
+        if (event.keyCode === 81) {
+            keyQ = false;
+        } else if (event.keyCode === 65) {
+            keyA = false;
+        } else if (event.keyCode === 38) {
+            keyUp = false;
+        } else if (event.keyCode === 40) {
+            keyDown = false;
+        }
+    });
+
+    // Comienza el juego
+    requestAnimationFrame(main);
+
+  </script>
+</html>

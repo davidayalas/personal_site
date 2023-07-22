@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Asteroids</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+            width: 50%;
+        }
+    </style>
+    <script>
+        // Variables iniciales
+        var canvas = null;
+        var ctx = null;
+        var timer = null;
+
+        var SCORE = 0;
+        var LEVEL = 1;
+        var SCORE_MULTIPLIER = 1;
+
+        var keyboard = {};
+
+        var ship = {
+            x: 0,
+            y: 0,
+            r: 20,
+            angle: 0,
+            dx: 0,
+            dy: 0,
+            thrust: 0.1,
+            rotationSpeed: 5 * Math.PI / 180,
+            maxSpeed: 8,
+            img: new Image()
+        };
+
+        var bullets = [];
+        var asteroids = [];
+        var debris = [];
+
+        var ASTEROID_LARGE = 40;
+        var ASTEROID_MEDIUM = 20;
+        var ASTEROID_SMALL = 10;
+
+        // Funciones de utilidad
+        function loadImages() {
+            ship.img.src = "https://i.imgur.com/pjM27sN.png";
+            for (var i = 0; i < 3; i++) {
+                asteroids[i].img.src = "https://i.imgur.com/LyqSUx3.png";
+            }
+        }
+
+        function randomNum(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+        function dist(x1, y1, x2, y2) {
+            return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+        }
+
+        // Funciones del juego
+        function init() {
+            canvas = document.getElementById("gameCanvas");
+            ctx = canvas.getContext("2d");
+
+            canvas.width = window.innerWidth / 2;
+            canvas.height = window.innerHeight;
+
+            keyboard = {};
+            SCORE = 0;
+            LEVEL = 1;
+            SCORE_MULTIPLIER = 1;
+
+            ship.x = canvas.width / 2;
+            ship.y = canvas.height / 2;
+            ship.dx = 0;
+            ship.dy = 0;
+            ship.angle = -90 * Math.PI / 180;
+
+            bullets = [];
+            asteroids = [{
+                    x: randomNum(0, canvas.width),
+                    y: randomNum(0, canvas.height),
+                    r: ASTEROID_LARGE,
+                    dx: (Math.random() - 0.5) * 2,
+                    dy: (Math.random() - 0.5) * 2,
+                    img: new Image()
+                },
+                {
+                    x: randomNum(0, canvas.width),
+                    y: randomNum(0, canvas.height),
+                    r: ASTEROID_LARGE,
+                    dx: (Math.random() - 0.5) * 2,
+                    dy: (Math.random() - 0.5) * 2,
+                    img: new Image()
+                },
+                {
+                    x: randomNum(0, canvas.width),
+                    y: randomNum(0, canvas.height),
+                    r: ASTEROID_LARGE,
+                    dx: (Math.random() - 0.5) * 2,
+                    dy: (Math.random() - 0.5) * 2,
+                    img: new Image()
+                }
+            ];
+
+            debris = [];
+
+            loadImages();
+        }
+
+        function drawShip() {
+            ctx.save();
+            ctx.translate(ship.x, ship.y);
+            ctx.rotate(ship.angle);
+            ctx.drawImage(ship.img, -ship.r, -ship.r, ship.r * 2, ship.r * 2);
+            ctx.restore();
+        }
+
+        function moveShip() {
+            if (keyboard[37]) {
+                ship.angle -= ship.rotationSpeed;
+            }
+            if (keyboard[39]) {
+                ship.angle += ship.rotationSpeed;
+            }
+            if (keyboard[38]) {
+                ship.dx += Math.cos(ship.angle) * ship.thrust;
+                ship.dy += Math.sin(ship.angle) * ship.thrust;
+            }
+            if (keyboard[32]) {
+                bullets.push({
+                    x: ship.x + Math.cos(ship.angle) * ship.r,
+                    y: ship.y + Math.sin(ship.angle) * ship.r,
+                    dx: Math.cos(ship.angle) * 12,
+                    dy: Math.sin(ship.angle) * 12,
+                    r: 3
+                });
+            }
+
+            // Mover la nave
+            ship.dx *= 0.99;
+            ship.dy *= 0.99;
+            ship.x += ship.dx;
+            ship.y += ship.dy;
+
+            // Limitar la velocidad de la nave
+            var speed = Math.sqrt(ship.dx * ship.dx + ship.dy * ship.dy);
+            if (speed > ship.maxSpeed) {
+                ship.dx *= ship.maxSpeed / speed;
+                ship.dy *= ship.maxSpeed / speed;
+            }
+        }
+
+        function drawBullet() {
+            for (var i = 0; i < bullets.length; i++) {
+                ctx.fillStyle = "white";
+                ctx.beginPath();
+                ctx.arc(bullets[i].x, bullets[i].y, bullets[i].r, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
+
+        function moveBullet() {
+            for (var i = 0; i < bullets.length; i++) {
+                bullets[i].x += bullets[i].dx;
+                bullets[i].y += bullets[i].dy;
+
+                // Eliminar los proyectiles cuando salgan de la pantalla
+                if (bullets[i].x < 0 || bullets[i].x > canvas.width || bullets[i].y < 0 || bullets[i].y > canvas.height) {
+                    bullets.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
+        function drawAsteroid() {
+            for (var i = 0; i < asteroids.length; i++) {
+                ctx.drawImage(asteroids[i].img, asteroids[i].x - asteroids[i].r, asteroids[i].y - asteroids[i].r, asteroids[i].r * 2, asteroids[i].r * 2);
+            }
+        }
+
+        function moveAsteroid() {
+            for (var i = 0; i < asteroids.length; i++) {
+                asteroids[i].x += asteroids[i].dx;
+                asteroids[i].y += asteroids[i].dy;
+
+                // Comprobar si los asteroides están fuera de pantalla
+                if (asteroids[i].x < -50) {
+                    asteroids[i].x = canvas.width + 50;
+                } else if (asteroids[i].x > canvas.width + 50) {
+                    asteroids[i].x = -50;
+                }
+                if (asteroids[i].y < -50) {
+                    asteroids[i].y = canvas.height + 50;
+                } else if (asteroids[i].y > canvas.height + 50) {
+                    asteroids[i].y = -50;
+                }
+            }
+        }
+
+        function drawDebris() {
+            for (var i = 0; i < debris.length; i++) {
+                ctx.fillStyle = "white";
+                ctx.beginPath();
+                ctx.arc(debris[i].x, debris[i].y, debris[i].r, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
+
+        function moveDebris() {
+            for (var i = 0; i < debris.length; i++) {
+                debris[i].x += debris[i].dx;
+                debris[i].y += debris[i].dy;
+                debris[i].r -= 0.1;
+                debris[i].dx *= 0.99;
+                debris[i].dy *= 0.99;
+
+                // Eliminar el escombro cuando sea demasiado pequeño
+                if (debris[i].r < 0.1) {
+                    debris.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
+        function checkCollisions() {
+            // Comprobar colisiones entre asteroides y proyectiles
+            for (var i = 0; i < asteroids.length; i++) {
+                for (var j = 0; j < bullets.length; j++) {
+                    if (asteroids[i] && dist(asteroids[i].x, asteroids[i].y, bullets[j].x, bullets[j].y) < asteroids[i].r + bullets[j].r) {
+                        bullets.splice(j, 1);
+                        j--;
+
+                        debris.push({
+                            x: asteroids[i].x,
+                            y: asteroids[i].y,
+                            dx: (Math.random() - 0.5) * 10,
+                            dy: (Math.random() - 0.5) * 10,
+                            r: asteroids[i].r * 0.3
+                        });
+
+                        if (asteroids[i].r == ASTEROID_LARGE) {
+                            asteroids.push({
+                                x: asteroids[i].x,
+                                y: asteroids[i].y,
+                                r: ASTEROID_MEDIUM,
+                                dx: (Math.random() - 0.5) * 4,
+                                dy: (Math.random() - 0.5) * 4,
+                                img: new Image()
+                            }, {
+                                x: asteroids[i].x,
+                                y: asteroids[i].y,
+                                r: ASTEROID_MEDIUM,
+                                dx: (Math.random() - 0.5) * 4,
+                                dy: (Math.random() - 0.5) * 4,
+                                img: new Image()
+                            });
+                            SCORE += 20 * SCORE_MULTIPLIER;
+                            asteroids.splice(i, 1);
+                            i--;
+                        } else if (asteroids[i].r == ASTEROID_MEDIUM) {
+                            asteroids.push({
+                                x: asteroids[i].x,
+                                y: asteroids[i].y,
+                                r: ASTEROID_SMALL,
+                                dx: (Math.random() - 0.5) * 6,
+                                dy: (Math.random() - 0.5) * 6,
+                                img: new Image()
+                            }, {
+                                x: asteroids[i].x,
+                                y: asteroids[i].y,
+                                r: ASTEROID_SMALL,
+                                dx: (Math.random() - 0.5) * 6,
+                                dy: (Math.random() - 0.5) * 6,
+                                img: new Image()
+                            });
+                            SCORE += 50 * SCORE_MULTIPLIER;
+                            asteroids.splice(i, 1);
+                            i--;
+                        } else if (asteroids[i].r == ASTEROID_SMALL) {
+                            SCORE += 100 * SCORE_MULTIPLIER;
+                            asteroids.splice(i, 1);
+                            i--;
+                        }
+                    }
+                }
+            }
+
+            // Comprobar colisiones entre nave y asteroides
+            for (var i = 0; i < asteroids.length; i++) {
+                if (dist(asteroids[i].x, asteroids[i].y, ship.x, ship.y) < asteroids[i].r + ship.r) {
+                    init();
+                    break;
+                }
+            }
+        }
+
+        function drawScore() {
+            ctx.fillStyle = "white";
+            ctx.font = "20px Verdana";
+            ctx.fillText("Score: " + SCORE, 20, 30);
+            ctx.fillText("Level: " + LEVEL, 20, 60);
+        }
+
+        function draw() {
+            // Dibujar el fondo
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Dibujar la nave
+            drawShip();
+
+            // Dibujar los proyectiles
+            drawBullet();
+
+            // Dibujar los asteroides
+            drawAsteroid();
+
+            // Dibujar el escombro
+            drawDebris();
+
+            // Dibujar la puntuación
+            drawScore();
+        }
+
+        function move() {
+            // Mover la nave
+            moveShip();
+
+            // Mover los proyectiles
+            moveBullet();
+
+            // Mover los asteroides
+            moveAsteroid();
+
+            // Mover el escombro
+            moveDebris();
+
+            // Comprobar las colisiones
+            checkCollisions();
+
+            // Aumentar la puntuación y la complejidad a lo largo del tiempo
+            SCORE_MULTIPLIER = Math.floor(SCORE / 1000) + 1;
+            LEVEL = SCORE_MULTIPLIER;
+            var numAsteroids = asteroids.length;
+            if (SCORE_MULTIPLIER < numAsteroids) {
+                asteroids.splice(numAsteroids - SCORE_MULTIPLIER, SCORE_MULTIPLIER);
+            }
+            for (var i = numAsteroids; i < SCORE_MULTIPLIER; i++) {
+                asteroids.push({
+                    x: randomNum(0, canvas.width),
+                    y: randomNum(0, canvas.height),
+                    r: ASTEROID_LARGE,
+                    dx: (Math.random() - 0.5) * 2 * LEVEL,
+                    dy: (Math.random() - 0.5) * 2 * LEVEL,
+                    img: new Image()
+                });
+            }
+        }
+
+        function keydown(e) {
+            keyboard[e.keyCode] = true;
+        }
+
+        function keyup(e) {
+            keyboard[e.keyCode] = false;
+        }
+
+        function loop() {
+            move();
+            draw();
+            timer = requestAnimationFrame(loop);
+        }
+
+        window.addEventListener("load", function() {
+            init();
+            window.addEventListener("keydown", keydown);
+            window.addEventListener("keyup", keyup);
+            loop();
+        });
+    </script>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+</body>
+</html>

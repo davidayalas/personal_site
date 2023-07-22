@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Acelerómetro Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+
+    <script>
+        // Variables para el canvas
+        var canvas = document.getElementById("gameCanvas");
+        var ctx = canvas.getContext("2d");
+        var canvasWidth = canvas.width;
+        var canvasHeight = canvas.height;
+
+        // Variables para el juego
+        var x = canvasWidth / 2;
+        var y = canvasHeight / 2;
+        var radius = 20;
+        var speed = 5;
+        var xSpeed = 0;
+        var ySpeed = 0;
+        var score = 0;
+        var maxScore = 10;
+        var objectX = 0;
+        var objectY = 0;
+        var objectRadius = 10;
+
+        // Función para dibujar el círculo
+        function drawCircle() {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = "red";
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        // Función para dibujar el objeto
+        function drawObject() {
+            ctx.beginPath();
+            ctx.arc(objectX, objectY, objectRadius, 0, Math.PI * 2);
+            ctx.fillStyle = "blue";
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        // Función para actualizar la posición del círculo
+        function updateCircle() {
+            x += xSpeed;
+            y += ySpeed;
+
+            // Comprobar si el círculo ha salido del canvas
+            if (x < radius) {
+                x = radius;
+            }
+            if (x > canvasWidth - radius) {
+                x = canvasWidth - radius;
+            }
+            if (y < radius) {
+                y = radius;
+            }
+            if (y > canvasHeight - radius) {
+                y = canvasHeight - radius;
+            }
+
+            // Comprobar si el círculo ha recogido el objeto
+            if (Math.sqrt(Math.pow(x - objectX, 2) + Math.pow(y - objectY, 2)) < radius + objectRadius) {
+                score++;
+                objectX = Math.random() * canvasWidth;
+                objectY = Math.random() * canvasHeight;
+            }
+        }
+
+        // Función para actualizar la velocidad del círculo según el acelerómetro
+        function updateSpeed(event) {
+            xSpeed = event.accelerationIncludingGravity.x * speed;
+            ySpeed = event.accelerationIncludingGravity.y * speed;
+        }
+
+        // Añadir el listener del acelerómetro
+        window.addEventListener("devicemotion", updateSpeed);
+
+        // Función para dibujar y actualizar el juego
+        function drawGame() {
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            drawCircle();
+            drawObject();
+            updateCircle();
+
+            // Mostrar la puntuación
+            ctx.font = "20px Arial";
+            ctx.fillStyle = "black";
+            ctx.fillText("Score: " + score + "/" + maxScore, 10, 30);
+
+            // Comprobar si se ha alcanzado la puntuación máxima
+            if (score >= maxScore) {
+                ctx.font = "50px Arial";
+                ctx.fillStyle = "green";
+                ctx.fillText("¡Ganaste!", canvasWidth / 2 - 100, canvasHeight / 2);
+            } else {
+                requestAnimationFrame(drawGame);
+            }
+        }
+
+        // Iniciar el juego
+        objectX = Math.random() * canvasWidth;
+        objectY = Math.random() * canvasHeight;
+        drawGame();
+    </script>
+</body>
+</html>

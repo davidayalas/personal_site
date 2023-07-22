@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tetris Multicolor</title>
+	<style>
+		canvas {
+			display: block;
+			margin: 0 auto;
+			border: 2px solid black;
+			background-color: #eee;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+	<script>
+		// Elementos del juego
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		var rows = 20;
+		var cols = 10;
+		var blockSize = 30;
+		canvas.width = cols * blockSize;
+		canvas.height = rows * blockSize;
+		var grid = [];
+		for (var r = 0; r < rows; r++) {
+			grid[r] = [];
+			for (var c = 0; c < cols; c++) {
+				grid[r][c] = "#eee";
+			}
+		}
+		var shapes = [
+			{ blocks: [[1, 1, 0], [0, 1, 1]], color: "orange" },
+			{ blocks:[[0, 2, 0], [0, 2, 0], [0, 2, 2]], color: "blue" },
+			{ blocks:[[0, 3, 0], [0, 3, 0], [0, 3, 3]], color: "purple" },
+			{ blocks:[[0, 4, 4], [0, 4, 0], [0, 4, 0]], color: "green" },
+			{ blocks:[[0, 5, 5], [0, 5, 5]], color: "red" },
+			{ blocks:[[0, 6], [0, 6], [0, 6], [0, 6]], color: "yellow" },
+			{ blocks:[[0, 7, 0, 0], [0, 7, 0, 0], [0, 7, 0, 0], [0, 7, 0, 0]], color: "cyan" }
+		];
+		var currentShape = null;
+		var shapeRow = 0;
+		var shapeCol = 0;
+
+		// Función que dibuja el juego en la pantalla
+		function draw() {
+			// Dibujar el fondo del juego
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.fillStyle = "#eee";
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+			// Dibujar la cuadrícula del juego
+			for (var r = 0; r < rows; r++) {
+				for (var c = 0; c < cols; c++) {
+					ctx.fillStyle = grid[r][c];
+					ctx.fillRect(c * blockSize, r * blockSize, blockSize, blockSize);
+				}
+			}
+
+			// Dibujar la pieza actual
+			if (currentShape !== null) {
+				drawShape(currentShape.blocks, currentShape.color, shapeRow, shapeCol);
+			}
+
+			// Dibujar el puntaje actual en la pantalla
+			ctx.font = "20px Arial";
+			ctx.fillStyle = "black";
+			ctx.fillText("Score: " + score, 10, 30);
+		}
+
+		// Función que dibuja una pieza en la pantalla
+		function drawShape(blocks, color, row, col) {
+			ctx.fillStyle = color;
+			for (var r = 0; r < blocks.length; r++) {
+				for (var c = 0; c < blocks[r].length; c++) {
+					if (blocks[r][c] !== 0) {
+						ctx.fillRect((col + c) * blockSize, (row + r) * blockSize, blockSize, blockSize);
+					}
+				}
+			}
+		}
+
+		// Función que comprueba si una pieza colisiona con la cuadrícula
+		function collidesWithGrid(blocks, row, col) {
+			for (var r = 0; r < blocks.length; r++) {
+				for (var c = 0; c < blocks[r].length; c++) {
+					if (blocks[r][c] !== 0 &&
+						(row + r >= rows || col + c < 0 || col + c >= cols || grid[row + r][col + c] !== "#eee")
+					) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
+		// Función que fija una pieza en la cuadrícula
+		function fixShapeInGrid() {
+			var blocks = currentShape.blocks;
+			var color = currentShape.color;
+			for (var r = 0; r < blocks.length; r++) {
+				for (var c = 0; c < blocks[r].length; c++) {
+					if (blocks[r][c] !== 0) {
+						grid[shapeRow + r][shapeCol + c] = color;
+					}
+				}
+			}
+		}
+
+		// Función que comprueba si se puede mover la pieza actual hacia abajo
+		function canMoveDown() {
+			return !collidesWithGrid(currentShape.blocks, shapeRow + 1, shapeCol);
+		}
+
+		// Función que mueve la pieza actual hacia abajo
+		function moveDown() {
+			if (canMoveDown()) {
+				shapeRow++;
+			} else {
+				fixShapeInGrid();
+				removeCompletedRows();
+				newShape();
+			}
+		}
+
+		// Función que elimina las filas completadas
+		function removeCompletedRows() {
+			for (var r = rows - 1; r >= 0; r--) {
+				var rowCompleted = true;
+				for (var c = 0; c < cols; c++) {
+					if (grid[r][c] === "#eee") {
+						rowCompleted = false;
+						break;
+					}
+				}
+				if (rowCompleted) {
+					score++;
+					for (var rr = r - 1; rr >= 0; rr--) {
+						for (var c = 0; c < cols; c++) {
+							grid[rr + 1][c] = grid[rr][c];
+						}
+					}
+					r++; // Comprobar la misma fila
+				}
+			}
+		}
+
+		// Función que mueve la pieza actual hacia la izquierda
+		function moveLeft() {
+			if (!collidesWithGrid(currentShape.blocks, shapeRow, shapeCol - 1)) {
+				shapeCol--;
+			}
+		}
+
+		// Función que mueve la pieza actual hacia la derecha
+		function moveRight() {
+			if (!collidesWithGrid(currentShape.blocks, shapeRow, shapeCol + 1)) {
+				shapeCol++;
+			}
+		}
+
+		// Función que rota la pieza actual
+		function rotate() {
+			var rotatedBlocks = [];
+			for (var c = 0; c < currentShape.blocks[0].length; c++) {
+				rotatedBlocks[c] = [];
+				for (var r = 0; r < currentShape.blocks.length; r++) {
+					rotatedBlocks[c][currentShape.blocks.length - r - 1] = currentShape.blocks[r][c];
+				}
+			}
+			if (!collidesWithGrid(rotatedBlocks, shapeRow, shapeCol)) {
+				currentShape.blocks = rotatedBlocks;
+			}
+		}
+
+		// Función que genera una nueva pieza aleatoria
+		function newShape() {
+			var shape = shapes[Math.floor(Math.random() * shapes.length)];
+			currentShape = {
+				blocks: shape.blocks,
+				color: shape.color
+			};
+			shapeRow = 0;
+			shapeCol = Math.floor(cols / 2) - Math.floor(currentShape.blocks[0].length / 2);
+			if (collidesWithGrid(currentShape.blocks, shapeRow, shapeCol)) {
+				// Fin del juego
+				alert("Game Over");
+				location.reload();
+			}
+		}
+
+		var score = 0;
+		newShape();
+		var dropInterval = 1000; // Cada segundo
+		var lastTime = 0;
+		requestAnimationFrame(function gameLoop(time) {
+			var elapsedTime = time - lastTime;
+			lastTime = time;
+			if (elapsedTime > dropInterval) {
+				moveDown();
+			}
+			draw();
+			requestAnimationFrame(gameLoop);
+		});
+
+		// Capturar las pulsaciones de teclas para controlar la pieza actual
+		document.addEventListener("keydown", function(e) {
+			switch (e.keyCode) {
+				case 37: moveLeft(); break;
+				case 38: rotate(); break;
+				case 39: moveRight(); break;
+				case 40: moveDown(); break;
+			}
+		});
+	</script>
+</body>
+</html>

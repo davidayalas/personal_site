@@ -6,17 +6,24 @@ Then, I decided to use Netlify Functions (AWS Lambda) to capture webhook and pro
 
 * This lambda is based on the idea behind of https://staticman.net/ for publising comments into static sites and [JAMStack Lambda Comments](https://github.com/davidayalas/jamstack-lambda-comments)
 
-* It manages Twitter webhook validation: crc token (GET) and x-twitter-webhooks-signature (POST webhook)
-* On new tweets or retweets puts new markdown file into github repo to generate a build
-* Deletes from github deleted tweets or undone retweets 
-* For pinned tweets there isn't a webhook action. For that, I generate a build if webhook is a fav (favorited_status) on a tweet of my own.
+* ~~It manages Twitter webhook validation: crc token (GET) and x-twitter-webhooks-signature (POST webhook)~~  
+* ~~On new tweets or retweets puts new markdown file into github repo to generate a build~~  
+* ~~Deletes from github deleted tweets or undone retweets~~   
+* ~~For pinned tweets there isn't a webhook action. For that, I generate a build if webhook is a fav (favorited_status) on a tweet of my own.~~ 
+* I'm trying some twitter scrapping due to api restrictions ($).
 
 ## Environment variables
 
-* TWITTER:
-    * TWITTER_CONSUMER_KEY
-    * TWITTER_CONSUMER_SECRET
-    * TWITTER_USER
+* ~~TWITTER:~~  
+    * ~~TWITTER_CONSUMER_KEY~~  
+    * ~~TWITTER_CONSUMER_SECRET~~  
+    * TWITTER_USER  
+    * TWITTER_USER_ID 
+    * TWITTER_AUTH_TOKEN (from network tab in browser, url like https://twitter.com/i/api/graphql/XicnWRbyQ3WgVY__VataBQ/UserTweets?... from cookie ct0)
+    * TWITTER_BEARER_TOKEN (same, but headers)
+    * TWITTER_COOKIE_CT0
+    * TWITTER_GRAPHQL_ID (maybe not necessary, but... next path in url after /api/graphql)
+    * TWITTER_CSRF (another header in that request)
 
 * GIT
     * GIT_TYPE [optional] "GITHUB" or "GITLAB". Default "GITHUB"

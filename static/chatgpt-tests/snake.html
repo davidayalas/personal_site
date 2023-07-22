@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Snake Game</title>
+	<style>
+	    canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+			border: 1px solid black;
+        }
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+
+	<script>
+		// Obtener el elemento canvas y configurar su contexto
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+
+		// Configuraciones de juego
+		var blockSize = 10;
+		var snake = [{x: 10, y: 10}];
+		var food = {x: 0, y: 0};
+		var direction = "right";
+		var score = 0;
+
+		// Función que dibuja el cuadrado en las coordenadas dadas
+		function drawSquare(x, y) {
+			ctx.fillRect(x*blockSize, y*blockSize, blockSize, blockSize);
+		}
+
+		// Función que dibuja la serpiente
+		function drawSnake() {
+			snake.forEach(function(segment) {
+				drawSquare(segment.x, segment.y);
+			});
+		}
+
+		// Función que actualiza la serpiente
+		function updateSnake() {
+			// Calcular la posición de la nueva cabeza de la serpiente
+			var newHead = {x: snake[0].x, y: snake[0].y};
+			switch (direction) {
+				case "right": newHead.x++; break;
+				case "left": newHead.x--; break;
+				case "up": newHead.y--; break;
+				case "down": newHead.y++; break;
+			}
+
+			// Comprobar si la serpiente colisiona con las paredes del canvas
+			if (newHead.x * blockSize >= canvas.width) newHead.x = 0;
+			else if (newHead.x < 0) newHead.x = Math.floor(canvas.width / blockSize);
+			if (newHead.y * blockSize >= canvas.height) newHead.y = 0;
+			else if (newHead.y < 0) newHead.y = Math.floor(canvas.height / blockSize);
+
+			// Insertar la nueva cabeza de la serpiente al inicio y eliminar la cola
+			snake.unshift(newHead);
+			if (newHead.x == food.x && newHead.y == food.y) {
+				score++;
+				generateFood();
+			}
+			else snake.pop();
+		}
+
+		// Función que dibuja la comida
+		function drawFood() {
+			drawSquare(food.x, food.y);
+		}
+
+		// Función que genera una nueva comida aleatoria
+		function generateFood() {
+			// Generar una posición aleatoria dentro del canvas
+			var widthInBlocks = Math.floor(canvas.width / blockSize);
+			var heightInBlocks = Math.floor(canvas.height / blockSize);
+			food = {
+				x: Math.floor(Math.random() * widthInBlocks),
+				y: Math.floor(Math.random() * heightInBlocks)
+			};
+		}
+
+		// Función que dibuja el puntaje en la pantalla
+		function drawScore() {
+			ctx.font = "20px Arial";
+			ctx.fillStyle = "black";
+			ctx.fillText("Score: " + score, 10, 30);
+		}
+
+		// Función principal del juego
+		function gameLoop() {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			updateSnake();
+			drawSnake();
+			drawFood();
+			drawScore();
+			setTimeout(gameLoop, 50);
+		}
+		generateFood();
+		gameLoop();
+
+		// Capturar las pulsaciones de teclas para cambiar la dirección de la serpiente
+		document.addEventListener("keydown", function(e) {
+			switch (e.keyCode) {
+				case 37: direction = "left"; break;
+				case 38: direction = "up"; break;
+				case 39: direction = "right"; break;
+				case 40: direction = "down"; break;
+			}
+		});
+	</script>
+</body>
+</html>

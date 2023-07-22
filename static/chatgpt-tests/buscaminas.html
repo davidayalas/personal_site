@@ -1,0 +1,340 @@
+
+<html>
+<head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1 {
+    text-align: center;
+    color: white;
+    background-color: #333;
+    margin: 0;
+    padding: 10px;
+  }
+
+  #container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  #selector {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #selector label {
+    margin-right: 10px;
+  }
+
+  #selector select {
+    margin-right: 20px;
+  }
+
+  #selector button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+  }
+
+  #board {
+    display: grid;
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(10, 30px);
+    gap: 2px;
+    margin-top: 20px;
+  }
+
+  .cell {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: black;
+  }
+
+  .cell:hover {
+    background-color: #ddd;
+  }
+
+  .cell.mine {
+    background-color: red;
+  }
+
+  .cell.flagged {
+    background-color: yellow;
+  }
+
+</style>
+</head>
+<body>
+<h1>Buscaminas</h1>
+<div id="container">
+<div id="selector">
+<label for="size">Tamaño del campo:</label>
+<select id="size">
+<option value="10">10 x 10</option>
+<option value="15">15 x 15</option>
+<option value="20">20 x 20</option>
+</select>
+<button id="start">Empezar</button>
+</div>
+<div id="board"></div>
+</div>
+<script>
+
+// Variables globales
+let size = 10; // Tamaño del campo
+let mines = Math.floor(size * size * 0.15); // Número de minas
+let board = []; // Matriz que representa el campo
+let revealed = []; // Matriz que indica si una celda está revelada
+let flagged = []; // Matriz que indica si una celda está marcada con bandera
+let gameOver = false; // Indica si el juego ha terminado
+
+// Elementos del DOM
+let sizeSelector = document.getElementById("size");
+let startButton = document.getElementById("start");
+let boardElement = document.getElementById("board");
+
+// Función que genera el campo de forma aleatoria
+function generateBoard() {
+  
+// Inicializar las matrices vacías
+board = [];
+revealed = [];
+flagged = [];
+
+// Rellenar las matrices con ceros
+for (let i = 0; i < size; i++) {
+board[i] = [];
+revealed[i] = [];
+flagged[i] = [];
+for (let j = 0; j < size; j++) {
+board[i][j] = 0; // Cero indica que no hay mina
+revealed[i][j] = false; // Falso indica que no está revelada
+flagged[i][j] = false; // Falso indica que no está marcada
+}
+}
+
+// Colocar las minas de forma aleatoria
+let count = mines; // Contador de minas colocadas
+while (count > 0) {
+let i = Math.floor(Math.random() * size); // Fila aleatoria
+let j = Math.floor(Math.random() * size); // Columna aleatoria
+if (board[i][j] == 0) { // Si la celda no tiene mina
+board[i][j] = -1; // -1 indica que hay mina
+count--; // Decrementar el contador
+}
+}
+
+// Calcular los números de las celdas adyacentes a las minas
+for (let i = 0; i < size; i++) {
+for (let j = 0; j < size; j++) {
+if (board[i][j] == -1) { // Si la celda tiene mina
+// Recorrer las celdas vecinas
+for (let di = -1; di <= 1; di++) {
+for (let dj = -1; dj <=1; dj++) {
+// Si la celda vecina está dentro del campo y no tiene mina
+if (i + di >=0 && i + di < size && j + dj >=0 && j + dj < size && board[i + di][j + dj] != -1) {
+// Incrementar el número de la celda vecina en uno
+board[i + di][j + dj]++;
+}
+}
+}
+}
+}
+}
+
+}
+
+// Función que crea los elementos del DOM para el campo
+function createBoardElement() {
+
+// Vaciar el elemento del campo
+boardElement.innerHTML = "";
+
+// Establecer el número de columnas y filas según el tamaño del campo
+boardElement.style.gridTemplateColumns = `repeat(${size},30px)`;
+boardElement.style.gridTemplateRows = `repeat(${size},30px)`;
+
+// Crear los elementos para cada celda del campo
+for (let i =0; i < size; i++) {
+for (let j=0; j < size; j++) {
+
+// Crear un elemento div para la celda
+let cellElement = document.createElement("div");
+
+// Asignarle la clase cell y el id correspondiente a su posición
+cellElement.className = "cell";
+cellElement.id = `cell-${i}-${j}`;
+
+// Añadir un evento de clic izquierdo para revelar la celda
+cellElement.addEventListener("click", function() {
+revealCell(i,j);
+});
+
+// Añadir un evento de clic derecho para marcar o desmarcar la celda con bandera
+cellElement.addEventListener("contextmenu", function(e) {
+e.preventDefault(); // Evitar el menú contextual por defecto
+toggleFlag(i,j);
+});
+
+// Añadir el elemento al campo
+boardElement.appendChild(cellElement);
+
+}
+}
+
+}
+
+// Función que revela una celda y actualiza el DOM
+function revealCell(i,j) {
+
+// Si el juego ha terminado o la celda está marcada, no hacer nada
+if (gameOver || flagged[i][j]) return;
+
+// Si la celda tiene mina, mostrar todas las minas y terminar el juego
+if (board[i][j] == -1) {
+
+gameOver = true;
+
+for (let i=0; i < size; i++) {
+for (let j=0; j < size; j++) {
+if (board[i][j] == -1) { // Si la celda tiene mina
+
+// Obtener el elemento de la celda y asignarle la clase mine
+let cellElement = document.getElementById(`cell-${i}-${j}`);
+cellElement.className = "cell mine";
+
+}
+}
+}
+
+alert("¡Has perdido!");
+
+} else { // Si la celda no tiene mina
+
+// Revelar la celda y actualizar el DOM
+
+revealed[i][j] = true;
+
+let cellElement = document.getElementById(`cell-${i}-${j}`);
+cellElement.style.backgroundColor ="white";
+
+if (board[i][j] >0) { // Si la celda tiene un número, mostrarlo
+
+cellElement.textContent= board[i][j];
+
+} else { // Si la celda tiene un cero, revelar las celdas vecinas recursivamente
+
+for (let di=-1; di <=1; di++) {
+for (let dj=-1; dj <=1; dj++) {
+
+if (i + di >=0 && i + di < size && j + dj >=0 && j + dj < size && !revealed[i + di][j + dj]) {
+
+revealCell(i+di,j+dj);
+
+}
+}
+}
+
+}
+
+// Comprobar si se ha ganado el juego
+
+checkWin();
+
+}
+
+}
+
+// Función que marca o desmarca una celda con bandera y actualiza el DOM
+
+function toggleFlag(i,j) {
+
+// Si el juego ha terminado o la celda está revelada, no hacer nada
+
+if (gameOver || revealed[i][j]) return;
+
+// Cambiar el estado de la bandera y actualizar el DOM
+
+flagged[i][j] = !flagged[i][j];
+
+let cellElement= document.getElementById(`cell-${i}-${j}`);
+
+if (flagged[i][j]) { // Si se ha marcado la celda, asignarle la clase flagged
+
+cellElement.className ="cell flagged";
+
+} else { // Si se ha desmarcado la celda, quitarle la clase flagged
+
+cellElement.className ="cell";
+
+}
+
+}
+
+
+// Función que comprueba si se ha ganado el juego
+function checkWin() {
+
+// Contar el número de celdas reveladas y el número de minas marcadas
+let revealedCount = 0;
+let flaggedCount = 0;
+for (let i=0; i < size; i++) {
+for (let j=0; j < size; j++) {
+if (revealed[i][j]) revealedCount++;
+if (flagged[i][j]) flaggedCount++;
+}
+}
+
+// Si el número de celdas reveladas más el número de minas marcadas es igual al tamaño del campo al cuadrado, se ha ganado el juego
+if (revealedCount + flaggedCount == size * size) {
+
+gameOver = true;
+
+alert("¡Has ganado!");
+
+}
+
+}
+
+// Función que inicia el juego
+function startGame() {
+
+// Obtener el tamaño del campo del selector
+size = parseInt(sizeSelector.value);
+
+// Generar el campo
+generateBoard();
+
+// Crear el elemento del campo
+createBoardElement();
+
+// Reiniciar el estado del juego
+gameOver = false;
+
+}
+
+// Añadir un evento al botón de empezar para iniciar el juego
+startButton.addEventListener("click", startGame);
+
+// Iniciar el juego por primera vez
+startGame();
+
+</script>
+</body>
+</html>
