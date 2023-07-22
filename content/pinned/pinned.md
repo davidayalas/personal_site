@@ -1,8 +1,8 @@
 ---
 title: 
 description: >-
- Un placer explicar la experiencia de la UOC en el camino a la nube #AWSSummit Madrid 2022 #failfast #automateeverything #goserverless #goservicefull #lowcode #cloudnative #transform https://t.co/ofoTRQXB4x
-date: 2022-05-05T18:41:44.000Z
-id: 1522285433266352129
-media: https://pbs.twimg.com/media/FSA-iLFXEAI8NE0.jpg
+ Talking with chatGPT: "Yes, we can say that we are entering a humanless tech era. AI is revolutionizing the way we work and live, and it’s only going to become more prevalent in the future" #humanless
+date: 2023-03-25T08:23:25.000Z
+id: 1639543496271855616
+media: 
 ---
