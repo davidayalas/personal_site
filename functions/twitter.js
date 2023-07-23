@@ -84,6 +84,11 @@ async function fetchLatestTweets(){
     ;
 
     const tweets = await response.json();
+
+    if(tweets.errors && tweets.errors.length>0){
+        return [0, false, true, tweets.errors, []];
+    }
+
     const pinned = tweets.data.user.result.timeline_v2.timeline.instructions[1].entry;
     const entries = tweets.data.user.result.timeline_v2.timeline.instructions[2].entries;
 
@@ -120,7 +125,7 @@ async function fetchLatestTweets(){
         count++;
     }
 
-    return [count, newPinned];
+    return [count, newPinned, false, []];
 }
 
 /**
@@ -143,7 +148,8 @@ exports.handler = async event => {
 
     return {
         statusCode: 200,
-        body: "Pushed " + result[0] + " tweet/s" + (result[1] ? "\nNew pinned tweet" : "")
+        ...!result[2] && {body: "Pushed " + result[0] + " tweet/s" + (result[1] ? "\nNew pinned tweet" : "")},
+        ...result[2] && {body: "Error " + JSON.stringify(result[3])}
     }
 }
 
@@ -168,7 +174,8 @@ async function test(){
 
     return {
         statusCode: 200,
-        body: "Pushed " + result[0] + " tweet/s" + (result[1] ? "\nNew pinned tweet" : "")
+        ...!result[2] && {body: "Pushed " + result[0] + " tweet/s" + (result[1] ? "\nNew pinned tweet" : "")},
+        ...result[2] && {body: "Error " + JSON.stringify(result[3])}
     }
 }
 
