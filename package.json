@@ -8,7 +8,7 @@
         "netlify-lambda": "^1.4.3"
     },
     "scripts": {
-        "dev": "netlify-lambda serve functions",
+        "dev": "export NODE_OPTIONS=--openssl-legacy-provider && netlify-lambda serve functions",
         "install": "netlify-lambda install functions",
         "build": "netlify-lambda build functions"
     }
