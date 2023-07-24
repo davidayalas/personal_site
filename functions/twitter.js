@@ -18,13 +18,21 @@ const graphqlID = process.env.TWITTER_GRAPHQL_ID;
 const cookie_ct0 = process.env.TWITTER_COOKIE_CT0;
 const csrf_token = process.env.TWITTER_CSRF;
 
+async function fetchGitTweet(id){
+    if(!git){
+        git = new utils.git(git_options);
+    }
+
+    return await git.repo.get(`content/tweets/${id}.md`);
+}
+
 async function getTweetData(entry, pinned=false){
     let description="";
     let media="";
 
     //tweet id --> search in github repo
     tweetId = entry.entryId.replace("tweet-","");
-    tweet = await git.repo.get(`content/tweets/${tweetId}.md`);
+    tweet = await fetchGitTweet(tweetId);
 
     try{
         tweet = JSON.parse(tweet.body);
@@ -81,27 +89,42 @@ async function fetchLatestTweets(){
         return [0, false, true, tweets.errors, []];
     }
 
-    const pinned = tweets.data.user.result.timeline_v2.timeline.instructions[1].entry;
-    const entries = tweets.data.user.result.timeline_v2.timeline.instructions[2].entries;
+    let pinned = null, entries = null;
 
-    const pinnedData = await getTweetData(pinned, true);
-    let pinnedGit = await git.repo.get('content/pinned/pinned.md');
+    for(const instruction of tweets.data.user.result.timeline_v2.timeline.instructions){
+        switch(instruction.type){
+            case "TimelinePinEntry":
+                pinned = instruction.entry;
+                break;
+            case "TimelineAddEntries":
+                entries = instruction.entries;
+                break;
+        }
+    }
+
     let newPinned = false;
 
-    try{
-        pinnedGit = JSON.parse(pinnedGit.body);
-        let pinnedId;
-        if(pinnedGit.content){
-            pinnedId = Buffer.from(pinnedGit.content, 'base64').toString('utf8');
-            pinnedId = pinnedId.slice(pinnedId.indexOf("id: ")+4,pinnedId.indexOf("media:"));
+    if(pinned){
+        const pinnedData = await getTweetData(pinned, true);
+        let pinnedGit = await git.repo.get('content/pinned/pinned.md');
+    
+        try{
+            pinnedGit = JSON.parse(pinnedGit.body);
+            let pinnedId;
+            if(pinnedGit.content){
+                pinnedId = Buffer.from(pinnedGit.content, 'base64').toString('utf8');
+                pinnedId = pinnedId.slice(pinnedId.indexOf("id: ")+4,pinnedId.indexOf("media:"));
+            }
+    
+            if(!pinnedData.exists && (pinnedGit.message || pinnedId*1!=pinnedData.id*1)){
+                newPinned = true;
+                await git.repo.put('content/pinned/pinned.md', `---\ntitle: \ndescription: >-\n ${pinnedData.description.replace(/\n/g,"\n  ")}\ndate: ${pinnedData.date}\nid: ${pinnedData.id}\nmedia: ${pinnedData.media}\n---`, {"message":"twitter webhook [skip ci]"});
+            }
+        }catch(e){
+            console.log("pinned tweet error ",e.message);
         }
-
-        if(!pinnedData.exists && (pinnedGit.message || pinnedId*1!=pinnedData.id*1)){
-            newPinned = true;
-            await git.repo.put('content/pinned/pinned.md', `---\ntitle: \ndescription: >-\n ${pinnedData.description.replace(/\n/g,"\n  ")}\ndate: ${pinnedData.date}\nid: ${pinnedData.id}\nmedia: ${pinnedData.media}\n---`, {"message":"twitter webhook [skip ci]"});
-        }
-    }catch(e){
-        console.log("pinned tweet error ",e.message);
+    }else{
+        await git.repo.del('content/pinned/pinned.md');
     }
 
     let tweet, count=0;
@@ -135,7 +158,7 @@ exports.handler = async event => {
           "host" : "api.netlify.com",
           'method': "POST",
           "path" : `/build_hooks/${process.env.WEBHOOK_ID}`
-        });    
+        });
     }  
 
     return {
