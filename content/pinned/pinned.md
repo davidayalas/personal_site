@@ -1,8 +1,8 @@
 ---
 title: 
 description: >-
- I ❤️ AWS S3 Select https://t.co/Hng6UFHyAB
-date: 2020-05-18T15:52:13.000Z
-id: 1262410672261955590
+ Talking with chatGPT: "Yes, we can say that we are entering a humanless tech era. AI is revolutionizing the way we work and live, and it’s only going to become more prevalent in the future" #humanless
+date: 2023-03-25T08:23:25.000Z
+id: 1639543496271855616
 media: 
 ---
