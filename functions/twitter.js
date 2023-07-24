@@ -18,21 +18,13 @@ const graphqlID = process.env.TWITTER_GRAPHQL_ID;
 const cookie_ct0 = process.env.TWITTER_COOKIE_CT0;
 const csrf_token = process.env.TWITTER_CSRF;
 
-async function fetchGitTweet(id){
-    if(!git){
-        git = new utils.git(git_options);
-    }
-
-    return await git.repo.get(`content/tweets/${id}.md`);
-}
-
 async function getTweetData(entry, pinned=false){
     let description="";
     let media="";
 
     //tweet id --> search in github repo
     tweetId = entry.entryId.replace("tweet-","");
-    tweet = await fetchGitTweet(tweetId);
+    tweet = await git.repo.get(`content/tweets/${tweetId}.md`);
 
     try{
         tweet = JSON.parse(tweet.body);
