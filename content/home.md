@@ -1,6 +1,6 @@
 ---
 title: David Ayala
-html_title: David Ayala - Looking for ServiceFull Enterprise Architecture
+html_title: David Ayala - Looking for ServiceFul Enterprise Architecture
 header: /media/header-finland.jpg
 header_quality: 59
 description: ((Proud father x 2) && N's life partner)<br/>+<br/>(Head of Cloud
