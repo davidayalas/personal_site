@@ -19,7 +19,7 @@ doingnow: >-
 
   * **Former Director of IT/EA** @ [UOC](https://www.uoc.edu)
 
-  * **Associate lecturer** @ [UAB](https://www.uab.cat)
+  * **Associate professor** @ [UAB](https://www.uab.cat)
 
   * **Looking for the balance** between business, technology, simplicity ([KISS](https://en.m.wikipedia.org/wiki/KISS_principle)) and costs
 
