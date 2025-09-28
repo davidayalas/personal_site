@@ -35,7 +35,7 @@ doingnow: >-
 
   * Trying to **teach programming skills** to my children
 
-  * Running, karate, hikking
+  * Running, karate, hikking, domotics...
 
   * **[BZFlag](https://www.bzflag.org/)** player
 media: Media
