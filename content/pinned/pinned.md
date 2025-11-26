@@ -1,8 +1,8 @@
 ---
 title: 
 description: >-
- Talking with chatGPT: "Yes, we can say that we are entering a humanless tech era. AI is revolutionizing the way we work and live, and it’s only going to become more prevalent in the future" #humanless
-date: 2023-03-25T08:23:25.000Z
-id: 1639543496271855616
-media: 
+ Coding games with ChatGPT, Bing, Bard @UABBarcelona #everythingischanging #teachingdifferent https://t.co/Bx2ZvCPpqi
+date: 2023-10-21T18:03:44.000Z
+id: 1715790987858002399
+media: https://pbs.twimg.com/media/F8-2z1NW4AEV9zp.jpg
 ---

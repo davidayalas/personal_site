@@ -121,8 +121,6 @@ async function fetchLatestTweets() {
         return [0, false, true, tweets.errors, []];
     }
 
-
-
     // Check if the expected structure exists
     if (!tweets.data || !tweets.data.user || !tweets.data.user.result) {
         console.error('Unexpected response structure. Full response:', JSON.stringify(tweets).substring(0, 500));

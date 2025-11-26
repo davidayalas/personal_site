@@ -1,10 +1,10 @@
 ---
 title: David Ayala
-html_title: David Ayala - Looking for ServiceFull Enterprise Architecture
+html_title: David Ayala - Looking for ServiceFul Enterprise Architecture
 header: /media/header-finland.jpg
 header_quality: 59
 description: ((Proud father x 2) && N's life partner)<br/>+<br/>(Head of Cloud
-  Solutions @ CTTI.gencat.cat && <br />Associate lecturer @ UAB.cat)
+  Solutions @ CTTI.gencat.cat && <br />Associate Professor @ UAB.cat)
 message: '"Be Async, My Friend. <br /> Fail Fast, Again, Better" '
 meta_keywords: successful it architecture, everything as a service, enterprise
   architecture, ea, serverless, servicefull, kiss principle, it manager, design
@@ -19,7 +19,7 @@ doingnow: >-
 
   * **Former Director of IT/EA** @ [UOC](https://www.uoc.edu)
 
-  * **Associate lecturer** @ [UAB](https://www.uab.cat)
+  * **Associate professor** @ [UAB](https://www.uab.cat)
 
   * **Looking for the balance** between business, technology, simplicity ([KISS](https://en.m.wikipedia.org/wiki/KISS_principle)) and costs
 
@@ -35,7 +35,7 @@ doingnow: >-
 
   * Trying to **teach programming skills** to my children
 
-  * Running, karate, hikking
+  * Running, karate, hikking, domotics...
 
   * **[BZFlag](https://www.bzflag.org/)** player
 media: Media
