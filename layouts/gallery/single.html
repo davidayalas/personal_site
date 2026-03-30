@@ -1,84 +1,55 @@
-<!DOCTYPE HTML>
-<!--
-	Helios by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!DOCTYPE html>
 <html lang="en">
-	{{ $p := .Site.GetPage "page" "home.md" }}
-	{{ $.Scratch.Set "page" (.Site.GetPage "page" (print .Section "/_index.md")) }}
+{{ $p := .Site.GetPage "page" "home.md" }}
+{{ $mediaPage := .Site.GetPage "page" "media/index.md" }}
+<head>
+  {{ partial "head.html" (dict "context" . "data" $p "isServer" hugo.IsServer "testProd" $.Site.Params.testProd) }}
+</head>
+<body>
 
+<div class="page-header">
+  <div class="container">
+    <nav class="page-header__nav" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/gallery/">Gallery</a>
+      <span>/</span>
+      <span class="notranslate">{{ .Title }}</span>
+    </nav>
+  </div>
+</div>
 
-	{{ if not ($.Scratch.Get "page") }}
-		{{ $.Scratch.Set "page" . }}
-	{{ end }}
+<section class="section">
+  <div class="container">
+    <div class="gallery-single">
+      <a href="/gallery/" class="gallery-single__back">&larr; Back to gallery</a>
+      <h1 class="gallery-single__title notranslate">{{ .Title }}</h1>
+      <p class="gallery-single__date">{{ dateFormat "January 2, 2006" .Date }}</p>
 
-	{{ $page := $.Scratch.Get "page" }}
+      {{ if and (eq .Section "gallery") .Params.image }}
+        {{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}
+        {{ $thumb := $image }}
+        {{ if lt $image.Width $image.Height }}
+          {{ if gt $image.Width 750 }}
+            {{ $thumb = $image.Resize "750x q90" }}
+          {{ end }}
+        {{ else }}
+          {{ if gt $image.Width 1000 }}
+            {{ $thumb = $image.Resize "1000x q90" }}
+          {{ end }}
+        {{ end }}
+        <div class="gallery-single__image">
+          <a href="{{ $image.RelPermalink }}">
+            <img class="lozad" width="1" height="1" src="/images/1px.png"
+                 data-src="{{ $thumb.RelPermalink }}" alt="{{ .Title }}" />
+          </a>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
 
-	<head>
-		{{ partial "head.html" (dict "data" $p "isServer" .Site.IsServer "section" .Section "testProd" $.Site.Params.testProd )}}
-	</head>
-	<body class="no-sidebar {{.Section}}">
-		<div id="page-wrapper">
+{{ partial "footer.html" (dict "context" . "data" $p "isServer" hugo.IsServer "testProd" $.Site.Params.testProd) }}
 
-				<div id="header">
-					<!-- Inner -->
-					<div class="inner">
-						<header>
-							<h1><a href="/{{.Section}}">{{ $page.Title }}</a></h1>
-						</header>
-					</div>
-					<nav id="nav">
-						<ul>
-							<li style="white-space: nowrap;"><a href="/">Home</a></li>
-						</ul>
-					</nav>					
-				</div>
-
-				<!--section-->
-					<article id="main" class="container special">
-						<header>
-							<h2>{{ .Title }}</h2>
-						</header>
-						{{ if eq .Section "gallery" }}
-							<div class="image-container">
-								{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
-								{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
-								{{ $.Scratch.Set "thumb" $image }}
-
-								{{ $width1 := 750 }}
-								{{ $width2 := 1000 }}
-
-								{{ if lt $image.Width $image.Height }}
-									{{ if gt $image.Width $width1}}
-										{{ $.Scratch.Set "thumb" ($image.Resize "750x q90") }}
-									{{ end }}
-								{{ else }}
-									{{ if gt $image.Width $width2}}
-										{{ $.Scratch.Set "thumb" ($image.Resize "1000x q90") }}	
-									{{ end }}
-								{{ end }}
-
-								<a href="{{$image.RelPermalink}}"><img class="lozad" width="1" height="1" src="/images/1px.png" data-src="{{ ($.Scratch.Get "thumb").RelPermalink }}" alt="{{ .Title }}" /></a>
-							</div>	
-						{{ else if eq .Section "tweets" }}
-							<div class="{{ .Section }}">
-								<span>{{ dateFormat "02-01-2006 15:04" .Date }}</span><br /><br />
-								{{ safeHTML (replaceRE "(https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*))" "<a href='$1'>$1</a>" (replace .Description "\n" "<br />") ) }}
-								{{if ne .Params.media nil}}
-									{{ $ext := path.Ext .Params.media }}
-									<img src="/images/1px.png" width="1" height="1" data-origin="twitter" data-src="{{ replace .Params.media $ext ""}}?format=jpg&name=small" class="lozad" alt="" />
-								{{ end }}
-							</div
-							div>
-							
-						{{ else }}
-							{{ .Content }}
-						{{ end }}
-
-                    </article>
-				<!--/section-->
-
-				{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer "testProd" $.Site.Params.testProd) }}
-	</body>
+</body>
 </html>

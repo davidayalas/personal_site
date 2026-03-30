@@ -1,1 +1,38 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en">
+{{ $p := .Site.GetPage "page" "home.md" }}
+<head>
+  {{ partial "head.html" (dict "context" . "data" $p "isServer" hugo.IsServer "testProd" $.Site.Params.testProd) }}
+</head>
+<body>
+
+<div class="page-header">
+  <div class="container">
+    <h1 class="notranslate">{{ .Title }}</h1>
+    <nav class="page-header__nav">
+      <a href="/">&larr; Home</a>
+    </nav>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container" style="max-width:700px">
+    {{ if eq .Section "tweets" }}
+      <p style="color:var(--muted);font-size:.88rem;margin-bottom:1rem">{{ dateFormat "02-01-2006 15:04" .Date }}</p>
+      <p>{{ safeHTML (replaceRE "(https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*))" "<a href='$1'>$1</a>" (replace .Description "\n" "<br />")) }}</p>
+      {{ if ne .Params.media nil }}
+        {{ $ext := path.Ext .Params.media }}
+        <img src="/images/1px.png" width="1" height="1" data-origin="twitter"
+             data-src="{{ replace .Params.media $ext "" }}?format=jpg&name=small"
+             class="lozad" alt="" style="margin-top:1rem;border-radius:.5rem;max-width:100%" />
+      {{ end }}
+    {{ else }}
+      {{ .Content }}
+    {{ end }}
+  </div>
+</section>
+
+{{ partial "footer.html" (dict "context" . "data" $p "isServer" hugo.IsServer "testProd" $.Site.Params.testProd) }}
+
+</body>
+</html>

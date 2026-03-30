@@ -1,110 +1,111 @@
-<!DOCTYPE HTML>
-<!--
-	Helios by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!DOCTYPE html>
 <html lang="en">
-	{{ $scratch := newScratch }}
-	{{ $p := .Site.GetPage "page" "home.md" }}
-	{{ $mediaPage := .Site.GetPage "page" "media/index.md"}}
-	<head>
-		{{ partial "head.html" (dict "context" . "data" $p "isServer" .Site.IsServer "section" .Section "testProd" $.Site.Params.testProd )}}
-	</head> 
-	<body class="homepage">
-		<div id="page-wrapper">
-			<!-- Header -->
-				<div id="header" class="webp">
-					<!-- Inner -->
-					<div class="inner">
-						<header>
-							<h1 class="notranslate">{{ $p.Title }}</h1>
-							<hr />
-							<p class="notranslate"><strong>{{ safeHTML $p.Description }}</strong></p>
-							<strong>{{ if $p.Params.message }}</strong>
-							<hr />
-							<h2 class="notranslate">{{ safeHTML $p.Params.message }}</h2>
-							{{ end }}
-						</header>
-						<footer>
-							<a href="#banner" class="button circled scrolly notranslate" style="scroll-behavior: smooth!important">Start</a>
-						</footer>
-					</div>
-				</div>
+{{ $scratch := newScratch }}
+{{ $p := .Site.GetPage "page" "home.md" }}
+{{ $mediaPage := .Site.GetPage "page" "media/index.md" }}
+<head>
+  {{ partial "head.html" (dict "context" . "data" $p "isServer" hugo.IsServer "testProd" $.Site.Params.testProd) }}
+</head>
+<body>
 
-			<!-- Banner -->
-				<section id="banner">
-					<header>
-						<h2 class="notranslate">{{ $p.Params.social_title }}</h2>
-						<p>&nbsp;</p>
-						<ul class="icons">
-							{{ range $p.Params.social }}
-							<li><a href="{{.link}}" class="icon-{{.class}}" title="{{.title}}" aria-label="Link to {{.title}} profile"><span class="label">{{.title}}</span></a></li>
-							{{ end }}
-						</ul>
-					</header>
-				</section>
-			<!-- Main -->
+<!-- ══ HERO ═══════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero__inner">
+    <h1 class="hero__name notranslate">{{ $p.Title }}</h1>
+    <p class="hero__desc notranslate">{{ safeHTML $p.Description }}</p>
+    {{ if $p.Params.message }}
+    <p class="hero__quote notranslate">{{ safeHTML $p.Params.message }}</p>
+    {{ end }}
+    <div class="hero__actions">
+      <a href="#about" class="btn btn--ghost">About me</a>
+      <a href="/gallery/" class="btn btn--primary">Gallery</a>
+    </div>
+    <div class="hero__social">
+      {{ range $p.Params.social }}
+      <a href="{{ .link }}" title="{{ .title }}" aria-label="{{ .title }}">
+        <span class="icon-{{ .class }}" aria-hidden="true"></span>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+  <span class="hero__scroll" aria-hidden="true">Scroll</span>
+</section>
 
-				<div class="wrapper style2">
-					<article id="main" class="container special doingnow">
-						<header>
-							<h2>{{ $p.Params.doingnow_title }}</h2>
-						</header>
-						{{ markdownify (safeHTML $p.Params.doingnow) }}
-					</article>
+<!-- ══ ABOUT ══════════════════════════════════════════════════════ -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about__grid">
+      <div class="about__bio">
+        <span class="label">About me</span>
+        <h2>{{ $p.Params.doingnow_title }}</h2>
+        {{ markdownify (safeHTML $p.Params.doingnow) }}
+      </div>
+      <div class="about__links">
+        <span class="label">Find me online</span>
+        <h2 class="notranslate">{{ $p.Params.social_title }}</h2>
+        {{ range $p.Params.social }}
+        <a href="{{ .link }}" class="about__link-card notranslate">
+          <span class="card-icon icon-{{ .class }}"></span>
+          <div class="card-info">
+            <strong>{{ .title }}</strong>
+            <span>{{ .link }}</span>
+          </div>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
 
-				</div>
+<!-- ══ GALLERY ════════════════════════════════════════════════════ -->
+<section id="gallery" class="section section--alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="label">Photos</span>
+      <h2 class="notranslate">{{ $p.Params.media }}</h2>
+    </div>
+    <div class="gallery-grid">
+      {{ $max := $p.Params.number_of_images_home }}
+      {{ $count := 0 }}
+      {{ range where .Site.Pages "Section" "gallery" }}
+        {{ if and (lt $count $max) .Params.image }}
+          {{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}
+          {{ $thumb := $image.Fill "400x400 q85 Center" }}
+          <a href="{{ .Permalink }}" class="gallery-item">
+            <img src="/images/1px.png" width="1" height="1"
+                 data-src="{{ $thumb.RelPermalink }}"
+                 alt="{{ .Title }}" class="lozad" />
+            <div class="gallery-item__overlay">
+              <p class="gallery-item__title notranslate">{{ .Title }}</p>
+            </div>
+          </a>
+          {{ $count = add $count 1 }}
+        {{ end }}
+      {{ end }}
+    </div>
+    <div class="gallery-footer">
+      <a href="/gallery/" class="btn btn--outline">View all photos</a>
+    </div>
+  </div>
+</section>
 
-			<!-- Pictures -->
-				<section class="carousel special">
-					<header style="text-align: center">
-						<h2><a href="/gallery/" class="notranslate">{{$p.Params.media}}</a></h2>
-					</header>
+<!-- ══ TWEETS ═════════════════════════════════════════════════════ -->
+<section id="twitter" class="section tweets-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="label" style="color:rgba(255,255,255,0.5)">Social</span>
+      <h2>{{ $p.Params.timeline_title }}</h2>
+    </div>
+    <ul class="tweets">
+      {{ partial "tweets.html" (dict "context" . "data" $p) }}
+    </ul>
+    <div class="tweets-footer">
+      <a href="#" id="moretweets" class="btn btn--ghost">More tweets</a>
+    </div>
+  </div>
+</section>
 
-					<div class="reel">
-					{{ $scratch.Set "max" (add $p.Params.number_of_images 1)}}
-					{{ range first ($scratch.Get "max") (where .Site.Pages "Section" "gallery") }}
-		            	{{ if .Params.image }}
-			              	{{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}            
-		              		{{ $thumb := $image.Fill "320x320 q90 Center" }}
-							<article>
-								<a href="{{.Permalink}}" class="image featured"><img src="/images/1px.png" width="1" height="1" data-src="{{$thumb.RelPermalink}}" alt="{{.Title}}" class="lozad" /></a>
-								<H3 class="notranslate">{{ .Title }}</H3>
-							</article>
-						{{ end }}
-					{{ end }}
-					
-					<!--article><a href="/gallery" class="image featured"><h3><p style="padding:4em;">More images</p></h3></a><p>&nbsp;</p></article-->
+{{ partial "footer.html" (dict "context" . "data" $p "isServer" hugo.IsServer "testProd" $.Site.Params.testProd "isHome" $.IsHome) }}
 
-					</div>
-					<div class="backward"></div>
-					<div class="forward"></div>
-					{{ if gt (len (where .Site.Pages "Section" "gallery")) ($scratch.Get "max") }}
-					<footer>
-					<a href="/gallery/" class="button">More images</a>
-					</footer>
-					{{ end }}
-
-				</section>
-
-			<!-- Talks -->
-
-			<div class="wrapper style2">
-				<article id="main" class="container special doingnow">
-					<header>
-						<h2>{{ $p.Params.strategy_title }}</h2>
-					</header>
-					<ul>
-						{{ range $p.Params.strategy }}
-						<li><a href="{{.link}}" title="{{.title}}">{{.title}}</a></li>
-						{{ end }}
-					</ul>
-				</article>
-			</div>
-			
-
-				{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer "testProd" $.Site.Params.testProd "tweetsAPI" $.Site.Params.tweetsAPI "isHome" $.IsHome) }}
-	</body>
-	
+</body>
 </html>

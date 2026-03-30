@@ -17,11 +17,11 @@ doingnow: >-
   Solutions](https://blogs.msdn.microsoft.com/nickmalik/2014/11/11/the-architecture-manager-the-forgotten-enterprise-architecture-role/)**
   @ [CTTI](https://ctti.gencat.cat)
 
-  * **Former Director of IT/EA** @ [UOC](https://www.uoc.edu)
-
   * **Associate professor** @ [UAB](https://www.uab.cat)
 
-  * **Looking for the balance** between business, technology, simplicity ([KISS](https://en.m.wikipedia.org/wiki/KISS_principle)) and costs
+  * **Former Director of IT/EA** @ [UOC](https://www.uoc.edu)
+
+  * **Looking for the balance** between business, technology, simplicity [KISS](https://en.m.wikipedia.org/wiki/KISS_principle) and costs
 
   * Adding **value** to my company **through technology**
 
@@ -40,7 +40,8 @@ doingnow: >-
   * **[BZFlag](https://www.bzflag.org/)** player
 media: Media
 number_of_tweets: 20
-number_of_images: 6
+number_of_images_home: 8
+number_of_images_gallery: 12
 social_title: Networks
 social:
   - class: twitter

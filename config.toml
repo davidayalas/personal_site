@@ -9,7 +9,12 @@ publishdir = "public"
 
 assetDir = "static/assets"
 
-disableKinds = ["taxonomy", "taxonomyTerm"]
+disableKinds = ["taxonomy"]
+
+ignoreLogs = ["warning-goldmark-raw-html"]
+
+[markup.goldmark.renderer]
+  unsafe = true
 
 [params]
   timeDiff = 7200

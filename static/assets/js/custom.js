@@ -1,57 +1,19 @@
 _$().ready(function(){
 
-	_$(".doingnow ul").addClass("default");
-
+	// Lazy-load all images
 	const observer = window.lozad();
-	observer.observe();  
-	
+	observer.observe();
+
+	// "More tweets" toggle
 	_$("#moretweets").on("click", function(){
 		_$("#twitter ul li.hidden").slice(0,10).removeClass("hidden").addClass("visible");
 		if(_$("#twitter ul li.hidden").size()===0){
-			let tweets_button = _$("#moretweets").first().get();
-			tweets_button.setAttribute("href","/tweets/page/"+(Math.floor(number_of_tweets/10)+1));
-			tweets_button.setAttribute("onclick", function(){return true;});
+			var btn = _$("#moretweets").first().get();
+			btn.setAttribute("href","/tweets/page/"+(Math.floor(number_of_tweets/10)+1));
+			btn.setAttribute("onclick", function(){return true;});
 		}
 		return false;
 	});
-
-
-	var galleryContainer = _$(".reel").first().get();
-
-	_$(".forward").on("mouseenter",function(){
-		window.GalleryRepeater=setInterval(function(){
-			scrollTo(galleryContainer, "forward");   
-		}, 100);
- 	});
-	
-	_$(".forward").on("mouseout",function(){
-		clearInterval(window.GalleryRepeater);
- 	});
-
-	_$(".backward").on("mouseenter",function(){
-		window.GalleryRepeater=setInterval(function(){
-			scrollTo(galleryContainer, "backward");   
-		}, 100);
-	});
-
-	_$(".backward").on("mouseout",function(){
-		clearInterval(window.GalleryRepeater)
- 	});
-
-	var GalleryWidth = galleryContainer.offsetWidth;
-	var maxWidth = galleryContainer.scrollWidth-GalleryWidth; //(max width of picture+ margin-left) * 9 pictures
-	
-	function scrollTo(container, direction) {
-		var movement = 75;
-		window.GalleryTranslate = window.GalleryTranslate || 0;
-
-		if(direction==="forward" && (maxWidth>window.GalleryTranslate*-1)){
-			window.GalleryTranslate = window.GalleryTranslate-movement;
-		}else if(direction==="backward" && (window.GalleryTranslate*-1)>0){
-			window.GalleryTranslate = window.GalleryTranslate+movement;
-		}
-		container.style.transform = "translateX(" + window.GalleryTranslate + "px" + ")";
-	}
 
 });
 
