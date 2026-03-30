@@ -1,6 +1,9 @@
 [build]
   functions = "./functions-build"
 
+[build.environment]
+  HUGO_VERSION = "0.148.2"
+
 [[headers]]
   for = "*.woff"
   [headers.values]
