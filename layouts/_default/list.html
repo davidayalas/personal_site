@@ -9,11 +9,11 @@
 
 <div class="page-header">
   <div class="container">
-    <h1>{{ .Title }}</h1>
+    <h1>{{ .Title | safeHTML }}</h1>
     <nav class="page-header__nav" aria-label="Breadcrumb">
       <a href="/">&larr; Home</a>
       <span>/</span>
-      <span>{{ .Title }}</span>
+      <span>{{ .Title | safeHTML }}</span>
     </nav>
   </div>
 </div>

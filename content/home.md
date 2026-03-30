@@ -1,8 +1,8 @@
 ---
 title: David Ayala
 html_title: David Ayala - Looking for ServiceFul Enterprise Architecture
-header: /media/header-finland.jpg
-header_quality: 59
+#header: /media/header-finland.jpg
+#header_quality: 59
 description: ((Proud father x 2) && N's life partner)<br/>+<br/>(Head of Cloud
   Solutions @ CTTI.gencat.cat && <br />Associate Professor @ UAB.cat)
 message: '"Be Async, My Friend. <br /> Fail Fast, Again, Better" '
@@ -51,7 +51,7 @@ social:
     link: https://www.linkedin.com/in/davidayalas
     title: Linkedin
   - class: github
-    link: https://github.com/davidayalas?tab=repositories
+    link: https://github.com/davidayalas
     title: Github
   - class: instagram
     link: https://www.instagram.com/davidayalas

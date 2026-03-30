@@ -24,7 +24,7 @@
 
 /* --- Reset ----------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 ul, ol { list-style: none; }
@@ -652,9 +652,8 @@ ul.section-list.tweets img {
   flex-wrap: wrap;
   margin-top: 2.5rem;
 }
-.pagination li { display: flex; }
-.pagination li a,
-.pagination li span {
+.pagination .page-item { display: flex; }
+.pagination .page-link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -668,13 +667,13 @@ ul.section-list.tweets img {
   color: var(--text);
   transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
 }
-.pagination li.active a,
-.pagination li a:hover {
+.pagination .page-item.active .page-link,
+.pagination .page-link:hover {
   background: var(--accent);
   color: var(--white);
   border-color: var(--accent);
 }
-.pagination li.disabled span {
+.pagination .page-item.disabled .page-link {
   opacity: 0.35;
   pointer-events: none;
 }
@@ -724,11 +723,11 @@ a:hover .ico { opacity: 1; }
    ================================================================ */
 @media (max-width: 900px) {
   .about__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2.5rem;
   }
   ul.tweets {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -737,6 +736,10 @@ a:hover .ico { opacity: 1; }
 
   #hero { background-attachment: scroll; }
   .hero__scroll { display: none; }
+
+  .about__link-card:hover {
+    transform: none;
+  }
 
   .gallery-grid,
   .gallery-list-grid {

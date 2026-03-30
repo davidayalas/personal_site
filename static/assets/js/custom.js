@@ -9,7 +9,8 @@ _$().ready(function(){
 		_$("#twitter ul li.hidden").slice(0,10).removeClass("hidden").addClass("visible");
 		if(_$("#twitter ul li.hidden").size()===0){
 			var btn = _$("#moretweets").first().get();
-			btn.setAttribute("href","/tweets/page/"+(Math.floor(number_of_tweets/10)+1));
+			//btn.setAttribute("href","/tweets/page/"+(Math.floor(number_of_tweets/10)+1));
+			btn.setAttribute("href","/tweets/");
 			btn.setAttribute("onclick", function(){return true;});
 		}
 		return false;
