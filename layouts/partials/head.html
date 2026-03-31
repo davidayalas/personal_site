@@ -25,8 +25,15 @@
   {{ end }}
 {{ end }}
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" />
-<link rel="stylesheet" href="/assets/css/fontello.css" />
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" /></noscript>
+{{ if not $isServer }}
+  {{ $fontello := resources.Get "css/fontello.css" | resources.Fingerprint }}
+  <link rel="preload" href="{{ $fontello.Permalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" />
+  <noscript><link rel="stylesheet" href="{{ $fontello.Permalink }}" crossorigin="anonymous" /></noscript>
+{{ else }}
+  <link rel="stylesheet" href="/assets/css/fontello.css" />
+{{ end }}
 
 {{ if not $isServer }}
   {{ $css := resources.Get "css/site.css" | resources.Fingerprint }}
