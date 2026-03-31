@@ -35,9 +35,12 @@
   <link rel="stylesheet" href="/assets/css/fontello.css" />
 {{ end }}
 
+<style>{{ partial "critical-css.html" . | print | safeCSS }}</style>
+
 {{ if not $isServer }}
   {{ $css := resources.Get "css/site.css" | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous" />
+  <link rel="preload" href="{{ $css.Permalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous" />
+  <noscript><link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous" /></noscript>
 {{ else }}
   <link rel="stylesheet" href="/assets/css/site.css" />
 {{ end }}
