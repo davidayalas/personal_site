@@ -4,7 +4,7 @@
 {{ $p := .Site.GetPage "page" "home.md" }}
 {{ $mediaPage := .Site.GetPage "page" "media/index.md" }}
 <head>
-  {{ partial "head.html" (dict "context" . "data" $p "isServer" hugo.IsServer "testProd" $.Site.Params.testProd) }}
+  {{ partial "head.html" (dict "context" . "data" $p "isServer" .Site.IsServer "testProd" $.Site.Params.testProd) }}
 </head>
 <body>
 
@@ -105,7 +105,7 @@
   </div>
 </section>
 
-{{ partial "footer.html" (dict "context" . "data" $p "isServer" hugo.IsServer "testProd" $.Site.Params.testProd "isHome" $.IsHome) }}
+{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer "testProd" $.Site.Params.testProd "isHome" $.IsHome) }}
 
 </body>
 </html>

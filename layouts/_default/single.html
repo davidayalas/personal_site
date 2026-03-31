@@ -2,7 +2,7 @@
 <html lang="en">
 {{ $p := .Site.GetPage "page" "home.md" }}
 <head>
-  {{ partial "head.html" (dict "context" . "data" $p "isServer" hugo.IsServer "testProd" $.Site.Params.testProd) }}
+  {{ partial "head.html" (dict "context" . "data" $p "isServer" .Site.IsServer "testProd" $.Site.Params.testProd) }}
 </head>
 <body>
 
@@ -32,7 +32,7 @@
   </div>
 </section>
 
-{{ partial "footer.html" (dict "context" . "data" $p "isServer" hugo.IsServer "testProd" $.Site.Params.testProd) }}
+{{ partial "footer.html" (dict "context" . "data" $p "isServer" .Site.IsServer "testProd" $.Site.Params.testProd) }}
 
 </body>
 </html>
