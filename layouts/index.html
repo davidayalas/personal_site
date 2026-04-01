@@ -7,6 +7,7 @@
   {{ partial "head.html" (dict "context" . "data" $p "isServer" false "testProd" $.Site.Params.testProd) }}
 </head>
 <body>
+<main>
 
 <!-- ══ HERO ═══════════════════════════════════════════════════════ -->
 <section id="hero">
@@ -104,6 +105,8 @@
     </div>
   </div>
 </section>
+
+</main>
 
 {{ partial "footer.html" (dict "context" . "data" $p "isServer" false "testProd" $.Site.Params.testProd "isHome" $.IsHome) }}
 

@@ -303,11 +303,12 @@ strong { font-weight: 600; }
 
 .about__bio a {
   color: var(--accent-text);
-  border-bottom: 1px solid transparent;
-  transition: border-color var(--dur) var(--ease);
+  text-decoration: underline;
+  text-decoration-color: rgba(181, 53, 31, 0.45);
+  transition: text-decoration-color var(--dur) var(--ease);
 }
 .about__bio a:hover {
-  border-bottom-color: var(--accent-text);
+  text-decoration-color: var(--accent-text);
 }
 
 .about__links {
@@ -537,7 +538,7 @@ ul.tweets li:hover {
 ul.tweets li a {
   color: var(--accent);
   text-decoration: underline;
-  text-decoration-color: transparent;
+  text-decoration-color: rgba(232, 93, 74, 0.45);
   transition: text-decoration-color var(--dur) var(--ease);
 }
 ul.tweets li a:hover {
