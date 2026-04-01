@@ -38,10 +38,17 @@
           <img src="/images/1px.png" width="1" height="1" data-src="/images/github2.png" alt="Github" class="ico lozad" />
         </a>
       </div>
-      {{ if eq $c.RelPermalink "/" }}
-        <a href="/admin/#/collections/home/entries/home" class="edit-link">✏️ Edit this page</a>
-        <a href="/admin/#/collections/gallery/new" class="edit-link">+ Add image</a>
-      {{ end }}
+
+      <div class="site-footer__inner">
+        <a href="https://pagespeed.web.dev/analysis?url=https://davidayala.me" target="_blank" class="edit-link" style="display:inline-flex;align-items:center;gap:0.3rem;white-space:nowrap">
+          <img src="/images/1px.png" width="1" height="1" data-src="/images/pagespeed.png" alt="PageSpeed Insights" class="ico lozad" /><span>PageSpeed Insights</span>
+        </a>
+
+        {{ if eq $c.RelPermalink "/" }}
+          <a href="/admin/#/collections/home/entries/home" class="edit-link">✏️ Edit this page</a>
+          <a href="/admin/#/collections/gallery/new" class="edit-link">+ Add image</a>
+        {{ end }}
+      </div>
     </div>
   </div>
 </footer>
