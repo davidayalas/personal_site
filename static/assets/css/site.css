@@ -152,7 +152,6 @@ strong { font-weight: 600; }
   justify-content: center;
   text-align: center;
   background: var(--bg-dark) center/cover no-repeat;
-  background-attachment: fixed;
   overflow: hidden;
 }
 
@@ -744,7 +743,6 @@ a:hover .ico { opacity: 1; }
 @media (max-width: 600px) {
   .section { padding-block: 3rem; }
 
-  #hero { background-attachment: scroll; }
   .hero__scroll { display: none; }
 
   .about__link-card:hover {

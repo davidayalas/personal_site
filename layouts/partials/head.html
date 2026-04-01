@@ -17,8 +17,7 @@
 <link rel="manifest" href="/manifest.json">
 
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" href="/assets/fonts/inter-latin-v20.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 <link rel="preload" href="/assets/fonts/fontello.woff2?79438795" as="font" type="font/woff2" crossorigin="anonymous" />
 
 {{ if $p.Params.header }}
@@ -30,8 +29,6 @@
   {{ end }}
 {{ end }}
 
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" /></noscript>
 {{ if not $isServer }}
   {{ $fontello := resources.Get "css/fontello.css" | resources.Fingerprint }}
   <link rel="preload" href="{{ $fontello.Permalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" />
@@ -51,6 +48,8 @@
 {{ end }}
 
 {{ if $p.Params.header }}
+<link rel="preload" as="image" href="{{ ($c.Scratch.Get "header_mobile").RelPermalink }}" media="(max-width: 600px)" />
+<link rel="preload" as="image" href="{{ ($c.Scratch.Get "header").RelPermalink }}" media="(min-width: 601px)" />
 <style>
   #hero {
     background-image: url("{{ ($c.Scratch.Get "header").RelPermalink }}");
