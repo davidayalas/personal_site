@@ -1,0 +1,224 @@
+<svg width="1000" height="760" viewBox="0 0 1000 760" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Sophisticated Shadows -->
+    <filter id="premium-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" />
+      <feOffset dx="0" dy="8" result="offsetblur" />
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3" />
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Glowing Lines Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+      <feMerge>
+        <feMergeNode in="coloredBlur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Arrowhead (grey, for solid lines) -->
+    <marker id="arrowhead-premium" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748B" />
+    </marker>
+
+    <!-- Arrowhead (purple, for dashed lines) -->
+    <marker id="arrowhead-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6366F1" />
+    </marker>
+
+    <!-- Gradients -->
+    <linearGradient id="grad-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E293B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0F172A;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="grad-node" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#334155;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E293B;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="grad-netlify" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#25E5D7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#009489;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="grad-hugo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF4088;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C2185B;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="grad-twitter" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1DA1F2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0C85D0;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="grad-lambda" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9900;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E68A00;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="grad-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366F1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4F46E5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="760" fill="url(#grad-bg)" />
+
+  <style>
+    .node-bg { fill: url(#grad-node); stroke: #334155; stroke-width: 1.5; filter: url(#premium-shadow); }
+    .label-main { font-family: 'Outfit', 'Inter', sans-serif; font-size: 15px; fill: #F8FAFC; font-weight: 600; }
+    .label-sub { font-family: 'Inter', sans-serif; font-size: 11px; fill: #94A3B8; font-weight: 400; }
+    .conn-line { fill: none; stroke: #475569; stroke-width: 2.5; marker-end: url(#arrowhead-premium); }
+    .conn-line-dashed { fill: none; stroke: #6366F1; stroke-width: 2; stroke-dasharray: 6,4; marker-end: url(#arrowhead-purple); filter: url(#glow); }
+    .conn-text { font-family: 'Inter', sans-serif; font-size: 12px; fill: #CBD5E1; font-weight: 500; }
+    .logo-text { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+  </style>
+
+  <!-- ============================================================ -->
+  <!-- COLUMN 1: ADMIN > NETLIFY CMS > GITHUB                       -->
+  <!-- ============================================================ -->
+  
+  <!-- Admin Node (circle, top left) -->
+  <!-- Admin circle: center=(140, 80), r=38 → bottom edge at y=118 -->
+  <g transform="translate(100, 40)">
+    <circle cx="40" cy="40" r="38" class="node-bg" />
+    <g transform="translate(25, 23) scale(1.3)">
+        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="#94A3B8"/>
+        <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.12.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.40 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.22.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" fill="#FDBA74" transform="scale(0.5) translate(40, -10)"/>
+    </g>
+    <text x="40" y="105" text-anchor="middle" class="label-main">Admin</text>
+    <text x="40" y="120" text-anchor="middle" class="label-sub">Content Creator</text>
+  </g>
+
+  <!-- Connection Admin → Netlify CMS -->
+  <!-- Admin bottom is at absolute y=118; labels end at ~y=160; arrow starts clear at 168 -->
+  <path d="M140 165 L140 228" class="conn-line" />
+  <text x="148" y="200" class="conn-text">Admin content (me)</text>
+
+  <!-- Netlify CMS Box: shifted down to y=238 for breathing room -->
+  <!-- Box: x=40..240, y=238..328 -->
+  <g transform="translate(40, 238)">
+    <rect width="200" height="90" rx="14" class="node-bg" />
+    <text x="100" y="55" text-anchor="middle" class="logo-text" fill="#F8FAFC">Netlify <tspan fill="#25E5D7">CMS</tspan></text>
+  </g>
+
+  <!-- Connect Netlify CMS → GitHub -->
+  <!-- Netlify CMS bottom = 238+90=328; arrow starts at 333 -->
+  <path d="M140 333 L140 418" class="conn-line" />
+  <text x="148" y="380" class="conn-text">Github API</text>
+
+  <!-- GitHub Node: shifted down to y=428 -->
+  <!-- Box: x=40..240, y=428..518 -->
+  <g transform="translate(40, 428)">
+    <rect width="200" height="90" rx="14" class="node-bg" />
+    <g transform="translate(30, 25) scale(1.6)">
+      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="#F0F6FC"/>
+    </g>
+    <text x="125" y="55" text-anchor="middle" class="logo-text" fill="#F8FAFC">GitHub</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- COLUMN 2: YOU > NETLIFY > HUGO                               -->
+  <!-- ============================================================ -->
+
+  <!-- User Node (circle) -->
+  <!-- User circle: center=(470, 70), r=45 → bottom at y=115, labels end at ~153 -->
+  <g transform="translate(420, 20)">
+    <circle cx="50" cy="50" r="45" class="node-bg" />
+    <g transform="translate(30, 30) scale(1.6)">
+        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="url(#grad-accent)"/>
+    </g>
+    <text x="50" y="115" text-anchor="middle" class="label-main">You</text>
+    <text x="50" y="130" text-anchor="middle" class="label-sub">End User</text>
+  </g>
+
+  <!-- Connect User → Netlify -->
+  <!-- User labels end at absolute y=150; Netlify top at 250; arrow: 158 → 248 -->
+  <path d="M470 158 L470 248" class="conn-line" />
+  <text x="478" y="208" class="conn-text">Content via CDN</text>
+
+  <!-- Netlify Build Center: y=250 -->
+  <!-- Box: x=360..580, y=250..350 -->
+  <g transform="translate(360, 250)">
+    <rect width="220" height="100" rx="14" class="node-bg" style="stroke: #25E5D7; stroke-width: 2.5; filter: drop-shadow(0 0 8px rgba(37, 229, 215, 0.3));" />
+    <g transform="translate(30, 30) scale(1.5)">
+        <path d="M6.49 19.04h-.23L5.13 17.9v-.23l1.73-1.71h1.2l.15.15v1.2L6.5 19.04ZM5.13 6.31V6.1l1.13-1.13h.23L8.2 6.68v1.2l-.15.15h-1.2L5.13 6.31Zm9.96 9.09h-1.65l-.14-.13v-3.83c0-.68-.27-1.2-1.1-1.23-.42 0-.9 0-1.43.02l-.07.08v4.96l-.14.14H8.9l-.13-.14V8.73l.13-.14h3.7a2.6 2.6 0 0 1 2.61 2.6v4.08l-.13.14Zm-8.37-2.44H.14L0 12.82v-1.64l.14-.14h6.58l.14.14v1.64l-.14.14Zm17.14 0h-6.58l-.14-.14v-1.64l.14-.14h6.58l.14.14v1.64l-.14.14ZM11.05 6.55V1.64l.14-.14h1.65l.14.14v4.9l-.14.14h-1.65l-.14-.13Zm0 15.81v-4.9l.14-.14h1.65l.14.13v4.91l-.14.14h-1.65l-.14-.14Z" fill="url(#grad-netlify)"/>
+    </g>
+    <text x="135" y="62" text-anchor="middle" class="logo-text" fill="#25E5D7">Netlify</text>
+  </g>
+
+  <!-- Webhook GitHub → Netlify (dashed) -->
+  <!-- GitHub right edge at 40+200=240; Netlify left edge at 360; GitHub center y=428+45=473 -->
+  <path d="M242 473 L320 473 L320 300 L358 300" class="conn-line-dashed" />
+  <text x="282" y="493" class="conn-text" style="fill: #6366F1;">webhook</text>
+
+  <!-- Connection Netlify → Hugo -->
+  <!-- Netlify bottom = 250+100=350; Hugo top = 440; arrow: 356 → 438 -->
+  <path d="M470 356 L470 438" class="conn-line" />
+  <text x="478" y="400" class="conn-text">Build &amp; Host</text>
+
+  <!-- Hugo static generator: y=440 -->
+  <!-- Box: x=360..580, y=440..530 -->
+  <g transform="translate(360, 440)">
+    <rect width="220" height="90" rx="14" class="node-bg" />
+    <g transform="translate(30, 25) scale(1.5)">
+        <path d="M11.754 0a3.998 3.998 0 00-2.049.596L3.33 4.532a4.252 4.252 0 00-2.017 3.615v8.03c0 1.473.79 2.838 2.067 3.574l6.486 3.733a3.88 3.88 0 003.835.018l7.043-3.966a3.817 3.817 0 001.943-3.323V7.752a3.57 3.57 0 00-1.774-3.084L13.817.541a3.998 3.998 0 00-2.063-.54zm.022 1.674c.413-.006.828.1 1.2.315l7.095 4.127c.584.34.941.96.94 1.635v8.462c0 .774-.414 1.484-1.089 1.864l-7.042 3.966a2.199 2.199 0 01-2.179-.01l-6.485-3.734a2.447 2.447 0 01-1.228-2.123v-8.03c0-.893.461-1.72 1.221-2.19l6.376-3.935a2.323 2.323 0 011.19-.347zm-4.7 3.844V18.37h2.69v-5.62h4.46v5.62h2.696V5.518h-2.696v4.681h-4.46V5.518Z" fill="url(#grad-hugo)"/>
+    </g>
+    <text x="135" y="58" text-anchor="middle" class="logo-text" fill="#FF4088">HUGO</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- COLUMN 3: TWITTER & NETLIFY FUNCTIONS (AWS Lambda)           -->
+  <!-- ============================================================ -->
+
+  <!-- Twitter 'web': x=720..900, y=50..170 -->
+  <g transform="translate(720, 50)">
+    <rect width="180" height="120" rx="14" class="node-bg" style="stroke: #1DA1F2; stroke-width: 2;" />
+    <g transform="translate(65, 28) scale(2)">
+      <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" fill="url(#grad-twitter)"/>
+    </g>
+    <text x="90" y="105" text-anchor="middle" class="label-main">Twitter</text>
+  </g>
+
+  <!-- Netlify Functions (AWS Lambda): y=255, same width as Netlify (220x100) -->
+  <!-- Box: x=700..920, y=255..355 -->
+  <g transform="translate(700, 255)">
+    <rect width="220" height="100" rx="14" class="node-bg" style="stroke: #FF9900; stroke-width: 2;" />
+
+    <!-- Official AWS Lambda icon (exact path from AWS Architecture Icons CDN) -->
+    <!-- Icon viewBox 0 0 64 64, scaled to ~75% and placed at left side of box -->
+    <g transform="translate(8, 10) scale(0.8)">
+      <path d="M22.6794094,52 L13.5740701,52 L23.8376189,30.41 L28.3997494,39.861 L22.6794094,52 Z M24.7269406,27.667 C24.5606285,27.321 24.2120702,27.103 23.8306478,27.103 L23.8276601,27.103 C23.4452418,27.104 23.0966835,27.325 22.9323632,27.672 L11.0973143,52.569 C10.9499239,52.879 10.9708374,53.243 11.1540795,53.534 C11.3353298,53.824 11.6540117,54 11.9955989,54 L23.309802,54 C23.695208,54 24.0447622,53.777 24.2100784,53.428 L30.4044577,40.284 C30.5329264,40.01 30.5319305,39.692 30.3994783,39.42 L24.7269406,27.667 Z M51.0082382,52 L41.985557,52 L26.9547262,19.578 C26.7914017,19.226 26.4388599,19 26.0524581,19 L20.1279625,19 L20.1349337,12 L31.8146251,12 L46.7747483,44.42 C46.9380728,44.774 47.2906147,45 47.6790082,45 L51.0082382,45 L51.0082382,52 Z M52.0041191,43 L48.3143803,43 L33.354257,10.58 C33.1909326,10.226 32.8383907,10 32.450993,10 L19.1400486,10 C18.5913182,10 18.1451636,10.447 18.1441677,10.999 L18.1362006,19.999 C18.1362006,20.265 18.2407681,20.519 18.4269979,20.707 C18.6142235,20.895 18.8671772,21 19.1310857,21 L25.4170861,21 L40.4479168,53.422 C40.6112413,53.774 40.9627873,54 41.350185,54 L52.0041191,54 C52.5548412,54 53,53.552 53,53 L53,44 C53,43.448 52.5548412,43 52.0041191,43 Z" fill="#FF9900"/>
+    </g>
+
+    <!-- Text to the right of the icon -->
+    <text x="148" y="44" text-anchor="middle" class="label-main" style="font-size: 16px;">Functions</text>
+    <text x="148" y="62" text-anchor="middle" class="label-sub">Netlify / AWS Lambda</text>
+    <text x="148" y="78" text-anchor="middle" class="label-sub">Twitter poll &amp; push</text>
+  </g>
+
+  <!-- Lambda Connect → Twitter -->
+  <!-- Lambda top = 255; Twitter bottom = 50+120=170; arrow from 810,253 upwards to 810,172 -->
+  <path d="M810 253 L810 172" class="conn-line" />
+  <text x="820" y="216" class="conn-text" style="font-size: 10px;">fetch UserTweets</text>
+
+  <!-- Lambda → Netlify build trigger (dashed webhook) -->
+  <!-- Netlify right edge = 360+220=580. Arrow must end BEFORE x=580 so arrowhead is visible outside. End at 568. -->
+  <path d="M698 305 L568 305" class="conn-line-dashed" />
+  <text x="632" y="295" text-anchor="middle" class="conn-text">webhook</text>
+  <text x="632" y="320" text-anchor="middle" class="label-sub" style="font-size: 9px;">trigger build</text>
+
+  <!-- Lambda → Github (PUT/push tweets) -->
+  <!-- Lambda bottom = 255+100=355; GitHub left edge is at 40, center y=428+45=473 -->
+  <path d="M810 357 L810 660 L140 660 L140 520" class="conn-line" />
+  <text x="475" y="650" text-anchor="middle" class="conn-text">Push processed tweets to GIT</text>
+
+</svg>

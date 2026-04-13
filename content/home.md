@@ -96,7 +96,7 @@ miniprojects:
     link: https://github.com/davidayalas/gsuite-directory-query-user
     title: GSuite Directory Query User
 architecture_title: Architecture Diagram of this site
-architecture_diagram: /media/personal-site.png
+architecture_diagram: /media/architecture.svg
 strategy_title: Some talks and presentations
 strategy:
   - link: /docs/AWS_Summit_2022_Madrid_UOC.pdf
