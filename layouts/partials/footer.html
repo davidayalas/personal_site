@@ -62,7 +62,11 @@
     for(var i=0;i<imgs.length;i++){
       var src = imgs[i].getAttribute('data-src');
       if(src && src.indexOf('/media/')>-1 && imgs[i].getAttribute('data-origin')!=='twitter'){
-        imgs[i].setAttribute('data-src', src.slice(src.indexOf('/media/'))+'.webp');
+        var mediaPath = src.slice(src.indexOf('/media/'));
+        var basePath = mediaPath.split('?')[0].toLowerCase();
+        if(/\.(jpg|jpeg|png)$/.test(basePath)){
+          imgs[i].setAttribute('data-src', mediaPath + '.webp');
+        }
       }
     }
   };
