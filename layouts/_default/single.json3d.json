@@ -1,0 +1,66 @@
+{{- $mediaPage := .Site.GetPage "page" "media/index.md" -}}
+{{- $gallery := slice -}}
+{{- range where .Site.Pages "Section" "gallery" -}}
+  {{- if .Params.image -}}
+    {{- $img := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") -}}
+    {{- if $img -}}
+      {{- $thumb := $img.Fill "512x512 q80 Center" -}}
+      {{- $gallery = $gallery | append (dict
+          "title" .Title
+          "date" (.Date.Format "2006-01-02")
+          "url" .RelPermalink
+          "image" $thumb.RelPermalink
+        ) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $tweets := slice -}}
+{{- range where .Site.Pages "Section" "tweets" -}}
+  {{- $media := "" -}}
+  {{- if .Params.media -}}
+    {{- $ext := path.Ext .Params.media -}}
+    {{- $media = printf "%s?format=jpg&name=small" (replace .Params.media $ext "") -}}
+  {{- end -}}
+  {{- $tweets = $tweets | append (dict
+      "id" .Params.id
+      "date" .Params.date
+      "text" .Description
+      "media" $media
+    ) -}}
+{{- end -}}
+{{- $tweets = sort $tweets "date" "desc" -}}
+
+{{- $doingnowItems := slice -}}
+{{- range split (.Params.doingnow | default "") "\n" -}}
+  {{- $line := trim . " " -}}
+  {{- if hasPrefix $line "* " -}}
+    {{- $clean := substr $line 2 -}}
+    {{- $clean = replaceRE `\*\*(.*?)\*\*` "$1" $clean -}}
+    {{- $clean = replaceRE `\[([^\]]+)\]\([^\)]+\)` "$1" $clean -}}
+    {{- $clean = replaceRE `<[^>]+>` "" $clean -}}
+    {{- $clean = replaceRE `\s+` " " $clean -}}
+    {{- $doingnowItems = $doingnowItems | append (trim $clean " ") -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $architectureImage := "" -}}
+{{- if .Params.architecture_diagram -}}
+  {{- $archImg := $mediaPage.Resources.GetMatch (replace .Params.architecture_diagram "/media/" "") -}}
+  {{- if $archImg -}}
+    {{- $architectureImage = $archImg.RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $profile := dict
+    "title" .Title
+    "description" .Params.description
+    "message" .Params.message
+    "doingnow_title" .Params.doingnow_title
+    "doingnow_items" $doingnowItems
+    "social" .Params.social
+    "architecture_title" .Params.architecture_title
+    "architecture_image" $architectureImage
+  -}}
+
+{{- dict "profile" $profile "gallery" $gallery "tweets" $tweets | jsonify -}}

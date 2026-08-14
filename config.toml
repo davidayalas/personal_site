@@ -16,6 +16,11 @@ ignoreLogs = ["warning-goldmark-raw-html"]
 [markup.goldmark.renderer]
   unsafe = true
 
+[outputFormats.json3d]
+  mediaType = "application/json"
+  baseName = "manifest"
+  isPlainText = true
+
 [params]
   timeDiff = 7200
   testProd = false

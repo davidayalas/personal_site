@@ -1,4 +1,7 @@
 ---
+outputs:
+  - html
+  - json3d
 title: David Ayala
 html_title: David Ayala - Looking for ServiceFul Enterprise Architecture
 #header: /media/header-finland.jpg
