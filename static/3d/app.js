@@ -990,7 +990,6 @@ function setupStreetViewNav(scene, camera, containers, content) {
   edges.set('plaza', { hub });
 
   const homeBtn = document.getElementById('nav-home');
-  const hubEl = document.getElementById('nav-hub');
 
   const arrowGroup = new THREE.Group();
   scene.add(arrowGroup);
@@ -1027,9 +1026,6 @@ function setupStreetViewNav(scene, camera, containers, content) {
     arrowGroup.add(group);
   }
 
-  let currentId = 'plaza';
-  camera.position.copy(positions.get(currentId));
-
   // after a move, keep facing the direction just walked (so a subsequent
   // forward/back arrow lands roughly in view instead of behind or off to the
   // side — branches don't all face the same way relative to the plaza)
@@ -1042,6 +1038,24 @@ function setupStreetViewNav(scene, camera, containers, content) {
   }
   function wrapAngle(a) {
     return ((a + Math.PI) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2) - Math.PI;
+  }
+
+  // start where the desktop version's own narrative starts (the far end of
+  // the entrance hall, i.e. the title/intro) rather than the plaza hub, so
+  // touch visitors read the site from its actual beginning too
+  const hallDef = branchDefs.find(b => b.key === 'hall');
+  let currentId = hallDef && hallDef.zs.length ? `hall-${hallDef.zs.length - 1}` : 'plaza';
+  camera.position.copy(positions.get(currentId));
+  {
+    const startEdge = edges.get(currentId);
+    const faceTowards = startEdge.forward || startEdge.back;
+    const yaw = faceTowards && yawFacing(currentId, faceTowards);
+    if (yaw !== null && yaw !== undefined) {
+      const euler = new THREE.Euler(0, 0, 0, 'YXZ');
+      euler.setFromQuaternion(camera.quaternion);
+      euler.y = yaw;
+      camera.quaternion.setFromEuler(euler);
+    }
   }
 
   const transition = { active: false, from: new THREE.Vector3(), to: new THREE.Vector3(), t: 0, fromYaw: 0, deltaYaw: 0 };
@@ -1067,21 +1081,12 @@ function setupStreetViewNav(scene, camera, containers, content) {
   function refreshUI() {
     clearArrows();
     const edge = edges.get(currentId);
+    const curPos = positions.get(currentId);
     if (currentId === 'plaza') {
-      hubEl.innerHTML = '';
-      edge.hub.forEach(h => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.textContent = h.label;
-        btn.addEventListener('touchend', ev => { ev.preventDefault(); goTo(h.id); }, { passive: false });
-        hubEl.appendChild(btn);
-      });
-      hubEl.classList.add('visible');
       homeBtn.classList.remove('visible');
+      edge.hub.forEach(h => addArrow(curPos, h.id));
     } else {
-      hubEl.classList.remove('visible');
       homeBtn.classList.add('visible');
-      const curPos = positions.get(currentId);
       if (edge.forward) addArrow(curPos, edge.forward);
       if (edge.back) addArrow(curPos, edge.back);
     }

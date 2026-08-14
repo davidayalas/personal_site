@@ -46,32 +46,18 @@
     body.is-touch #touch-look { display: block; }
 
     /* street-view style navigation: stepping happens via floor arrows tapped
-       in the 3D view itself; these two on-screen controls just pick a room
-       from the plaza and offer a quick way back to it. Anchored above the HUD
-       hint text at the very bottom, which can wrap onto two lines on narrow
-       screens */
-    #nav-controls {
-      position: fixed; left: 0; right: 0; bottom: 84px; z-index: 9;
-      display: none; justify-content: center; pointer-events: none;
-    }
-    body.is-touch #nav-controls { display: flex; }
-
-    #nav-controls button {
-      pointer-events: auto; font: 600 14px system-ui, sans-serif; color: #eee;
-      background: rgba(20,20,26,.72); border: 1px solid rgba(255,255,255,.28);
-      border-radius: 999px; backdrop-filter: blur(2px);
-    }
-
-    #nav-hub { display: none; gap: 10px; }
-    #nav-hub.visible { display: flex; }
-    #nav-hub { flex-wrap: wrap; justify-content: center; max-width: 90vw; row-gap: 8px; }
-    #nav-hub button { padding: 9px 16px; font-size: 13px; }
-
+       directly in the 3D view, everywhere including the plaza — this is the
+       only fixed on-screen control, a quick way back to the plaza hub.
+       Anchored above the HUD hint text at the very bottom, which can wrap
+       onto two lines on narrow screens */
     #nav-home {
       position: fixed; left: 16px; bottom: 84px; z-index: 9; display: none;
       width: 44px; height: 44px; padding: 0; border-radius: 50%; font-size: 19px;
+      pointer-events: auto; color: #eee;
+      background: rgba(20,20,26,.72); border: 1px solid rgba(255,255,255,.28);
+      backdrop-filter: blur(2px);
     }
-    #nav-home.visible { display: block; }
+    body.is-touch #nav-home.visible { display: block; }
   </style>
 </head>
 <body>
@@ -88,9 +74,6 @@
   <div id="touch-look"></div>
 
   <button id="nav-home" type="button" aria-label="Torna a la plaça">⌂</button>
-  <div id="nav-controls">
-    <div id="nav-hub"></div>
-  </div>
 
   <script type="importmap">
     {
