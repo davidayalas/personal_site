@@ -45,8 +45,11 @@
     }
     body.is-touch #touch-look { display: block; }
 
-    /* street-view style step navigation — anchored above the HUD hint text
-       at the very bottom, which can wrap onto two lines on narrow screens */
+    /* street-view style navigation: stepping happens via floor arrows tapped
+       in the 3D view itself; these two on-screen controls just pick a room
+       from the plaza and offer a quick way back to it. Anchored above the HUD
+       hint text at the very bottom, which can wrap onto two lines on narrow
+       screens */
     #nav-controls {
       position: fixed; left: 0; right: 0; bottom: 84px; z-index: 9;
       display: none; justify-content: center; pointer-events: none;
@@ -59,11 +62,10 @@
       border-radius: 999px; backdrop-filter: blur(2px);
     }
 
-    #nav-hub, #nav-step { display: none; gap: 10px; }
-    #nav-hub.visible, #nav-step.visible { display: flex; }
+    #nav-hub { display: none; gap: 10px; }
+    #nav-hub.visible { display: flex; }
     #nav-hub { flex-wrap: wrap; justify-content: center; max-width: 90vw; row-gap: 8px; }
     #nav-hub button { padding: 9px 16px; font-size: 13px; }
-    #nav-step button { width: 56px; height: 56px; border-radius: 50%; font-size: 24px; padding: 0; }
 
     #nav-home {
       position: fixed; left: 16px; bottom: 84px; z-index: 9; display: none;
@@ -88,10 +90,6 @@
   <button id="nav-home" type="button" aria-label="Torna a la plaça">⌂</button>
   <div id="nav-controls">
     <div id="nav-hub"></div>
-    <div id="nav-step">
-      <button id="nav-back" type="button" aria-label="Enrere">‹</button>
-      <button id="nav-forward" type="button" aria-label="Endavant">›</button>
-    </div>
   </div>
 
   <script type="importmap">

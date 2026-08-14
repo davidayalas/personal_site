@@ -59,7 +59,7 @@ async function init() {
 
   if (isTouch) {
     document.body.classList.add('is-touch');
-    controlsHint.textContent = 'Arrossega: mira · ‹ ›: camina · Toca: interactua';
+    controlsHint.textContent = 'Arrossega: mira · Toca una fletxa del terra: camina';
   } else {
     controlsHint.textContent = 'WASD: move · Mouse: look · Click: shoot · ESC: exit';
   }
@@ -133,15 +133,17 @@ async function init() {
   scene.add(hemi);
   if (!isTouch) addPointLightGrid(scene, zones);
 
-  // touch devices navigate street-view style: fixed viewpoints, drag to look,
-  // tap arrows to step — free-roam collision movement doesn't translate well
-  // to a joystick + drag-to-look combo on small screens
+  // touch devices navigate street-view style: fixed viewpoints one per item,
+  // drag to look, tap the floor arrow to step — free-roam collision movement
+  // doesn't translate well to a joystick + drag-to-look combo on small screens
   let nav = null;
   if (isTouch) {
     scene.updateMatrixWorld(true);
-    nav = setupStreetViewNav(camera, {
+    nav = setupStreetViewNav(scene, camera, {
       hall: hallContainer, gallery: galleryContainer, tweets: tweetsContainer, architecture: architectureContainer,
-    }, layout);
+    }, {
+      hallLayout, aboutCount: aboutItemsReversed.length, galleryCount: gallery.length, tweetsCount: tweets.length, archLength,
+    });
   }
 
   // ---- controls ----
@@ -171,10 +173,12 @@ async function init() {
   document.addEventListener('click', () => {
     if (isTouch) return;
     if (!controls.isLocked) { controls.lock(); return; }
-    interact(camera, raycaster, scene, bullets);
+    interact(camera, raycaster, scene, bullets, nav);
   });
 
-  if (isTouch) setupTouchControls(camera, () => interact(camera, raycaster, scene, bullets));
+  if (isTouch) {
+    setupTouchControls(camera, ndc => interact(camera, raycaster, scene, bullets, nav, ndc));
+  }
 
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -709,12 +713,16 @@ function addPointLightGrid(scene, zones) {
 
 // ---------------------------------------------------------------- interaction
 
-function interact(camera, raycaster, scene, bullets) {
-  raycaster.setFromCamera({ x: 0, y: 0 }, camera);
+function interact(camera, raycaster, scene, bullets, nav, ndc) {
+  raycaster.setFromCamera(ndc || { x: 0, y: 0 }, camera);
   const hits = raycaster.intersectObjects(scene.children, true);
   for (const hit of hits) {
     const data = hit.object.userData;
     if (!data) continue;
+    if (data.isNavArrow && nav) {
+      nav.goTo(data.navTarget);
+      return;
+    }
     if (data.url) {
       window.open(data.url, '_blank', 'noopener');
       return;
@@ -863,7 +871,15 @@ function setupTouchControls(camera, onTap) {
     for (const t of e.changedTouches) {
       if (t.identifier !== lookTouchId) continue;
       lookTouchId = null;
-      if (lookMoved < 8) onTap();
+      // a short tap (not a drag) raycasts from the actual tap point, so you
+      // can tap directly on a floor arrow or a frame instead of aiming a
+      // hidden center crosshair first
+      if (lookMoved < 8) {
+        onTap({
+          x: (t.clientX / window.innerWidth) * 2 - 1,
+          y: -(t.clientY / window.innerHeight) * 2 + 1,
+        });
+      }
     }
   });
 }
@@ -879,28 +895,79 @@ function applyLook(camera, dx, dy) {
 
 // ---------------------------------------------------------------- street-view navigation (touch)
 
-const NAV_NODE_SPACING = 4.5;
 const NAV_START_Z = 2.2;
 const NAV_TRANSITION = 0.35;
+const NAV_ARROW_DIST = 2.0;
+// Eye-level looks straight ahead with zero pitch by default, so an arrow
+// flush with the floor sits well below the camera's vertical FOV and is
+// never actually visible unless the user proactively tilts down first (there
+// is nothing prompting them to). Lifting it roughly waist-high keeps it
+// inside the default view while still reading as "the path ahead".
+const NAV_ARROW_HEIGHT = 0.85;
 
-// Evenly spaced stops along a branch, from just past the plaza doorway to
-// just short of the far end wall — not tied to per-item spacing, since a
-// branch's content count varies a lot (a handful of frames vs. dozens of tweets).
-function nodeZsForLength(length) {
-  const endZ = Math.max(length - 1.6, NAV_START_Z + 0.5);
-  const span = endZ - NAV_START_Z;
-  const count = Math.max(2, Math.min(7, Math.round(span / NAV_NODE_SPACING) + 1));
+// One node per pair of wall-mounted items, at the exact z each pair is
+// mounted at (see mountPanel/mountWallItems) — so stepping never skips past
+// content, and every photo/tweet pair is individually reachable.
+function pairNodeZs(count, startZ, spacing) {
+  const pairs = Math.max(Math.ceil(count / 2), 1);
+  const zs = [];
+  for (let i = 0; i < pairs; i++) zs.push(startZ + i * spacing);
+  return zs;
+}
+
+// The hall concatenates three segments (social links, about-me targets,
+// intro/title) each with their own spacing — mirror buildHall's z formulas
+// exactly so every node lines up with real content instead of empty wall.
+function hallNodeZs(hallLayout, aboutCount) {
+  const zs = [];
+  pairNodeZs(hallLayout.social.length, HALL_START_Z, HALL_SPACING).forEach(z => zs.push(z));
+  for (let i = 0; i < aboutCount; i++) zs.push(hallLayout.socialLen + 2 + i * ABOUT_SPACING);
+  pairNodeZs(hallLayout.intro.length, hallLayout.socialLen + hallLayout.aboutLen + HALL_START_Z, HALL_SPACING)
+    .forEach(z => zs.push(z));
+  return zs;
+}
+
+// Architecture room has no per-item content to align to (just the entrance
+// and the end display), so fall back to a short, even step.
+function uniformNodeZs(length, step) {
+  const end = Math.max(length - 1.6, NAV_START_Z + step);
+  const span = end - NAV_START_Z;
+  const count = Math.max(2, Math.round(span / step) + 1);
   const zs = [];
   for (let i = 0; i < count; i++) zs.push(NAV_START_Z + (span * i) / (count - 1));
   return zs;
 }
 
-function setupStreetViewNav(camera, containers, layout) {
+function makeChevronCanvas() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 128; canvas.height = 128;
+  const ctx = canvas.getContext('2d');
+  ctx.translate(64, 64);
+  ctx.fillStyle = '#fff3c4';
+  ctx.beginPath();
+  // points toward the top of the canvas, which after the flat-lay + lookAt
+  // transform below ends up pointing away from the viewer, in the direction
+  // of travel — flip both if it ever reads as pointing the wrong way
+  ctx.moveTo(0, 46);
+  ctx.lineTo(40, -20);
+  ctx.lineTo(16, -20);
+  ctx.lineTo(16, -46);
+  ctx.lineTo(-16, -46);
+  ctx.lineTo(-16, -20);
+  ctx.lineTo(-40, -20);
+  ctx.closePath();
+  ctx.fill();
+  return canvas;
+}
+
+const chevronTexture = flatTexture(new THREE.CanvasTexture(makeChevronCanvas()));
+
+function setupStreetViewNav(scene, camera, containers, content) {
   const branchDefs = [
-    { key: 'hall', container: containers.hall, length: layout.hallLength, label: 'Vestíbul' },
-    { key: 'gallery', container: containers.gallery, length: layout.galleryLength, label: 'Galeria' },
-    { key: 'tweets', container: containers.tweets, length: layout.tweetsLength, label: 'Piulades' },
-    { key: 'architecture', container: containers.architecture, length: layout.archLength, label: 'Arquitectura' },
+    { key: 'hall', container: containers.hall, label: 'Vestíbul', zs: hallNodeZs(content.hallLayout, content.aboutCount) },
+    { key: 'gallery', container: containers.gallery, label: 'Galeria', zs: pairNodeZs(content.galleryCount, 3, FRAME_SPACING) },
+    { key: 'tweets', container: containers.tweets, label: 'Piulades', zs: pairNodeZs(content.tweetsCount, 2, TWEET_SPACING) },
+    { key: 'architecture', container: containers.architecture, label: 'Arquitectura', zs: uniformNodeZs(content.archLength, 2.2) },
   ];
 
   // every node sits on its branch's local x=0 centerline, so a straight lerp
@@ -911,12 +978,11 @@ function setupStreetViewNav(camera, containers, layout) {
   const hub = [];
 
   branchDefs.forEach(b => {
-    const zs = nodeZsForLength(b.length);
-    zs.forEach((z, i) => {
+    b.zs.forEach((z, i) => {
       const id = `${b.key}-${i}`;
       positions.set(id, b.container.localToWorld(new THREE.Vector3(0, EYE_HEIGHT, z)));
       const back = i === 0 ? 'plaza' : `${b.key}-${i - 1}`;
-      const forward = i < zs.length - 1 ? `${b.key}-${i + 1}` : null;
+      const forward = i < b.zs.length - 1 ? `${b.key}-${i + 1}` : null;
       edges.set(id, { back, forward });
       if (i === 0) hub.push({ id, label: b.label });
     });
@@ -925,26 +991,81 @@ function setupStreetViewNav(camera, containers, layout) {
 
   const homeBtn = document.getElementById('nav-home');
   const hubEl = document.getElementById('nav-hub');
-  const stepEl = document.getElementById('nav-step');
-  const backBtn = document.getElementById('nav-back');
-  const forwardBtn = document.getElementById('nav-forward');
+
+  const arrowGroup = new THREE.Group();
+  scene.add(arrowGroup);
+
+  function clearArrows() {
+    arrowGroup.children.slice().forEach(group => {
+      arrowGroup.remove(group);
+      group.traverse(o => { if (o.material) o.material.dispose(); if (o.geometry) o.geometry.dispose(); });
+    });
+  }
+
+  // a flat chevron marking the path ahead, pointing from the current spot
+  // toward `toId` — kept within the target's own distance so it never floats
+  // past the stop it's pointing at, especially on short hops
+  function addArrow(fromPos, toId) {
+    const toPos = positions.get(toId);
+    const offset = new THREE.Vector3(toPos.x - fromPos.x, 0, toPos.z - fromPos.z);
+    const toDistance = offset.length();
+    if (toDistance < 1e-3) return;
+    const dir = offset.clone().divideScalar(toDistance);
+    const dist = Math.min(NAV_ARROW_DIST, toDistance * 0.8);
+
+    const group = new THREE.Group();
+    group.position.set(fromPos.x + dir.x * dist, NAV_ARROW_HEIGHT, fromPos.z + dir.z * dist);
+    group.lookAt(group.position.x + dir.x, group.position.y, group.position.z + dir.z);
+    group.userData = { pulseSeed: Math.random() * Math.PI * 2 };
+
+    const mat = new THREE.MeshBasicMaterial({ map: chevronTexture, transparent: true, side: THREE.DoubleSide, depthWrite: false });
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(0.85, 0.85), mat);
+    mesh.rotation.x = -Math.PI / 2;
+    mesh.userData = { isNavArrow: true, navTarget: toId };
+    group.add(mesh);
+
+    arrowGroup.add(group);
+  }
 
   let currentId = 'plaza';
   camera.position.copy(positions.get(currentId));
 
-  const transition = { active: false, from: new THREE.Vector3(), to: new THREE.Vector3(), t: 0 };
+  // after a move, keep facing the direction just walked (so a subsequent
+  // forward/back arrow lands roughly in view instead of behind or off to the
+  // side — branches don't all face the same way relative to the plaza)
+  function yawFacing(fromId, toId) {
+    const dir = new THREE.Vector3().subVectors(positions.get(toId), positions.get(fromId));
+    dir.y = 0;
+    if (dir.lengthSq() < 1e-6) return null;
+    dir.normalize();
+    return Math.atan2(-dir.x, -dir.z);
+  }
+  function wrapAngle(a) {
+    return ((a + Math.PI) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2) - Math.PI;
+  }
+
+  const transition = { active: false, from: new THREE.Vector3(), to: new THREE.Vector3(), t: 0, fromYaw: 0, deltaYaw: 0 };
 
   function goTo(id) {
     if (transition.active || id === currentId || !positions.has(id)) return;
+    const prevId = currentId;
     transition.from.copy(camera.position);
     transition.to.copy(positions.get(id));
     transition.t = 0;
     transition.active = true;
+
+    const euler = new THREE.Euler(0, 0, 0, 'YXZ');
+    euler.setFromQuaternion(camera.quaternion);
+    transition.fromYaw = euler.y;
+    const targetYaw = yawFacing(prevId, id);
+    transition.deltaYaw = targetYaw === null ? 0 : wrapAngle(targetYaw - transition.fromYaw);
+
     currentId = id;
     refreshUI();
   }
 
   function refreshUI() {
+    clearArrows();
     const edge = edges.get(currentId);
     if (currentId === 'plaza') {
       hubEl.innerHTML = '';
@@ -956,27 +1077,16 @@ function setupStreetViewNav(camera, containers, layout) {
         hubEl.appendChild(btn);
       });
       hubEl.classList.add('visible');
-      stepEl.classList.remove('visible');
       homeBtn.classList.remove('visible');
     } else {
       hubEl.classList.remove('visible');
-      stepEl.classList.add('visible');
       homeBtn.classList.add('visible');
-      backBtn.style.visibility = edge.back ? 'visible' : 'hidden';
-      forwardBtn.style.visibility = edge.forward ? 'visible' : 'hidden';
+      const curPos = positions.get(currentId);
+      if (edge.forward) addArrow(curPos, edge.forward);
+      if (edge.back) addArrow(curPos, edge.back);
     }
   }
 
-  backBtn.addEventListener('touchend', ev => {
-    ev.preventDefault();
-    const edge = edges.get(currentId);
-    if (edge.back) goTo(edge.back);
-  }, { passive: false });
-  forwardBtn.addEventListener('touchend', ev => {
-    ev.preventDefault();
-    const edge = edges.get(currentId);
-    if (edge.forward) goTo(edge.forward);
-  }, { passive: false });
   homeBtn.addEventListener('touchend', ev => {
     ev.preventDefault();
     goTo('plaza');
@@ -985,12 +1095,25 @@ function setupStreetViewNav(camera, containers, layout) {
   refreshUI();
 
   return {
+    goTo,
     update(dt) {
+      arrowGroup.children.forEach(group => {
+        const s = 1 + 0.1 * Math.sin(performance.now() * 0.004 + group.userData.pulseSeed);
+        group.scale.setScalar(s);
+      });
       if (!transition.active) return;
       transition.t += dt / NAV_TRANSITION;
       const k = Math.min(transition.t, 1);
       const eased = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
       camera.position.lerpVectors(transition.from, transition.to, eased);
+
+      if (transition.deltaYaw !== 0) {
+        const euler = new THREE.Euler(0, 0, 0, 'YXZ');
+        euler.setFromQuaternion(camera.quaternion);
+        euler.y = transition.fromYaw + transition.deltaYaw * eased;
+        camera.quaternion.setFromEuler(euler);
+      }
+
       if (k >= 1) transition.active = false;
     },
   };
