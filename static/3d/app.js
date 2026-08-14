@@ -137,7 +137,10 @@ async function init() {
   // A click is still what grants mouse-look (Pointer Lock API requires a user
   // gesture), but nothing on screen needs to gate on it.
   const keys = { forward: false, back: false, left: false, right: false };
-  window.addEventListener('keydown', e => setKey(e.code, true));
+  window.addEventListener('keydown', e => {
+    if (e.code === 'Escape') { window.location.href = '/'; return; }
+    setKey(e.code, true);
+  });
   window.addEventListener('keyup', e => setKey(e.code, false));
   function setKey(code, value) {
     if (code === 'KeyW' || code === 'ArrowUp') keys.forward = value;
