@@ -5,6 +5,11 @@
   HUGO_VERSION = "0.148.2"
 
 [[headers]]
+  for = "/3d/*"
+  [headers.values]
+    Cache-Control = "no-cache, must-revalidate"
+
+[[headers]]
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
