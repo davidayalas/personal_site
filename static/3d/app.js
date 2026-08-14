@@ -3,6 +3,8 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
 
 const MANIFEST_URL = '/home/manifest.json';
 
+const isTouch = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+
 const CORRIDOR_WIDTH = 6;
 const WALL_HEIGHT = 4;
 const EYE_HEIGHT = 1.7;
@@ -21,7 +23,7 @@ const FRAME_SIZE = 1.7;
 
 const TWEET_SPACING = 2.0;
 const TWEET_SIZE = 1.4;
-const TWEETS_MAX = 60;
+const TWEETS_MAX = isTouch ? 24 : 60;
 
 const ARCH_ROOM_LENGTH = 9;
 
@@ -33,7 +35,13 @@ const ACCENT_ARCHITECTURE = 0x2fa88a;
 const ACCENT_LINK = 0xe8b23d;
 const ZONE_COLORS = { plaza: '#3a3945', hall: '#e8b23d', gallery: '#e85d4a', tweets: '#4a90d9', architecture: '#2fa88a' };
 
-const isTouch = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+// Flat billboard panels don't need mipmaps — skipping them cuts texture
+// upload/generation cost noticeably, which matters most on mobile GPUs.
+function flatTexture(texture) {
+  texture.generateMipmaps = false;
+  texture.minFilter = THREE.LinearFilter;
+  return texture;
+}
 
 const loadingEl = document.getElementById('loading');
 const hudLabel = document.getElementById('hud-label');
@@ -93,14 +101,14 @@ async function init() {
   // ---- scene ----
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x0b0a10);
-  scene.fog = new THREE.Fog(0x0b0a10, 10, 30);
+  scene.fog = new THREE.Fog(0x0b0a10, isTouch ? 6 : 10, isTouch ? 20 : 30);
 
-  const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 100);
+  const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, isTouch ? 42 : 100);
   camera.position.set(0, EYE_HEIGHT, PLAZA_HALF + hallLength - 1);
   camera.rotation.order = 'YXZ';
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const renderer = new THREE.WebGLRenderer({ antialias: !isTouch, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isTouch ? 1.5 : 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
@@ -121,9 +129,9 @@ async function init() {
     buildArchitectureRoom(container, profile, archLength);
   });
 
-  const hemi = new THREE.HemisphereLight(0x8899aa, 0x111111, 0.9);
+  const hemi = new THREE.HemisphereLight(0x8899aa, 0x111111, isTouch ? 1.5 : 0.9);
   scene.add(hemi);
-  addPointLightGrid(scene, zones);
+  if (!isTouch) addPointLightGrid(scene, zones);
 
   // ---- controls ----
   const controls = new PointerLockControls(camera, renderer.domElement);
@@ -267,7 +275,7 @@ function mountWallItems(container, items, zOffset) {
     const isLink = item.kind === 'link';
 
     const canvas = isLink ? makeLinkCanvas(item.title) : makeTextCanvas(item.title, item.body);
-    const mat = new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(canvas) });
+    const mat = new THREE.MeshBasicMaterial({ map: flatTexture(new THREE.CanvasTexture(canvas)) });
     const mesh = new THREE.Mesh(new THREE.PlaneGeometry(size, size), mat);
 
     mountPanel(container, {
@@ -290,7 +298,7 @@ function buildAboutTargets(container, items, startZ, targets) {
     container.add(label);
 
     const targetMat = new THREE.MeshBasicMaterial({
-      map: new THREE.CanvasTexture(makeTargetCanvas()), transparent: true, side: THREE.DoubleSide,
+      map: flatTexture(new THREE.CanvasTexture(makeTargetCanvas())), transparent: true, side: THREE.DoubleSide,
     });
     const target = new THREE.Mesh(new THREE.CircleGeometry(0.3, 32), targetMat);
     target.position.set(x, EYE_HEIGHT + 0.35, z);
@@ -449,6 +457,7 @@ function buildGalleryFrames(container, gallery, startZ) {
 
     loader.load(item.image, texture => {
       texture.colorSpace = THREE.SRGBColorSpace;
+      if (isTouch) flatTexture(texture);
       picMat.map = texture;
       picMat.color.set(0xffffff);
       picMat.needsUpdate = true;
@@ -469,7 +478,7 @@ function buildTweetPanels(container, tweets, startZ) {
     const z = startZ + 2 + Math.floor(i / 2) * TWEET_SPACING;
 
     const canvas = makeTweetCanvas(tweet);
-    const mat = new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(canvas) });
+    const mat = new THREE.MeshBasicMaterial({ map: flatTexture(new THREE.CanvasTexture(canvas)) });
     const mesh = new THREE.Mesh(new THREE.PlaneGeometry(TWEET_SIZE, TWEET_SIZE), mat);
 
     mountPanel(container, { size: TWEET_SIZE, z, side, frameMaterial: tweetFrameMat, contentMesh: mesh });
@@ -518,6 +527,7 @@ function buildArchitectureRoom(container, profile, length) {
 
     new THREE.TextureLoader().load(profile.architecture_image, texture => {
       texture.colorSpace = THREE.SRGBColorSpace;
+      if (isTouch) flatTexture(texture);
       mat.map = texture;
       mat.color.set(0xffffff);
       mat.needsUpdate = true;
@@ -621,7 +631,7 @@ function makeLabel(text, width = 1.7, height = 0.32, fontSize = 34, accent = nul
   if (display !== text) display = truncate(display, display.length - 1);
   ctx.fillText(display, canvas.width / 2, canvas.height / 2 - 4);
 
-  const texture = new THREE.CanvasTexture(canvas);
+  const texture = flatTexture(new THREE.CanvasTexture(canvas));
   const mat = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
   return new THREE.Mesh(new THREE.PlaneGeometry(width, height), mat);
 }
@@ -643,7 +653,7 @@ function makeFloatingLabel(text, width = 2.2, height = 0.44, fontSize = 30) {
   }
   ctx.fillText(truncate(text, 60), canvas.width / 2, canvas.height / 2);
 
-  const texture = new THREE.CanvasTexture(canvas);
+  const texture = flatTexture(new THREE.CanvasTexture(canvas));
   const mat = new THREE.MeshBasicMaterial({ map: texture, transparent: true, side: THREE.DoubleSide });
   return new THREE.Mesh(new THREE.PlaneGeometry(width, height), mat);
 }
