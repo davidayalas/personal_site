@@ -59,7 +59,7 @@ async function init() {
 
   if (isTouch) {
     document.body.classList.add('is-touch');
-    controlsHint.textContent = 'Left stick: move · Drag right side: look · Tap a target to shoot';
+    controlsHint.textContent = 'Arrossega: mira · ‹ ›: camina · Toca: interactua';
   } else {
     controlsHint.textContent = 'WASD: move · Mouse: look · Click: shoot · ESC: exit';
   }
@@ -115,23 +115,34 @@ async function init() {
   buildPlaza(scene);
 
   const aboutTargets = [];
-  addBranch(scene, { axis: 'z', worldOffset: PLAZA_HALF, sign: 1 }, container =>
+  const hallContainer = addBranch(scene, { axis: 'z', worldOffset: PLAZA_HALF, sign: 1 }, container =>
     buildHall(container, hallLayout, aboutItemsReversed, aboutTargets));
-  addBranch(scene, { axis: 'z', worldOffset: -PLAZA_HALF, sign: -1 }, container => {
+  const galleryContainer = addBranch(scene, { axis: 'z', worldOffset: -PLAZA_HALF, sign: -1 }, container => {
     buildCorridorShell(container, galleryLength);
     buildGalleryFrames(container, gallery, 0);
   });
-  addBranch(scene, { axis: 'x', worldOffset: PLAZA_HALF, sign: 1 }, container => {
+  const tweetsContainer = addBranch(scene, { axis: 'x', worldOffset: PLAZA_HALF, sign: 1 }, container => {
     buildCorridorShell(container, tweetsLength);
     buildTweetPanels(container, tweets, 0);
   });
-  addBranch(scene, { axis: 'x', worldOffset: -PLAZA_HALF, sign: -1 }, container => {
+  const architectureContainer = addBranch(scene, { axis: 'x', worldOffset: -PLAZA_HALF, sign: -1 }, container => {
     buildArchitectureRoom(container, profile, archLength);
   });
 
   const hemi = new THREE.HemisphereLight(0x8899aa, 0x111111, isTouch ? 1.5 : 0.9);
   scene.add(hemi);
   if (!isTouch) addPointLightGrid(scene, zones);
+
+  // touch devices navigate street-view style: fixed viewpoints, drag to look,
+  // tap arrows to step — free-roam collision movement doesn't translate well
+  // to a joystick + drag-to-look combo on small screens
+  let nav = null;
+  if (isTouch) {
+    scene.updateMatrixWorld(true);
+    nav = setupStreetViewNav(camera, {
+      hall: hallContainer, gallery: galleryContainer, tweets: tweetsContainer, architecture: architectureContainer,
+    }, layout);
+  }
 
   // ---- controls ----
   const controls = new PointerLockControls(camera, renderer.domElement);
@@ -163,7 +174,7 @@ async function init() {
     interact(camera, raycaster, scene, bullets);
   });
 
-  const touch = isTouch ? setupTouchControls(camera, () => interact(camera, raycaster, scene, bullets)) : null;
+  if (isTouch) setupTouchControls(camera, () => interact(camera, raycaster, scene, bullets));
 
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -177,22 +188,23 @@ async function init() {
 
   renderer.setAnimationLoop(() => {
     const dt = Math.min(clock.getDelta(), 0.1);
-    const step = MOVE_SPEED * dt;
 
-    // movement always works — only mouse-look needs the click-granted pointer lock
-    const prevX = camera.position.x, prevZ = camera.position.z;
+    if (nav) {
+      nav.update(dt);
+    } else {
+      const step = MOVE_SPEED * dt;
 
-    if (keys.forward) controls.moveForward(step);
-    if (keys.back) controls.moveForward(-step);
-    if (keys.left) controls.moveRight(-step);
-    if (keys.right) controls.moveRight(step);
-    if (touch) {
-      controls.moveForward(-touch.move.y * step);
-      controls.moveRight(touch.move.x * step);
+      // movement always works — only mouse-look needs the click-granted pointer lock
+      const prevX = camera.position.x, prevZ = camera.position.z;
+
+      if (keys.forward) controls.moveForward(step);
+      if (keys.back) controls.moveForward(-step);
+      if (keys.left) controls.moveRight(-step);
+      if (keys.right) controls.moveRight(step);
+
+      resolveCollision(camera, prevX, prevZ, zones, margin);
+      camera.position.y = EYE_HEIGHT;
     }
-
-    resolveCollision(camera, prevX, prevZ, zones, margin);
-    camera.position.y = EYE_HEIGHT;
 
     const zoneLabel = currentZoneLabel(camera.position.x, camera.position.z);
     if (zoneLabel !== lastZoneLabel) {
@@ -826,47 +838,8 @@ function updateMinimap(camera, layout) {
 // ---------------------------------------------------------------- touch controls
 
 function setupTouchControls(camera, onTap) {
-  const moveZone = document.getElementById('touch-move');
   const lookZone = document.getElementById('touch-look');
-  const stick = document.getElementById('touch-stick');
-
-  const state = { move: { x: 0, y: 0 } };
-  let moveTouchId = null, moveOrigin = { x: 0, y: 0 };
   let lookTouchId = null, lookLast = { x: 0, y: 0 }, lookMoved = 0;
-
-  moveZone.addEventListener('touchstart', e => {
-    const t = e.changedTouches[0];
-    moveTouchId = t.identifier;
-    moveOrigin = { x: t.clientX, y: t.clientY };
-    stick.style.opacity = '1';
-  }, { passive: true });
-
-  moveZone.addEventListener('touchmove', e => {
-    for (const t of e.changedTouches) {
-      if (t.identifier !== moveTouchId) continue;
-      const dx = t.clientX - moveOrigin.x;
-      const dy = t.clientY - moveOrigin.y;
-      const r = 45;
-      const len = Math.min(Math.hypot(dx, dy), r);
-      const angle = Math.atan2(dy, dx);
-      const nx = (Math.cos(angle) * len) / r;
-      const ny = (Math.sin(angle) * len) / r;
-      state.move = { x: nx, y: ny };
-      stick.style.transform = `translate(${nx * r}px, ${ny * r}px)`;
-    }
-  }, { passive: true });
-
-  function endMove(e) {
-    for (const t of e.changedTouches) {
-      if (t.identifier !== moveTouchId) continue;
-      moveTouchId = null;
-      state.move = { x: 0, y: 0 };
-      stick.style.transform = 'translate(0,0)';
-      stick.style.opacity = '0.5';
-    }
-  }
-  moveZone.addEventListener('touchend', endMove);
-  moveZone.addEventListener('touchcancel', endMove);
 
   lookZone.addEventListener('touchstart', e => {
     const t = e.changedTouches[0];
@@ -893,8 +866,6 @@ function setupTouchControls(camera, onTap) {
       if (lookMoved < 8) onTap();
     }
   });
-
-  return state;
 }
 
 function applyLook(camera, dx, dy) {
@@ -904,6 +875,125 @@ function applyLook(camera, dx, dy) {
   euler.x -= dy * 0.0035;
   euler.x = Math.max(-Math.PI / 2 + 0.02, Math.min(Math.PI / 2 - 0.02, euler.x));
   camera.quaternion.setFromEuler(euler);
+}
+
+// ---------------------------------------------------------------- street-view navigation (touch)
+
+const NAV_NODE_SPACING = 4.5;
+const NAV_START_Z = 2.2;
+const NAV_TRANSITION = 0.35;
+
+// Evenly spaced stops along a branch, from just past the plaza doorway to
+// just short of the far end wall — not tied to per-item spacing, since a
+// branch's content count varies a lot (a handful of frames vs. dozens of tweets).
+function nodeZsForLength(length) {
+  const endZ = Math.max(length - 1.6, NAV_START_Z + 0.5);
+  const span = endZ - NAV_START_Z;
+  const count = Math.max(2, Math.min(7, Math.round(span / NAV_NODE_SPACING) + 1));
+  const zs = [];
+  for (let i = 0; i < count; i++) zs.push(NAV_START_Z + (span * i) / (count - 1));
+  return zs;
+}
+
+function setupStreetViewNav(camera, containers, layout) {
+  const branchDefs = [
+    { key: 'hall', container: containers.hall, length: layout.hallLength, label: 'Vestíbul' },
+    { key: 'gallery', container: containers.gallery, length: layout.galleryLength, label: 'Galeria' },
+    { key: 'tweets', container: containers.tweets, length: layout.tweetsLength, label: 'Piulades' },
+    { key: 'architecture', container: containers.architecture, length: layout.archLength, label: 'Arquitectura' },
+  ];
+
+  // every node sits on its branch's local x=0 centerline, so a straight lerp
+  // between any two (including to/from the plaza) stays on the walkable path
+  // and never cuts through a wall
+  const positions = new Map([['plaza', new THREE.Vector3(0, EYE_HEIGHT, 0)]]);
+  const edges = new Map();
+  const hub = [];
+
+  branchDefs.forEach(b => {
+    const zs = nodeZsForLength(b.length);
+    zs.forEach((z, i) => {
+      const id = `${b.key}-${i}`;
+      positions.set(id, b.container.localToWorld(new THREE.Vector3(0, EYE_HEIGHT, z)));
+      const back = i === 0 ? 'plaza' : `${b.key}-${i - 1}`;
+      const forward = i < zs.length - 1 ? `${b.key}-${i + 1}` : null;
+      edges.set(id, { back, forward });
+      if (i === 0) hub.push({ id, label: b.label });
+    });
+  });
+  edges.set('plaza', { hub });
+
+  const homeBtn = document.getElementById('nav-home');
+  const hubEl = document.getElementById('nav-hub');
+  const stepEl = document.getElementById('nav-step');
+  const backBtn = document.getElementById('nav-back');
+  const forwardBtn = document.getElementById('nav-forward');
+
+  let currentId = 'plaza';
+  camera.position.copy(positions.get(currentId));
+
+  const transition = { active: false, from: new THREE.Vector3(), to: new THREE.Vector3(), t: 0 };
+
+  function goTo(id) {
+    if (transition.active || id === currentId || !positions.has(id)) return;
+    transition.from.copy(camera.position);
+    transition.to.copy(positions.get(id));
+    transition.t = 0;
+    transition.active = true;
+    currentId = id;
+    refreshUI();
+  }
+
+  function refreshUI() {
+    const edge = edges.get(currentId);
+    if (currentId === 'plaza') {
+      hubEl.innerHTML = '';
+      edge.hub.forEach(h => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = h.label;
+        btn.addEventListener('touchend', ev => { ev.preventDefault(); goTo(h.id); }, { passive: false });
+        hubEl.appendChild(btn);
+      });
+      hubEl.classList.add('visible');
+      stepEl.classList.remove('visible');
+      homeBtn.classList.remove('visible');
+    } else {
+      hubEl.classList.remove('visible');
+      stepEl.classList.add('visible');
+      homeBtn.classList.add('visible');
+      backBtn.style.visibility = edge.back ? 'visible' : 'hidden';
+      forwardBtn.style.visibility = edge.forward ? 'visible' : 'hidden';
+    }
+  }
+
+  backBtn.addEventListener('touchend', ev => {
+    ev.preventDefault();
+    const edge = edges.get(currentId);
+    if (edge.back) goTo(edge.back);
+  }, { passive: false });
+  forwardBtn.addEventListener('touchend', ev => {
+    ev.preventDefault();
+    const edge = edges.get(currentId);
+    if (edge.forward) goTo(edge.forward);
+  }, { passive: false });
+  homeBtn.addEventListener('touchend', ev => {
+    ev.preventDefault();
+    goTo('plaza');
+  }, { passive: false });
+
+  refreshUI();
+
+  return {
+    update(dt) {
+      if (!transition.active) return;
+      transition.t += dt / NAV_TRANSITION;
+      const k = Math.min(transition.t, 1);
+      const eased = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      camera.position.lerpVectors(transition.from, transition.to, eased);
+      if (k >= 1) transition.active = false;
+    },
+  };
 }
 
 // ---------------------------------------------------------------- utils
