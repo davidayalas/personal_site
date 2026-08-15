@@ -59,7 +59,7 @@ async function init() {
 
   if (isTouch) {
     document.body.classList.add('is-touch');
-    controlsHint.textContent = 'Arrossega: mira · Toca una fletxa del terra: camina';
+    controlsHint.textContent = 'Drag: look · Tap a floor arrow: walk';
   } else {
     controlsHint.textContent = 'WASD: move · Mouse: look · Click: shoot · ESC: exit';
   }
@@ -266,7 +266,7 @@ function addBranch(scene, { axis, worldOffset, sign }, buildFn) {
 function computeHallLayout(profile, aboutItemsReversed) {
   const intro = [
     { kind: 'title', title: profile.title || 'David Ayala', body: stripHtml(profile.message || '') },
-    { kind: 'text', title: 'Sobre mi', body: stripHtml(profile.description || '') },
+    { kind: 'text', title: 'About me', body: stripHtml(profile.description || '') },
   ];
   const social = (profile.social || []).map(s => ({ kind: 'link', title: s.title, url: s.link }));
   const introLen = Math.ceil(intro.length / 2) * HALL_SPACING + HALL_END_PAD;
@@ -601,7 +601,7 @@ function makeLinkCanvas(title) {
   ctx.fillText(title, canvas.width / 2, 320);
   ctx.fillStyle = '#8f8f9a';
   ctx.font = '600 20px system-ui, sans-serif';
-  ctx.fillText('OBRIR ENLLAÇ', canvas.width / 2, 366);
+  ctx.fillText('OPEN LINK', canvas.width / 2, 366);
   return canvas;
 }
 
@@ -964,10 +964,10 @@ const chevronTexture = flatTexture(new THREE.CanvasTexture(makeChevronCanvas()))
 
 function setupStreetViewNav(scene, camera, containers, content) {
   const branchDefs = [
-    { key: 'hall', container: containers.hall, label: 'Vestíbul', zs: hallNodeZs(content.hallLayout, content.aboutCount) },
-    { key: 'gallery', container: containers.gallery, label: 'Galeria', zs: pairNodeZs(content.galleryCount, 3, FRAME_SPACING) },
-    { key: 'tweets', container: containers.tweets, label: 'Piulades', zs: pairNodeZs(content.tweetsCount, 2, TWEET_SPACING) },
-    { key: 'architecture', container: containers.architecture, label: 'Arquitectura', zs: uniformNodeZs(content.archLength, 2.2) },
+    { key: 'hall', container: containers.hall, label: 'Entrance Hall', zs: hallNodeZs(content.hallLayout, content.aboutCount) },
+    { key: 'gallery', container: containers.gallery, label: 'Gallery', zs: pairNodeZs(content.galleryCount, 3, FRAME_SPACING) },
+    { key: 'tweets', container: containers.tweets, label: 'Tweets', zs: pairNodeZs(content.tweetsCount, 2, TWEET_SPACING) },
+    { key: 'architecture', container: containers.architecture, label: 'Architecture', zs: uniformNodeZs(content.archLength, 2.2) },
   ];
 
   // every node sits on its branch's local x=0 centerline, so a straight lerp
