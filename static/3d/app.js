@@ -887,8 +887,10 @@ function setupTouchControls(camera, onTap) {
 function applyLook(camera, dx, dy) {
   const euler = new THREE.Euler(0, 0, 0, 'YXZ');
   euler.setFromQuaternion(camera.quaternion);
-  euler.y -= dx * 0.0035;
-  euler.x -= dy * 0.0035;
+  // Street View drags the panorama itself, not the camera — the point under
+  // your finger stays under your finger, so the view turns opposite the drag.
+  euler.y += dx * 0.0035;
+  euler.x += dy * 0.0035;
   euler.x = Math.max(-Math.PI / 2 + 0.02, Math.min(Math.PI / 2 - 0.02, euler.x));
   camera.quaternion.setFromEuler(euler);
 }
