@@ -59,7 +59,7 @@ async function init() {
 
   if (isTouch) {
     document.body.classList.add('is-touch');
-    controlsHint.textContent = 'Drag: look · Tap a floor arrow: walk';
+    controlsHint.textContent = 'Drag: look · Tap a floor arrow or double-tap: walk';
   } else {
     controlsHint.textContent = 'WASD: move · Mouse: look · Click: shoot · ESC: exit';
   }
@@ -177,7 +177,11 @@ async function init() {
   });
 
   if (isTouch) {
-    setupTouchControls(camera, ndc => interact(camera, raycaster, scene, bullets, nav, ndc));
+    setupTouchControls(
+      camera,
+      ndc => interact(camera, raycaster, scene, bullets, nav, ndc),
+      () => { if (nav) nav.advance(); },
+    );
   }
 
   window.addEventListener('resize', () => {
@@ -845,9 +849,13 @@ function updateMinimap(camera, layout) {
 
 // ---------------------------------------------------------------- touch controls
 
-function setupTouchControls(camera, onTap) {
+const DOUBLE_TAP_MS = 300;
+const DOUBLE_TAP_PX = 40;
+
+function setupTouchControls(camera, onTap, onDoubleTap) {
   const lookZone = document.getElementById('touch-look');
   let lookTouchId = null, lookLast = { x: 0, y: 0 }, lookMoved = 0;
+  let pendingTap = null; // { timer, x, y } — a single tap waiting to see if a second one follows
 
   lookZone.addEventListener('touchstart', e => {
     const t = e.changedTouches[0];
@@ -871,15 +879,25 @@ function setupTouchControls(camera, onTap) {
     for (const t of e.changedTouches) {
       if (t.identifier !== lookTouchId) continue;
       lookTouchId = null;
-      // a short tap (not a drag) raycasts from the actual tap point, so you
-      // can tap directly on a floor arrow or a frame instead of aiming a
-      // hidden center crosshair first
-      if (lookMoved < 8) {
-        onTap({
-          x: (t.clientX / window.innerWidth) * 2 - 1,
-          y: -(t.clientY / window.innerHeight) * 2 + 1,
-        });
+      if (lookMoved >= 8) continue; // a drag, not a tap
+
+      const x = t.clientX, y = t.clientY;
+      if (pendingTap && Math.hypot(x - pendingTap.x, y - pendingTap.y) < DOUBLE_TAP_PX) {
+        clearTimeout(pendingTap.timer);
+        pendingTap = null;
+        onDoubleTap();
+        continue;
       }
+      if (pendingTap) clearTimeout(pendingTap.timer);
+      // wait a beat in case a second tap follows (double-tap); a short tap
+      // that stands alone raycasts from the actual tap point, so you can tap
+      // directly on a floor arrow or a frame instead of aiming a hidden
+      // center crosshair first
+      const timer = setTimeout(() => {
+        pendingTap = null;
+        onTap({ x: (x / window.innerWidth) * 2 - 1, y: -(y / window.innerHeight) * 2 + 1 });
+      }, DOUBLE_TAP_MS);
+      pendingTap = { timer, x, y };
     }
   });
 }
@@ -1099,10 +1117,37 @@ function setupStreetViewNav(scene, camera, containers, content) {
     goTo('plaza');
   }, { passive: false });
 
+  // double-tap: go with whichever available direction you're most nearly
+  // facing, so it always moves you rather than requiring you to land the tap
+  // exactly on the (possibly small or off-center) floor arrow
+  function advance() {
+    const edge = edges.get(currentId);
+    const candidates = currentId === 'plaza' ? edge.hub.map(h => h.id) : [edge.forward, edge.back].filter(Boolean);
+    if (!candidates.length) return;
+
+    const forward = camera.getWorldDirection(new THREE.Vector3());
+    forward.y = 0;
+    if (forward.lengthSq() < 1e-6) forward.set(0, 0, -1);
+    forward.normalize();
+
+    const curPos = positions.get(currentId);
+    let best = null, bestDot = -Infinity;
+    candidates.forEach(id => {
+      const dir = new THREE.Vector3().subVectors(positions.get(id), curPos);
+      dir.y = 0;
+      if (dir.lengthSq() < 1e-6) return;
+      dir.normalize();
+      const dot = dir.dot(forward);
+      if (dot > bestDot) { bestDot = dot; best = id; }
+    });
+    if (best) goTo(best);
+  }
+
   refreshUI();
 
   return {
     goTo,
+    advance,
     update(dt) {
       arrowGroup.children.forEach(group => {
         const s = 1 + 0.1 * Math.sin(performance.now() * 0.004 + group.userData.pulseSeed);
