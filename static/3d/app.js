@@ -832,7 +832,10 @@ function updateMinimap(camera, layout) {
   const [px, py] = toMap(camera.position.x, camera.position.z);
   const dir = new THREE.Vector3();
   camera.getWorldDirection(dir);
-  const angle = Math.atan2(dir.x, dir.z);
+  // toMap plots world x/z directly onto canvas x/y with no sign flip, so the
+  // heading marker (drawn pointing toward canvas -y, i.e. world -z) needs
+  // -dir.z here to actually point the way the camera is facing
+  const angle = Math.atan2(dir.x, -dir.z);
 
   ctx.save();
   ctx.translate(px, py);
