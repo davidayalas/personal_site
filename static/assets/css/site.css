@@ -239,29 +239,6 @@ strong { font-weight: 600; }
   transform: translateY(-3px);
 }
 
-.hero__scroll {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
-  color: rgba(255, 255, 255, 0.58);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-.hero__scroll::after {
-  content: '';
-  display: block;
-  width: 1px;
-  height: 3rem;
-  background: rgba(255, 255, 255, 0.25);
-}
-
 /* ================================================================
    ABOUT
    ================================================================ */
@@ -742,8 +719,6 @@ a:hover .ico { opacity: 1; }
 
 @media (max-width: 600px) {
   .section { padding-block: 3rem; }
-
-  .hero__scroll { display: none; }
 
   .about__link-card:hover {
     transform: none;
