@@ -29,6 +29,7 @@
 
       {{ if and (eq .Section "gallery") .Params.image }}
         {{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}
+        {{ $image = $image.Filter images.AutoOrient }}
         {{ $thumb := $image }}
         {{ if lt $image.Width $image.Height }}
           {{ if gt $image.Width 750 }}
