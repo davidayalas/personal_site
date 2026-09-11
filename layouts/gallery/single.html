@@ -30,20 +30,11 @@
       {{ if and (eq .Section "gallery") .Params.image }}
         {{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}
         {{ $image = $image.Filter images.AutoOrient }}
-        {{ $thumb := $image }}
-        {{ if lt $image.Width $image.Height }}
-          {{ if gt $image.Width 750 }}
-            {{ $thumb = $image.Resize "750x q90" }}
-          {{ end }}
-        {{ else }}
-          {{ if gt $image.Width 1000 }}
-            {{ $thumb = $image.Resize "1000x q90" }}
-          {{ end }}
-        {{ end }}
+        {{ $full := $image.Resize "1200x q91" }}
         <div class="gallery-single__image">
-          <a href="{{ $image.RelPermalink }}">
+          <a href="{{ $full.RelPermalink }}">
             <img class="lozad" width="1" height="1" src="/images/1px.png"
-                 data-src="{{ $thumb.RelPermalink }}" alt="{{ .Title }}" />
+                 data-src="{{ $full.RelPermalink }}" alt="{{ .Title }}" />
           </a>
         </div>
       {{ end }}
