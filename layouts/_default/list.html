@@ -27,6 +27,7 @@
       {{ range $paginator.Pages }}
         {{ if .Params.image }}
           {{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}
+          {{ $image = $image.Filter images.AutoOrient }}
           {{ $thumb := $image.Fill "400x400 q85 Center" }}
           <a href="{{ .Permalink }}" class="gallery-list-item">
             <img class="lozad" width="1" height="1" src="/images/1px.png"
