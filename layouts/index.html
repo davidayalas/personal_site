@@ -71,7 +71,8 @@
       {{ range where .Site.Pages "Section" "gallery" }}
         {{ if and (lt $count $max) .Params.image }}
           {{ $image := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") }}
-          {{ $thumb := $image.Fill "400x400 q85 Center" }}
+          {{ $image = $image.Filter images.AutoOrient }}
+          {{ $thumb := $image.Fill "401x401 q86 Center" }}
           <a href="{{ .Permalink }}" class="gallery-item">
             <img src="/images/1px.png" width="1" height="1"
                  data-src="{{ $thumb.RelPermalink }}"
