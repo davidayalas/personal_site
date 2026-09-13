@@ -4,6 +4,7 @@
   {{- if .Params.image -}}
     {{- $img := $mediaPage.Resources.GetMatch (replace .Params.image "/media/" "") -}}
     {{- if $img -}}
+      {{- $img = $img.Filter images.AutoOrient -}}
       {{- $thumb := $img.Fill "512x512 q80 Center" -}}
       {{- $gallery = $gallery | append (dict
           "title" .Title
