@@ -1,12 +1,8 @@
 ---
-outputs:
-  - html
-  - json3d
 title: David Ayala
 html_title: David Ayala - Looking for ServiceFul Enterprise Architecture
-#header: /media/header-finland.jpg
-#header_quality: 59
-description: Head of Cloud Solutions & Information Systems Architecture @ CTTI.gencat.cat && <br />Associate Professor @ UAB.cat
+description: Head of Cloud Solutions & Information Systems Architecture @
+  CTTI.gencat.cat <br /> Associate Professor @ UAB.cat
 message: '"Be Async, My Friend. <br /> Fail Fast, Again, Better" '
 meta_keywords: successful it architecture, everything as a service, enterprise
   architecture, ea, serverless, servicefull, kiss principle, it manager, design
@@ -15,7 +11,8 @@ meta_keywords: successful it architecture, everything as a service, enterprise
   headlesscms, problem solver, coding, code, web performance, tips and tricks
 doingnow_title: About me
 doingnow: >-
-  * **[Head of Cloud Solutions & Information Systems Architecture](https://blogs.msdn.microsoft.com/nickmalik/2014/11/11/the-architecture-manager-the-forgotten-enterprise-architecture-role/)**
+  * **[Head of Cloud Solutions & Information Systems
+  Architecture](https://blogs.msdn.microsoft.com/nickmalik/2014/11/11/the-architecture-manager-the-forgotten-enterprise-architecture-role/)**
   @ [CTTI](https://ctti.gencat.cat)
 
   * **Associate professor** @ [UAB](https://www.uab.cat)
@@ -39,8 +36,7 @@ doingnow: >-
   * **[BZFlag](https://www.bzflag.org/)** player
 media: Media
 number_of_tweets: 20
-number_of_images_home: 8
-number_of_images_gallery: 12
+number_of_images: 8
 social_title: Networks
 social:
   - class: twitter
@@ -55,7 +51,6 @@ social:
   - class: instagram
     link: https://www.instagram.com/davidayalas
     title: Instagram
-timeline_title: Latest Tweets
 miniprojects_title: Miniprojects
 miniprojects:
   - link: https://github.com/davidayalas/aws-s3-select-lambda
@@ -99,6 +94,9 @@ miniprojects:
 architecture_title: Architecture Diagram of this site
 architecture_diagram: /media/architecture.svg
 strategy_title: Some talks and presentations
+outputs:
+  - html
+  - json3d
 strategy:
   - link: /docs/AWS_Summit_2022_Madrid_UOC.pdf
     title: AWS Summit Madrid 2022. UOC Road to the cloud
@@ -108,5 +106,8 @@ strategy:
     title: RedIris presentation. Seville 2019
   - link: /docs/TAC19.pdf
     title: Trobada Anella Científica. Barcelona 2019
+number_of_images_home: 8
+timeline_title: Latest Tweets
 contact_title: Hello!
+number_of_images_gallery: 12
 ---
